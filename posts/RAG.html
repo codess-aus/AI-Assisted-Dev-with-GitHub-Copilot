@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Retrieval-Augmented Generation (RAG) is an AI model pattern that actively pulls in relevant information from external data sources to inform Copilot's completions and replies.">
+    <title>What is RAG in a GitHub Copilot Context? - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/RAG1.png" 
+                 alt="What is RAG in a GitHub Copilot Context?">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-13">January 13, 2026</time>
+            <h1 class="post-title">What is RAG in a GitHub Copilot Context?</h1>
+        </div>
+
+        <div class="post-body">
+            <p><strong>Retrieval-Augmented Generation (RAG)</strong> is an AI model pattern that, before giving you an answer or suggestion, <strong>actively pulls in relevant information</strong> from external data sources (like your company's docs, wikis, tickets, API specs, etc.). It then uses this retrieved material to inform Copilot's (or an AI agent's) completion or reply.</p>
+
+            <p><strong>Why is this powerful?</strong></p>
+            <ul>
+                <li>Instead of generic, surface-level AI answers, Copilot can "borrow" your company's actual ways of doing things.</li>
+                <li>Output becomes <strong>business-aware and context-smart</strong>, applying the right patterns, names, conventions, and edge-case thinking.</li>
+            </ul>
+
+            <h2>Practical How-To: Using RAG with Copilot for Business Knowledge</h2>
+
+            <h3>1. Connect Your Knowledge Sources</h3>
+
+            <p>To unlock RAG, you want Copilot or Copilot Agents to <em>see</em> more than just code. This means:</p>
+            <ul>
+                <li><strong>Ingesting docs</strong>: Design specs, architecture docs, runbooks, style guides, API references, onboarding guides.</li>
+                <li><strong>Linking structured/unstructured sources</strong>: Maybe a Notion database, Confluence pages, RFC markdowns in your repo, or lively Slack threads.</li>
+                <li>Using a RAG platform/tool or extension that can <strong>make these sources retrievable</strong> during code context (see below for ways to do this).</li>
+            </ul>
+
+            <p><strong>Interesting Fact:</strong> Some companies build private embeddings using tools like <a href="https://haystack.deepset.ai/">Haystack</a> or <a href="https://www.langchain.com/">LangChain</a>, then expose them via an internal API that Copilot Agents can call as part of a RAG workflow.</p>
+
+            <h3>2. Set Up Retrieval in Your Workflow</h3>
+
+            <p><strong>Ways to do it:</strong></p>
+            <ul>
+                <li><strong>Via Copilot Chat</strong> (with RAG plugins or Agent integrations): Some Copilot Chat rollouts, especially in enterprise, support plugins or "knowledge pack" integrations. These let you <em>point</em> Copilot at relevant sources for a session e.g., "Use our onboarding guideline MD files plus this project's RFC for help on this ticket."</li>
+                <li><strong>Custom Copilot Agents</strong>: If using <a href="https://docs.github.com/en/copilot/github-copilot-workspace/about-github-copilot-workspace">Copilot Workspace</a> or similar, define an agent that, before answering, searches (retrieves!) from your business doc embeddings, issue threads, or even code owners' comments.</li>
+                <li><strong>Manual context pasting</strong> (simple but effective!): Paste docs, code snippets, or recent PR review threads at the start of a prompt, so Copilot has richer context to pull from.</li>
+            </ul>
+
+            <h3>3. Prompt Strategically for RAG</h3>
+
+            <p>Don't just say "fix this bug."<br>
+            Ask Copilot:</p>
+            <blockquote>
+                <p>"Using our [linked runbook](link), and last week's postmortem doc below, show how to handle this error in our data pipeline code."</p>
+            </blockquote>
+
+            <p>Or for API work:</p>
+            <blockquote>
+                <p>"Here is our company API spec for invoice creation (paste), and the new business logic doc (paste). Write a script that..."</p>
+            </blockquote>
+
+            <p><strong>Interesting Fact:</strong> The more context (especially recent, relevant text or links) Copilot has, the more the AI can retrieve and weave in those facts—boosting both trust and alignment.</p>
+
+            <h3>4. Keep It Fresh: Continuous Retrieval</h3>
+
+            <ul>
+                <li><strong>Favorite sources:</strong> Pin most-used docs, specs, or Q&A threads as go-to knowledge packs.</li>
+                <li><strong>Dynamic retrieval:</strong> Agents can sometimes be coded to actively pull in new info as you reference new tickets, PRs, or emails.</li>
+                <li><strong>Business events:</strong> For recurring processes (like quarterly planning), have agents auto-retrieve last quarter's retrospective for smarter prompts!</li>
+            </ul>
+
+            <h2>Practical Example: How RAG Feeds Copilot's "Second Brain"</h2>
+
+            <p>Let's make it real:</p>
+
+            <pre><code class="language-python"># Example: A Copilot Agent with RAG fetching internal company policies before answering
+
+def retrieve_company_policies(query, embeddings_index):
+    """Fetch relevant docs (RAG) given a work task description."""
+    relevant_docs = embeddings_index.search(query)
+    return relevant_docs[:3]  # Return the top 3 most relevant
+
+def copilot_agent(prompt, embeddings_index):
+    """Augment prompt with RAG before sending to Copilot."""
+    context_docs = retrieve_company_policies(prompt, embeddings_index)
+    context_snippet = "\n".join([doc.text for doc in context_docs])
+    full_prompt = f"Company policies &amp; guides:\n{context_snippet}\n\nUser question:\n{prompt}\n"
+    # Copilot (or LLM) then gets this as input
+    return copilot_generate(full_prompt)
+
+# agent_reply = copilot_agent("How should I handle invoice retries?", embeddings_index)
+</code></pre>
+
+            <p><strong>What's happening here?</strong></p>
+            <ul>
+                <li>Before answering, the agent retrieves the <em>most relevant</em> internal documentation about invoice retries and policies</li>
+                <li>It feeds both the docs <em>and</em> the user's question to Copilot for a super-informed answer</li>
+            </ul>
+
+            <h2>Key Tips and Tricks</h2>
+
+            <ul>
+                <li><strong>Be Intentional with Context:</strong> Always point AI at the <em>right</em> docs - don't just hope</li>
+                <li><strong>Organize Knowledge</strong>: Have a process for flagging "golden" policies and keeping embeddings fresh</li>
+                <li><strong>Review and Iterate:</strong> Notice when Copilot gives the <em>right</em> business-context answer, and when it doesn't; tune your retrieval sources!</li>
+            </ul>
+
+            <h2>Final Thought</h2>
+
+            <p><strong>Most interesting thing about RAG + Copilot?</strong><br>
+            You're no longer limited by what's <em>in the codebase</em>. The "second brain" learns from <em>everything</em> you care about, making your AI feel like a true team member, not a generic assistant.</p>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

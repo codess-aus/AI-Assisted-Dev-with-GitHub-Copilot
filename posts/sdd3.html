@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GitHub Copilot and SDD - How GitHub Copilot can be a significant ally in Spec Driven Development">
+    <title>GitHub Copilot and SDD - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/RoleOfDevs.png" 
+                 alt="Blog post hero image">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-07">January 7, 2026</time>
+            <h1 class="post-title">GitHub Copilot and SDD</h1>
+        </div>
+
+        <div class="post-body">
+            <p>Did you know GitHub Copilot can be a significant ally in Spec Driven Development (SDD) helping you work faster, stay consistent with your specs, and automate large parts of the workflow?</p>
+
+            <h2>1. Spec Writing Assistance</h2>
+            <ul>
+                <li><strong>Copilot suggests spec templates:</strong> As you write tests, user stories, or API contracts, Copilot auto-completes boilerplate, edge cases, and even full test scenarios.</li>
+                <li><strong>Plain language to code:</strong> You can describe a spec in a comment or markdown, and Copilot will often generate the corresponding test skeleton or contract.</li>
+            </ul>
+            <p><em>Example: Type // test that login page redirects on success and Copilot suggests a Jest/Cypress test function!</em></p>
+
+            <h2>2. Faster Test-First Coding</h2>
+            <ul>
+                <li><strong>Implementation from specs:</strong> Once specs/tests are in place, Copilot uses them as context to suggest matching code. If you're in a multiply.test.js describing expected behavior, Copilot predicts the implementation of multiply() so it satisfies those specs.</li>
+                <li><strong>Detects intent from spec files:</strong> Copilot recognizes common spec libraries (Jest, Pytest, Mocha, etc.) and often generates both positive and negative test cases you may not have considered.</li>
+            </ul>
+
+            <h2>3. API and Contract Generation</h2>
+            <ul>
+                <li><strong>Suggesting OpenAPI/Swagger YAML:</strong> Copilot can draft API contracts by reading your comments, endpoint routes, or even existing test data.</li>
+                <li><strong>Aligns frontend with backend:</strong> When specs live in code, Copilot's suggestions in one layer mirror those in another, reducing mismatch between your API and frontend code.</li>
+            </ul>
+
+            <h2>4. Automating Repetitive Spec-Driven Tasks</h2>
+            <ul>
+                <li><strong>Bulk test/implementation generation:</strong> Given a pattern, Copilot can crank out dozens of spec-conforming components or handlers (e.g., a CRUD API for all entities using a single contract style).</li>
+                <li><strong>Edge cases coverage:</strong> As you spec new requirements, Copilot often proposes additional edge or corner cases for those requirements, helping you build more robust specs.</li>
+            </ul>
+
+            <h2>5. Learn Spec Patterns as You Go</h2>
+            <ul>
+                <li><strong>Shows idiomatic syntax:</strong> New to a testing framework or spec standard? Copilot's suggestions are usually based on stable, widely-accepted patterns. Handy for quickly ramping up!</li>
+                <li><strong>Cross-language support:</strong> Whether you're using Python's pytest, JavaScript's Jest, or YAML for API specs, Copilot adapts and keeps your codebase stylistically consistent.</li>
+            </ul>
+
+            <p>GitHub Copilot's context engine means as your spec/test suite grows, its suggestions get sharper and more aligned with your project's patterns and requirements.</p>
+
+            <h2>Conclusion</h2>
+            <p>Copilot accelerates spec writing and validation, translates specs to code, and keeps your project aligned with your planned requirements. That means less grunt work, fewer errors, and code that's tied directly to clearly defined specs.</p>
+
+            <p><a href="msft.it/61102tq7p0">msft.it/61102tq7p0</a></p>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

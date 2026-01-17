@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GitHub Advanced Security and Defender for Cloud Integration">
+    <title>GitHub Advanced Security & Defender for Cloud Integration - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/DfC.jpg" 
+                 alt="Blog post hero image">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2025-12-05">December 5, 2025</time>
+            <h1 class="post-title">GitHub Advanced Security & Defender for Cloud Integration</h1>
+        </div>
+
+        <div class="post-body">
+            <p>I was chatting to my friend and he admitted he was confused by the Ignite announcement about what's changed with GitHub Advanced Security and Defender for Cloud integration. I said, "Let's just ask GitHub Copilot," and it explained it all to us:</p>
+
+            <h2>Native, Two-Way Integration</h2>
+            <ul>
+                <li>GitHub Advanced Security now directly integrates with Defender for Cloud. This creates an end-to-end feedback loop, linking source code security findings with runtime cloud security insights.</li>
+                <li>For the first time, vulnerabilities found in running cloud workloads (like containers or VMs) can be traced right back to their source in your code on GitHub, visible to developers inside their normal workflow.</li>
+                <li>This blurs the line between "shift left" (prevention in code) and "shield right" (detection in runtime).</li>
+            </ul>
+
+            <h2>AI-Driven Remediation</h2>
+            <ul>
+                <li>When Defender for Cloud detects a critical issue in production, it traces it to the commit or library responsible.</li>
+                <li>Developers see these alerts in GitHub, complete with AI-powered fix suggestions using Copilot Autofix - a huge deal for speeding up the remediation cycle dramatically.</li>
+            </ul>
+
+            <h2>Enhanced Collaboration via GitHub Issues</h2>
+            <ul>
+                <li>Security teams can open and track GitHub issues right from Defender for Cloud.</li>
+                <li>Developers and security analysts now have a single thread for collaborating and tracking work - bringing security and engineering together, prioritizing the vulnerabilities that actually matter to production.</li>
+            </ul>
+
+            <h2>Supply Chain Security at Scale</h2>
+            <ul>
+                <li>The integration links signals across the entire SDLC, including code, dependencies, CI/CD pipelines, and live runtime.</li>
+                <li>Runtime flaws - often the hardest to fix - are now mapped directly to your code repo, making it practical to secure both in-house and third-party code faster.</li>
+            </ul>
+
+            <h2>Copilot Everywhere</h2>
+            <p>Copilot's role is expanding - alongside AI-generated recommendations, the new integration leverages "agentic AI" to recommend secure-by-default dev patterns and nudge developers in real time. These Copilots/agents become part of your default dev pipeline.</p>
+
+            <h2>Why This Matters</h2>
+            <ul>
+                <li>Reduces context switching for devs - code security and runtime protection become one workflow.</li>
+                <li>Shortens remediation time from weeks to potentially hours thanks to AI and unified context.</li>
+                <li>Tackles software supply chain security problems at the source and across the cloud.</li>
+                <li>Represents Microsoft's biggest cloud security leap - catching and fixing what really matters, instead of bombarding devs with endless theoretical issues.</li>
+            </ul>
+
+            <p><strong>Interesting fact:</strong> This kind of "bidirectional" integration - linking runtime security directly with source code context - is something the security industry has been waiting for, since it's critical for true DevSecOps maturity.</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

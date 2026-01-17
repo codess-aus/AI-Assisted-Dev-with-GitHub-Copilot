@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A comprehensive, technical exploration of combining GitHub Copilot and Microsoft AI Foundry for robust, scalable, and compliant AI-powered coding workflows in GitHub Codespaces, including Python examples and Azure integration.">
+    <title>Mastering AI Coding Workflows in GitHub Codespaces with Copilot and Microsoft AI Foundry</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">&larr; Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/foundry.png" 
+                 alt="Blog post hero image">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-16">January 16, 2026</time>
+            <h1 class="post-title">Mastering AI Coding Workflows in GitHub Codespaces with Copilot and Microsoft AI Foundry</h1>
+        </div>
+
+        <div class="post-body">
+            
+            <p>
+            When I develop in GitHub Codespaces, I blend the code-suggesting power of GitHub Copilot with the advanced AI controls of Microsoft AI Foundry. This combination helps me automate routine development tasks and meet enterprise compliance requirements with scalability and precision. In this post, Master Chief Sparkle goes deep on building transparent and robust workflows, shares detailed Python code samples, and demonstrates how to work fluidly with Azure using extensions.
+            </p>
+
+            <h2>Prompt Engineering in GitHub Copilot</h2>
+            <p>
+                Copilot’s output is shaped most predictably by the prompts and system instructions I provide. Thoughtful prompt engineering is often all it takes to get high-quality, standards-compliant code, especially in Python.
+            </p>
+            <h3>Example: Context-Aware Python Docstrings</h3>
+            <pre><code class="language-python">class DataCleaner:
+    def clean(self, data: list[str]) -> list[str]:
+        """
+        Cleans the input list of strings by removing extra whitespace and converting to lowercase.
+
+        Parameters
+        ----------
+        data : list of str
+            List of raw strings.
+
+        Returns
+        -------
+        list of str
+            List of cleaned strings.
+        """
+        return [s.strip().lower() for s in data if isinstance(s, str)]
+</code></pre>
+
+            <p>
+                To make this reliable and uniform, I include explicit system instructions such as “Always format docstrings using numpy style, include type hints and explanations for each parameter and return value.” Copilot responds extremely well to clear formatting examples, so I also use “shot prompting”—giving concrete inputs and expected outputs:
+            </p>
+            <pre><code># Input: [' Sparkle ', 'MASTER ', None, 42]
+# Output: ['sparkle', 'master']
+</code></pre>
+
+            <h2>Deploying and Managing Azure Resources in Codespaces</h2>
+            <p>
+                Codespaces extensions integrate tightly with Azure. I authenticate and deploy from my dev environment using the Azure CLI extension. Here’s an example of launching a FastAPI app directly:
+            </p>
+            <pre><code class="language-bash">az login
+az webapp up --name sparkle-api --resource-group SparkleGroup --sku F1
+</code></pre>
+            <p>
+                By scripting and automating these steps, I unify code and deployment in a single workflow.
+            </p>
+
+            <h2>Advanced Output Control with Microsoft AI Foundry</h2>
+            <p>
+                For regulated industries or projects needing stringent quality, Microsoft AI Foundry lets me explicitly tune how the AI responds—using parameters like temperature, top_p, and frequency_penalty for specific control.
+            </p>
+            <h3>Example: Generating Audit Logs with Strict AI Output</h3>
+            <pre><code class="language-python">from azure.ai.foundry import FoundryClient
+
+client = FoundryClient(endpoint="https://my-foundry-instance.azure.com", api_key="MY_KEY")
+
+response = client.generate(
+    prompt="Generate an audit log entry: User Sparkle created file ai-report.txt.",
+    temperature=0.1,
+    frequency_penalty=1.0,
+    top_p=0.8
+)
+
+print(response)
+</code></pre>
+            <p>
+                Low temperature values keep audit logs deterministic. Adding a frequency penalty prevents unnecessary repetition.
+            </p>
+
+            <h3>Orchestrating Multi-Agent Workflows</h3>
+            <pre><code class="language-python"># Pseudocode for chaining agents
+
+extractor_agent = client.create_agent("extractor")
+transformer_agent = client.create_agent("transformer")
+logger_agent = client.create_agent("logger")
+
+pipeline = client.create_chain([extractor_agent, transformer_agent, logger_agent])
+result = pipeline.run(input_data)
+</code></pre>
+            <p>
+                This approach helps build reliable, auditable pipelines, where each phase of data handling can be isolated and monitored.
+            </p>
+
+            <h2>Choosing the Right Tool: Copilot vs. Foundry</h2>
+            <p>
+                For speedy development with predictable output, I stick with Copilot and invest in my prompt design. If compliance, privacy, or multi-step orchestration is the goal, I switch to AI Foundry.
+            </p>
+
+            <h2>Scaling Quality and Reliability</h2>
+            <ul>
+                <li>Prompt and instruction files are checked into version control, so the team works consistently.</li>
+                <li>Unit tests verify Copilot-generated code. For example:</li>
+            </ul>
+            <pre><code class="language-python">def test_clean():
+    assert DataCleaner().clean([' Sparkle ']) == ['sparkle']
+</code></pre>
+            <ul>
+                <li>Foundry workflows log AI inputs and outputs to guarantee audit trails.</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>
+                Using GitHub Copilot and Microsoft AI Foundry together in Codespaces, and integrating with Azure, lets me automate, audit, control, and deploy at any scale. Copilot gives developer speed and intelligence. Foundry provides fine-grained control and compliance for complex needs.
+            </p>
+            <p>
+                <strong>Interesting Fact:</strong> Most developers get great results just by crafting skillful prompts in Copilot, but Foundry opens the door to precise, enterprise-grade AI customization without relying on unpredictable magic.
+            </p>
+            <p>
+                How do you combine rapid automation and advanced control in your cloud development workflows? Got any tips for scaling output quality?
+            </p>
+            <p>
+                Learn more: <a href="https://learn.microsoft.com/en-us/training/azure/ai-foundry">https://learn.microsoft.com/en-us/training/azure/ai-foundry</a>
+            </p>
+            <p>
+                #GitHubCopilot #MicrosoftFoundry #PromptEngineering #Python #Azure #DeveloperWorkflow #Codespaces #AIQuality #Automation
+            </p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="What I Learned Using GitHub Agent Mode - A deep dive into using GitHub Copilot's Agent Mode for building, debugging, and shipping code">
+    <title>What I Learned Using GitHub Agent Mode - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/agentmode2.jpg" 
+                 alt="What I Learned Using GitHub Agent Mode">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-12">January 12, 2026</time>
+            <h1 class="post-title">What I Learned Using GitHub Agent Mode</h1>
+        </div>
+
+        <div class="post-body">
+            <p>I've been diving deep into GitHub Copilot's AgentMode, and it's genuinely a game-changer for how I build, debug, and ship code!</p>
+
+            <p>Copilot has always been my virtual pair programmer, but Agent Mode takes it a step further. Instead of just suggesting code as I type, Copilot becomes more interactive and can actually execute tasks across my codebase - like refactoring, running tests, or fixing bugs on command. It's like having an AI teammate who understands context, can follow through on bigger tasks, and stays with me through the lifecycle of my project.</p>
+
+            <h2>Agent Mode Capabilities</h2>
+            <p><strong>Agent mode can:</strong></p>
+            <ul>
+                <li>Analyze your codebase to grasp the full context.</li>
+                <li>Plan and execute multi-step solutions.</li>
+                <li>Run commands or tests.</li>
+                <li>Reach out to external tools for specialized tasks.</li>
+                <li>Suggest architectural improvements.</li>
+                <li>Run and refine its own work through an agentic loop, including planning, applying changes, testing, and iterating.</li>
+            </ul>
+
+            <p>What makes Agent Mode stand out for me is how it reduces context switching. Rather than bouncing between tools or endlessly researching, I can describe a high-level goal ("Refactor this function for readability," or "Find and fix every usage of deprecated method"), and Copilot assembles solutions, sometimes even proposing PRs for review.</p>
+
+            <h2>How It Works</h2>
+            <p>Here's what happens when you use Copilot agent mode:</p>
+            <ol>
+                <li>You prompt Copilot with clear requirements on the end result you want.</li>
+                <li>Copilot parses the question and asks an AI language model how to resolve the task, then begins working.</li>
+                <li>Copilot monitors the first iteration for errors and determines how to fix them.</li>
+                <li>Agent mode autonomously uses various tools to get to the end result.</li>
+            </ol>
+
+            <p>I love that I'm not limited to just built-in tools. I can extend agent mode's capabilities by installing more specialised tools from Model Context Protocol (MCP) servers or extensions.</p>
+
+            <h2>Language Support and Use Cases</h2>
+            <p>I've started using this with both Python and JavaScript projects (my go-tos!), but I know it works just as well for C#, Java - even up and coming languages like RUST (whatever you like and need) and the time savings and creative boost are real. Knowing I can ask Copilot to handle repetitive or tedious chores, while I focus on more interesting problems, feels like the future of development.</p>
+
+            <h2>Ways I've Been Using It</h2>
+            <ul>
+                <li><strong>Refactoring code</strong> (literally every single day)</li>
+                <li><strong>Migrating a project to another programming language or to another tech stack</strong> (this is how I am learning RUST, it helps me to see something I know done as the language I want to learn - I then use GitHub Copilot in Ask mode a million questions about how it works, what it means, if the order is important etc)</li>
+                <li><strong>Writing tests</strong> (It's teaching me testing, because I never learnt much on that - totally recommend Playwright btw)</li>
+                <li><strong>Modernizing legacy code</strong> (so you don't have to learn an outdated language)</li>
+                <li><strong>Autofixing code gen errors</strong> (always)</li>
+                <li><strong>Adding new features to an application</strong> (I love to build a MVP in GitHub Pages, then add features, make it more trustworthy, add security, databases, AI etc. A better architect would start with a better product, but I am a simple girl)</li>
+                <li><strong>Prototyping a new app based on a functional spec or UI sketch</strong> (I always do this)</li>
+                <li><strong>Implementing non-functional requirements or boilerplate code</strong> (obs)</li>
+                <li><strong>Scoping and planning the work for implementing a new feature</strong> (it helps me think)</li>
+                <li><strong>Non-code generation tasks, like documentation</strong> (this is perfect - I love it!)</li>
+            </ul>
+
+            <h2>Learn More</h2>
+            <p>If you're interested in working smarter with AI or just curious about what's next in coding productivity, definitely check out Agent Mode. GitHub's vision for Copilot isn't just autocomplete - it's collaborative, contextual, and evolving fast. Highly recommend exploring it!</p>
+
+            <p><a href="https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/" target="_blank" rel="noopener noreferrer">GitHub Copilot Agent Mode Training Module</a></p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
