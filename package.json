@@ -1,0 +1,8 @@
+{
+  "name": "ai-assisted-dev-workshop",
+  "version": "1.0.0",
+  "description": "AI-Assisted Development Workshop with GitHub Copilot",
+  "scripts": {
+    "build": "echo 'Static site - no build required'"
+  }
+}
