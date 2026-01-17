@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how GitHub Copilot thinks. Explore context windows, prompt engineering, and the mental models that drive Copilot's code suggestions.">
+    <title>Part 2: Mental Models & Context - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-17">January 17, 2026</time>
+            <h1 class="post-title">Part 2: How GitHub Copilot Thinks — Mental Models & Context</h1>
+        </div>
+
+        <div class="post-body">
+            <h2>Understanding the Machine Behind the Suggestions</h2>
+            <p>To use GitHub Copilot effectively, you need to understand how it "thinks"—not in the sense that it has human-like consciousness, but in terms of how it processes information and generates suggestions. This chapter explores the mental models and context mechanisms that drive Copilot's recommendations.</p>
+
+            <p>When you understand these mechanisms, you'll write better prompts, anticipate where Copilot might go wrong, and know exactly how to steer it back on track.</p>
+
+            <h2>Learning Objectives</h2>
+            <ul>
+                <li><strong>Understand token context and model limitations</strong> that shape Copilot's "awareness" of your code</li>
+                <li><strong>Learn how prompts influence suggestions</strong> through code, comments, and file context</li>
+                <li><strong>Identify why Copilot succeeds or fails</strong> in predicting your intent</li>
+                <li><strong>Master context engineering</strong> to guide Copilot toward better outcomes</li>
+                <li><strong>Recognize context leakage</strong> and how to prevent it</li>
+            </ul>
+
+            <h2>The Token Context Window</h2>
+            <p>At its core, Copilot (and all modern language models) processes code as a sequence of <em>tokens</em>—roughly equivalent to words, but more granular. Each model has a <strong>context window</strong>—a maximum number of tokens it can "see" at once.</p>
+
+            <p>Think of the context window like a window into your codebase. Copilot can only see what's visible through that window. If your file is large or you're working in a repository with many dependencies, Copilot might not see the full picture.</p>
+
+            <p><strong>Practical implications:</strong></p>
+            <ul>
+                <li>Very long files (1000+ lines) can confuse Copilot because relevant context gets pushed out of the window</li>
+                <li>Comments and variable names are crucial because they "explain" context succinctly</li>
+                <li>Imports and type annotations help Copilot understand the frameworks and libraries you're using</li>
+                <li>Function signatures (names, parameters, return types) are high-value context that guide suggestions</li>
+            </ul>
+
+            <h3>Example: Context Window Effect</h3>
+            <p>Consider a large Python file with many utility functions. If you're at the bottom of the file trying to write a new function, Copilot might not have "seen" a helper function defined at the top. This can result in Copilot re-implementing logic that already exists elsewhere in the file.</p>
+
+            <p><strong>Solution:</strong> Keep related functions close together, or use clear comments to summarize context. For instance:</p>
+
+            <pre><code># Helper: Uses the existing format_date() function from above
+def generate_report(data):</code></pre>
+
+            <h2>How Prompts Shape Suggestions</h2>
+            <p>Copilot's suggestions are strongly influenced by what you provide as input. This input comes from three sources:</p>
+
+            <h3>1. Code Context (Preceding and Following Code)</h3>
+            <p>Copilot analyzes the code above the cursor (what you've already typed) and sometimes looks ahead to infer structure.</p>
+
+            <p><strong>Example:</strong></p>
+            <pre><code>def process_user_data(user_id):
+    user = fetch_user(user_id)
+    # At this point, Copilot knows about 'user' and will suggest operations
+    # relevant to the user object</code></pre>
+
+            <h3>2. Comments and Docstrings</h3>
+            <p>Comments are gold for Copilot. Explicit instructions in comments dramatically improve suggestion quality.</p>
+
+            <p><strong>Weak prompt:</strong></p>
+            <pre><code>def process(data):
+    # Some processing here</code></pre>
+
+            <p><strong>Strong prompt:</strong></p>
+            <pre><code>def process(data):
+    # Iterate through data list, filter out None values, 
+    # convert each item to uppercase, and return as a new list
+    </code></pre>
+
+            <h3>3. File Metadata (Language, Imports, Class/Function Signatures)</h3>
+            <p>Copilot uses imports, class definitions, and function signatures as context clues about your coding style and the libraries you're using.</p>
+
+            <p><strong>Example:</strong> If Copilot sees <code>import numpy as np</code> at the top of your file, it will suggest NumPy idioms rather than vanilla Python loops.</p>
+
+            <h2>Why Copilot Succeeds—and Why It Fails</h2>
+
+            <h3>Copilot Succeeds When:</h3>
+            <ul>
+                <li><strong>Context is clear:</strong> Function names, variable names, and comments align well with what you're trying to do</li>
+                <li><strong>Patterns are common:</strong> The code follows standard idioms (e.g., iterating over a list, writing a CRUD operation)</li>
+                <li><strong>Context is local:</strong> All the information Copilot needs is visible within a few lines</li>
+                <li><strong>Examples exist in training data:</strong> The pattern is well-represented in public code repositories</li>
+            </ul>
+
+            <h3>Copilot Fails When:</h3>
+            <ul>
+                <li><strong>Context is ambiguous:</strong> Variable names are unclear; the purpose of a function is not self-evident</li>
+                <li><strong>Context is distant:</strong> Key information is many lines away, outside the context window</li>
+                <li><strong>Patterns are rare:</strong> The code is highly custom or domain-specific; few similar examples exist in training data</li>
+                <li><strong>Requirements are complex:</strong> Multi-step logic or edge cases require human reasoning</li>
+            </ul>
+
+            <h2>Context Engineering: Steering Copilot Right</h2>
+            <p>Context engineering is the art of structuring your code and comments to guide Copilot toward better suggestions. Here are core techniques:</p>
+
+            <h3>1. Use Descriptive Names</h3>
+            <p><strong>Bad:</strong> <code>def f(x):</code></p>
+            <p><strong>Good:</strong> <code>def calculate_total_revenue(sales_data):</code></p>
+
+            <h3>2. Add Type Annotations</h3>
+            <p><strong>Python example:</strong></p>
+            <pre><code>from typing import List, Dict
+
+def aggregate_user_metrics(user_ids: List[int]) -> Dict[int, float]:
+    # Copilot now knows input and output types, improving suggestions</code></pre>
+
+            <p><strong>C# example:</strong></p>
+            <pre><code>public Dictionary<int, double> AggregateUserMetrics(List<int> userIds)
+{
+    // Type safety guides Copilot's reasoning
+}</code></pre>
+
+            <h3>3. Provide Examples or Patterns</h3>
+            <p>If you want Copilot to follow a specific pattern, show it an example first:</p>
+
+            <pre><code># Example: Convert list of integers to list of their string representations
+numbers = [1, 2, 3]
+string_numbers = [str(n) for n in numbers]
+
+# Now apply this pattern to another list
+user_ids = [101, 102, 103]
+user_id_strings = # Copilot will suggest the list comprehension pattern</code></pre>
+
+            <h3>4. Use Docstrings to Explain Intent</h3>
+            <pre><code>def validate_email(email: str) -> bool:
+    """
+    Check if email is valid using standard rules:
+    - Must contain exactly one '@' symbol
+    - Must have non-empty local and domain parts
+    - Domain must contain at least one '.'
+    
+    Returns:
+        True if valid, False otherwise
+    """</code></pre>
+
+            <h3>5. Place Related Code Together</h3>
+            <p>Group functions that work together. If Copilot sees related patterns nearby, it can reuse them.</p>
+
+            <pre><code># Utility functions for data parsing
+def parse_csv_line(line: str) -> List[str]:
+    ...
+
+def parse_json_object(json_str: str) -> Dict:
+    # Copilot is primed with parse patterns
+    ...</code></pre>
+
+            <h2>When Context "Leaks" or Fails</h2>
+            <p>Sometimes Copilot uses unexpected context, leading to incorrect suggestions. Here's how to diagnose and fix it:</p>
+
+            <h3>Symptom: Copilot Suggests Code That References Objects You Haven't Defined</h3>
+            <p><strong>Cause:</strong> Copilot assumed a dependency or helper function based on naming patterns, but it doesn't exist.</p>
+
+            <p><strong>Fix:</strong> Be explicit about available imports and be more specific in your comment. For instance, instead of a vague comment like "fetch data," write "fetch data using the requests library and json.loads()".</p>
+
+            <h3>Symptom: Copilot Suggests the Wrong Pattern</h3>
+            <p><strong>Cause:</strong> Your code context is similar to a different pattern in Copilot's training data, and it's matching on surface similarity rather than true intent.</p>
+
+            <p><strong>Fix:</strong> Add a more explicit comment or docstring that clarifies your intent. Show examples of what you expect.</p>
+
+            <h2>Lab 2: Context Engineering Experiments</h2>
+            <p>In this hands-on lab, you'll experiment with how comments and context shape Copilot's behavior.</p>
+
+            <h3>Exercise 1: Context Sensitivity (Python)</h3>
+            <p>Create a file called <code>context_experiment.py</code></p>
+
+            <p><strong>Step 1:</strong> Write minimal context</p>
+            <pre><code>def transform(data):
+    # TODO: implement
+    </code></pre>
+
+            <p>Note Copilot's suggestion. Is it clear? Probably not very helpful.</p>
+
+            <p><strong>Step 2:</strong> Add type hints and a better comment</p>
+            <pre><code>def transform(data: List[Dict[str, Any]]) -> List[str]:
+    # Extract the 'name' field from each dictionary and return as a list of strings
+    </code></pre>
+
+            <p>See how much more relevant Copilot's suggestion becomes.</p>
+
+            <h3>Exercise 2: Variable Name Context (C#)</h3>
+            <p>Create a file called <code>ContextExperiment.cs</code></p>
+
+            <p><strong>Bad naming:</strong></p>
+            <pre><code>public List<string> Process(List<object> d)
+{
+    // Copilot doesn't know what 'd' is
+}</code></pre>
+
+            <p><strong>Good naming:</strong></p>
+            <pre><code>public List<string> ExtractProductNames(List<Product> products)
+{
+    // Much clearer intent; Copilot suggests appropriate operations
+}</code></pre>
+
+            <h3>Exercise 3: Example-Driven Prompting</h3>
+            <p>Create a function that processes lists. First, write an example of what you want:</p>
+
+            <pre><code>def format_names(names: List[str]) -> List[str]:
+    # Example: ["alice", "bob"] -> ["ALICE", "BOB"]
+    return [name.upper() for name in names]
+
+def format_dates(dates: List[str]) -> List[str]:
+    # Using the same pattern as format_names above:
+    # Example: ["2026-01-17", "2026-02-20"] -> 
+    # Copilot will follow the established pattern</code></pre>
+
+            <h3>Exercise 4: Docstring Impact</h3>
+            <p>Compare two implementations:</p>
+
+            <p><strong>Without docstring:</strong></p>
+            <pre><code>def calculate(a, b, c):</code></pre>
+
+            <p><strong>With detailed docstring:</strong></p>
+            <pre><code>def calculate(a: float, b: float, c: float) -> float:
+    """
+    Calculate the area of a triangle given three side lengths using Heron's formula.
+    
+    Args:
+        a: Length of side A
+        b: Length of side B
+        c: Length of side C
+    
+    Returns:
+        The area of the triangle
+    """</code></pre>
+
+            <p>Observe how the docstring completely changes Copilot's suggestions.</p>
+
+            <h3>Reflection Questions</h3>
+            <ul>
+                <li>How did adding type hints improve Copilot's suggestions?</li>
+                <li>Did more detailed comments lead to more accurate code?</li>
+                <li>When did Copilot fail or surprise you?</li>
+                <li>How can you apply context engineering to your own projects?</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Copilot is a statistical model that excels at pattern matching. By understanding how it uses context—from token windows to naming conventions—you can engineer prompts that guide it toward excellent suggestions. The key is to think like Copilot: provide clear context, use descriptive names, add type information, and write comments that explain your intent in simple, concrete terms.</p>
+
+            <p>In the next chapter, we'll apply these mental models to real-world pair programming scenarios.</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

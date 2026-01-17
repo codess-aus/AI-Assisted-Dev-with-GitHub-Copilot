@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master effective prompting with GitHub Copilot. Learn pair programming techniques, refactoring, and documentation generation.">
+    <title>Part 3: AI Pair Programming - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-17">January 17, 2026</time>
+            <h1 class="post-title">Part 3: AI Pair Programming — Prompts, Refactoring, and Docs</h1>
+        </div>
+
+        <div class="post-body">
+            <h2>From Suggestions to Partnership</h2>
+            <p>Now that you understand how Copilot thinks, it's time to become an expert pair programmer with it. True pair programming with Copilot goes beyond letting it finish your lines—it's about collaborating to write better, more tested, and better-documented code. You guide, Copilot generates, and together you create something neither would produce alone.</p>
+
+            <p>This chapter focuses on three key real-world tasks where Copilot excels: extending and refactoring existing code, generating documentation, and writing tests. You'll learn effective prompting strategies that make Copilot your most productive pair programmer.</p>
+
+            <h2>Learning Objectives</h2>
+            <ul>
+                <li><strong>Write effective prompts</strong> for clear, secure, idiomatic code</li>
+                <li><strong>Use Copilot for refactoring</strong> legacy code safely and efficiently</li>
+                <li><strong>Generate documentation</strong> (docstrings, XML comments, README sections)</li>
+                <li><strong>Guide Copilot through complex instructions</strong> and multi-step logic</li>
+                <li><strong>Write unit tests</strong> alongside code generation</li>
+            </ul>
+
+            <h2>Effective Prompting for Code Generation</h2>
+            <p>The quality of your prompts determines the quality of Copilot's suggestions. Here are the key principles:</p>
+
+            <h3>1. Be Specific and Concrete</h3>
+            <p><strong>Weak prompt:</strong></p>
+            <pre><code># Add a function that handles users
+def manage_users():</code></pre>
+
+            <p><strong>Strong prompt:</strong></p>
+            <pre><code># Fetch all active users from the database, filter by last login date (within 30 days),
+# sort by user name, and return as a list of user objects
+def get_recently_active_users(days: int = 30) -> List[User]:</code></pre>
+
+            <h3>2. Specify Expected Behavior and Edge Cases</h3>
+            <p><strong>Example:</strong></p>
+            <pre><code># Parse a comma-separated list of integers.
+# Handle whitespace around numbers; skip empty entries.
+# Return a list of integers. Raise ValueError if a value is not a valid integer.
+def parse_int_list(csv_string: str) -> List[int]:</code></pre>
+
+            <h3>3. Indicate Language-Specific Idioms</h3>
+            <p><strong>Python:</strong></p>
+            <pre><code># Using list comprehension, create a set of unique email domains from the users list
+def extract_email_domains(users: List[User]) -> Set[str]:</code></pre>
+
+            <p><strong>C#:</strong></p>
+            <pre><code>// Using LINQ, extract email domains as a HashSet, then order by frequency
+public HashSet<string> ExtractEmailDomains(List<User> users)
+{</code></pre>
+
+            <h3>4. Reference Standards or Patterns</h3>
+            <pre><code># Implement password validation following NIST guidelines:
+# Minimum 12 characters, avoid common patterns, no hardcoded hints.
+# Return (is_valid: bool, error_message: str)
+def validate_password(password: str) -> Tuple[bool, str]:</code></pre>
+
+            <h2>Refactoring with Copilot</h2>
+            <p>Refactoring is one of Copilot's superpowers. By providing clear instructions, you can safely modernize legacy code, improve readability, and enhance performance.</p>
+
+            <h3>Step-by-Step Refactoring</h3>
+            <p><strong>Original code (messy):</strong></p>
+            <pre><code>def process_data(x):
+    result = []
+    i = 0
+    while i < len(x):
+        if x[i] % 2 == 0:
+            result.append(x[i] * 2)
+        i += 1
+    return result</code></pre>
+
+            <p><strong>Refactoring prompt:</strong></p>
+            <pre><code># Refactor to use list comprehension, add type hints, and make the logic clearer
+def process_data(x: List[int]) -> List[int]:
+    # Filter even numbers and double them
+    </code></pre>
+
+            <p>Copilot will suggest:</p>
+            <pre><code>def process_data(x: List[int]) -> List[int]:
+    # Filter even numbers and double them
+    return [n * 2 for n in x if n % 2 == 0]</code></pre>
+
+            <h3>Adding Error Handling</h3>
+            <pre><code># Add error handling and input validation.
+# Check for None and non-list inputs. Log errors.
+def process_data(x: List[int]) -> Optional[List[int]]:
+    if x is None:
+        logging.error("Input is None")
+        return None
+    # Copilot continues with safe processing logic</code></pre>
+
+            <h3>Performance Improvements</h3>
+            <pre><code># Optimize this function to use a single pass over the data.
+# Use generators if appropriate.
+def categorize_users(users: List[User]) -> Dict[str, List[User]]:
+    # Categorize users by role, returning each role's users
+    </code></pre>
+
+            <h2>Documentation Generation</h2>
+            <p>Copilot is excellent at generating documentation. Use it to create docstrings, XML comments, README sections, and even API documentation.</p>
+
+            <h3>Docstrings (Python)</h3>
+            <p><strong>Your code:</strong></p>
+            <pre><code>def calculate_age(birth_year: int) -> int:</code></pre>
+
+            <p><strong>Trigger Copilot for docstring (usually auto-suggests):</strong></p>
+            <pre><code>def calculate_age(birth_year: int) -> int:
+    """
+    # Copilot suggests:
+    Calculate the age of a person given their birth year.
+    
+    Args:
+        birth_year: The year the person was born (e.g., 1990)
+    
+    Returns:
+        The calculated age in years
+    
+    Raises:
+        ValueError: If birth_year is in the future
+    """
+    from datetime import datetime
+    current_year = datetime.now().year
+    if birth_year > current_year:
+        raise ValueError(f"Birth year {birth_year} cannot be in the future")
+    return current_year - birth_year</code></pre>
+
+            <h3>XML Comments (C#)</h3>
+            <pre><code>/// <summary>
+/// Copilot will auto-complete this based on your method signature:
+/// Validates whether an email address follows standard RFC 5322 rules.
+/// </summary>
+/// <param name="email">The email address to validate</param>
+/// <returns>True if valid, false otherwise</returns>
+public bool ValidateEmail(string email)
+{</code></pre>
+
+            <h3>Requesting Documentation Generation</h3>
+            <p>If Copilot doesn't auto-suggest, ask directly:</p>
+            <pre><code># Add comprehensive docstring with examples
+def merge_sorted_lists(list1: List[int], list2: List[int]) -> List[int]:</code></pre>
+
+            <h2>Guided Code Generation: Multi-Step Logic</h2>
+            <p>For complex tasks, break them into smaller steps in comments. Copilot will follow your outlined structure.</p>
+
+            <h3>Example: Building an API Endpoint</h3>
+            <pre><code>@app.route('/api/users/<user_id>', methods=['GET'])
+def get_user(user_id):
+    # 1. Validate that user_id is a positive integer
+    # 2. Query the database for the user
+    # 3. If not found, return a 404 error
+    # 4. Return the user as JSON with appropriate headers
+    
+    # Copilot will fill in each step based on your framework context</code></pre>
+
+            <h3>Example: Data Processing Pipeline (C#)</h3>
+            <pre><code>public async Task<List<ProcessedData>> ProcessUserDataAsync(List<RawData> rawData)
+{
+    // 1. Validate input (check for null, empty list)
+    // 2. Filter out invalid records
+    // 3. Transform each valid record
+    // 4. Sort by timestamp
+    // 5. Return the result
+    
+    // Copilot will implement each step with async/await where appropriate
+}</code></pre>
+
+            <h2>Writing Tests with Copilot</h2>
+            <p>Copilot excels at generating unit tests. After writing a function, prompt Copilot to create comprehensive tests.</p>
+
+            <h3>Python Example (using pytest)</h3>
+            <pre><code>def validate_credit_card(card_number: str) -> bool:
+    # Implementation here
+    pass
+
+# Prompt for tests:
+# Write comprehensive pytest tests for validate_credit_card, 
+# including valid numbers, invalid formats, boundary cases
+import pytest
+
+def test_validate_credit_card_valid_number():
+    assert validate_credit_card("4532015112830366") == True
+
+def test_validate_credit_card_invalid_length():
+    assert validate_credit_card("123") == False
+
+# ... more tests follow</code></pre>
+
+            <h3>C# Example (using xUnit)</h3>
+            <pre><code>public class UserServiceTests
+{
+    private UserService _userService;
+    
+    public UserServiceTests()
+    {
+        _userService = new UserService();
+    }
+    
+    // Write xUnit tests for UserService.ValidateEmail, 
+    // including valid addresses, invalid formats, edge cases
+    [Fact]
+    public void ValidateEmail_WithValidEmail_ReturnsTrue()
+    {
+        // Arrange & Act & Assert: Copilot will complete
+    }
+}</code></pre>
+
+            <h2>Lab 3: AI Pairing for Real Tasks</h2>
+            <p>Put your prompting and refactoring skills to work on practical scenarios.</p>
+
+            <h3>Exercise 1: Refactoring a Buggy Function (Python)</h3>
+            <p>Create a file <code>buggy_code.py</code> with this function:</p>
+
+            <pre><code>def calculate_stats(numbers):
+    sum = 0
+    max_val = numbers[0]
+    min_val = numbers[0]
+    for n in numbers:
+        sum = sum + n
+        if n > max_val:
+            max_val = n
+        if n < min_val:
+            min_val = n
+    average = sum / len(numbers)
+    return {"sum": sum, "avg": average, "max": max_val, "min": min_val}</code></pre>
+
+            <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:
+            - Type hints
+            - Input validation (empty list, non-numeric)
+            - More Pythonic approach (statistics module or comprehensions)
+            - Docstring with examples</p>
+
+            <h3>Exercise 2: Generate Comprehensive Tests (C#)</h3>
+            <p>Create a class <code>PasswordValidator.cs</code>:</p>
+
+            <pre><code>public class PasswordValidator
+{
+    public static bool Validate(string password)
+    {
+        return !string.IsNullOrEmpty(password) &&
+               password.Length >= 8 &&
+               password.Any(char.IsDigit) &&
+               password.Any(char.IsUpper);
+    }
+}</code></pre>
+
+            <p><strong>Task:</strong> Ask Copilot to generate xUnit tests covering:
+            - Valid passwords
+            - Passwords too short
+            - Passwords missing required character types
+            - Null/empty inputs
+            - Edge cases (exactly 8 chars, special characters)</p>
+
+            <h3>Exercise 3: Multi-Step Implementation</h3>
+            <p>Implement a function that:</p>
+            <ol>
+                <li>Reads user data from a CSV file</li>
+                <li>Validates each row</li>
+                <li>Transforms data to a standardized format</li>
+                <li>Removes duplicates</li>
+                <li>Writes to a JSON file</li>
+            </ol>
+
+            <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
+
+            <h3>Exercise 4: Documentation Pass</h3>
+            <p>Take one of your previous functions and ask Copilot to:</p>
+            <ul>
+                <li>Add a comprehensive docstring (Python) or XML comments (C#)</li>
+                <li>Include parameter descriptions and return values</li>
+                <li>Add usage examples</li>
+                <li>Document exceptions and edge cases</li>
+            </ul>
+
+            <h3>Reflection Questions</h3>
+            <ul>
+                <li>How much faster were you able to refactor with Copilot's assistance?</li>
+                <li>Did the generated tests catch bugs you might have missed?</li>
+                <li>How did detailed prompts compare to vague ones?</li>
+                <li>Which aspect of pair programming (refactoring, docs, tests) felt most natural with Copilot?</li>
+            </ul>
+
+            <h2>Best Practices Summary</h2>
+            <ul>
+                <li><strong>Be explicit:</strong> More detail in your prompts = better suggestions</li>
+                <li><strong>Add context:</strong> Type hints, existing patterns, and framework knowledge matter</li>
+                <li><strong>Iterate:</strong> If the first suggestion isn't right, refine your comment and try again</li>
+                <li><strong>Test aggressively:</strong> Even well-prompted code needs testing</li>
+                <li><strong>Keep refactoring focused:</strong> One change at a time is easier for both you and Copilot to reason about</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Copilot becomes a truly effective pair programmer when you master the art of prompting. Whether you're refactoring legacy code, generating documentation, or writing tests, clear instructions and good context are your most valuable tools. In the next chapter, we'll explore the differences between traditional Copilot completions, Copilot Chat, and the newer Agent Mode—each suited to different tasks.</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

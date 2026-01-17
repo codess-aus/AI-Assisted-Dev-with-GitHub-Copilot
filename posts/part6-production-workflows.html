@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Integrate Copilot into real software projects. Learn team workflows, code reviews, and production-ready practices.">
+    <title>Part 6: Production Workflows - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-17">January 17, 2026</time>
+            <h1 class="post-title">Part 6: Production Workflows — Integrating Copilot into Real Projects</h1>
+        </div>
+
+        <div class="post-body">
+            <h2>From Experiment to Daily Driver</h2>
+            <p>Copilot works brilliantly in isolated experiments and small projects. But integrating it into a real, production codebase with team members, code reviews, CI/CD pipelines, and legacy systems is a different challenge. This chapter shows you how to make that transition successfully.</p>
+
+            <p>You'll learn team workflows, code review practices, CI/CD integration, and how to establish Copilot as a trusted, scalable part of your development process.</p>
+
+            <h2>Learning Objectives</h2>
+            <ul>
+                <li><strong>Integrate Copilot into code reviews</strong> without slowing down the process</li>
+                <li><strong>Set team standards</strong> for using Copilot responsibly</li>
+                <li><strong>Use Copilot with version control and CI/CD</strong> pipelines</li>
+                <li><strong>Scale AI-assisted development</strong> across a team</li>
+                <li><strong>Handle edge cases:</strong> legacy code, complex systems, distributed teams</li>
+            </ul>
+
+            <h2>Team Standards for Copilot Usage</h2>
+
+            <h3>Establishing Guidelines</h3>
+            <p>Before rolling out Copilot across your team, establish clear guidelines:</p>
+
+            <p><strong>1. Code Ownership and Responsibility</strong></p>
+            <ul>
+                <li>Developers are responsible for all code in their PRs, AI-generated or not</li>
+                <li>AI-generated code is subject to the same review standards as human code</li>
+                <li>Consider using comments to flag AI-assisted sections: <code># AI-generated: reviewed</code></li>
+            </ul>
+
+            <p><strong>2. Where Copilot is Encouraged</strong></p>
+            <ul>
+                <li>✓ Boilerplate and routine code (getters/setters, standard patterns)</li>
+                <li>✓ Documentation and docstrings</li>
+                <li>✓ Unit tests</li>
+                <li>✓ Non-critical utility functions</li>
+                <li>⚠ Use caution: Security-critical code, performance-sensitive algorithms, complex business logic</li>
+                <li>✗ Avoid: Hard-coded secrets, sensitive data, compliance-critical features (without extra review)</li>
+            </ul>
+
+            <p><strong>3. Review and Testing Requirements</strong></p>
+            <ul>
+                <li>All Copilot-assisted code must pass automated tests</li>
+                <li>Pair review: one reviewer checks for logic, another for security</li>
+                <li>Increased scrutiny for: first-time features, critical paths, security zones</li>
+            </ul>
+
+            <p><strong>4. Knowledge Sharing</strong></p>
+            <ul>
+                <li>Share interesting Copilot wins (and fails) in team meetings</li>
+                <li>Document effective prompting patterns for your codebase</li>
+                <li>Create a shared knowledge base of "Copilot best practices for our team"</li>
+            </ul>
+
+            <h2>Code Review Workflow</h2>
+
+            <h3>Integrating Copilot into the Review Process</h3>
+            <p>Copilot shouldn't disrupt your existing code review workflow. Instead, it should enhance it:</p>
+
+            <h3>Step 1: Mark AI-Assisted Code</h3>
+            <p>When creating a PR, developers should indicate where Copilot was used:</p>
+
+            <pre><code>// Copilot-assisted: Validate email format following RFC 5322
+// Prompt: "Write a function that validates email addresses using standard rules"
+function validateEmail(email: string): boolean {
+    // Generated code here
+}</code></pre>
+
+            <h3>Step 2: Automated Checks First</h3>
+            <p>Run automated tests and static analysis <em>before</em> human review:</p>
+
+            <p><strong>GitHub Actions example:</strong></p>
+            <pre><code>name: Code Quality Checks
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: npm test
+      - name: Lint
+        run: npm run lint
+      - name: Security scan
+        run: npm run security
+      - name: Coverage report
+        run: npm run coverage</code></pre>
+
+            <h3>Step 3: Human Review Checklist</h3>
+            <p>Reviewers should use the "AI-Generated Code Review Checklist" from Part 5. Key points:</p>
+
+            <ul>
+                <li>Does the logic match the intent?</li>
+                <li>Are edge cases handled?</li>
+                <li>Are there security issues?</li>
+                <li>Does the code fit the team's patterns and style?</li>
+                <li>Are there missed optimizations?</li>
+            </ul>
+
+            <h3>Step 4: Approval and Merge</h3>
+            <p>Once approved, merge like any other code. Consider requiring at least one approval (instead of the standard two) if tests pass and the code is well-marked and straightforward. Require two approvals for security-critical or complex code.</p>
+
+            <h2>CI/CD Pipeline Integration</h2>
+
+            <h3>Testing Copilot-Generated Code</h3>
+            <p>Your CI/CD pipeline is crucial for quality control. Ensure it:</p>
+
+            <h4>1. Runs All Tests</h4>
+            <pre><code>npm test  # Unit tests
+npm run integration-test  # Integration tests
+npm run e2e  # End-to-end tests</code></pre>
+
+            <h4>2. Performs Security Scanning</h4>
+            <pre><code>npm audit  # Dependency vulnerabilities
+bandit -r .  # Python security issues
+snyk test  # Comprehensive security analysis</code></pre>
+
+            <h4>3. Enforces Code Standards</h4>
+            <pre><code>npm run lint  # Style and logic errors
+npm run format:check  # Code formatting
+npm run type-check  # Type safety</code></pre>
+
+            <h4>4. Tracks Code Quality Metrics</h4>
+            <pre><code>npm run coverage  # Code coverage
+npm run complexity  # Cyclomatic complexity
+npm run duplication  # Duplicated code detection</code></pre>
+
+            <h3>Failing the Build for Copilot Code</h3>
+            <p>Consider more strict gate policies for AI-assisted code:</p>
+
+            <ul>
+                <li>Require 100% test coverage for new Copilot-generated functions (vs. 80% normally)</li>
+                <li>Enforce zero security findings from automated tools</li>
+                <li>Require complexity scores below a certain threshold</li>
+            </ul>
+
+            <h2>Scaling Across Teams</h2>
+
+            <h3>Onboarding New Team Members</h3>
+            <p>Create a brief onboarding guide:</p>
+
+            <ol>
+                <li><strong>Day 1:</strong> Install and configure Copilot extension</li>
+                <li><strong>Day 1-2:</strong> Do the early exercises from Parts 1-3 to get familiar</li>
+                <li><strong>Day 2-3:</strong> Pair with a senior developer on a real task using Copilot</li>
+                <li><strong>Week 1:</strong> Work on a small task independently, with code review feedback</li>
+                <li><strong>Week 2+:</strong> Full integration with team workflow</li>
+            </ol>
+
+            <h3>Team Retrospectives on AI Usage</h3>
+            <p>Every sprint, dedicate 15 minutes to discussing Copilot:</p>
+
+            <ul>
+                <li>What worked well with Copilot this sprint?</li>
+                <li>Did any Copilot-generated code cause issues? What did we learn?</li>
+                <li>How can we improve our prompting or review process?</li>
+                <li>Are there new patterns we should document?</li>
+            </ul>
+
+            <h3>Establish a "Copilot Champion"</h3>
+            <p>Designate someone (or a small team) to:</p>
+
+            <ul>
+                <li>Stay updated on new Copilot features</li>
+                <li>Mentor teammates on effective usage</li>
+                <li>Investigate Copilot-related bugs and failures</li>
+                <li>Share best practices and patterns</li>
+            </ul>
+
+            <h2>Real-World Scenarios</h2>
+
+            <h3>Scenario 1: Refactoring Legacy Code</h3>
+            <p><strong>Challenge:</strong> Your team needs to modernize a 10,000-line Python module written in 2010.</p>
+
+            <p><strong>Copilot approach:</strong></p>
+            <ol>
+                <li>Use Copilot Chat to understand the existing code: "What does this function do?"</li>
+                <li>Have Copilot suggest refactorings: "How would you rewrite this with modern Python and type hints?"</li>
+                <li>Use inline suggestions to implement the refactoring, function by function</li>
+                <li>Use Agent Mode to scaffold comprehensive test suite for the refactored code</li>
+                <li>Use strict code review to validate that refactoring doesn't change behavior</li>
+            </ol>
+
+            <p><strong>Key practices:</strong></p>
+            <ul>
+                <li>Refactor one function at a time</li>
+                <li>Verify behavior with tests before and after</li>
+                <li>Use git bisect to find any behavioral changes</li>
+            </ul>
+
+            <h3>Scenario 2: Cross-Team Feature Development</h3>
+            <p><strong>Challenge:</strong> Your team (8 devs) is building a new payment feature with another team (5 devs) in a different timezone.</p>
+
+            <p><strong>Copilot approach:</strong></p>
+            <ol>
+                <li>Define clear API contracts (input/output schemas)</li>
+                <li>Use Copilot to generate mock implementations that match the contract</li>
+                <li>Each team uses Copilot to implement their side, referencing the mocks</li>
+                <li>Integration tests ensure both sides work together</li>
+                <li>Pair-review sessions catch Copilot's security or logic issues</li>
+            </ol>
+
+            <p><strong>Key practices:</strong></p>
+            <ul>
+                <li>Clear specs reduce Copilot confusion</li>
+                <li>Mocks and contracts are more valuable than ever</li>
+                <li>Automated testing catches integration issues early</li>
+            </ul>
+
+            <h3>Scenario 3: Performance-Critical Code</h3>
+            <p><strong>Challenge:</strong> You need to optimize a data processing pipeline that's currently too slow.</p>
+
+            <p><strong>Copilot approach:</strong></p>
+            <ol>
+                <li>Use Copilot Chat to discuss algorithms: "What's the most efficient way to X?"</li>
+                <li>Have Copilot generate multiple implementations (quick version, optimized version)</li>
+                <li>Benchmark both with realistic data</li>
+                <li>Profile the optimized version to find any bottlenecks</li>
+                <li>Use detailed comments to guide Copilot: "Use numpy for vectorized operations"</li>
+            </ol>
+
+            <p><strong>Key practices:</strong></p>
+            <ul>
+                <li>Always profile before and after optimization</li>
+                <li>Test with realistic data volumes</li>
+                <li>Don't assume Copilot's optimization is correct without verification</li>
+            </ul>
+
+            <h2>Lab 6: Mini End-to-End Project</h2>
+            <p>In this lab, you'll go through the full product workflow: design, implementation, review, and testing.</p>
+
+            <h3>Project: Build a Simple To-Do API</h3>
+            <p>Requirements:</p>
+            <ul>
+                <li>REST API with CRUD operations for to-do items</li>
+                <li>In-memory storage (no database required for this exercise)</li>
+                <li>Input validation</li>
+                <li>Error handling</li>
+                <li>Comprehensive unit tests</li>
+                <li>Docstrings/comments</li>
+            </ul>
+
+            <h3>Step 1: Design (Use Copilot Chat)</h3>
+            <p>Open Copilot Chat and ask:</p>
+            <p>"Design a simple to-do API with CRUD operations. What endpoints should it have? What data structure? What validation?"</p>
+
+            <p>Document the design based on Copilot's suggestions.</p>
+
+            <h3>Step 2: Implementation (Use Inline & Chat)</h3>
+            <p>Create the API using Copilot:</p>
+            <ul>
+                <li>Data model: Copilot will suggest class/object structure</li>
+                <li>CRUD endpoints: Copilot will generate the functions</li>
+                <li>Error handling: Ask Copilot to add comprehensive error handling</li>
+            </ul>
+
+            <h3>Step 3: Testing (Use Copilot Chat & Inline)</h3>
+            <p>Ask Copilot Chat:</p>
+            <p>"What test cases should I write for a to-do API?"</p>
+
+            <p>Use inline suggestions to implement the tests. Cover:</p>
+            <ul>
+                <li>Creating items</li>
+                <li>Updating items</li>
+                <li>Deleting items</li>
+                <li>Invalid input</li>
+                <li>Edge cases (empty lists, missing IDs, etc.)</li>
+            </ul>
+
+            <h3>Step 4: Code Review (Self-Review)</h3>
+            <p>Review your own code using the checklist from Part 5:</p>
+            <ul>
+                <li>Security: ☐ Input validation ☐ No secrets</li>
+                <li>Correctness: ☐ Null checks ☐ Edge cases tested</li>
+                <li>Maintainability: ☐ Clear names ☐ Comments ☐ Consistent style</li>
+            </ul>
+
+            <h3>Step 5: Reflection</h3>
+            <ul>
+                <li>How much time did Copilot save?</li>
+                <li>Did you need to edit Copilot's suggestions? How much?</li>
+                <li>Did tests pass on the first run?</li>
+                <li>What would you do differently next time?</li>
+            </ul>
+
+            <h2>Best Practices Summary</h2>
+            <ul>
+                <li><strong>Mark AI code:</strong> Use comments to flag Copilot-assisted sections</li>
+                <li><strong>Automate testing:</strong> Strong CI/CD is your first line of defense</li>
+                <li><strong>Team standards:</strong> Clear guidelines prevent confusion and conflicts</li>
+                <li><strong>Gradual adoption:</strong> Start small, learn, scale carefully</li>
+                <li><strong>Continuous learning:</strong> Retrospectives and knowledge sharing make your team better</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Copilot isn't just a productivity tool—it's a fundamental shift in how development teams work. The most successful organizations will be those that master the workflow: using Copilot strategically, reviewing rigorously, and continuously improving their processes based on real-world feedback.</p>
+
+            <p>In the final chapter, we'll wrap up, review key concepts, and point you toward resources for continued learning and mastery of AI-assisted development.</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

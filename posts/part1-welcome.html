@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to AI-Assisted Development with GitHub Copilot. Learn how AI is reshaping modern software development and discover the capabilities and limitations of Copilot.">
+    <title>Part 1: Welcome & AI-Assisted Development - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-header">
+            <time class="post-date" datetime="2026-01-17">January 17, 2026</time>
+            <h1 class="post-title">Part 1: Welcome & AI-Assisted Development Landscape</h1>
+        </div>
+
+        <div class="post-body">
+            <h2>The Rise of AI-Assisted Development</h2>
+            <p>Artificial intelligence is fundamentally reshaping how we write code. GitHub Copilot represents a watershed moment in software development—a tool that brings AI pair programming directly into your IDE. Whether you're maintaining legacy systems, building new features, or exploring cutting-edge architectures, understanding how to work effectively with AI-assisted code generation is becoming essential.</p>
+            
+            <p>This workshop is designed to take you from "What's Copilot?" to "How do I integrate this into my daily workflow?" We'll explore its capabilities, acknowledge its limitations, and equip you with practical techniques to use Copilot responsibly and productively.</p>
+
+            <h2>Learning Objectives</h2>
+            <ul>
+                <li><strong>Set expectations</strong> for the workshop and understand what AI-assisted development means</li>
+                <li><strong>Recognize Copilot's capabilities</strong> as a code suggestion and generation tool</li>
+                <li><strong>Understand Copilot's limitations</strong> and when to rely on human judgment</li>
+                <li><strong>Learn typical workflows</strong> for using Copilot effectively in daily development</li>
+                <li><strong>Differentiate</strong> between Copilot as an autocomplete tool versus as a true pair programmer</li>
+            </ul>
+
+            <h2>What is GitHub Copilot?</h2>
+            <p>GitHub Copilot is an AI coding assistant powered by OpenAI's large language models (specifically trained on public code repositories). It integrates directly into VS Code, Visual Studio, JetBrains IDEs, and other development environments, providing real-time code suggestions as you type.</p>
+
+            <p><strong>Key Capabilities:</strong></p>
+            <ul>
+                <li>Generate multi-line code completions from function signatures or comments</li>
+                <li>Write unit tests and documentation</li>
+                <li>Suggest refactorings and improvements</li>
+                <li>Support multiple programming languages (Python, JavaScript, TypeScript, C#, Java, Go, Rust, and many more)</li>
+                <li>Work with both inline completions and chat-based interactions (via Copilot Chat)</li>
+            </ul>
+
+            <h2>Key Limitations to Keep in Mind</h2>
+            <p>Copilot is incredibly powerful, but it's not a silver bullet. Understanding its constraints will help you use it more effectively:</p>
+
+            <ul>
+                <li><strong>Hallucinations:</strong> Copilot can generate plausible-sounding but incorrect code, including references to non-existent functions or libraries</li>
+                <li><strong>Limited reasoning:</strong> It works best with clear context; complex multi-step logic may require human guidance</li>
+                <li><strong>Security awareness:</strong> Copilot isn't trained to avoid all security vulnerabilities; you must review and test carefully</li>
+                <li><strong>Outdated knowledge:</strong> Training data has a cutoff date; newer APIs or frameworks may not be well-represented</li>
+                <li><strong>Context window:</strong> Copilot has a limited "view" of your codebase; large files or complex architectures can confuse it</li>
+            </ul>
+
+            <h2>Copilot as Autocomplete vs. True Pair Programming</h2>
+            <p>It's important to understand the spectrum of Copilot usage:</p>
+
+            <p><strong>Autocomplete Mode:</strong> You type a few characters, and Copilot suggests the next word or line. This is fast and useful for routine coding patterns, but you're still driving the conversation.</p>
+
+            <p><strong>Pair Programming Mode:</strong> You write a detailed comment describing what you want to build, and Copilot generates substantial code blocks or entire functions. You then review, refactor, and test. This mode is more powerful but requires more critical thinking on your part.</p>
+
+            <p><strong>Agent Mode:</strong> Copilot takes more autonomy, making multi-step decisions to solve larger problems. This is the frontier of AI-assisted development and brings both exciting possibilities and new responsibilities.</p>
+
+            <h2>Your Mindset Going Forward</h2>
+            <p>The most successful Copilot users adopt a few core principles:</p>
+
+            <ul>
+                <li><strong>Stay in control:</strong> You're the senior developer. Copilot is your junior developer. Review, question, and improve every suggestion.</li>
+                <li><strong>Be explicit:</strong> The better your prompts (via comments, variable names, and docstrings), the better Copilot's output.</li>
+                <li><strong>Test everything:</strong> Copilot-generated code should pass the same scrutiny as any other code—automated tests, security reviews, code reviews.</li>
+                <li><strong>Iterate together:</strong> If Copilot's first suggestion isn't right, refine your prompt and try again.</li>
+            </ul>
+
+            <h2>Lab 1: Getting Started with Copilot</h2>
+            <p>In this hands-on lab, you'll set up Copilot and take it for a spin. We'll work in both Python and C# to show that Copilot's capabilities span multiple languages.</p>
+
+            <h3>Setup</h3>
+            <ul>
+                <li>Ensure Copilot extension is installed in VS Code (GitHub Copilot by GitHub)</li>
+                <li>Sign in with your GitHub account</li>
+                <li>Create a new file: <code>fizzbuzz.py</code></li>
+            </ul>
+
+            <h3>Exercise 1: Simple Python Completion</h3>
+            <p>Write a comment and let Copilot suggest the implementation:</p>
+
+            <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
+def fizzbuzz(n):</code></pre>
+
+            <p>Press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Accept the suggestion or iterate by providing more detail in your comment.</p>
+
+            <h3>Exercise 2: C# Version</h3>
+            <p>Repeat the exercise in C#. Create a new file: <code>FizzBuzz.cs</code></p>
+
+            <pre><code>// Implement FizzBuzz logic as a method in a class
+public class FizzBuzzSolver
+{
+    // Your comment here
+    public string Solve(int n)
+    {</code></pre>
+
+            <p>Let Copilot complete the method. Notice how it adapts to C# syntax and conventions.</p>
+
+            <h3>Exercise 3: Iteration and Refinement</h3>
+            <p>Ask Copilot to add edge case handling or error checking. For example, modify your comment to include:</p>
+
+            <pre><code># Handle negative numbers by returning an error message
+def fizzbuzz(n):</code></pre>
+
+            <p>See how Copilot's suggestion changes based on your more detailed prompt.</p>
+
+            <h3>Reflection Questions</h3>
+            <ul>
+                <li>How accurate was Copilot's first suggestion?</li>
+                <li>Did you need to edit the generated code? What did you change?</li>
+                <li>How did the Python and C# suggestions differ?</li>
+                <li>Could you have written this code faster without Copilot, or did Copilot save you time?</li>
+            </ul>
+
+            <h2>What's Next?</h2>
+            <p>You've taken your first steps with Copilot. In the next chapters, we'll dive deeper:</p>
+
+            <ul>
+                <li><strong>Part 2</strong> explores how Copilot "thinks"—the mental models and context mechanisms that drive its suggestions</li>
+                <li><strong>Part 3</strong> covers real-world pair programming: refactoring, documentation, and advanced prompting techniques</li>
+                <li><strong>Part 4</strong> compares Copilot Chat and Agent Mode, showing you when to use each approach</li>
+                <li><strong>Part 5</strong> focuses on security and code quality guardrails</li>
+                <li><strong>Part 6</strong> shows how to integrate Copilot into production workflows</li>
+                <li><strong>Part 7</strong> wraps up with resources and your next steps</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>AI-assisted development isn't about replacing developers—it's about amplifying your capabilities. Copilot is at its best when paired with human judgment, skepticism, and expertise. By the end of this workshop, you'll have the knowledge and practical experience to use Copilot confidently and responsibly in your own projects.</p>
+
+            <p>Let's get started!</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

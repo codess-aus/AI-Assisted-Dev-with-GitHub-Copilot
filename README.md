@@ -1,129 +1,60 @@
-# Developer FAQ Blog
+# Master AI-Assisted Development with GitHub Copilot Workshop
 
-Final Website: https://www.scaling-guacamole.com/
+## Overview  
+Design, implement, and ship real AI-assisted software with trusted development workflows using GitHub Copilot.  
+
+AI-assisted development is no longer a novelty. it’s becoming a core skill for modern developers. GitHub Copilot can dramatically accelerate how you write, review, and refactor code, but only if you know how to use it well.
+
+This hands-on workshop goes beyond autocomplete and demos. You’ll learn how to use GitHub Copilot as a true AI pair programmer, one that understands context, follows your intent, and helps you write cleaner, more secure, production-ready code.
+
+Through real-world examples and guided exercises, you’ll explore Copilot’s capabilities, Agent Mode, and advanced prompting techniques, while learning practical guardrails for security and maintainability.
+
+By the end, you’ll know how to work faster without sacrificing code quality and how to confidently use Copilot in real projects.
+
+## What You’ll Get:  
+
+- 🧑‍💻 65% hands-on learning with real coding exercises
+- ⚡ Live demos + guided practice using GitHub Copilot
+- 🧠 Clear mental models for how Copilot works under the hood
+- 🔐 Best practices for secure, responsible Copilot usage
+- 🤖 Hands-on experience with Copilot Agent Mode & integrations
+- 🛠️ Mini end-to-end project to apply everything you learn
+- 📚 Curated resources & further learning links
+- 💬 Live Q&A and peer discussions
 
 
-A modern, accessible blog website featuring developer productivity tips and best practices.
+## Who Should Attend?
+This workshop is ideal for:  
 
-## 🌟 Features
+- Intermediate developers (Python or JavaScript) who want to work faster with AI
+- Developers curious about AI-assisted coding beyond basic autocomplete
+- Engineers using (or planning to use) GitHub Copilot in real projects
+- Teams evaluating how Copilot fits into production workflows
+- Developers who want to understand best practices, limitations, and risks of AI-generated code
 
-- **Responsive Design**: Works beautifully on desktop, tablet, and mobile devices
-- **Dark/Light Mode**: Automatic theme detection with manual toggle (Alt + T)
-- **Gradient Design**: Beautiful purple gradient theme throughout
-- **Accessible**: WCAG compliant with keyboard navigation and screen reader support
-- **Fast & Lightweight**: Pure HTML, CSS, and JavaScript with no dependencies
-- **GitHub Pages Ready**: Automated deployment with GitHub Actions
+You don’t need to be an AI expert - just comfortable with coding fundamentals and eager to level up how you build software.
 
-## 🚀 Local Development
+## What Will I Be Able to Do After This Workshop?  
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/codess-aus/DeveloperFAQ.git
-   cd DeveloperFAQ
-   ```
+After completing this workshop, you’ll be able to:  
 
-2. Open `index.html` in your browser or use a local server:
-   ```bash
-   python -m http.server 8000
-   # or
-   npx serve
-   ```
+- Use GitHub Copilot confidently as an AI pair programmer, not just an autocomplete tool
+- Write, refactor, and document code faster using effective prompting and context engineering
+- Understand when and how to use Copilot Chat vs Agent Mode
+- Scaffold real-world components (APIs, modules, tests) with Copilot assistance
+- Apply security and quality guardrails when working with AI-generated code
+- Review Copilot suggestions critically and adapt them to your coding style
+- Integrate Copilot into daily development workflows with confidence
+- Walk away knowing how to turn Copilot into a productivity multiplier, without losing control of your codebase.
 
-3. Visit `http://localhost:8000` in your browser
+## Meet Your Instructor
 
-## 📝 Adding New Blog Posts
 
-1. Create a new HTML file in the `posts/` directory (e.g., `posts/my-new-post.html`)
-2. Use the template from `posts/capturedecisions.html` as a starting point
-3. Update the hero image URL and content
-4. Add a new blog card to `index.html` in the blog grid section
+**Michelle Sandford**
+*Developer Engagement Lead at Microsoft*
 
-## 🌐 GitHub Pages Deployment
+Michelle is a Developer Engagement Leader who builds with GitHub and Azure AI and learns in public. A community builder and technical storyteller, she connects developers, MVPs, and ecosystems while shaping clear, practical conversations around AI-powered engineering. Michelle focuses on shipping real solutions, designing scalable developer programs, and bridging the gap between engineering teams and the field, so developers feel supported from first line of code to production.
 
-### First-time Setup
-
-1. Go to your repository settings on GitHub
-2. Navigate to **Pages** in the sidebar
-3. Under **Source**, select "GitHub Actions"
-4. The workflow will automatically deploy on every push to main
-
-### Manual Deployment
-
-You can also trigger deployment manually:
-1. Go to the **Actions** tab in your repository
-2. Select the "Deploy to GitHub Pages" workflow
-3. Click "Run workflow"
-
-Your site will be available at: `https://codess-aus.github.io/DeveloperFAQ/`
-
-## ☁️ Azure Static Web Apps Deployment (Future)
-
-To deploy to Azure Static Web Apps:
-
-1. Install Azure CLI:
-   ```bash
-   curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-   ```
-
-2. Login to Azure:
-   ```bash
-   az login
-   ```
-
-3. Create a Static Web App:
-   ```bash
-   az staticwebapp create \
-     --name developer-faq-blog \
-     --resource-group <your-resource-group> \
-     --source https://github.com/codess-aus/DeveloperFAQ \
-     --location "East US 2" \
-     --branch main \
-     --app-location "/" \
-     --output-location "/"
-   ```
-
-4. The Azure CLI will create a GitHub Actions workflow automatically
-
-## 🎨 Customization
-
-### Colors
-
-Edit the CSS variables in `styles.css`:
-```css
-:root {
-    --accent-from: #667eea;  /* Gradient start color */
-    --accent-to: #764ba2;    /* Gradient end color */
-}
-```
-
-### Theme
-
-The theme persists using localStorage and respects system preferences by default.
-
-## ♿ Accessibility Features
-
-- Semantic HTML structure
-- ARIA labels and roles
-- Keyboard navigation support
-- Skip to main content link
-- Focus indicators
-- Reduced motion support
-- High contrast in both themes
-
-## 📱 Browser Support
-
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 📄 License
-
-See [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
