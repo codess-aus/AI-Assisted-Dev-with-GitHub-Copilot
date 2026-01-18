@@ -80,7 +80,7 @@ body {
 
 /* Header */
 .site-header {
-    background-image: url('images/websitebanner.png');
+    background-image: url('image/workshop-banner.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
