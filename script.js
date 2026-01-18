@@ -263,8 +263,16 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const language = button.dataset.language;
             
-            // Remove active class from all buttons in this tab group
+            // Find the tab group and content container
             const tabGroup = button.closest('.language-tabs');
+            const contentContainer = tabGroup.parentElement.querySelector('.tab-content-container');
+            
+            if (!contentContainer) {
+                console.warn('Content container not found for tab group');
+                return;
+            }
+            
+            // Remove active class from all buttons in this tab group
             tabGroup.querySelectorAll('.language-tab').forEach(btn => {
                 btn.classList.remove('active');
             });
@@ -272,8 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add active class to clicked button
             button.classList.add('active');
             
-            // Hide all content in this tab group
-            const contentContainer = tabGroup.nextElementSibling;
+            // Hide all content in this tab group's container
             contentContainer.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
