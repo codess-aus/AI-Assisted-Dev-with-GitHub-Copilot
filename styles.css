@@ -5,7 +5,7 @@
     --text-primary: #1a1a1a;
     --text-secondary: #6c757d;
     --accent-from: #667eea;
-    --accent-to: #764ba2;
+    --accent-to: #38b6ff;
     --card-bg: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.1);
     --border-color: #e9ecef;
@@ -97,7 +97,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(13, 189, 202, 0.7) 100%);
     pointer-events: none;
     z-index: 1;
 }
