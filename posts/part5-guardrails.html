@@ -218,22 +218,21 @@ def process_user_data(raw_data):
             <h3>Static Analysis Tools</h3>
             <p>Use static analyzers to catch common issues automatically:</p>
 
-            <p><strong>Python:</strong></p>
-            <ul>
-                <li><strong>Pylint / Flake8:</strong> Style and logic errors</li>
-                <li><strong>Bandit:</strong> Security issues (hard-coded secrets, SQL injection risks)</li>
-                <li><strong>Mypy:</strong> Type checking</li>
-            </ul>
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <p><strong>C#:</strong></p>
-            <ul>
-                <li><strong>Roslyn Analyzers:</strong> Built-in code analysis</li>
-                <li><strong>SonarQube:</strong> Code smells and security vulnerabilities</li>
-                <li><strong>FxCop:</strong> .NET design rule validation</li>
-            </ul>
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <ul>
+                        <li><strong>Pylint / Flake8:</strong> Style and logic errors</li>
+                        <li><strong>Bandit:</strong> Security issues (hard-coded secrets, SQL injection risks)</li>
+                        <li><strong>Mypy:</strong> Type checking</li>
+                    </ul>
 
-            <p><strong>Setup example (Python):</strong></p>
-            <pre><code># .flake8 configuration
+                    <p><strong>Setup example:</strong></p>
+                    <pre><code># .flake8 configuration
 [flake8]
 max-line-length = 100
 exclude = .git,__pycache__,docs,build,dist
@@ -242,6 +241,28 @@ exclude = .git,__pycache__,docs,build,dist
 flake8 your_code.py
 bandit -r your_module/
 mypy your_module/</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <ul>
+                        <li><strong>Roslyn Analyzers:</strong> Built-in code analysis</li>
+                        <li><strong>SonarQube:</strong> Code smells and security vulnerabilities</li>
+                        <li><strong>FxCop:</strong> .NET design rule validation</li>
+                    </ul>
+
+                    <p><strong>Setup example:</strong></p>
+                    <pre><code>// .editorconfig configuration
+root = true
+
+[*.cs]
+dotnet_analyzer_diagnostic.severity = warning
+
+# Run:
+dotnet build /p:TreatWarningsAsErrors=true
+# Or install and run:
+dotnet tool install --global dotnet-sonarscanner</code></pre>
+                </div>
+            </div>
 
             <h3>Automated Testing</h3>
             <p>Test <em>everything</em> that Copilot generates. Use unit tests, integration tests, and property-based testing when appropriate.</p>
@@ -292,7 +313,14 @@ def test_validate_email_edge_cases():
             <h3>Exercise 1: Security Review</h3>
             <p>Here's some code Copilot might generate. Review it using the security checklist:</p>
 
-            <pre><code>def login_user(username, password):
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>def login_user(username, password):
     # Query the database
     user = db.execute(f"SELECT * FROM users WHERE username = '{username}'")
     
@@ -307,16 +335,98 @@ def upload_file(filename, file_content):
         f.write(file_content)
     return {"status": "uploaded"}</code></pre>
 
-            <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely.</p>
+                    <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely using:</p>
+                    <ul>
+                        <li>Parameterized queries</li>
+                        <li>Password hashing (bcrypt/argon2)</li>
+                        <li>Secure token generation</li>
+                        <li>Path sanitization</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>public class UserService
+{
+    public LoginResult LoginUser(string username, string password)
+    {
+        // Query the database
+        var query = $"SELECT * FROM Users WHERE Username = '{username}'";  // SQL Injection!
+        var user = db.Execute(query);
+        
+        if (user != null && user.Password == password)  // Plain-text comparison!
+        {
+            var token = "secret_token_12345";  // Hard-coded!
+            return new LoginResult { Success = true, Token = token };
+        }
+        return new LoginResult { Success = false };
+    }
+
+    public void UploadFile(string filename, string content)
+    {
+        // Path traversal risk!
+        File.WriteAllText($"/uploads/{filename}", content);
+    }
+}</code></pre>
+
+                    <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely using:</p>
+                    <ul>
+                        <li>Parameterized queries or Entity Framework</li>
+                        <li>Password hashing (BCrypt.Net or Identity)</li>
+                        <li>Secure token generation (JWT)</li>
+                        <li>Path sanitization (Path.GetFileName)</li>
+                    </ul>
+                </div>
+            </div>
 
             <h3>Exercise 2: Logic and Edge Case Testing</h3>
             <p>Write comprehensive tests for this function:</p>
 
-            <pre><code>def calculate_discount(price: float, customer_type: str) -> float:
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>def calculate_discount(price: float, customer_type: str) -> float:
     if customer_type == "premium":
         return price * 0.9
     elif customer_type == "regular":
         return price * 0.95
+    else:
+        return price</code></pre>
+
+                    <p><strong>Task:</strong> Write pytest tests covering:</p>
+                    <ul>
+                        <li>All customer types</li>
+                        <li>Negative prices</li>
+                        <li>Zero price</li>
+                        <li>Invalid customer types</li>
+                        <li>None values</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>public decimal CalculateDiscount(decimal price, string customerType)
+{
+    return customerType switch
+    {
+        "premium" => price * 0.9m,
+        "regular" => price * 0.95m,
+        _ => price
+    };
+}</code></pre>
+
+                    <p><strong>Task:</strong> Write xUnit tests covering:</p>
+                    <ul>
+                        <li>All customer types</li>
+                        <li>Negative prices</li>
+                        <li>Zero price</li>
+                        <li>Null customer type</li>
+                        <li>Empty string customer type</li>
+                    </ul>
+                </div>
+            </div>
     else:
         return price</code></pre>
 

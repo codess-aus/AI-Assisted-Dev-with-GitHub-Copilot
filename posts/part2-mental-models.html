@@ -195,49 +195,123 @@ def parse_json_object(json_str: str) -> Dict:
             <h2>Lab 2: Context Engineering Experiments</h2>
             <p>In this hands-on lab, you'll experiment with how comments and context shape Copilot's behavior.</p>
 
-            <h3>Exercise 1: Context Sensitivity (Python)</h3>
-            <p>Create a file called <code>context_experiment.py</code></p>
+            <h3>Exercise 1: Context Sensitivity</h3>
 
-            <p><strong>Step 1:</strong> Write minimal context</p>
-            <pre><code>def transform(data):
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Create a file called <code>context_experiment.py</code></p>
+
+                    <p><strong>Step 1:</strong> Write minimal context</p>
+                    <pre><code>def transform(data):
     # TODO: implement
     </code></pre>
 
-            <p>Note Copilot's suggestion. Is it clear? Probably not very helpful.</p>
+                    <p>Note Copilot's suggestion. Is it clear? Probably not very helpful.</p>
 
-            <p><strong>Step 2:</strong> Add type hints and a better comment</p>
-            <pre><code>def transform(data: List[Dict[str, Any]]) -> List[str]:
+                    <p><strong>Step 2:</strong> Add type hints and a better comment</p>
+                    <pre><code>def transform(data: List[Dict[str, Any]]) -> List[str]:
     # Extract the 'name' field from each dictionary and return as a list of strings
     </code></pre>
 
-            <p>See how much more relevant Copilot's suggestion becomes.</p>
+                    <p>See how much more relevant Copilot's suggestion becomes.</p>
+                </div>
 
-            <h3>Exercise 2: Variable Name Context (C#)</h3>
-            <p>Create a file called <code>ContextExperiment.cs</code></p>
+                <div class="tab-content" data-language="csharp">
+                    <p>Create a file called <code>ContextExperiment.cs</code></p>
 
-            <p><strong>Bad naming:</strong></p>
-            <pre><code>public List<string> Process(List<object> d)
+                    <p><strong>Step 1:</strong> Write minimal context</p>
+                    <pre><code>public List<string> Process(List<object> data)
+{
+    // TODO: implement
+}</code></pre>
+
+                    <p>Note Copilot's suggestion. Is it clear? Probably not very helpful.</p>
+
+                    <p><strong>Step 2:</strong> Add better type information and descriptive names</p>
+                    <pre><code>public List<string> ExtractNames(List<Dictionary<string, object>> data)
+{
+    // Extract the 'name' field from each dictionary and return as a list of strings
+}</code></pre>
+
+                    <p>See how much more relevant Copilot's suggestion becomes.</p>
+                </div>
+            </div>
+
+            <h3>Exercise 2: Variable Name Context</h3>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Bad naming:</strong></p>
+                    <pre><code>def process(d):
+    # Copilot doesn't know what 'd' is
+    pass</code></pre>
+
+                    <p><strong>Good naming:</strong></p>
+                    <pre><code>def extract_product_names(products: List[Product]) -> List[str]:
+    # Much clearer intent; Copilot suggests appropriate operations
+    pass</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Bad naming:</strong></p>
+                    <pre><code>public List<string> Process(List<object> d)
 {
     // Copilot doesn't know what 'd' is
 }</code></pre>
 
-            <p><strong>Good naming:</strong></p>
-            <pre><code>public List<string> ExtractProductNames(List<Product> products)
+                    <p><strong>Good naming:</strong></p>
+                    <pre><code>public List<string> ExtractProductNames(List<Product> products)
 {
     // Much clearer intent; Copilot suggests appropriate operations
 }</code></pre>
+                </div>
+            </div>
 
             <h3>Exercise 3: Example-Driven Prompting</h3>
             <p>Create a function that processes lists. First, write an example of what you want:</p>
 
-            <pre><code>def format_names(names: List[str]) -> List[str]:
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>def format_names(names: List[str]) -> List[str]:
     # Example: ["alice", "bob"] -> ["ALICE", "BOB"]
     return [name.upper() for name in names]
 
 def format_dates(dates: List[str]) -> List[str]:
     # Using the same pattern as format_names above:
-    # Example: ["2026-01-17", "2026-02-20"] -> 
+    # Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
     # Copilot will follow the established pattern</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>public List<string> FormatNames(List<string> names)
+{
+    // Example: ["alice", "bob"] -> ["ALICE", "BOB"]
+    return names.Select(n => n.ToUpper()).ToList();
+}
+
+public List<string> FormatDates(List<string> dates)
+{
+    // Using the same pattern as FormatNames above:
+    // Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
+    // Copilot will follow the established pattern
+}</code></pre>
+                </div>
+            </div>
 
             <h3>Exercise 4: Docstring Impact</h3>
             <p>Compare two implementations:</p>

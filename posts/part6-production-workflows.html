@@ -272,42 +272,85 @@ npm run duplication  # Duplicated code detection</code></pre>
             <p>In this lab, you'll go through the full product workflow: design, implementation, review, and testing.</p>
 
             <h3>Project: Build a Simple To-Do API</h3>
-            <p>Requirements:</p>
-            <ul>
-                <li>REST API with CRUD operations for to-do items</li>
-                <li>In-memory storage (no database required for this exercise)</li>
-                <li>Input validation</li>
-                <li>Error handling</li>
-                <li>Comprehensive unit tests</li>
-                <li>Docstrings/comments</li>
-            </ul>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <h3>Step 1: Design (Use Copilot Chat)</h3>
-            <p>Open Copilot Chat and ask:</p>
-            <p>"Design a simple to-do API with CRUD operations. What endpoints should it have? What data structure? What validation?"</p>
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Requirements:</strong></p>
+                    <ul>
+                        <li>REST API with CRUD operations for to-do items (using Flask or FastAPI)</li>
+                        <li>In-memory storage (no database required for this exercise)</li>
+                        <li>Input validation using Pydantic</li>
+                        <li>Error handling</li>
+                        <li>Comprehensive pytest unit tests</li>
+                        <li>Docstrings</li>
+                    </ul>
 
-            <p>Document the design based on Copilot's suggestions.</p>
+                    <h4>Step 1: Design (Use Copilot Chat)</h4>
+                    <p>Open Copilot Chat and ask:</p>
+                    <p>"Design a simple Flask/FastAPI to-do API with CRUD operations. What endpoints should it have? What data structure? What validation?"</p>
+                    <p>Document the design based on Copilot's suggestions.</p>
 
-            <h3>Step 2: Implementation (Use Inline & Chat)</h3>
-            <p>Create the API using Copilot:</p>
-            <ul>
-                <li>Data model: Copilot will suggest class/object structure</li>
-                <li>CRUD endpoints: Copilot will generate the functions</li>
-                <li>Error handling: Ask Copilot to add comprehensive error handling</li>
-            </ul>
+                    <h4>Step 2: Implementation (Use Inline & Chat)</h4>
+                    <p>Create the API using Copilot:</p>
+                    <ul>
+                        <li>Data model: Use dataclass or Pydantic model</li>
+                        <li>CRUD endpoints: GET, POST, PUT, DELETE</li>
+                        <li>Error handling: 400/404 responses</li>
+                    </ul>
 
-            <h3>Step 3: Testing (Use Copilot Chat & Inline)</h3>
-            <p>Ask Copilot Chat:</p>
-            <p>"What test cases should I write for a to-do API?"</p>
+                    <h4>Step 3: Testing (Use Copilot Chat & Inline)</h4>
+                    <p>Ask Copilot Chat: "What pytest test cases should I write for a to-do API?"</p>
+                    <p>Use inline suggestions to implement the tests. Cover:</p>
+                    <ul>
+                        <li>Creating items</li>
+                        <li>Updating items</li>
+                        <li>Deleting items</li>
+                        <li>Invalid input</li>
+                        <li>Edge cases (empty lists, missing IDs, etc.)</li>
+                    </ul>
+                </div>
 
-            <p>Use inline suggestions to implement the tests. Cover:</p>
-            <ul>
-                <li>Creating items</li>
-                <li>Updating items</li>
-                <li>Deleting items</li>
-                <li>Invalid input</li>
-                <li>Edge cases (empty lists, missing IDs, etc.)</li>
-            </ul>
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Requirements:</strong></p>
+                    <ul>
+                        <li>REST API with CRUD operations for to-do items (using ASP.NET Core)</li>
+                        <li>In-memory storage (no database required for this exercise)</li>
+                        <li>Input validation using Data Annotations</li>
+                        <li>Error handling</li>
+                        <li>Comprehensive xUnit unit tests</li>
+                        <li>XML documentation</li>
+                    </ul>
+
+                    <h4>Step 1: Design (Use Copilot Chat)</h4>
+                    <p>Open Copilot Chat and ask:</p>
+                    <p>"Design a simple ASP.NET Core to-do API with CRUD operations. What endpoints should it have? What data structure? What validation?"</p>
+                    <p>Document the design based on Copilot's suggestions.</p>
+
+                    <h4>Step 2: Implementation (Use Inline & Chat)</h4>
+                    <p>Create the API using Copilot:</p>
+                    <ul>
+                        <li>Data model: TodoItem class with properties</li>
+                        <li>CRUD endpoints: Controller with GET, POST, PUT, DELETE actions</li>
+                        <li>Error handling: BadRequest/NotFound responses</li>
+                    </ul>
+
+                    <h4>Step 3: Testing (Use Copilot Chat & Inline)</h4>
+                    <p>Ask Copilot Chat: "What xUnit test cases should I write for a to-do API?"</p>
+                    <p>Use inline suggestions to implement the tests. Cover:</p>
+                    <ul>
+                        <li>Creating items</li>
+                        <li>Updating items</li>
+                        <li>Deleting items</li>
+                        <li>Invalid input</li>
+                        <li>Edge cases (empty lists, missing IDs, etc.)</li>
+                    </ul>
+                </div>
+            </div>
 
             <h3>Step 4: Code Review (Self-Review)</h3>
             <p>Review your own code using the checklist from Part 5:</p>

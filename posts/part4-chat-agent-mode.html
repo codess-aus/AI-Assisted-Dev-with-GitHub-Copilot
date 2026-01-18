@@ -257,9 +257,16 @@
             <p>In this lab, you'll apply all three modes to real-world problems and compare their effectiveness.</p>
 
             <h3>Exercise 1: Debugging with Copilot Chat</h3>
-            <p>Create a buggy Python function:</p>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <pre><code>def find_user_by_email(users_list, email):
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Create a buggy Python function:</p>
+                    <pre><code>def find_user_by_email(users_list, email):
     for user in users_list:
         if user['email'] == email:
             return user
@@ -269,26 +276,80 @@
 result = find_user_by_email(users, "test@example.com")
 print(result['name'])  # What if result is None?</code></pre>
 
-            <p><strong>Task:</strong> Open Copilot Chat and ask: "What's wrong with this code and how do I fix it?" Include the error message you'd get. Let Chat guide you through a safe solution.</p>
+                    <p><strong>Task:</strong> Open Copilot Chat and ask: "What's wrong with this code and how do I fix it?" Include the error message you'd get. Let Chat guide you through a safe solution.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p>Create a buggy C# method:</p>
+                    <pre><code>public User FindUserByEmail(List<User> users, string email)
+{
+    foreach (var user in users)
+    {
+        if (user.Email == email)
+            return user;
+    }
+    return null;
+}
+
+// Buggy usage:
+var result = FindUserByEmail(users, "test@example.com");
+Console.WriteLine(result.Name);  // What if result is null?</code></pre>
+
+                    <p><strong>Task:</strong> Open Copilot Chat and ask: "What's wrong with this code and how do I fix it?" Include the error message you'd get. Let Chat guide you through a safe solution.</p>
+                </div>
+            </div>
 
             <h3>Exercise 2: Scaffolding with Inline Suggestions</h3>
-            <p>Start a new function and use inline suggestions only:</p>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <pre><code>def calculate_discount(original_price: float, customer_type: str) -> float:</code></pre>
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Start a new function and use inline suggestions only:</p>
+                    <pre><code>def calculate_discount(original_price: float, customer_type: str) -> float:</code></pre>
+                    <p><strong>Task:</strong> Let Copilot complete the function. Then add another function using the same pattern. Note how quickly inline suggestions work for routine logic.</p>
+                </div>
 
-            <p><strong>Task:</strong> Let Copilot complete the function. Then add another function using the same pattern. Note how quickly inline suggestions work for routine logic.</p>
+                <div class="tab-content" data-language="csharp">
+                    <p>Start a new method and use inline suggestions only:</p>
+                    <pre><code>public decimal CalculateDiscount(decimal originalPrice, string customerType)</code></pre>
+                    <p><strong>Task:</strong> Let Copilot complete the method. Then add another method using the same pattern. Note how quickly inline suggestions work for routine logic.</p>
+                </div>
+            </div>
 
             <h3>Exercise 3: Building a Module with Agent Mode</h3>
-            <p>Use Copilot Chat or Agent Mode (if available) to request:</p>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <p>"Build a Python module called `inventory_manager.py` that:
-            - Manages a simple in-memory inventory of products
-            - Supports add, remove, update, and list operations
-            - Includes input validation
-            - Has comprehensive unit tests
-            - Includes docstrings"</p>
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Use Copilot Chat or Agent Mode (if available) to request:</p>
+                    <p>"Build a Python module called `inventory_manager.py` that:
+                    - Manages a simple in-memory inventory of products
+                    - Supports add, remove, update, and list operations
+                    - Includes input validation
+                    - Has comprehensive unit tests
+                    - Includes docstrings"</p>
+                    <p><strong>Task:</strong> Review the generated code. What did Agent do well? What would you change? Run the tests.</p>
+                </div>
 
-            <p><strong>Task:</strong> Review the generated code. What did Agent do well? What would you change? Run the tests.</p>
+                <div class="tab-content" data-language="csharp">
+                    <p>Use Copilot Chat or Agent Mode (if available) to request:</p>
+                    <p>"Build a C# class called `InventoryManager.cs` that:
+                    - Manages a simple in-memory inventory of products
+                    - Supports Add, Remove, Update, and List operations
+                    - Includes input validation
+                    - Has comprehensive xUnit tests
+                    - Includes XML documentation"</p>
+                    <p><strong>Task:</strong> Review the generated code. What did Agent do well? What would you change? Run the tests.</p>
+                </div>
+            </div>
 
             <h3>Exercise 4: Comparison - Same Task, Three Modes</h3>
             <p>Pick a small task (e.g., "Write a function that parses a query string into a dictionary"):</p>
