@@ -265,10 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Find the tab group and content container
             const tabGroup = button.closest('.language-tabs');
-            const contentContainer = tabGroup.parentElement.querySelector('.tab-content-container');
+            // The tab-content-container is the immediate next sibling of language-tabs
+            const contentContainer = tabGroup.nextElementSibling;
             
-            if (!contentContainer) {
-                console.warn('Content container not found for tab group');
+            if (!contentContainer || !contentContainer.classList.contains('tab-content-container')) {
+                console.warn('Content container not found. Next sibling:', contentContainer?.className);
                 return;
             }
             
