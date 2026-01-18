@@ -422,6 +422,32 @@ body {
     font-style: italic;
 }
 
+/* Post navigation */
+.post-navigation {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+}
+
+.post-navigation .next-post {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    transition: transform var(--transition-fast), box-shadow var(--transition-base);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.post-navigation .next-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 /* Header actions */
 .header-actions {
     margin-top: var(--spacing-sm);
