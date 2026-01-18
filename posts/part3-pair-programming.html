@@ -77,14 +77,24 @@ def get_recently_active_users(days: int = 30) -> List[User]:</code></pre>
 def parse_int_list(csv_string: str) -> List[int]:</code></pre>
 
             <h3>3. Indicate Language-Specific Idioms</h3>
-            <p><strong>Python:</strong></p>
-            <pre><code># Using list comprehension, create a set of unique email domains from the users list
-def extract_email_domains(users: List[User]) -> Set[str]:</code></pre>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <p><strong>C#:</strong></p>
-            <pre><code>// Using LINQ, extract email domains as a HashSet, then order by frequency
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code># Using list comprehension, create a set of unique email domains from the users list
+def extract_email_domains(users: List[User]) -> Set[str]:</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>// Using LINQ, extract email domains as a HashSet, then order by frequency
 public HashSet<string> ExtractEmailDomains(List<User> users)
 {</code></pre>
+                </div>
+            </div>
 
             <h3>4. Reference Standards or Patterns</h3>
             <pre><code># Implement password validation following NIST guidelines:
@@ -136,12 +146,19 @@ def categorize_users(users: List[User]) -> Dict[str, List[User]]:
             <h2>Documentation Generation</h2>
             <p>Copilot is excellent at generating documentation. Use it to create docstrings, XML comments, README sections, and even API documentation.</p>
 
-            <h3>Docstrings (Python)</h3>
-            <p><strong>Your code:</strong></p>
-            <pre><code>def calculate_age(birth_year: int) -> int:</code></pre>
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <p><strong>Trigger Copilot for docstring (usually auto-suggests):</strong></p>
-            <pre><code>def calculate_age(birth_year: int) -> int:
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <h4>Docstrings</h4>
+                    <p><strong>Your code:</strong></p>
+                    <pre><code>def calculate_age(birth_year: int) -> int:</code></pre>
+
+                    <p><strong>Trigger Copilot for docstring (usually auto-suggests):</strong></p>
+                    <pre><code>def calculate_age(birth_year: int) -> int:
     """
     # Copilot suggests:
     Calculate the age of a person given their birth year.
@@ -161,8 +178,14 @@ def categorize_users(users: List[User]) -> Dict[str, List[User]]:
         raise ValueError(f"Birth year {birth_year} cannot be in the future")
     return current_year - birth_year</code></pre>
 
-            <h3>XML Comments (C#)</h3>
-            <pre><code>/// <summary>
+                    <p><strong>Requesting Documentation:</strong> If Copilot doesn't auto-suggest, ask directly:</p>
+                    <pre><code># Add comprehensive docstring with examples
+def merge_sorted_lists(list1: List[int], list2: List[int]) -> List[int]:</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <h4>XML Comments</h4>
+                    <pre><code>/// <summary>
 /// Copilot will auto-complete this based on your method signature:
 /// Validates whether an email address follows standard RFC 5322 rules.
 /// </summary>
@@ -171,10 +194,12 @@ def categorize_users(users: List[User]) -> Dict[str, List[User]]:
 public bool ValidateEmail(string email)
 {</code></pre>
 
-            <h3>Requesting Documentation Generation</h3>
-            <p>If Copilot doesn't auto-suggest, ask directly:</p>
-            <pre><code># Add comprehensive docstring with examples
-def merge_sorted_lists(list1: List[int], list2: List[int]) -> List[int]:</code></pre>
+                    <p><strong>Requesting Documentation:</strong> Ask Copilot to generate comprehensive documentation:</p>
+                    <pre><code>/// Add comprehensive XML documentation with examples and exceptions
+public List<T> MergeAndSort<T>(List<T> list1, List<T> list2) where T : IComparable<T>
+{</code></pre>
+                </div>
+            </div>
 
             <h2>Guided Code Generation: Multi-Step Logic</h2>
             <p>For complex tasks, break them into smaller steps in comments. Copilot will follow your outlined structure.</p>
@@ -204,8 +229,15 @@ def get_user(user_id):
             <h2>Writing Tests with Copilot</h2>
             <p>Copilot excels at generating unit tests. After writing a function, prompt Copilot to create comprehensive tests.</p>
 
-            <h3>Python Example (using pytest)</h3>
-            <pre><code>def validate_credit_card(card_number: str) -> bool:
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <h4>Using pytest</h4>
+                    <pre><code>def validate_credit_card(card_number: str) -> bool:
     # Implementation here
     pass
 
@@ -221,9 +253,11 @@ def test_validate_credit_card_invalid_length():
     assert validate_credit_card("123") == False
 
 # ... more tests follow</code></pre>
+                </div>
 
-            <h3>C# Example (using xUnit)</h3>
-            <pre><code>public class UserServiceTests
+                <div class="tab-content" data-language="csharp">
+                    <h4>Using xUnit</h4>
+                    <pre><code>public class UserServiceTests
 {
     private UserService _userService;
     
@@ -240,14 +274,23 @@ def test_validate_credit_card_invalid_length():
         // Arrange & Act & Assert: Copilot will complete
     }
 }</code></pre>
+                </div>
+            </div>
 
             <h2>Lab 3: AI Pairing for Real Tasks</h2>
             <p>Put your prompting and refactoring skills to work on practical scenarios.</p>
 
-            <h3>Exercise 1: Refactoring a Buggy Function (Python)</h3>
-            <p>Create a file <code>buggy_code.py</code> with this function:</p>
+            <h3>Exercise 1: Refactoring a Buggy Function</h3>
 
-            <pre><code>def calculate_stats(numbers):
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Create a file <code>buggy_code.py</code> with this function:</p>
+                    <pre><code>def calculate_stats(numbers):
     sum = 0
     max_val = numbers[0]
     min_val = numbers[0]
@@ -260,16 +303,67 @@ def test_validate_credit_card_invalid_length():
     average = sum / len(numbers)
     return {"sum": sum, "avg": average, "max": max_val, "min": min_val}</code></pre>
 
-            <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:
-            - Type hints
-            - Input validation (empty list, non-numeric)
-            - More Pythonic approach (statistics module or comprehensions)
-            - Docstring with examples</p>
+                    <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:</p>
+                    <ul>
+                        <li>Type hints</li>
+                        <li>Input validation (empty list, non-numeric)</li>
+                        <li>More Pythonic approach (statistics module or comprehensions)</li>
+                        <li>Docstring with examples</li>
+                    </ul>
+                </div>
 
-            <h3>Exercise 2: Generate Comprehensive Tests (C#)</h3>
-            <p>Create a class <code>PasswordValidator.cs</code>:</p>
+                <div class="tab-content" data-language="csharp">
+                    <p>Create a file <code>StatCalculator.cs</code> with this method:</p>
+                    <pre><code>public Dictionary<string, double> CalculateStats(int[] numbers)
+{
+    int sum = 0;
+    int max = numbers[0];
+    int min = numbers[0];
+    foreach (int n in numbers)
+    {
+        sum += n;
+        if (n > max) max = n;
+        if (n < min) min = n;
+    }
+    double average = sum / numbers.Length;
+    return new Dictionary<string, double>
+    {
+        {"sum", sum}, {"avg", average}, {"max", max}, {"min", min}
+    };
+}</code></pre>
 
-            <pre><code>public class PasswordValidator
+                    <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:</p>
+                    <ul>
+                        <li>Input validation (null, empty array)</li>
+                        <li>Use LINQ where appropriate</li>
+                        <li>Add XML documentation</li>
+                        <li>Return a typed result object instead of Dictionary</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Exercise 2: Generate Comprehensive Tests</h3>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Using pytest, ask Copilot to generate tests for your refactored function covering:</p>
+                    <ul>
+                        <li>Happy path with valid data</li>
+                        <li>Empty list</li>
+                        <li>Single element</li>
+                        <li>Negative numbers</li>
+                        <li>Mixed positive/negative</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p>Create a class <code>PasswordValidator.cs</code>:</p>
+                    <pre><code>public class PasswordValidator
 {
     public static bool Validate(string password)
     {
@@ -280,12 +374,16 @@ def test_validate_credit_card_invalid_length():
     }
 }</code></pre>
 
-            <p><strong>Task:</strong> Ask Copilot to generate xUnit tests covering:
-            - Valid passwords
-            - Passwords too short
-            - Passwords missing required character types
-            - Null/empty inputs
-            - Edge cases (exactly 8 chars, special characters)</p>
+                    <p><strong>Task:</strong> Ask Copilot to generate xUnit tests covering:</p>
+                    <ul>
+                        <li>Valid passwords</li>
+                        <li>Passwords too short</li>
+                        <li>Passwords missing required character types</li>
+                        <li>Null/empty inputs</li>
+                        <li>Edge cases (exactly 8 chars, special characters)</li>
+                    </ul>
+                </div>
+            </div>
 
             <h3>Exercise 3: Multi-Step Implementation</h3>
             <p>Implement a function that:</p>

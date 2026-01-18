@@ -105,34 +105,58 @@
             <ul>
                 <li>Ensure Copilot extension is installed in VS Code (GitHub Copilot by GitHub)</li>
                 <li>Sign in with your GitHub account</li>
-                <li>Create a new file: <code>fizzbuzz.py</code></li>
             </ul>
 
-            <h3>Exercise 1: Simple Python Completion</h3>
-            <p>Write a comment and let Copilot suggest the implementation:</p>
+            <h3>Exercise 1: Simple Completion</h3>
+            <p>Choose your preferred language and let Copilot suggest the implementation:</p>
 
-            <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Create a new file: <code>fizzbuzz.py</code></p>
+                    <p>Write a comment and let Copilot suggest the implementation:</p>
+                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
 def fizzbuzz(n):</code></pre>
+                    <p>Press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Accept the suggestion or iterate by providing more detail in your comment.</p>
+                </div>
 
-            <p>Press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Accept the suggestion or iterate by providing more detail in your comment.</p>
-
-            <h3>Exercise 2: C# Version</h3>
-            <p>Repeat the exercise in C#. Create a new file: <code>FizzBuzz.cs</code></p>
-
-            <pre><code>// Implement FizzBuzz logic as a method in a class
+                <div class="tab-content" data-language="csharp">
+                    <p>Create a new file: <code>FizzBuzz.cs</code></p>
+                    <p>Write a comment and let Copilot suggest the implementation:</p>
+                    <pre><code>// Implement FizzBuzz logic as a method in a class
 public class FizzBuzzSolver
 {
     // Your comment here
     public string Solve(int n)
     {</code></pre>
+                    <p>Let Copilot complete the method. Notice how it adapts to C# syntax and conventions.</p>
+                </div>
+            </div>
 
-            <p>Let Copilot complete the method. Notice how it adapts to C# syntax and conventions.</p>
+            <h3>Exercise 2: Iteration and Refinement</h3>
+            <p>Ask Copilot to add edge case handling or error checking. For example, modify your comment:</p>
 
-            <h3>Exercise 3: Iteration and Refinement</h3>
-            <p>Ask Copilot to add edge case handling or error checking. For example, modify your comment to include:</p>
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <pre><code># Handle negative numbers by returning an error message
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code># Handle negative numbers by returning an error message
 def fizzbuzz(n):</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>// Handle negative numbers by throwing an ArgumentException
+public string Solve(int n)
+{</code></pre>
+                </div>
+            </div>
 
             <p>See how Copilot's suggestion changes based on your more detailed prompt.</p>
 

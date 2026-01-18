@@ -1099,3 +1099,71 @@ button:focus {
 #visitor-counter:hover {
     opacity: 1;
 }
+/* Language Tabs */
+.language-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.language-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    bottom: -2px;
+}
+
+.language-tab:hover {
+    color: var(--accent-from);
+    background: var(--bg-secondary);
+}
+
+.language-tab.active {
+    color: var(--accent-from);
+    border-bottom-color: var(--accent-from);
+}
+
+.tab-content-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive tabs */
+@media (max-width: 768px) {
+    .language-tabs {
+        width: 100%;
+    }
+    
+    .language-tab {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        font-size: var(--font-size-sm);
+    }
+}

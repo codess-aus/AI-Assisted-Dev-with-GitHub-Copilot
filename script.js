@@ -250,3 +250,50 @@ if (document.readyState === 'loading') {
 } else {
     initVisitorCounter();
 }
+
+// Language Tab Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.language-tab');
+    
+    // Get saved language preference or default to Python
+    const savedLanguage = localStorage.getItem('preferred-language') || 'python';
+    
+    // Initialize tabs with saved preference
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const language = button.dataset.language;
+            
+            // Remove active class from all buttons in this tab group
+            const tabGroup = button.closest('.language-tabs');
+            tabGroup.querySelectorAll('.language-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Hide all content in this tab group
+            const contentContainer = tabGroup.nextElementSibling;
+            contentContainer.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected content
+            const selectedContent = contentContainer.querySelector(`[data-language="${language}"]`);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+            
+            // Save preference
+            localStorage.setItem('preferred-language', language);
+        });
+    });
+    
+    // Apply saved language preference to all tab groups
+    document.querySelectorAll('.language-tabs').forEach(tabGroup => {
+        const button = tabGroup.querySelector(`[data-language="${savedLanguage}"]`);
+        if (button) {
+            button.click();
+        }
+    });
+});
