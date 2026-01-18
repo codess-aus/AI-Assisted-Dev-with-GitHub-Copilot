@@ -316,11 +316,18 @@ public List<string> FormatDates(List<string> dates)
             <h3>Exercise 4: Docstring Impact</h3>
             <p>Compare two implementations:</p>
 
-            <p><strong>Without docstring:</strong></p>
-            <pre><code>def calculate(a, b, c):</code></pre>
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <p><strong>With detailed docstring:</strong></p>
-            <pre><code>def calculate(a: float, b: float, c: float) -> float:
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Without docstring:</strong></p>
+                    <pre><code>def calculate(a, b, c):</code></pre>
+
+                    <p><strong>With detailed docstring:</strong></p>
+                    <pre><code>def calculate(a: float, b: float, c: float) -> float:
     """
     Calculate the area of a triangle given three side lengths using Heron's formula.
     
@@ -333,7 +340,26 @@ public List<string> FormatDates(List<string> dates)
         The area of the triangle
     """</code></pre>
 
-            <p>Observe how the docstring completely changes Copilot's suggestions.</p>
+                    <p>Observe how the docstring completely changes Copilot's suggestions.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Without documentation:</strong></p>
+                    <pre><code>public double Calculate(double a, double b, double c)</code></pre>
+
+                    <p><strong>With detailed XML documentation:</strong></p>
+                    <pre><code>/// <summary>
+/// Calculate the area of a triangle given three side lengths using Heron's formula.
+/// </summary>
+/// <param name="a">Length of side A</param>
+/// <param name="b">Length of side B</param>
+/// <param name="c">Length of side C</param>
+/// <returns>The area of the triangle</returns>
+public double Calculate(double a, double b, double c)</code></pre>
+
+                    <p>Observe how the XML documentation completely changes Copilot's suggestions.</p>
+                </div>
+            </div>
 
             <h3>Reflection Questions</h3>
             <ul>

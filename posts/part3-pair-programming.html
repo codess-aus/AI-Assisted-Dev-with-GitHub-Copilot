@@ -362,49 +362,79 @@ def test_validate_credit_card_invalid_length():
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Create a class <code>PasswordValidator.cs</code>:</p>
-                    <pre><code>public class PasswordValidator
-{
-    public static bool Validate(string password)
-    {
-        return !string.IsNullOrEmpty(password) &&
-               password.Length >= 8 &&
-               password.Any(char.IsDigit) &&
-               password.Any(char.IsUpper);
-    }
-}</code></pre>
-
-                    <p><strong>Task:</strong> Ask Copilot to generate xUnit tests covering:</p>
+                    <p>Using xUnit, ask Copilot to generate tests for your refactored method covering:</p>
                     <ul>
-                        <li>Valid passwords</li>
-                        <li>Passwords too short</li>
-                        <li>Passwords missing required character types</li>
-                        <li>Null/empty inputs</li>
-                        <li>Edge cases (exactly 8 chars, special characters)</li>
+                        <li>Happy path with valid data</li>
+                        <li>Empty array</li>
+                        <li>Single element</li>
+                        <li>Negative numbers</li>
+                        <li>Mixed positive/negative</li>
+                        <li>Null array input</li>
                     </ul>
                 </div>
             </div>
 
             <h3>Exercise 3: Multi-Step Implementation</h3>
-            <p>Implement a function that:</p>
-            <ol>
-                <li>Reads user data from a CSV file</li>
-                <li>Validates each row</li>
-                <li>Transforms data to a standardized format</li>
-                <li>Removes duplicates</li>
-                <li>Writes to a JSON file</li>
-            </ol>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
 
-            <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Implement a function that:</p>
+                    <ol>
+                        <li>Reads user data from a CSV file</li>
+                        <li>Validates each row</li>
+                        <li>Transforms data to a standardized format</li>
+                        <li>Removes duplicates</li>
+                        <li>Writes to a JSON file</li>
+                    </ol>
+                    <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p>Implement a method that:</p>
+                    <ol>
+                        <li>Reads user data from a CSV file</li>
+                        <li>Validates each row</li>
+                        <li>Transforms data to a standardized format</li>
+                        <li>Removes duplicates</li>
+                        <li>Writes to a JSON file</li>
+                    </ol>
+                    <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
+                </div>
+            </div>
 
             <h3>Exercise 4: Documentation Pass</h3>
-            <p>Take one of your previous functions and ask Copilot to:</p>
-            <ul>
-                <li>Add a comprehensive docstring (Python) or XML comments (C#)</li>
-                <li>Include parameter descriptions and return values</li>
-                <li>Add usage examples</li>
-                <li>Document exceptions and edge cases</li>
-            </ul>
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p>Take one of your previous functions and ask Copilot to:</p>
+                    <ul>
+                        <li>Add a comprehensive docstring</li>
+                        <li>Include parameter descriptions and return values</li>
+                        <li>Add usage examples</li>
+                        <li>Document exceptions and edge cases</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p>Take one of your previous methods and ask Copilot to:</p>
+                    <ul>
+                        <li>Add comprehensive XML documentation comments</li>
+                        <li>Include parameter descriptions and return values</li>
+                        <li>Add usage examples in <c>&lt;example&gt;</c> tags</li>
+                        <li>Document exceptions using <c>&lt;exception&gt;</c> tags</li>
+                    </ul>
+                </div>
+            </div>
 
             <h3>Reflection Questions</h3>
             <ul>
