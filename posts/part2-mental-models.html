@@ -133,17 +133,27 @@ def generate_report(data):</code></pre>
             <p><strong>Good:</strong> <code>def calculate_total_revenue(sales_data):</code></p>
 
             <h3>2. Add Type Annotations</h3>
-            <p><strong>Python example:</strong></p>
-            <pre><code>from typing import List, Dict
+            
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>from typing import List, Dict
 
 def aggregate_user_metrics(user_ids: List[int]) -> Dict[int, float]:
     # Copilot now knows input and output types, improving suggestions</code></pre>
+                </div>
 
-            <p><strong>C# example:</strong></p>
-            <pre><code>public Dictionary<int, double> AggregateUserMetrics(List<int> userIds)
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>public Dictionary<int, double> AggregateUserMetrics(List<int> userIds)
 {
     // Type safety guides Copilot's reasoning
 }</code></pre>
+                </div>
+            </div>
 
             <h3>3. Provide Examples or Patterns</h3>
             <p>If you want Copilot to follow a specific pattern, show it an example first:</p>
