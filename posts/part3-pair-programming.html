@@ -469,4 +469,39 @@ def test_validate_credit_card_invalid_length():
 
     <script src="../script.js"></script>
 </body>
-</html>
+</html>    
+    <script>
+    // Inline tab functionality - drastic revision
+    (function() {
+        console.log('Tab script loaded');
+        const tabs = document.querySelectorAll('.language-tab');
+        console.log('Found tabs:', tabs.length);
+        
+        tabs.forEach(function(tab) {
+            tab.onclick = function() {
+                console.log('Tab clicked:', this.getAttribute('data-language'));
+                const lang = this.getAttribute('data-language');
+                const tabGroup = this.closest('.language-tabs');
+                const container = tabGroup.nextElementSibling;
+                
+                // Update buttons
+                tabGroup.querySelectorAll('.language-tab').forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Update content
+                container.querySelectorAll('.tab-content').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                const selected = container.querySelector('[data-language="' + lang + '"]');
+                if (selected) {
+                    selected.classList.add('active');
+                    console.log('Content switched to:', lang);
+                }
+                
+                localStorage.setItem('preferred-language', lang);
+            };
+        });
+    })();
+    </script>

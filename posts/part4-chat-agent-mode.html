@@ -410,4 +410,32 @@ Console.WriteLine(result.Name);  // What if result is null?</code></pre>
 
     <script src="../script.js"></script>
 </body>
-</html>
+</html>    
+    <script>
+    // Inline tab functionality
+    (function() {
+        const tabs = document.querySelectorAll('.language-tab');
+        tabs.forEach(function(tab) {
+            tab.onclick = function() {
+                const lang = this.getAttribute('data-language');
+                const tabGroup = this.closest('.language-tabs');
+                const container = tabGroup.nextElementSibling;
+                
+                tabGroup.querySelectorAll('.language-tab').forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                container.querySelectorAll('.tab-content').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                const selected = container.querySelector('[data-language="' + lang + '"]');
+                if (selected) {
+                    selected.classList.add('active');
+                }
+                
+                localStorage.setItem('preferred-language', lang);
+            };
+        });
+    })();
+    </script>
