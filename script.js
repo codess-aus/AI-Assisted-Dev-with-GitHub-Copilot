@@ -254,54 +254,57 @@ if (document.readyState === 'loading') {
 // Language Tab Functionality
 document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.language-tab');
-    
-    // Get saved language preference or default to Python
     const savedLanguage = localStorage.getItem('preferred-language') || 'python';
     
-    // Initialize tabs with saved preference
+    // Function to switch tabs
+    function switchTab(button, language) {
+        const tabGroup = button.closest('.language-tabs');
+        if (!tabGroup) return;
+        
+        // The tab-content-container is the immediate next sibling of language-tabs
+        const contentContainer = tabGroup.nextElementSibling;
+        
+        if (!contentContainer || !contentContainer.classList.contains('tab-content-container')) {
+            return;
+        }
+        
+        // Remove active class from all buttons in this tab group
+        tabGroup.querySelectorAll('.language-tab').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        // Hide all content in this tab group's container
+        contentContainer.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // Show selected content
+        const selectedContent = contentContainer.querySelector(`[data-language="${language}"]`);
+        if (selectedContent) {
+            selectedContent.classList.add('active');
+        }
+        
+        // Save preference
+        localStorage.setItem('preferred-language', language);
+    }
+    
+    // Attach click handlers to all tab buttons
     tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             const language = button.dataset.language;
-            
-            // Find the tab group and content container
-            const tabGroup = button.closest('.language-tabs');
-            // The tab-content-container is the immediate next sibling of language-tabs
-            const contentContainer = tabGroup.nextElementSibling;
-            
-            if (!contentContainer || !contentContainer.classList.contains('tab-content-container')) {
-                console.warn('Content container not found. Next sibling:', contentContainer?.className);
-                return;
-            }
-            
-            // Remove active class from all buttons in this tab group
-            tabGroup.querySelectorAll('.language-tab').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Add active class to clicked button
-            button.classList.add('active');
-            
-            // Hide all content in this tab group's container
-            contentContainer.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Show selected content
-            const selectedContent = contentContainer.querySelector(`[data-language="${language}"]`);
-            if (selectedContent) {
-                selectedContent.classList.add('active');
-            }
-            
-            // Save preference
-            localStorage.setItem('preferred-language', language);
+            switchTab(button, language);
         });
     });
     
-    // Apply saved language preference to all tab groups
-    document.querySelectorAll('.language-tabs').forEach(tabGroup => {
-        const button = tabGroup.querySelector(`[data-language="${savedLanguage}"]`);
-        if (button) {
-            button.click();
+    // Apply saved language preference to all tab groups on page load
+    tabButtons.forEach(button => {
+        if (button.dataset.language === savedLanguage) {
+            switchTab(button, savedLanguage);
         }
     });
 });
+
