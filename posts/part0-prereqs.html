@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get ready for the workshop: GitHub account, Copilot setup, Codespaces, and environment prerequisites.">
+    <title>Prerequisites & Setup - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/workflow.png" alt="Prerequisites & Setup for Workshop" loading="eager">
+        </div>
+        <div class="post-header">
+            <div class="post-date">Start Here</div>
+            <h1 class="post-title">Prerequisites & Setup</h1>
+        </div>
+
+        <div class="post-body">
+            <h2>Get Ready for the Workshop</h2>
+            <p>This quick-start guide assumes you have nothing installed. Follow these steps to prepare your development environment for hands-on labs with GitHub Copilot. The entire setup should take 10-15 minutes.</p>
+
+            <h2>1. GitHub Account (Free)</h2>
+            <p>If you don't already have a GitHub account:</p>
+            <ul>
+                <li>Visit <a href="https://github.com/join" target="_blank">github.com/join</a> and create an account</li>
+                <li>Use a strong password and enable Two-Factor Authentication (MFA) for security</li>
+                <li>Verify your email address</li>
+            </ul>
+
+            <p><strong>If you have an Enterprise or Business account:</strong> Sign in with your organization account to access Copilot through your company subscription (recommended for the best experience).</p>
+
+            <p><strong>If you're a student:</strong> Visit <a href="https://education.github.com/pack" target="_blank">education.github.com/pack</a>, apply with your school email or student ID, and enable GitHub Copilot once approved. This gives you free access to Copilot Pro!</p>
+
+            <h2>2. Enable GitHub Copilot</h2>
+            <p>Once you have a GitHub account:</p>
+            <ul>
+                <li>Go to <strong>Settings → Copilot</strong> in your GitHub account</li>
+                <li>Enable Copilot for your account (use your Enterprise/Business subscription if available, otherwise start the free trial)</li>
+                <li>For students: After GitHub Student Pack approval, enable Copilot from the same settings page</li>
+            </ul>
+
+            <h2>3. Recommended: Use GitHub Codespaces 🚀</h2>
+            <p><strong>Why Codespaces?</strong> It's the fastest way to get started—no local installations required!</p>
+
+            <h3>Benefits of Codespaces:</h3>
+            <ul>
+                <li>✅ <strong>1-click setup:</strong> Environment pre-configured with Git, Node.js, Python, .NET, and VS Code extensions</li>
+                <li>✅ <strong>Works everywhere:</strong> Runs in your browser or VS Code desktop—no downloads needed</li>
+                <li>✅ <strong>Consistent environment:</strong> Everyone has the same setup, eliminating "works on my machine" issues</li>
+                <li>✅ <strong>Free tier included:</strong> GitHub provides 60 hours/month of Codespaces usage for free accounts</li>
+                <li>✅ <strong>Save time:</strong> Skip installing Python, Node, .NET, and configuring extensions</li>
+            </ul>
+
+            <h3>How to Start a Codespace:</h3>
+            <ol>
+                <li>Go to the workshop repository: <a href="https://github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot" target="_blank">github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot</a></li>
+                <li>Click the green <strong>Code</strong> button</li>
+                <li>Switch to the <strong>Codespaces</strong> tab</li>
+                <li>Click <strong>"Create codespace on main"</strong></li>
+                <li>Wait 2-3 minutes for the environment to build (first time only)</li>
+                <li>Start coding! VS Code in the browser opens automatically with Copilot ready</li>
+            </ol>
+
+            <p><strong>💡 Pro Tip:</strong> You can also open a Codespace in VS Code desktop by clicking the three-dot menu in the Codespace and selecting "Open in VS Code Desktop".</p>
+
+            <h2>4. Alternative: VS Code Desktop Setup</h2>
+            <p>If you prefer working locally instead of using Codespaces:</p>
+
+            <h3>Install VS Code:</h3>
+            <ul>
+                <li>Download from <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></li>
+                <li>Install and launch VS Code</li>
+            </ul>
+
+            <h3>Sign in to GitHub:</h3>
+            <ul>
+                <li>Click the <strong>Accounts</strong> icon in the bottom-left corner of VS Code</li>
+                <li>Select <strong>Sign in to GitHub</strong> and authorize VS Code</li>
+            </ul>
+
+            <h3>Install Required Extensions:</h3>
+            <ul>
+                <li><strong>GitHub Copilot</strong> (by GitHub)</li>
+                <li><strong>GitHub Copilot Chat</strong> (by GitHub)</li>
+            </ul>
+            <p>Search for these in the Extensions panel (<code>Ctrl+Shift+X</code> or <code>Cmd+Shift+X</code> on Mac) and click Install.</p>
+
+            <h2>5. Language Runtimes (Local Setup Only)</h2>
+            <p><strong>Skip this if you're using Codespaces!</strong> Codespaces has everything pre-installed.</p>
+
+            <h3>Python</h3>
+            <ul>
+                <li>Install from <a href="https://python.org" target="_blank">python.org</a> (version 3.9 or later)</li>
+                <li>Verify: <code>python --version</code> or <code>python3 --version</code></li>
+                <li>Create a virtual environment for the workshop: <code>python -m venv .venv</code></li>
+                <li>Activate it:
+                    <ul>
+                        <li>Linux/macOS: <code>source .venv/bin/activate</code></li>
+                        <li>Windows: <code>.venv\Scripts\activate</code></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>JavaScript/TypeScript (Node.js)</h3>
+            <ul>
+                <li>Install from <a href="https://nodejs.org" target="_blank">nodejs.org</a> (LTS version recommended)</li>
+                <li>Verify: <code>node --version</code> and <code>npm --version</code></li>
+            </ul>
+
+            <h3>C# (.NET)</h3>
+            <ul>
+                <li>Install .NET SDK from <a href="https://dotnet.microsoft.com" target="_blank">dotnet.microsoft.com</a> (version 8.0 or later)</li>
+                <li>Verify: <code>dotnet --version</code></li>
+            </ul>
+
+            <h2>6. Clone the Repository (Local Setup Only)</h2>
+            <p><strong>Skip this if you're using Codespaces!</strong> The repo is already available in your Codespace.</p>
+
+            <pre><code>git clone https://github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot.git
+cd AI-Assisted-Dev-with-GitHub-Copilot
+code .</code></pre>
+
+            <h2>7. Quick Test: Is Everything Working?</h2>
+            <p>Before starting Lab 1, verify your setup:</p>
+
+            <h3>Test Copilot:</h3>
+            <ol>
+                <li>Open VS Code (in Codespace or locally)</li>
+                <li>Create a new file: <code>test.py</code></li>
+                <li>Type: <code># Write a function that adds two numbers</code></li>
+                <li>Press Enter and wait for Copilot to suggest code (appears in gray text)</li>
+                <li>Press <code>Tab</code> to accept the suggestion</li>
+            </ol>
+
+            <p>If you see gray suggestions appear, <strong>you're ready to go!</strong></p>
+
+            <h3>Test Language Runtimes:</h3>
+            <pre><code># Python
+python --version
+
+# JavaScript
+node --version
+
+# C#
+dotnet --version</code></pre>
+
+            <p>All commands should return version numbers without errors.</p>
+
+            <h2>8. Workshop Materials</h2>
+            <p>All labs and exercises are in the <code>posts/</code> directory of the repository. Each part includes:</p>
+            <ul>
+                <li>Theory and best practices</li>
+                <li>Hands-on coding exercises</li>
+                <li>Reflection questions to deepen your understanding</li>
+            </ul>
+
+            <h2>9. Troubleshooting</h2>
+            <h3>Copilot not suggesting code?</h3>
+            <ul>
+                <li>Confirm you're signed into GitHub in VS Code (bottom-left Accounts icon)</li>
+                <li>Check that the Copilot extension is enabled (Extensions panel)</li>
+                <li>Restart VS Code</li>
+            </ul>
+
+            <h3>Codespace build stuck?</h3>
+            <ul>
+                <li>Delete the Codespace and create a new one</li>
+                <li>Check the <a href="https://www.githubstatus.com" target="_blank">GitHub Status page</a> for Codespaces issues</li>
+            </ul>
+
+            <h3>Missing language runtimes locally?</h3>
+            <ul>
+                <li><strong>Recommended:</strong> Switch to Codespaces to avoid setup friction</li>
+                <li>Ensure the runtime is installed and added to your system PATH</li>
+            </ul>
+
+            <h2>Ready to Start!</h2>
+            <p>Once your environment is set up, proceed to <strong>Part 1: Welcome & AI-Assisted Development Landscape</strong> to begin the workshop.</p>
+
+            <p><strong>🎓 Pro Tips for Success:</strong></p>
+            <ul>
+                <li>Keep Copilot Chat open for quick questions (click the chat icon in VS Code sidebar)</li>
+                <li>Experiment freely—Copilot learns from your context and gets better as you code</li>
+                <li>Review all AI-generated code before running it—you're the senior developer!</li>
+                <li>Use Codespaces if you encounter any local setup issues</li>
+            </ul>
+
+            <div class="post-navigation">
+                <a href="part1-welcome.html" class="next-post">Next: Part 1 - Welcome & AI-Assisted Development →</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
