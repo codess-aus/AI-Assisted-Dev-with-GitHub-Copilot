@@ -192,7 +192,7 @@ for (let i = 1; i <= 15; i++) {
             </div>
 
             <h3>Exercise 2: Iteration and Refinement</h3>
-            <p>Now let's enhance your function to handle edge cases. Modify your original comment to add error checking requirements. This is how you iterate with Copilot—improve your prompt by adding more details, and Copilot will generate better code.</p>
+            <p>Now let's enhance your function to handle edge cases. This demonstrates how to iterate with Copilot—improve your comment with more detailed requirements, and Copilot generates better code.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -202,68 +202,91 @@ for (let i = 1; i <= 15; i++) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1:</strong> Update your function comment to add error handling. Replace your original comment with this enhanced version:</p>
+                    <p><strong>Step 1:</strong> Clear your fizzbuzz.py file and start fresh with an enhanced comment. Here's your starting point:</p>
                     <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
 # Otherwise, return the number as a string.
-# Handle negative numbers by raising a ValueError with an appropriate message.
+# Raise a ValueError if the number is negative.
 def fizzbuzz(n):
     pass</code></pre>
-                    <p>Press <code>Ctrl+Enter</code> to trigger Copilot again. Notice how it now includes validation and error handling based on your enhanced comment.</p>
+                    <p>Position your cursor at the end of the `pass` statement and press <code>Ctrl+Enter</code> to trigger Copilot. It will now generate code that includes error handling for negative numbers.</p>
                     
-                    <p><strong>Step 2:</strong> Update your test code to verify error handling:</p>
-                    <pre><code>if __name__ == "__main__":
-    # Test normal cases
+                    <p><strong>Step 2:</strong> Replace your entire test code section with this complete version (delete the old test code first, then paste this):</p>
+                    <pre><code>
+if __name__ == "__main__":
+    print("=== Normal Cases (1-15) ===")
     for i in range(1, 16):
         print(f"{i}: {fizzbuzz(i)}")
     
-    # Test error handling
+    print("\n=== Edge Cases ===")
+    
+    # Test negative number (should raise an error)
+    print("Testing fizzbuzz(-5):")
     try:
-        fizzbuzz(-5)
+        result = fizzbuzz(-5)
+        print(f"Result: {result}")
     except ValueError as e:
-        print(f"Error: {e}")</code></pre>
+        print(f"✓ Caught error: {e}")
+    
+    # Test zero (should work)
+    print(f"\nfizzbuzz(0): {fizzbuzz(0)}")</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>python fizzbuzz.py</code> - you should see the normal output plus an error message when testing with -5.</p>
+                    <p><strong>Run it:</strong> <code>python fizzbuzz.py</code></p>
+                    <p><strong>Expected output:</strong> You should see the FizzBuzz sequence for 1-15, then a section showing the error handling working (with a ✓ checkmark), and fizzbuzz(0) returning "FizzBuzz".</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1:</strong> Update your method comment to add error handling. Replace your original comment with this enhanced version:</p>
-                    <pre><code>// Write a method that takes a number and returns "Fizz" if divisible by 3,
-// "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
-// Otherwise, return the number as a string.
-// Throw an ArgumentException if the input is negative.
-public string Solve(int n)
+                    <p><strong>Step 1:</strong> Clear your FizzBuzz.cs file and start fresh with an enhanced comment. Here's your starting point:</p>
+                    <pre><code>using System;
+
+public class FizzBuzzSolver
 {
-    return n.ToString();
+    // Write a method that takes a number and returns "Fizz" if divisible by 3,
+    // "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
+    // Otherwise, return the number as a string.
+    // Throw an ArgumentException if the number is negative.
+    public string Solve(int n)
+    {
+        return n.ToString();
+    }
 }</code></pre>
-                    <p>Press <code>Ctrl+Enter</code> to trigger Copilot again. Notice how it now includes validation and exception handling.</p>
+                    <p>Position your cursor inside the method and press <code>Ctrl+Enter</code> to trigger Copilot. It will now generate code that includes validation for negative numbers.</p>
                     
-                    <p><strong>Step 2:</strong> Update your Main method to test error handling:</p>
-                    <pre><code>    static void Main()
+                    <p><strong>Step 2:</strong> Add this complete Main method (inside the FizzBuzzSolver class, after the Solve method):</p>
+                    <pre><code>
+    static void Main()
     {
         var solver = new FizzBuzzSolver();
         
-        // Test normal cases
+        Console.WriteLine("=== Normal Cases (1-15) ===");
         for (int i = 1; i <= 15; i++)
         {
             Console.WriteLine($"{i}: {solver.Solve(i)}");
         }
         
-        // Test error handling
+        Console.WriteLine("\n=== Edge Cases ===");
+        
+        // Test negative number (should throw an error)
+        Console.WriteLine("Testing Solve(-5):");
         try
         {
-            solver.Solve(-5);
+            string result = solver.Solve(-5);
+            Console.WriteLine($"Result: {result}");
         }
         catch (ArgumentException e)
         {
-            Console.WriteLine($"Error: {e.Message}");
+            Console.WriteLine($"✓ Caught error: {e.Message}");
         }
+        
+        // Test zero (should work)
+        Console.WriteLine($"\nSolve(0): {solver.Solve(0)}");
     }</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>dotnet run</code> - you should see normal output plus an error message.</p>
+                    <p><strong>Run it:</strong> <code>dotnet run</code></p>
+                    <p><strong>Expected output:</strong> FizzBuzz sequence for 1-15, error handling demonstration with a ✓ checkmark, and Solve(0) returning "FizzBuzz".</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1:</strong> Update your function comment to add error handling. Replace your original comment with this enhanced version:</p>
+                    <p><strong>Step 1:</strong> Clear your fizzbuzz.js file and start fresh with an enhanced comment. Here's your starting point:</p>
                     <pre><code>// Implement FizzBuzz logic in JavaScript
 // Return "Fizz" for multiples of 3, "Buzz" for 5, "FizzBuzz" for both,
 // otherwise return the number as a string.
@@ -271,22 +294,31 @@ public string Solve(int n)
 function fizzbuzz(n) {
     return n.toString();
 }</code></pre>
-                    <p>Press <code>Ctrl+Enter</code> to trigger Copilot again. Notice how it now includes validation and error handling.</p>
+                    <p>Position your cursor at the end of the function and press <code>Ctrl+Enter</code> to trigger Copilot. It will now generate code that includes error handling for negative numbers.</p>
                     
-                    <p><strong>Step 2:</strong> Update your test code to verify error handling:</p>
-                    <pre><code>// Test normal cases
+                    <p><strong>Step 2:</strong> Replace your test code section with this complete version:</p>
+                    <pre><code>
+console.log("=== Normal Cases (1-15) ===");
 for (let i = 1; i <= 15; i++) {
     console.log(`${i}: ${fizzbuzz(i)}`);
 }
 
-// Test error handling
+console.log("\n=== Edge Cases ===");
+
+// Test negative number (should throw an error)
+console.log("Testing fizzbuzz(-5):");
 try {
-    fizzbuzz(-5);
+    const result = fizzbuzz(-5);
+    console.log(`Result: ${result}`);
 } catch (e) {
-    console.log(`Error: ${e.message}`);
-}</code></pre>
+    console.log(`✓ Caught error: ${e.message}`);
+}
+
+// Test zero (should work)
+console.log(`\nfizzbuzz(0): ${fizzbuzz(0)}`)</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code> - you should see normal output plus an error message.</p>
+                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code></p>
+                    <p><strong>Expected output:</strong> FizzBuzz sequence for 1-15, error handling working with a ✓ checkmark, and fizzbuzz(0) returning "FizzBuzz".</p>
                 </div>
             </div>
             </div>
