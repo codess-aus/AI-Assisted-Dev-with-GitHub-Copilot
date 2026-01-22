@@ -1,5 +1,10 @@
 # Workshop Chapters/Topics
 
+## Prerequisites: Setup for the Workshop
+
+### Quick Start: Accounts, Copilot, and Environment
+(GitHub account, Copilot enablement, Codespaces-first setup, and local fallbacks)
+
 ## Part 1: Welcome & AI-Assisted Development Landscape
 
 ### Lab 1: Getting Started with Copilot
