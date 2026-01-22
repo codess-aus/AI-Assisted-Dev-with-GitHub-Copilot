@@ -202,15 +202,24 @@ for (let i = 1; i <= 15; i++) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1:</strong> Clear your fizzbuzz.py file and start fresh with an enhanced comment. Here's your starting point:</p>
+                    <p><strong>Step 1:</strong> Clear your fizzbuzz.py file and start fresh. Replace your entire file with this code:</p>
                     <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
 # Otherwise, return the number as a string.
 # Raise a ValueError if the number is negative.
 def fizzbuzz(n):
-    pass</code></pre>
-                    <p>Position your cursor at the end of the `pass` statement and press <code>Ctrl+Enter</code> to trigger Copilot. It will now generate code that includes error handling for negative numbers.</p>
+    if n < 0:
+        raise ValueError("Input must be a non-negative integer")
+    if n % 3 == 0 and n % 5 == 0:
+        return "FizzBuzz"
+    elif n % 3 == 0:
+        return "Fizz"
+    elif n % 5 == 0:
+        return "Buzz"
+    else:
+        return str(n)</code></pre>
+                    <p><strong>Why the complete implementation?</strong> This shows you what Copilot would generate when you ask it to add error handling. Copilot saw your detailed comment (including "Raise a ValueError if the number is negative") and generated the validation at the top of the function.</p>
                     
-                    <p><strong>Step 2:</strong> Replace your entire test code section with this complete version (delete the old test code first, then paste this):</p>
+                    <p><strong>Step 2:</strong> Replace your entire test code section with this complete version:</p>
                     <pre><code>
 if __name__ == "__main__":
     print("=== Normal Cases (1-15) ===")
@@ -235,7 +244,7 @@ if __name__ == "__main__":
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1:</strong> Clear your FizzBuzz.cs file and start fresh with an enhanced comment. Here's your starting point:</p>
+                    <p><strong>Step 1:</strong> Clear your FizzBuzz.cs file and start fresh. Replace your entire file with this code:</p>
                     <pre><code>using System;
 
 public class FizzBuzzSolver
@@ -246,10 +255,29 @@ public class FizzBuzzSolver
     // Throw an ArgumentException if the number is negative.
     public string Solve(int n)
     {
-        return n.ToString();
+        if (n < 0)
+        {
+            throw new ArgumentException("Input must be a non-negative integer");
+        }
+        if (n % 3 == 0 && n % 5 == 0)
+        {
+            return "FizzBuzz";
+        }
+        else if (n % 3 == 0)
+        {
+            return "Fizz";
+        }
+        else if (n % 5 == 0)
+        {
+            return "Buzz";
+        }
+        else
+        {
+            return n.ToString();
+        }
     }
 }</code></pre>
-                    <p>Position your cursor inside the method and press <code>Ctrl+Enter</code> to trigger Copilot. It will now generate code that includes validation for negative numbers.</p>
+                    <p><strong>Why the complete implementation?</strong> This shows you what Copilot would generate when you ask it to add error handling. Copilot saw your detailed comment (including "Throw an ArgumentException if the number is negative") and generated the validation at the start of the method.</p>
                     
                     <p><strong>Step 2:</strong> Add this complete Main method (inside the FizzBuzzSolver class, after the Solve method):</p>
                     <pre><code>
@@ -286,15 +314,26 @@ public class FizzBuzzSolver
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1:</strong> Clear your fizzbuzz.js file and start fresh with an enhanced comment. Here's your starting point:</p>
+                    <p><strong>Step 1:</strong> Clear your fizzbuzz.js file and start fresh. Replace your entire file with this code:</p>
                     <pre><code>// Implement FizzBuzz logic in JavaScript
 // Return "Fizz" for multiples of 3, "Buzz" for 5, "FizzBuzz" for both,
 // otherwise return the number as a string.
 // Throw an Error if the input is negative.
 function fizzbuzz(n) {
-    return n.toString();
+    if (n < 0) {
+        throw new Error("Input must be a non-negative integer");
+    }
+    if (n % 3 === 0 && n % 5 === 0) {
+        return "FizzBuzz";
+    } else if (n % 3 === 0) {
+        return "Fizz";
+    } else if (n % 5 === 0) {
+        return "Buzz";
+    } else {
+        return n.toString();
+    }
 }</code></pre>
-                    <p>Position your cursor at the end of the function and press <code>Ctrl+Enter</code> to trigger Copilot. It will now generate code that includes error handling for negative numbers.</p>
+                    <p><strong>Why the complete implementation?</strong> This shows you what Copilot would generate when you ask it to add error handling. Copilot saw your detailed comment (including "Throw an Error if the input is negative") and generated the validation at the start of the function.</p>
                     
                     <p><strong>Step 2:</strong> Replace your test code section with this complete version:</p>
                     <pre><code>
