@@ -192,7 +192,7 @@ for (let i = 1; i <= 15; i++) {
             </div>
 
             <h3>Exercise 2: Iteration and Refinement</h3>
-            <p>Now update your function to handle edge cases. Ask Copilot to add error checking by modifying your comment:</p>
+            <p>Now let's enhance your function to handle edge cases. Modify your original comment to add error checking requirements. This is how you iterate with Copilot—improve your prompt by adding more details, and Copilot will generate better code.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -202,32 +202,93 @@ for (let i = 1; i <= 15; i++) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <pre><code># Handle negative numbers by returning an error message
+                    <p><strong>Step 1:</strong> Update your function comment to add error handling. Replace your original comment with this enhanced version:</p>
+                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
+# Otherwise, return the number as a string.
+# Handle negative numbers by raising a ValueError with an appropriate message.
 def fizzbuzz(n):
-    # Copilot will suggest validation
     pass</code></pre>
-                    <p><strong>After updating:</strong> Run <code>python fizzbuzz.py</code> again and test with <code>fizzbuzz(-5)</code> in your test loop to see the error handling.</p>
+                    <p>Press <code>Ctrl+Enter</code> to trigger Copilot again. Notice how it now includes validation and error handling based on your enhanced comment.</p>
+                    
+                    <p><strong>Step 2:</strong> Update your test code to verify error handling:</p>
+                    <pre><code>if __name__ == "__main__":
+    # Test normal cases
+    for i in range(1, 16):
+        print(f"{i}: {fizzbuzz(i)}")
+    
+    # Test error handling
+    try:
+        fizzbuzz(-5)
+    except ValueError as e:
+        print(f"Error: {e}")</code></pre>
+                    
+                    <p><strong>Run it:</strong> <code>python fizzbuzz.py</code> - you should see the normal output plus an error message when testing with -5.</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <pre><code>// Handle negative numbers by throwing an ArgumentException
+                    <p><strong>Step 1:</strong> Update your method comment to add error handling. Replace your original comment with this enhanced version:</p>
+                    <pre><code>// Write a method that takes a number and returns "Fizz" if divisible by 3,
+// "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
+// Otherwise, return the number as a string.
+// Throw an ArgumentException if the input is negative.
 public string Solve(int n)
 {
-    // Copilot will suggest validation and error handling
     return n.ToString();
 }</code></pre>
-                    <p><strong>After updating:</strong> Run <code>dotnet run</code> again and add <code>solver.Solve(-5)</code> in Main to see exception handling.</p>
+                    <p>Press <code>Ctrl+Enter</code> to trigger Copilot again. Notice how it now includes validation and exception handling.</p>
+                    
+                    <p><strong>Step 2:</strong> Update your Main method to test error handling:</p>
+                    <pre><code>    static void Main()
+    {
+        var solver = new FizzBuzzSolver();
+        
+        // Test normal cases
+        for (int i = 1; i <= 15; i++)
+        {
+            Console.WriteLine($"{i}: {solver.Solve(i)}");
+        }
+        
+        // Test error handling
+        try
+        {
+            solver.Solve(-5);
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+        }
+    }</code></pre>
+                    
+                    <p><strong>Run it:</strong> <code>dotnet run</code> - you should see normal output plus an error message.</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <pre><code>// Handle negative numbers by throwing an Error
+                    <p><strong>Step 1:</strong> Update your function comment to add error handling. Replace your original comment with this enhanced version:</p>
+                    <pre><code>// Implement FizzBuzz logic in JavaScript
+// Return "Fizz" for multiples of 3, "Buzz" for 5, "FizzBuzz" for both,
+// otherwise return the number as a string.
+// Throw an Error if the input is negative.
 function fizzbuzz(n) {
-    // Copilot will suggest validation and error handling
     return n.toString();
+}</code></pre>
+                    <p>Press <code>Ctrl+Enter</code> to trigger Copilot again. Notice how it now includes validation and error handling.</p>
+                    
+                    <p><strong>Step 2:</strong> Update your test code to verify error handling:</p>
+                    <pre><code>// Test normal cases
+for (let i = 1; i <= 15; i++) {
+    console.log(`${i}: ${fizzbuzz(i)}`);
 }
-</code></pre>
-                    <p><strong>After updating:</strong> Run <code>node fizzbuzz.js</code> again and test with <code>fizzbuzz(-5)</code> in your loop to see error handling.</p>
+
+// Test error handling
+try {
+    fizzbuzz(-5);
+} catch (e) {
+    console.log(`Error: ${e.message}`);
+}</code></pre>
+                    
+                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code> - you should see normal output plus an error message.</p>
                 </div>
+            </div>
             </div>
 
             <p>See how Copilot's suggestion changes based on your more detailed prompt.</p>
