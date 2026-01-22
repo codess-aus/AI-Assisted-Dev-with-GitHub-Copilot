@@ -121,14 +121,25 @@
                     <p>Create a new file: <code>fizzbuzz.py</code></p>
                     <p>Write a comment and let Copilot suggest the implementation:</p>
                     <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
-def fizzbuzz(n):</code></pre>
+def fizzbuzz(n):
+    # Copilot will suggest the implementation
+    pass
+
+# Test your function
+if __name__ == "__main__":
+    for i in range(1, 16):
+        print(f"{i}: {fizzbuzz(i)}")</code></pre>
                     <p>Press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Accept the suggestion or iterate by providing more detail in your comment.</p>
+                    <p><strong>Run it:</strong> <code>python fizzbuzz.py</code></p>
+                    <p><strong>Expected output:</strong> You should see numbers 1-15 with FizzBuzz logic applied (3 → "Fizz", 5 → "Buzz", 15 → "FizzBuzz", etc.)</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
                     <p>Create a new file: <code>FizzBuzz.cs</code></p>
                     <p>Write a comment and let Copilot suggest the implementation:</p>
                     <pre><code>// Implement FizzBuzz logic as a method in a class
+using System;
+
 public class FizzBuzzSolver
 {
     // Write a method that takes a number and returns "Fizz" if divisible by 3,
@@ -137,9 +148,21 @@ public class FizzBuzzSolver
     public string Solve(int n)
     {
         // Copilot will suggest the implementation
+        return n.ToString();
+    }
+
+    static void Main()
+    {
+        var solver = new FizzBuzzSolver();
+        for (int i = 1; i <= 15; i++)
+        {
+            Console.WriteLine($"{i}: {solver.Solve(i)}");
+        }
     }
 }</code></pre>
                     <p>Press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Notice how it adapts to C# syntax and conventions.</p>
+                    <p><strong>Run it:</strong> <code>dotnet run</code> or compile with <code>csc FizzBuzz.cs</code> then run <code>./FizzBuzz</code></p>
+                    <p><strong>Expected output:</strong> Numbers 1-15 with FizzBuzz logic applied</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
@@ -150,14 +173,22 @@ public class FizzBuzzSolver
 // otherwise return the number as a string.
 function fizzbuzz(n) {
     // Copilot will suggest the implementation
+    return n.toString();
+}
+
+// Test your function
+for (let i = 1; i <= 15; i++) {
+    console.log(`${i}: ${fizzbuzz(i)}`);
 }
 </code></pre>
                     <p>Press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Notice how it adapts to JavaScript idioms (strict equality, modulo checks).</p>
+                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code></p>
+                    <p><strong>Expected output:</strong> Numbers 1-15 with FizzBuzz logic applied</p>
                 </div>
             </div>
 
             <h3>Exercise 2: Iteration and Refinement</h3>
-            <p>Ask Copilot to add edge case handling or error checking. For example, modify your comment:</p>
+            <p>Now update your function to handle edge cases. Ask Copilot to add error checking by modifying your comment:</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -168,7 +199,10 @@ function fizzbuzz(n) {
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
                     <pre><code># Handle negative numbers by returning an error message
-def fizzbuzz(n):</code></pre>
+def fizzbuzz(n):
+    # Copilot will suggest validation
+    pass</code></pre>
+                    <p><strong>After updating:</strong> Run <code>python fizzbuzz.py</code> again and test with <code>fizzbuzz(-5)</code> in your test loop to see the error handling.</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
@@ -176,15 +210,19 @@ def fizzbuzz(n):</code></pre>
 public string Solve(int n)
 {
     // Copilot will suggest validation and error handling
+    return n.ToString();
 }</code></pre>
+                    <p><strong>After updating:</strong> Run <code>dotnet run</code> again and add <code>solver.Solve(-5)</code> in Main to see exception handling.</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
                     <pre><code>// Handle negative numbers by throwing an Error
 function fizzbuzz(n) {
     // Copilot will suggest validation and error handling
+    return n.toString();
 }
 </code></pre>
+                    <p><strong>After updating:</strong> Run <code>node fizzbuzz.js</code> again and test with <code>fizzbuzz(-5)</code> in your loop to see error handling.</p>
                 </div>
             </div>
 
@@ -194,8 +232,9 @@ function fizzbuzz(n) {
             <ul>
                 <li>How accurate was Copilot's first suggestion?</li>
                 <li>Did you need to edit the generated code? What did you change?</li>
-                <li>How did the Python and C# suggestions differ?</li>
+                <li>How did the Python, C#, and JavaScript suggestions differ?</li>
                 <li>Could you have written this code faster without Copilot, or did Copilot save you time?</li>
+                <li>Did seeing the output help you understand what Copilot generated?</li>
             </ul>
 
             <h2>What's Next?</h2>
