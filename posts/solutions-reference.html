@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete solutions reference for all workshop exercises. Use this to check your work or troubleshoot if things go wrong.">
+    <title>Solutions Reference - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/workflow.png" alt="Solutions Reference" loading="eager">
+        </div>
+        <div class="post-header">
+            <div class="post-date">Reference</div>
+            <h1 class="post-title">Solutions Reference</h1>
+        </div>
+
+        <div class="post-body">
+            <h2>How to Use This Page</h2>
+            <p>This page contains ideal solutions for all exercises in the workshop. Use this reference if:</p>
+            <ul>
+                <li>Your code isn't producing the expected output</li>
+                <li>You want to compare your approach with the ideal solution</li>
+                <li>You're stuck and need to see what the final result should look like</li>
+            </ul>
+            <p><strong>Important:</strong> Try to complete each exercise on your own first using Copilot. This reference is for troubleshooting and learning, not for copying solutions.</p>
+
+            <hr>
+
+            <h2>Part 1: Getting Started with Copilot</h2>
+
+            <h3>Lab 1, Exercise 1: Simple Completion</h3>
+            <p>Complete your fizzbuzz function using Copilot. Here's what the ideal result looks like for each language:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>File: fizzbuzz.py</strong></p>
+                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
+def fizzbuzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        return "FizzBuzz"
+    elif n % 3 == 0:
+        return "Fizz"
+    elif n % 5 == 0:
+        return "Buzz"
+    else:
+        return str(n)
+
+if __name__ == "__main__":
+    for i in range(1, 16):
+        print(f"{i}: {fizzbuzz(i)}")</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>1: 1
+2: 2
+3: Fizz
+4: 4
+5: Buzz
+6: Fizz
+7: 7
+8: 8
+9: Fizz
+10: Buzz
+11: 11
+12: Fizz
+13: 13
+14: 14
+15: FizzBuzz</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>File: FizzBuzz.cs</strong></p>
+                    <pre><code>using System;
+
+public class FizzBuzzSolver
+{
+    public string Solve(int n)
+    {
+        if (n % 3 == 0 && n % 5 == 0)
+        {
+            return "FizzBuzz";
+        }
+        else if (n % 3 == 0)
+        {
+            return "Fizz";
+        }
+        else if (n % 5 == 0)
+        {
+            return "Buzz";
+        }
+        else
+        {
+            return n.ToString();
+        }
+    }
+
+    static void Main()
+    {
+        var solver = new FizzBuzzSolver();
+        for (int i = 1; i <= 15; i++)
+        {
+            Console.WriteLine($"{i}: {solver.Solve(i)}");
+        }
+    }
+}</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>1: 1
+2: 2
+3: Fizz
+4: 4
+5: Buzz
+6: Fizz
+7: 7
+8: 8
+9: Fizz
+10: Buzz
+11: 11
+12: Fizz
+13: 13
+14: 14
+15: FizzBuzz</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>File: fizzbuzz.js</strong></p>
+                    <pre><code>function fizzbuzz(n) {
+    if (n % 3 === 0 && n % 5 === 0) {
+        return "FizzBuzz";
+    } else if (n % 3 === 0) {
+        return "Fizz";
+    } else if (n % 5 === 0) {
+        return "Buzz";
+    } else {
+        return n.toString();
+    }
+}
+
+for (let i = 1; i <= 15; i++) {
+    console.log(`${i}: ${fizzbuzz(i)}`);
+}</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>1: 1
+2: 2
+3: Fizz
+4: 4
+5: Buzz
+6: Fizz
+7: 7
+8: 8
+9: Fizz
+10: Buzz
+11: 11
+12: Fizz
+13: 13
+14: 14
+15: FizzBuzz</code></pre>
+                </div>
+            </div>
+
+            <h3>Lab 1, Exercise 2: Iteration and Refinement</h3>
+            <p>Enhanced function with error handling for negative numbers. Here's the ideal implementation:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>File: fizzbuzz.py (with error handling)</strong></p>
+                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
+# Otherwise, return the number as a string.
+# Raise a ValueError if the input is negative, with a descriptive error message.
+def fizzbuzz(n):
+    if n < 0:
+        raise ValueError("Input must be a non-negative integer")
+    if n % 3 == 0 and n % 5 == 0:
+        return "FizzBuzz"
+    elif n % 3 == 0:
+        return "Fizz"
+    elif n % 5 == 0:
+        return "Buzz"
+    else:
+        return str(n)
+
+if __name__ == "__main__":
+    for i in range(1, 16):
+        print(f"{i}: {fizzbuzz(i)}")
+    
+    print("\n=== Testing Error Handling ===")
+    try:
+        fizzbuzz(-5)
+        print("ERROR: Should have raised ValueError!")
+    except ValueError as e:
+        print(f"✓ Successfully caught error: {e}")</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>1: 1
+2: 2
+3: Fizz
+4: 4
+5: Buzz
+6: Fizz
+7: 7
+8: 8
+9: Fizz
+10: Buzz
+11: 11
+12: Fizz
+13: 13
+14: 14
+15: FizzBuzz
+
+=== Testing Error Handling ===
+✓ Successfully caught error: Input must be a non-negative integer</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>File: FizzBuzz.cs (with error handling)</strong></p>
+                    <pre><code>using System;
+
+public class FizzBuzzSolver
+{
+    public string Solve(int n)
+    {
+        if (n < 0)
+        {
+            throw new ArgumentException("Input must be a non-negative integer");
+        }
+        if (n % 3 == 0 && n % 5 == 0)
+        {
+            return "FizzBuzz";
+        }
+        else if (n % 3 == 0)
+        {
+            return "Fizz";
+        }
+        else if (n % 5 == 0)
+        {
+            return "Buzz";
+        }
+        else
+        {
+            return n.ToString();
+        }
+    }
+
+    static void Main()
+    {
+        var solver = new FizzBuzzSolver();
+        for (int i = 1; i <= 15; i++)
+        {
+            Console.WriteLine($"{i}: {solver.Solve(i)}");
+        }
+        
+        Console.WriteLine("\n=== Testing Error Handling ===");
+        try
+        {
+            solver.Solve(-5);
+            Console.WriteLine("ERROR: Should have thrown ArgumentException!");
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine($"✓ Successfully caught error: {e.Message}");
+        }
+    }
+}</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>1: 1
+2: 2
+3: Fizz
+4: 4
+5: Buzz
+6: Fizz
+7: 7
+8: 8
+9: Fizz
+10: Buzz
+11: 11
+12: Fizz
+13: 13
+14: 14
+15: FizzBuzz
+
+=== Testing Error Handling ===
+✓ Successfully caught error: Input must be a non-negative integer</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>File: fizzbuzz.js (with error handling)</strong></p>
+                    <pre><code>// Write a function that takes a number and returns "Fizz" for multiples of 3, 
+// "Buzz" for 5, "FizzBuzz" for both, otherwise the number as a string.
+// Throw an Error if the input is negative, with a descriptive message.
+function fizzbuzz(n) {
+    if (n < 0) {
+        throw new Error("Input must be a non-negative integer");
+    }
+    if (n % 3 === 0 && n % 5 === 0) {
+        return "FizzBuzz";
+    } else if (n % 3 === 0) {
+        return "Fizz";
+    } else if (n % 5 === 0) {
+        return "Buzz";
+    } else {
+        return n.toString();
+    }
+}
+
+for (let i = 1; i <= 15; i++) {
+    console.log(`${i}: ${fizzbuzz(i)}`);
+}
+
+console.log("\n=== Testing Error Handling ===");
+try {
+    fizzbuzz(-5);
+    console.log("ERROR: Should have thrown an Error!");
+} catch (e) {
+    console.log(`✓ Successfully caught error: ${e.message}`);
+}</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>1: 1
+2: 2
+3: Fizz
+4: 4
+5: Buzz
+6: Fizz
+7: 7
+8: 8
+9: Fizz
+10: Buzz
+11: 11
+12: Fizz
+13: 13
+14: 14
+15: FizzBuzz
+
+=== Testing Error Handling ===
+✓ Successfully caught error: Input must be a non-negative integer</code></pre>
+                </div>
+            </div>
+
+            <hr>
+
+            <h2>Part 2: Mental Models & Context</h2>
+            <p>Exercises in Part 2 are primarily exploratory and reflective. The solutions involve applying the principles learned to your own code. Focus on understanding the concepts rather than matching exact code.</p>
+
+            <h3>Lab 2, Exercise 1: Context Sensitivity</h3>
+            <p>This exercise teaches you to recognize how context affects Copilot's suggestions. There's no single "correct" solution—the goal is to observe how variable names, comments, and surrounding code influence what Copilot suggests.</p>
+
+            <h3>Lab 2, Exercise 2: Variable Name Context</h3>
+            <p>Similar to Exercise 1, this is about understanding context. The key is noticing that descriptive variable names lead to better suggestions than generic ones.</p>
+
+            <h3>Lab 2, Exercise 3: Example-Driven Prompting</h3>
+            <p>This exercise shows how providing examples in comments guides Copilot's output. Again, there's no single solution—focus on the principle that examples improve code generation.</p>
+
+            <hr>
+
+            <h2>Part 3: Pair Programming</h2>
+            <p>Part 3 exercises focus on refactoring, testing, and documentation. Solutions vary depending on your starting code, but the key principles are:</p>
+            <ul>
+                <li><strong>Refactoring:</strong> Extract functions, reduce duplication, improve readability</li>
+                <li><strong>Testing:</strong> Write unit tests or integration tests that verify your code works</li>
+                <li><strong>Documentation:</strong> Add docstrings and README sections that explain functionality</li>
+            </ul>
+            <p>Use Copilot to help with these tasks, and compare your approach with industry best practices.</p>
+
+            <hr>
+
+            <h2>Part 4: Copilot Chat vs Agent Mode</h2>
+            <p>These exercises are exploratory and involve comparing different ways of working with Copilot. Solutions depend on your own experiences and observations.</p>
+
+            <hr>
+
+            <h2>Part 5: Security & Guardrails</h2>
+            <p>Part 5 exercises involve code review and security analysis. Solutions focus on:</p>
+            <ul>
+                <li>Identifying security vulnerabilities in Copilot-generated code</li>
+                <li>Understanding common weaknesses and how to mitigate them</li>
+                <li>Building guardrails into your workflow</li>
+            </ul>
+            <p>There's no "one correct solution"—the goal is developing your critical eye for security issues.</p>
+
+            <hr>
+
+            <h2>Part 6: Production Workflows</h2>
+            <p>Part 6 involves building a To-Do API. The exercise is open-ended and depends on your implementation choices. Key milestones should include:</p>
+            <ul>
+                <li>CRUD endpoints (Create, Read, Update, Delete todos)</li>
+                <li>Input validation and error handling</li>
+                <li>Tests for your endpoints</li>
+                <li>Documentation (README, API docs)</li>
+            </ul>
+            <p>Use Copilot to help scaffold the API, but ensure you understand and review all generated code before deploying.</p>
+
+            <hr>
+
+            <h2>Part 7: Wrap-Up & Next Steps</h2>
+            <p>Part 7 exercises are reflective and personal. They don't have "correct" answers—instead, focus on:</p>
+            <ul>
+                <li>Exploring Copilot features you haven't discovered yet</li>
+                <li>Creating your own learning path</li>
+                <li>Building a "Copilot home base" of resources and best practices</li>
+            </ul>
+
+            <hr>
+
+            <h2>Troubleshooting Common Issues</h2>
+
+            <h3>Problem: Code won't run / Syntax errors</h3>
+            <ul>
+                <li>Double-check indentation (Python is especially sensitive)</li>
+                <li>Verify all brackets and parentheses are balanced</li>
+                <li>Make sure you're using the right syntax for your language (e.g., `===` in JavaScript, not `==`)</li>
+                <li>Compare your code to the solutions above character-by-character</li>
+            </ul>
+
+            <h3>Problem: Code runs but produces wrong output</h3>
+            <ul>
+                <li>Check the expected output on this page</li>
+                <li>Add `print()` or `console.log()` statements to debug intermediate values</li>
+                <li>Verify your function logic matches the ideal solution</li>
+                <li>Check for edge cases (negative numbers, zero, large numbers)</li>
+            </ul>
+
+            <h3>Problem: Error handling doesn't work</h3>
+            <ul>
+                <li>Make sure the error is actually being raised/thrown in the code</li>
+                <li>Verify your try/catch (or try/except) block is in the right place</li>
+                <li>Check that the error message matches what's being caught</li>
+                <li>Test with the exact input shown in the expected output (e.g., -5)</li>
+            </ul>
+
+            <h3>Problem: Copilot didn't generate the code I needed</h3>
+            <ul>
+                <li>Improve your comment with more specific requirements</li>
+                <li>Add type hints or function signatures</li>
+                <li>Provide an example in your comment of what you want</li>
+                <li>Try using Copilot Chat (Ctrl+I) instead of inline suggestions</li>
+            </ul>
+
+            <hr>
+
+            <h2>Key Principles to Remember</h2>
+            <ol>
+                <li><strong>Test everything:</strong> Even if Copilot generates code, you're responsible for verifying it works</li>
+                <li><strong>Better comments = Better code:</strong> Detailed requirements produce better suggestions</li>
+                <li><strong>Iterate:</strong> If Copilot's first suggestion isn't perfect, refine your prompt and try again</li>
+                <li><strong>Understand what you're running:</strong> Never execute code you don't understand</li>
+                <li><strong>Use this reference for learning:</strong> Compare your approach with these solutions, but try to solve problems on your own first</li>
+            </ol>
+
+            <div class="post-navigation">
+                <a href="part1-welcome.html" class="next-post">Back to Part 1 →</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
