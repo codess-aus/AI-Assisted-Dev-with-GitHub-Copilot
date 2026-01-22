@@ -81,6 +81,7 @@ def parse_int_list(csv_string: str) -> List[int]:</code></pre>
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -93,6 +94,14 @@ def extract_email_domains(users: List[User]) -> Set[str]:</code></pre>
                     <pre><code>// Using LINQ, extract email domains as a HashSet, then order by frequency
 public HashSet<string> ExtractEmailDomains(List<User> users)
 {</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+<pre><code>// Using array methods, extract email domains and keep them unique
+function extractEmailDomains(users) {
+    // Copilot will likely suggest map + Set to dedupe domains
+}
+</code></pre>
                 </div>
             </div>
 
@@ -149,6 +158,7 @@ def categorize_users(users: List[User]) -> Dict[str, List[User]]:
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -199,6 +209,27 @@ public bool ValidateEmail(string email)
 public List<T> MergeAndSort<T>(List<T> list1, List<T> list2) where T : IComparable<T>
 {</code></pre>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <h4>JSDoc</h4>
+<pre><code>/**
+ * Calculate the age of a person given their birth year.
+ * @param {number} birthYear The year the person was born (e.g., 1990)
+ * @returns {number} Calculated age in years
+ * @throws {RangeError} If birthYear is in the future
+ */
+function calculateAge(birthYear) {
+    // Copilot will complete the implementation
+}
+</code></pre>
+
+                    <p><strong>Requesting Documentation:</strong> Ask Copilot to generate comprehensive JSDoc with examples:</p>
+<pre><code>// Add comprehensive JSDoc with examples
+function mergeSortedLists(list1, list2) {
+    // Copilot will propose docs and edge cases
+}
+</code></pre>
+                </div>
             </div>
 
             <h2>Guided Code Generation: Multi-Step Logic</h2>
@@ -232,6 +263,7 @@ def get_user(user_id):
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -275,6 +307,28 @@ def test_validate_credit_card_invalid_length():
     }
 }</code></pre>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <h4>Using Jest</h4>
+<pre><code>function validateCreditCard(cardNumber) {
+    // Implementation here
+    return true;
+}
+
+// Prompt for tests:
+// Write comprehensive Jest tests for validateCreditCard,
+// including valid numbers, invalid formats, and boundary cases.
+describe('validateCreditCard', () => {
+    test('accepts a valid number', () => {
+        expect(validateCreditCard('4532015112830366')).toBe(true);
+    });
+
+    test('rejects too-short numbers', () => {
+        expect(validateCreditCard('123')).toBe(false);
+    });
+});
+</code></pre>
+                </div>
             </div>
 
             <h2>Lab 3: AI Pairing for Real Tasks</h2>
@@ -285,6 +339,7 @@ def test_validate_credit_card_invalid_length():
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -340,6 +395,31 @@ def test_validate_credit_card_invalid_length():
                         <li>Return a typed result object instead of Dictionary</li>
                     </ul>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Create a file <code>statsCalculator.js</code> with this function:</p>
+<pre><code>function calculateStats(numbers) {
+    let sum = 0;
+    let max = numbers[0];
+    let min = numbers[0];
+    numbers.forEach((n) => {
+        sum += n;
+        if (n > max) max = n;
+        if (n < min) min = n;
+    });
+    const average = sum / numbers.length;
+    return { sum, avg: average, max, min };
+}
+</code></pre>
+
+                    <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:</p>
+                    <ul>
+                        <li>Input validation (empty array, non-numeric values)</li>
+                        <li>Use array helpers like <code>reduce</code> and <code>Math.max</code>/<code>Math.min</code></li>
+                        <li>Add JSDoc for types</li>
+                        <li>Return a typed object (or class) instead of a loose literal</li>
+                    </ul>
+                </div>
             </div>
 
             <h3>Exercise 2: Generate Comprehensive Tests</h3>
@@ -347,6 +427,7 @@ def test_validate_credit_card_invalid_length():
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -372,6 +453,18 @@ def test_validate_credit_card_invalid_length():
                         <li>Null array input</li>
                     </ul>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Using Jest (or Vitest), ask Copilot to generate tests for your refactored function covering:</p>
+                    <ul>
+                        <li>Happy path with valid data</li>
+                        <li>Empty array</li>
+                        <li>Single element</li>
+                        <li>Negative numbers</li>
+                        <li>Mixed positive/negative</li>
+                        <li><code>null</code> or <code>undefined</code> input</li>
+                    </ul>
+                </div>
             </div>
 
             <h3>Exercise 3: Multi-Step Implementation</h3>
@@ -379,6 +472,7 @@ def test_validate_credit_card_invalid_length():
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -405,6 +499,18 @@ def test_validate_credit_card_invalid_length():
                     </ol>
                     <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Implement a function that:</p>
+                    <ol>
+                        <li>Reads user data from a CSV file</li>
+                        <li>Validates each row</li>
+                        <li>Transforms data to a standardized format</li>
+                        <li>Removes duplicates</li>
+                        <li>Writes to a JSON file</li>
+                    </ol>
+                    <p>Use step-by-step comments in JavaScript (Node.js) and let Copilot complete the pipeline.</p>
+                </div>
             </div>
 
             <h3>Exercise 4: Documentation Pass</h3>
@@ -412,6 +518,7 @@ def test_validate_credit_card_invalid_length():
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -432,6 +539,16 @@ def test_validate_credit_card_invalid_length():
                         <li>Include parameter descriptions and return values</li>
                         <li>Add usage examples in <c>&lt;example&gt;</c> tags</li>
                         <li>Document exceptions using <c>&lt;exception&gt;</c> tags</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Take one of your previous functions and ask Copilot to:</p>
+                    <ul>
+                        <li>Add comprehensive JSDoc comments</li>
+                        <li>Include parameter and return value descriptions</li>
+                        <li>Add usage examples</li>
+                        <li>Document thrown errors and edge cases</li>
                     </ul>
                 </div>
             </div>

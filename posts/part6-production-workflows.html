@@ -276,6 +276,7 @@ npm run duplication  # Duplicated code detection</code></pre>
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -341,6 +342,42 @@ npm run duplication  # Duplicated code detection</code></pre>
 
                     <h4>Step 3: Testing (Use Copilot Chat & Inline)</h4>
                     <p>Ask Copilot Chat: "What xUnit test cases should I write for a to-do API?"</p>
+                    <p>Use inline suggestions to implement the tests. Cover:</p>
+                    <ul>
+                        <li>Creating items</li>
+                        <li>Updating items</li>
+                        <li>Deleting items</li>
+                        <li>Invalid input</li>
+                        <li>Edge cases (empty lists, missing IDs, etc.)</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Requirements:</strong></p>
+                    <ul>
+                        <li>REST API with CRUD operations for to-do items (using Express or Fastify)</li>
+                        <li>In-memory storage (no database required for this exercise)</li>
+                        <li>Input validation with a library like Zod or Joi</li>
+                        <li>Error handling</li>
+                        <li>Comprehensive Jest (or Vitest) unit tests</li>
+                        <li>JSDoc comments</li>
+                    </ul>
+
+                    <h4>Step 1: Design (Use Copilot Chat)</h4>
+                    <p>Open Copilot Chat and ask:</p>
+                    <p>"Design a simple Express to-do API with CRUD operations. What endpoints should it have? What data structure? What validation?"</p>
+                    <p>Document the design based on Copilot's suggestions.</p>
+
+                    <h4>Step 2: Implementation (Use Inline & Chat)</h4>
+                    <p>Create the API using Copilot:</p>
+                    <ul>
+                        <li>Data model: Plain objects or a Zod/Joi schema</li>
+                        <li>CRUD endpoints: GET, POST, PUT, DELETE routes</li>
+                        <li>Error handling: 400/404 responses</li>
+                    </ul>
+
+                    <h4>Step 3: Testing (Use Copilot Chat & Inline)</h4>
+                    <p>Ask Copilot Chat: "What Jest test cases should I write for a to-do API?"</p>
                     <p>Use inline suggestions to implement the tests. Cover:</p>
                     <ul>
                         <li>Creating items</li>

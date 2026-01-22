@@ -137,6 +137,7 @@ def generate_report(data):</code></pre>
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -152,6 +153,17 @@ def aggregate_user_metrics(user_ids: List[int]) -> Dict[int, float]:
 {
     // Type safety guides Copilot's reasoning
 }</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+<pre><code>/**
+ * @param {number[]} userIds
+ * @returns {Map<number, number>}
+ */
+function aggregateUserMetrics(userIds) {
+    // JSDoc types guide Copilot toward Map lookups instead of ad-hoc objects
+}
+</code></pre>
                 </div>
             </div>
 
@@ -210,6 +222,7 @@ def parse_json_object(json_str: str) -> Dict:
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -250,6 +263,26 @@ def parse_json_object(json_str: str) -> Dict:
 
                     <p>See how much more relevant Copilot's suggestion becomes.</p>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Create a file called <code>contextExperiment.js</code></p>
+
+                    <p><strong>Step 1:</strong> Write minimal context</p>
+<pre><code>function transform(data) {
+    // TODO: implement
+}
+</code></pre>
+
+                    <p><strong>Step 2:</strong> Add JSDoc and a clearer description</p>
+<pre><code>/**
+ * @param {{ name: string }[]} data
+ * @returns {string[]}
+ */
+function extractNames(data) {
+    // Extract the 'name' field from each object and return as a list of strings
+}
+</code></pre>
+                </div>
             </div>
 
             <h3>Exercise 2: Variable Name Context</h3>
@@ -257,6 +290,7 @@ def parse_json_object(json_str: str) -> Dict:
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -285,6 +319,23 @@ def parse_json_object(json_str: str) -> Dict:
     // Much clearer intent; Copilot suggests appropriate operations
 }</code></pre>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Bad naming:</strong></p>
+<pre><code>function process(d) {
+    // Copilot doesn't know what 'd' is
+}
+</code></pre>
+
+                    <p><strong>Good naming:</strong></p>
+<pre><code>/**
+ * @param {{ products: string[] }} cart
+ */
+function extractProductNames(cart) {
+    // Much clearer intent; Copilot suggests appropriate operations
+}
+</code></pre>
+                </div>
             </div>
 
             <h3>Exercise 3: Example-Driven Prompting</h3>
@@ -293,6 +344,7 @@ def parse_json_object(json_str: str) -> Dict:
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -321,6 +373,18 @@ public List<string> FormatDates(List<string> dates)
     // Copilot will follow the established pattern
 }</code></pre>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+<pre><code>// Example: ["alice", "bob"] -> ["ALICE", "BOB"]
+const formatNames = (names) => names.map((name) => name.toUpperCase());
+
+// Using the same pattern as formatNames above:
+// Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
+const formatDates = (dates) => {
+    // Copilot will mirror the established pattern
+};
+</code></pre>
+                </div>
             </div>
 
             <h3>Exercise 4: Docstring Impact</h3>
@@ -329,6 +393,7 @@ public List<string> FormatDates(List<string> dates)
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -368,6 +433,23 @@ public List<string> FormatDates(List<string> dates)
 public double Calculate(double a, double b, double c)</code></pre>
 
                     <p>Observe how the XML documentation completely changes Copilot's suggestions.</p>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>With detailed JSDoc:</strong></p>
+<pre><code>/**
+ * Calculate the area of a triangle given three side lengths using Heron's formula.
+ * @param {number} a Length of side A
+ * @param {number} b Length of side B
+ * @param {number} c Length of side C
+ * @returns {number} The area of the triangle
+ */
+function calculate(a, b, c) {
+    // Copilot will propose the Heron's formula implementation
+}
+</code></pre>
+
+                    <p>Observe how detailed JSDoc changes Copilot's suggestions.</p>
                 </div>
             </div>
 

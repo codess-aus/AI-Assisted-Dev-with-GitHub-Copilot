@@ -221,6 +221,7 @@ def process_user_data(raw_data):
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -262,6 +263,29 @@ dotnet build /p:TreatWarningsAsErrors=true
 # Or install and run:
 dotnet tool install --global dotnet-sonarscanner</code></pre>
                 </div>
+
+                                <div class="tab-content" data-language="javascript">
+                                        <ul>
+                                                <li><strong>ESLint:</strong> Style, logic, and unused code detection</li>
+                                                <li><strong>TypeScript:</strong> Type safety for JS projects</li>
+                                                <li><strong>npm audit / snyk:</strong> Dependency vulnerability checks</li>
+                                                <li><strong>semgrep:</strong> Security and correctness patterns</li>
+                                        </ul>
+
+                                        <p><strong>Setup example:</strong></p>
+<pre><code>// .eslintrc.json
+{
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "env": { "es2021": true, "node": true },
+    "parser": "@typescript-eslint/parser"
+}
+
+# Run:
+npm run lint
+npm audit
+semgrep scan --config=p/owasp-top-ten
+</code></pre>
+                                </div>
             </div>
 
             <h3>Automated Testing</h3>
@@ -316,6 +340,7 @@ def test_validate_email_edge_cases():
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -376,6 +401,35 @@ def upload_file(filename, file_content):
                         <li>Path sanitization (Path.GetFileName)</li>
                     </ul>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+<pre><code>async function loginUser(username, password) {
+    // Query the database
+    const query = `SELECT * FROM users WHERE username = '${username}'`; // SQL Injection!
+    const user = await db.query(query);
+
+    if (user && user.password === password) { // Plain-text comparison!
+        const token = 'secret_token_12345'; // Hard-coded!
+        return { success: true, token };
+    }
+    return { success: false };
+}
+
+function uploadFile(filename, fileContent) {
+    // Path traversal risk!
+    fs.writeFileSync(`/uploads/${filename}`, fileContent);
+    return { status: 'uploaded' };
+}
+</code></pre>
+
+                    <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely using:</p>
+                    <ul>
+                        <li>Parameterized queries (or query builder/ORM)</li>
+                        <li>Password hashing (bcrypt/argon2)</li>
+                        <li>Secure token generation (JWT/crypto.randomUUID)</li>
+                        <li>Path sanitization (<code>path.basename</code>)</li>
+                    </ul>
+                </div>
             </div>
 
             <h3>Exercise 2: Logic and Edge Case Testing</h3>
@@ -384,6 +438,7 @@ def upload_file(filename, file_content):
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -423,6 +478,28 @@ def upload_file(filename, file_content):
                         <li>Negative prices</li>
                         <li>Zero price</li>
                         <li>Null customer type</li>
+                        <li>Empty string customer type</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+<pre><code>function calculateDiscount(price, customerType) {
+    if (customerType === 'premium') {
+        return price * 0.9;
+    }
+    if (customerType === 'regular') {
+        return price * 0.95;
+    }
+    return price;
+}
+</code></pre>
+
+                    <p><strong>Task:</strong> Write Jest tests covering:</p>
+                    <ul>
+                        <li>All customer types</li>
+                        <li>Negative prices</li>
+                        <li>Zero price</li>
+                        <li>Null/undefined customer type</li>
                         <li>Empty string customer type</li>
                     </ul>
                 </div>

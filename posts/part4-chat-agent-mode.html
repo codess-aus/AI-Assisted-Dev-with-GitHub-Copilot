@@ -261,6 +261,7 @@
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -297,6 +298,25 @@ Console.WriteLine(result.Name);  // What if result is null?</code></pre>
 
                     <p><strong>Task:</strong> Open Copilot Chat and ask: "What's wrong with this code and how do I fix it?" Include the error message you'd get. Let Chat guide you through a safe solution.</p>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Create a buggy JavaScript function:</p>
+<pre><code>function findUserByEmail(users, email) {
+    for (const user of users) {
+        if (user.email === email) {
+            return user;
+        }
+    }
+    return null;
+}
+
+// Buggy usage:
+const result = findUserByEmail(users, 'test@example.com');
+console.log(result.name); // What if result is null?
+</code></pre>
+
+                    <p><strong>Task:</strong> Open Copilot Chat and ask: "What's wrong with this code and how do I fix it?" Include the error message you'd get. Let Chat guide you through a safe solution.</p>
+                </div>
             </div>
 
             <h3>Exercise 2: Scaffolding with Inline Suggestions</h3>
@@ -304,6 +324,7 @@ Console.WriteLine(result.Name);  // What if result is null?</code></pre>
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -318,6 +339,15 @@ Console.WriteLine(result.Name);  // What if result is null?</code></pre>
                     <pre><code>public decimal CalculateDiscount(decimal originalPrice, string customerType)</code></pre>
                     <p><strong>Task:</strong> Let Copilot complete the method. Then add another method using the same pattern. Note how quickly inline suggestions work for routine logic.</p>
                 </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Start a new function and use inline suggestions only:</p>
+<pre><code>function calculateDiscount(originalPrice, customerType) {
+    // Copilot will complete the implementation
+}
+</code></pre>
+                    <p><strong>Task:</strong> Let Copilot complete the function. Then add another function using the same pattern. Note how quickly inline suggestions work for routine logic.</p>
+                </div>
             </div>
 
             <h3>Exercise 3: Building a Module with Agent Mode</h3>
@@ -325,6 +355,7 @@ Console.WriteLine(result.Name);  // What if result is null?</code></pre>
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
             <div class="tab-content-container">
@@ -347,6 +378,17 @@ Console.WriteLine(result.Name);  // What if result is null?</code></pre>
                     - Includes input validation
                     - Has comprehensive xUnit tests
                     - Includes XML documentation"</p>
+                    <p><strong>Task:</strong> Review the generated code. What did Agent do well? What would you change? Run the tests.</p>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p>Use Copilot Chat or Agent Mode (if available) to request:</p>
+                    <p>"Build a JavaScript module called <code>inventoryManager.js</code> that:
+                    - Manages a simple in-memory inventory of products
+                    - Supports add, remove, update, and list operations
+                    - Includes input validation
+                    - Has comprehensive Jest tests
+                    - Includes JSDoc comments"</p>
                     <p><strong>Task:</strong> Review the generated code. What did Agent do well? What would you change? Run the tests.</p>
                 </div>
             </div>
