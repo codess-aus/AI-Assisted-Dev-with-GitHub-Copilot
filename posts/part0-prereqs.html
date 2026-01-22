@@ -11,7 +11,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="../index.html" class="back-link">← Back to Blog</a>
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
                     <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -79,15 +79,20 @@
 
             <h3>How to Start a Codespace:</h3>
             <ol>
-                <li>Go to the workshop repository: <a href="https://github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot" target="_blank">github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot</a></li>
-                <li>Click the green <strong>Code</strong> button</li>
+                <li><strong>Fork the repository first:</strong> Go to <a href="https://github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot" target="_blank">github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot</a> and click the <strong>Fork</strong> button (top-right corner). This creates your own copy where you can save your work!</li>
+                <li>On <strong>your forked repository</strong>, click the green <strong>Code</strong> button</li>
                 <li>Switch to the <strong>Codespaces</strong> tab</li>
                 <li>Click <strong>"Create codespace on main"</strong></li>
                 <li>Wait 2-3 minutes for the environment to build (first time only)</li>
                 <li>Start coding! VS Code in the browser opens automatically with Copilot ready</li>
             </ol>
 
-            <p><strong>💡 Pro Tip:</strong> You can also open a Codespace in VS Code desktop by clicking the three-dot menu in the Codespace and selecting "Open in VS Code Desktop".</p>
+            <p><strong>💡 Pro Tips:</strong></p>
+            <ul>
+                <li>You can open a Codespace in VS Code desktop by clicking the three-dot menu in the Codespace and selecting "Open in VS Code Desktop"</li>
+                <li>Your changes auto-save in the Codespace. Use the Source Control panel (Ctrl+Shift+G) to commit and push your work to your forked repository</li>
+                <li>Codespaces automatically pause after 30 minutes of inactivity to save your free hours</li>
+            </ul>
 
             <h2>4. Alternative: VS Code Desktop Setup</h2>
             <p>If you prefer working locally instead of using Codespaces:</p>
@@ -141,8 +146,15 @@
 
             <h2>6. Clone the Repository (Local Setup Only)</h2>
             <p><strong>Skip this if you're using Codespaces!</strong> The repo is already available in your Codespace.</p>
+            
+            <p><strong>Important:</strong> Fork the repository first so you can save your work!</p>
+            <ol>
+                <li>Go to <a href="https://github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot" target="_blank">github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot</a></li>
+                <li>Click the <strong>Fork</strong> button (top-right corner)</li>
+                <li>Clone <strong>your forked repository</strong> (replace <code>YOUR-USERNAME</code> with your GitHub username):</li>
+            </ol>
 
-            <pre><code>git clone https://github.com/codess-aus/AI-Assisted-Dev-with-GitHub-Copilot.git
+            <pre><code>git clone https://github.com/YOUR-USERNAME/AI-Assisted-Dev-with-GitHub-Copilot.git
 cd AI-Assisted-Dev-with-GitHub-Copilot
 code .</code></pre>
 
