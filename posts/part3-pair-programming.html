@@ -42,6 +42,17 @@
         </div>
 
         <div class="post-body">
+            <h2>ByteStrike Levels Up</h2>
+            <p>ByteStrike's decoder works, but now the real work begins. The mission has grown:</p>
+            <ul>
+                <li>Need to handle multiple secret formats</li>
+                <li>Code needs to be production-ready (error handling, logging, type hints)</li>
+                <li>The decoder will be used by others on The League, so docs are critical</li>
+                <li>Time is running out</li>
+            </ul>
+
+            <p>This is where pair programming shines. You're no longer just asking for code—you're collaborating with Copilot to solve real problems.</p>
+
             <h2>From Suggestions to Partnership</h2>
             <p>Now that you understand how Copilot thinks, it's time to become an expert pair programmer with it. True pair programming with Copilot goes beyond letting it finish your lines—it's about collaborating to write better, more tested, and better-documented code. You guide, Copilot generates, and together you create something neither would produce alone.</p>
 
@@ -331,10 +342,25 @@ describe('validateCreditCard', () => {
                 </div>
             </div>
 
-            <h2>Lab 3: AI Pairing for Real Tasks</h2>
-            <p>Put your prompting and refactoring skills to work on practical scenarios.</p>
+            <h2>Lab 3: ByteStrike's Pair Programming Sprint</h2>
+            <p>Your mission is to take ByteStrike's decoder and make it production-ready.</p>
 
-            <h3>Exercise 1: Refactoring a Buggy Function</h3>
+            <p><strong>Tasks:</strong></p>
+            <ol>
+                <li><strong>Feature Request:</strong> Add support for nested secrets (e.g., <code>{* outer {* inner *} outer *}</code>). Prompt Copilot with a clear comment describing the requirement, then iterate on the solution.</li>
+                
+                <li><strong>Error Handling:</strong> The remote server is unreliable. Ask Copilot to add retry logic, timeout handling, and logging. Use a multi-line prompt to guide it.</li>
+                
+                <li><strong>Tests:</strong> Write unit tests for the decoder. Start with a simple test structure and let Copilot suggest the rest. Then refine it together.</li>
+                
+                <li><strong>Documentation:</strong> Generate comprehensive docstrings (Python) or XML comments (C#) that explain the decoder's behavior, parameters, and error conditions.</li>
+                
+                <li><strong>Code Review:</strong> Read the final code together with Copilot. Ask: "Are there security or performance issues?" and iterate on improvements.</li>
+            </ol>
+
+            <p><strong>What you'll learn:</strong> Pair programming isn't about Copilot doing all the work—it's about you directing, and Copilot accelerating. By the end, you have a decoder that ByteStrike can actually ship.</p>
+
+            <h3>Detailed Exercise Steps</h3>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>

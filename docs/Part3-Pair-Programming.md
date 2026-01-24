@@ -1,16 +1,43 @@
-3. Pair Programming with Copilot: Prompts, Refactoring, and Docs
-Learning Objectives:
+3. Pair Programming with Copilot: ByteStrike's Growing Decoder
 
-Use Copilot for real-world refactoring, new feature suggestions, and code documentation
-Practice writing effective prompts for clear, secure, idiomatic code
-Learn how to guide Copilot through complex instructions
-Teaching Structure:
+## ByteStrike Levels Up
 
-Live demo: Prompt Copilot through function extensions and edge cases
-Refactoring: Take legacy code, add tests, and improve style with Copilot
-Use Copilot to generate and revise docstrings/XML docs
-Lab 3: AI Pairing for Real Tasks
+ByteStrike's decoder works, but now the real work begins. The mission has grown:
+- Need to handle multiple secret formats
+- Code needs to be production-ready (error handling, logging, type hints)
+- The decoder will be used by others on The League, so docs are critical
+- Time is running out
 
-Task: Refactor a buggy method/class in Python and C# with Copilot’s help
-Prompt Copilot to generate inline docs and tests
-Challenge: Use a multi-line comment to guide Copilot to create a new, small utility function
+This is where pair programming shines. You're no longer just asking for code—you're collaborating with Copilot to solve real problems.
+
+## Learning Objectives
+
+- Use Copilot for real-world refactoring, new feature suggestions, and code documentation
+- Practice writing effective prompts for clear, secure, idiomatic code
+- Learn how to guide Copilot through complex instructions
+- Build a decoder that's maintainable, tested, and documented—not just functional
+
+## Teaching Structure
+
+- **Live demo:** Prompt Copilot through ByteStrike's feature requests (error handling, logging, type hints)
+- **Refactoring:** Take the v1 decoder, add tests, improve style with Copilot
+- **Documentation:** Use Copilot to generate docstrings and inline docs that explain *why*, not just *what*
+- **Edge cases:** Work together with Copilot to find and fix bugs before production
+
+## Lab 3: ByteStrike's Pair Programming Sprint
+
+Your mission is to take ByteStrike's decoder and make it production-ready.
+
+**Tasks:**
+
+1. **Feature Request:** Add support for nested secrets (e.g., `{* outer {* inner *} outer *}`). Prompt Copilot with a clear comment describing the requirement, then iterate on the solution.
+
+2. **Error Handling:** The remote server is unreliable. Ask Copilot to add retry logic, timeout handling, and logging. Use a multi-line prompt to guide it.
+
+3. **Tests:** Write unit tests for the decoder. Start with a simple test structure and let Copilot suggest the rest. Then refine it together.
+
+4. **Documentation:** Generate comprehensive docstrings (Python) or XML comments (C#) that explain the decoder's behavior, parameters, and error conditions.
+
+5. **Code Review:** Read the final code together with Copilot. Ask: "Are there security or performance issues?" and iterate on improvements.
+
+**What you'll learn:** Pair programming isn't about Copilot doing all the work—it's about you directing, and Copilot accelerating. By the end, you have a decoder that ByteStrike can actually ship.

@@ -1,22 +1,35 @@
-4. Copilot Chat vs. Agent Mode: Workflows and Integrations
+# Part 4: Copilot Chat vs. Agent Mode
 
-Learning Objectives:
+## Where ByteStrike Stands
 
-- Understand when to use Copilot inline, Chat (Ask Mode), and Agent Mode
-- Practice moving the same mission between Chat and Agent Mode
-- Integrate Copilot with your IDE, version control, and review flow
+You've helped ByteStrike build a working blueprint decoder. It fetches encrypted data from The League's remote servers, extracts secrets hidden between `{*` and `*}` markers, and logs them cleanly. The code is documented, tested, and ready—sort of.
 
-Teaching Structure:
+But now the mission evolves. The League has realized they need **faster iteration** on the decoder. New requirements arrive daily: support for multiple secret formats, better error recovery, UI improvements, even CLI flags for advanced operators.
 
-- Compare Copilot inline suggestions vs. Chat vs. Agent Mode
-- Demo: Use Chat to debug/iterate; use Agent Mode to scaffold end-to-end
-- Lab 4: Solve the League blueprint mission with both modes
+**This is where you learn the difference between two ways of working with Copilot:**
+- **Chat Mode (Ask Mode):** You stay in control. Ask targeted questions, get targeted answers. Great for quick improvements and understanding.
+- **Agent Mode (Autonomous Mode):** You set a goal; Copilot explores files, makes multiple edits, and runs tests. Faster for big refactors—but requires review.
 
-Shared Scenario: ByteStrike Blueprint Mission
+## Learning Objectives
 
-- Ask Mode story: [docs/superherostory.md](docs/superherostory.md)
-- Agent Mode story: [docs/league-AgentMode.md](docs/league-AgentMode.md)
-- Starter decoders (tabs below) fetch `scrolls.txt`, extract secrets between `{*` and `*}`.
+- Know when to use Chat vs Agent Mode for different ByteStrike missions
+- Practice both workflows on the same goal (decoder improvements)
+- Understand the risks and rewards of autonomous mode
+- Learn to review and validate Agent Mode's work before shipping
+
+## Mode Selection Guide
+
+| Scenario | Chat (Ask) | Agent (Autonomous) |
+|----------|-----------|-------------------|
+| **Add a single feature** (e.g., timeout + retry) | ✓ Best | Over-kill |
+| **Debug or explain code** (e.g., why regex fails) | ✓ Best | Not applicable |
+| **Refactor an entire file** (e.g., clean up all code style) | Possible but slow | ✓ Best |
+| **Build + test + scaffold** (e.g., full CLI with tests) | Very tedious | ✓ Best |
+| **Many files, many changes** (e.g., add new module to project) | Manual coordination needed | ✓ Best |
+
+## Your Starter: The League's Blueprint Decoder
+
+Here's where ByteStrike is now. It works, but it's basic. You'll improve it using Chat and Agent modes.
 
 Language Tabs — Starter Decoder
 

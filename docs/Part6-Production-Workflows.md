@@ -1,16 +1,80 @@
-6. Production Workflows: Using Copilot in Real Software Projects
+# Part 6: Production Workflows — Enterprise Deployment
 
-Learning Objectives:
+## Mission Critical: Moving to Production
 
-- Run Copilot through a full delivery loop: plan, scaffold, guard, test, and document
-- Decide when to trust AI output vs. when to override
-- Capture changes for review (diffs, PR notes) and production readiness
+ByteStrike's decoder is done. Security checks: ✓. Tests: ✓. Documentation: ✓. But there's one more frontier: **the actual world.**
 
-Teaching Structure:
+In production, code runs 24/7. Users depend on it. Failures ripple through teams. Compliance officers ask questions. Monitoring systems alert at 3 AM. This part isn't about writing new code—it's about **operating code safely at scale.**
 
-- Live example: turn the League decoder into a shippable tool (pick Python/JS/C#)
-- Show review flow, tests, guardrails (from Part 5), and docs in one loop
-- Lab 6: Ship a mini “League Mission Control” with tabs for each language
+Welcome to enterprise workflows: automated testing, continuous integration, deployment pipelines, monitoring, incident response, and compliance. This is where AI-assisted development meets real engineering discipline.
+
+## Learning Objectives
+
+- Understand the production readiness checklist (testing, CI/CD, monitoring, runbooks)
+- Build automated tests with Copilot's help (unit, integration, end-to-end)
+- Create a basic CI/CD pipeline (build, test, deploy gates)
+- Set up monitoring and alerting (logs, metrics, dashboards)
+- Document runbooks for incident response
+- Move from "works on my machine" to "works reliably in production"
+
+## The Production Readiness Checklist
+
+| Category | Requirement | Verification |
+|----------|-------------|----------------|
+| **🧪 Testing** | Unit tests ≥ 80% coverage, integration tests, edge cases | Run test suite locally; CI pipeline enforces |
+| **🏗️ Build** | Reproducible builds, version tagging, artifact storage | Build succeeds consistently; artifacts tagged with commit hash |
+| **🚀 Deployment** | Automated pipeline, staging environment, rollback plan | Deploy via CI/CD; never manual prod changes |
+| **📊 Monitoring** | Logs, metrics, dashboards, alerts on failures | Errors trigger Slack/PagerDuty; dashboards update in real-time |
+| **📋 Documentation** | Runbooks for common failures, incident response playbooks | Team can respond to page without code review |
+| **🔐 Security & Compliance** | Secrets management, access control, audit logs | No secrets in code; all access logged; compliance scan passes |
+
+## The Complete Production System
+
+Here's the architecture ByteStrike needs for the decoder to operate safely:
+
+### 1. Automated Testing (The Safety Net)
+
+**What to test:**
+- **Unit tests:** Individual functions (validate_url, extract_secrets, etc.)
+- **Integration tests:** End-to-end decoder flow with mock remote server
+- **Edge cases:** Malformed input, network timeouts, empty responses, very large payloads
+- **Security tests:** Verify allowlist is enforced, secrets aren't logged, errors don't leak info
+
+### 2. Continuous Integration (The Gatekeeper)
+
+Every commit triggers:
+1. **Lint/Format Check:** Code style consistent (use Copilot to fix)
+2. **Unit Tests:** Must pass; coverage ≥ 80%
+3. **Security Scan:** Dependencies up-to-date, no known vulnerabilities
+4. **Integration Tests:** Works with real-world conditions
+5. **Build Artifact:** Create versioned Docker image or binary
+
+### 3. Staging & Deployment
+
+**Never push directly to production.** Pipeline should be:
+1. **Pull request:** Code review required; CI must pass
+2. **Merge to main:** Automatically builds and deploys to staging
+3. **Staging validation:** Run smoke tests, manual verification
+4. **Production promotion:** Manual approval or automated (time-gated or based on metrics)
+5. **Rollback ready:** Can revert to previous version in < 5 minutes
+
+### 4. Monitoring & Alerting
+
+**Key metrics for ByteStrike's decoder:**
+- **Success rate:** % of missions decoded successfully (alert if < 95%)
+- **Error rate:** Network failures, timeouts, validation errors (alert on spike)
+- **Latency:** Average decode time (alert if > 10s)
+- **Resource usage:** CPU, memory, network bandwidth
+- **Security events:** Blocked URLs, malformed input attempts
+
+### 5. Documentation & Runbooks
+
+**Every on-call engineer needs:**
+- **How to monitor:** Where are logs? How to check dashboards?
+- **Common failure scenarios:** "Network timeout → check remote server status"
+- **How to rollback:** Step-by-step commands to revert to previous version
+- **Who to contact:** Escalation path (Slack channel, PagerDuty, etc.)
+- **Post-incident:** Log the issue, create fix, review what failed
 
 Production-Ready Expectations for the Mission Tool
 

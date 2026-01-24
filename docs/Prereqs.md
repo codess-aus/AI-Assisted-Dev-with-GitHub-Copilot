@@ -1,6 +1,24 @@
 # Prerequisites and Setup (Start Here)
 
-Use this quick-start to get ready for the workshop. It assumes you have nothing installed. If you already have a GitHub Enterprise/Business subscription, use it for Copilot (best experience); otherwise use the free tier or trial. Students: claim GitHub Student benefits for Copilot access.
+## Your Mission: Meet ByteStrike
+
+Welcome! In this workshop, you'll learn AI-assisted development by helping **ByteStrike**, a tech-savvy operative for the secret tech agency known as "The League."
+
+ByteStrike has just been assigned their first mission: Fetch encrypted blueprints from a remote server and extract critical secrets hidden between `{*` and `*}` markers. The only problem? ByteStrike needs to write code to do it—in multiple languages, under pressure, with questions about how to do it right in production.
+
+Over this workshop, you'll help ByteStrike:
+1. **Learn** how to write code with AI assistance (Parts 1-3)
+2. **Ask questions** and iterate using Chat vs. Agent modes (Part 4)
+3. **Add guardrails** for security, privacy, and correctness (Part 5)
+4. **Deploy safely** with governance, testing, and enterprise workflows (Part 6)
+
+By the end, you'll have built a production-ready system that teaches **architecture with governance, privacy, security, and enterprise best practices**—all through the lens of ByteStrike's mission.
+
+---
+
+## Setup: Get Ready for the Workshop
+
+This quick-start helps you prepare your development environment. It assumes you have nothing installed. If you already have a GitHub Enterprise/Business subscription, use it for Copilot (best experience); otherwise use the free tier or trial. Students: claim GitHub Student benefits for Copilot access.
 
 ## 1) GitHub Account (free, if you do not have one)
 - Go to github.com/join and create an account (use a strong password + MFA).

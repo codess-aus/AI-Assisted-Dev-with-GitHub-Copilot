@@ -42,6 +42,9 @@
         </div>
 
         <div class="post-body">
+            <h2>ByteStrike's Problem: Code Prediction Under Uncertainty</h2>
+            <p>ByteStrike's decoder is working, but the output is messy. Comments and variable names affect what Copilot suggests. Variable names affect everything. This part teaches <strong>why</strong>—so you can guide Copilot intentionally.</p>
+
             <h2>Understanding the Machine Behind the Suggestions</h2>
             <p>To use GitHub Copilot effectively, you need to understand how it "thinks"—not in the sense that it has human-like consciousness, but in terms of how it processes information and generates suggestions. This chapter explores the mental models and context mechanisms that drive Copilot's recommendations.</p>
 
@@ -214,10 +217,20 @@ def parse_json_object(json_str: str) -> Dict:
 
             <p><strong>Fix:</strong> Add a more explicit comment or docstring that clarifies your intent. Show examples of what you expect.</p>
 
-            <h2>Lab 2: Context Engineering Experiments</h2>
-            <p>In this hands-on lab, you'll experiment with how comments and context shape Copilot's behavior.</p>
+            <h2>Lab 2: ByteStrike's Context Experiments</h2>
+            <p>Your task: Improve ByteStrike's decoder using context engineering—without changing the core logic.</p>
 
-            <h3>Exercise 1: Context Sensitivity</h3>
+            <p><strong>Experiments:</strong></p>
+            <ol>
+                <li><strong>Variable naming:</strong> Rename <code>x</code> to <code>secret</code> in the decoder loop. Watch how Copilot's suggestions change.</li>
+                <li><strong>Docstrings:</strong> Add a detailed docstring to the <code>extract_secrets()</code> function. Observe how Copilot infers error handling.</li>
+                <li><strong>Comments as signal:</strong> Add inline comments like <code># Extract text between {* and *}</code>. Suggest the next line to Copilot and note the quality.</li>
+                <li><strong>File structure:</strong> Create two versions of the decoder in the same workspace (e.g., <code>decoder_v1.py</code> and <code>decoder_v2.py</code> with better naming). Compare Copilot's output in each.</li>
+            </ol>
+
+            <p><strong>What you'll learn:</strong> Copilot isn't "guessing"—it's pattern-matching on context. Better context = better code. This lesson applies to everything ByteStrike writes from now on.</p>
+
+            <h3>Detailed Exercise Steps</h3>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>

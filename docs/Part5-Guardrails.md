@@ -1,16 +1,60 @@
-5. Security and Quality: Guardrails for AI-Generated Code
+# Part 5: Guardrails — Security, Privacy & Enterprise Governance
 
-Learning Objectives:
+## The Reality Check: Moving to Production
 
-- Spot and patch security/quality gaps in AI-generated code
-- Add guardrails: validation, timeouts, retries, logging, and tests
-- Practice secure-by-default prompting for Copilot Chat and Agent Mode
+ByteStrike's decoder works. It's fast. It's got retry logic and error handling. Great! Now The League's Chief Information Security Officer (CISO) has a question:
 
-Teaching Structure:
+> "Before we deploy this to production, I need to know: Is the data safe? Is it private? Can we audit who used it? What happens if something goes wrong?"
 
-- Show “unsafe” patterns (no timeouts, unvalidated URLs, silent failures)
-- Checklist: validation, least-privilege IO, backoff, bounded output, tests
-- Lab 5: Harden the ByteStrike blueprint decoders in all three languages
+Welcome to the real world. **Guardrails** are the policies, checks, and safeguards that turn working code into trustworthy, enterprise-ready code. This part teaches you to think like a CISO, security engineer, and compliance officer—not to replace them, but to build with their concerns in mind from day one.
+
+## Learning Objectives
+
+- Understand the four pillars of enterprise code: **Security**, **Privacy**, **Governance**, and **Correctness**
+- Use Copilot to help implement guardrails (input validation, encryption, logging, access control)
+- Recognize when to ask for human expertise (legal, compliance, architecture)
+- Build a decoder that ByteStrike can ship with confidence
+
+## The Four Pillars of Enterprise Code
+
+| Pillar | Question | Example Check |
+|--------|----------|----------------|
+| **🔒 Security** | Can bad actors break this? | Validate URLs, sanitize regex, prevent code injection |
+| **🔐 Privacy** | Are secrets actually secrets? | Encrypt at rest, don't log secrets, mask in output |
+| **📋 Governance** | Can we audit and control usage? | Logging, access control, rate limits, alerts |
+| **✅ Correctness** | Does it actually work as intended? | Unit tests, integration tests, error handling |
+
+## Guardrails Checklist for ByteStrike's Decoder
+
+**Before shipping, check these:**
+
+### 🔒 Security
+- ☐ Input validation: URLs are from an allowlist (not user-supplied arbitrary URLs)
+- ☐ Timeout: Network requests timeout to prevent hangs
+- ☐ Error messages: Don't expose internal paths, credentials, or system info
+- ☐ Regex DoS: Ensure regex patterns can't be exploited to hang the system
+- ☐ Dependencies: Are libraries up-to-date and from trusted sources?
+
+### 🔐 Privacy
+- ☐ Data minimization: Only fetch/extract what's needed
+- ☐ Secret protection: Don't log, display, or cache secrets unnecessarily
+- ☐ Encryption: Secrets in transit (HTTPS) and at rest (if stored)
+- ☐ Retention: How long are secrets kept? (Auto-delete or expire?)
+- ☐ User consent: If this touches personal data, has legal reviewed?
+
+### 📋 Governance
+- ☐ Audit logging: Who ran it, when, with what inputs, and what happened
+- ☐ Access control: Only authorized users/services can call the decoder
+- ☐ Rate limits: Prevent abuse (e.g., max 10 requests per minute per user)
+- ☐ Alerts: Critical failures trigger notifications
+- ☐ Documentation: How to run it, what it does, when to use it, when NOT to use it
+
+### ✅ Correctness
+- ☐ Unit tests: Basic functionality (happy path, errors, edge cases)
+- ☐ Integration tests: Works with real remote blueprints
+- ☐ Error scenarios: What happens on network failure, timeout, malformed input?
+- ☐ Type safety: Use type hints/strong types to prevent runtime surprises
+- ☐ Code review: A human has read and approved the code
 
 Guardrail Checklist for the League Mission
 

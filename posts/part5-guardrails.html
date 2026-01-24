@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Establish guardrails for the ByteStrike blueprint mission. Harden Python, JavaScript, and C# decoders with validation, retries, and tests.">
-    <title>Part 5: Security & Quality Guardrails - Developer FAQ</title>
+    <meta name="description" content="Part 5: Add guardrails to ByteStrike's decoder. Learn security, privacy, correctness checks, and governance before production.">
+    <title>Part 5: Guardrails - Security & Enterprise Practices</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -34,33 +34,102 @@
 
     <article class="container post-content">
         <div class="post-hero">
-            <img src="../images/GHAS.png" alt="Security and Quality: Guardrails for AI-Generated Code" loading="eager">
+            <img src="../images/security.jpg" alt="Guardrails: Security, Privacy, and Governance" loading="eager">
         </div>
         <div class="post-header">
             <div class="post-date">Part 5</div>
-            <h1 class="post-title">Security and Quality: Guardrails for AI-Generated Code</h1>
+            <h1 class="post-title">Guardrails: Security, Privacy & Enterprise Governance</h1>
         </div>
 
         <div class="post-body">
-            <h2>Guardrails for the ByteStrike Mission</h2>
-            <p>We will harden the blueprint decoders from Part 4 across Python, JavaScript, and C#. Add validation, timeouts, retries, caps, logging, and tests so the League secrets stay safe.</p>
+            <h2>The Reality Check: Moving to Production</h2>
+            <p>ByteStrike's decoder works. It's fast. It's got retry logic and error handling. Great! Now The League's Chief Information Security Officer (CISO) has a question:</p>
+            
+            <blockquote style="border-left: 4px solid #ff6b6b; padding-left: 15px; margin: 20px 0; font-style: italic;">
+                "Before we deploy this to production, I need to know: Is the data safe? Is it private? Can we audit who used it? What happens if something goes wrong?"
+            </blockquote>
+
+            <p>Welcome to the real world. <strong>Guardrails</strong> are the policies, checks, and safeguards that turn working code into trustworthy, enterprise-ready code. This part teaches you to think like a CISO, security engineer, and compliance officer—not to replace them, but to build with their concerns in mind from day one.</p>
 
             <h2>Learning Objectives</h2>
             <ul>
-                <li>Spot and patch security/quality gaps in AI-generated code</li>
-                <li>Add guardrails: validation, retries, timeouts, caps, logging, and tests</li>
-                <li>Practice secure-by-default prompting in Chat and Agent Mode</li>
+                <li>Understand the four pillars of enterprise code: <strong>Security</strong>, <strong>Privacy</strong>, <strong>Governance</strong>, and <strong>Correctness</strong></li>
+                <li>Use Copilot to help implement guardrails (input validation, encryption, logging, access control)</li>
+                <li>Recognize when to ask for human expertise (legal, compliance, architecture)</li>
+                <li>Build a decoder that ByteStrike can ship with confidence</li>
             </ul>
 
-            <h2>Guardrail Checklist</h2>
+            <h2>The Four Pillars of Enterprise Code</h2>
+            <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+                <tr style="border-bottom: 2px solid #333; background: #f9f9f9;">
+                    <th style="text-align: left; padding: 12px; font-weight: bold;">Pillar</th>
+                    <th style="text-align: left; padding: 12px; font-weight: bold;">Question</th>
+                    <th style="text-align: left; padding: 12px; font-weight: bold;">Example Check</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 12px;"><strong>🔒 Security</strong></td>
+                    <td style="padding: 12px;">Can bad actors break this?</td>
+                    <td style="padding: 12px;">Validate URLs, sanitize regex, prevent code injection</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 12px;"><strong>🔐 Privacy</strong></td>
+                    <td style="padding: 12px;">Are secrets actually secrets?</td>
+                    <td style="padding: 12px;">Encrypt at rest, don't log secrets, mask in output</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 12px;"><strong>📋 Governance</strong></td>
+                    <td style="padding: 12px;">Can we audit and control usage?</td>
+                    <td style="padding: 12px;">Logging, access control, rate limits, alerts</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 12px;"><strong>✅ Correctness</strong></td>
+                    <td style="padding: 12px;">Does it actually work as intended?</td>
+                    <td style="padding: 12px;">Unit tests, integration tests, error handling</td>
+                </tr>
+            </table>
+
+            <h2>Guardrails Checklist for ByteStrike's Decoder</h2>
+            <p><strong>Before shipping, check these:</strong></p>
+            
+            <h3>🔒 Security</h3>
             <ul>
-                <li>Validate inputs (URL/host), set timeouts, retry with backoff</li>
-                <li>Precompile regex, cap bytes read, limit number/length of secrets</li>
-                <li>Structured logging and clear error messages</li>
-                <li>Tests for happy path, failure path, and empty payload</li>
+                <li>☐ Input validation: URLs are from an allowlist (not user-supplied arbitrary URLs)</li>
+                <li>☐ Timeout: Network requests timeout to prevent hangs</li>
+                <li>☐ Error messages: Don't expose internal paths, credentials, or system info</li>
+                <li>☐ Regex DoS: Ensure regex patterns can't be exploited to hang the system</li>
+                <li>☐ Dependencies: Are libraries up-to-date and from trusted sources?</li>
             </ul>
 
-            <h2>Language Tabs — Harden from Here</h2>
+            <h3>🔐 Privacy</h3>
+            <ul>
+                <li>☐ Data minimization: Only fetch/extract what's needed</li>
+                <li>☐ Secret protection: Don't log, display, or cache secrets unnecessarily</li>
+                <li>☐ Encryption: Secrets in transit (HTTPS) and at rest (if stored)</li>
+                <li>☐ Retention: How long are secrets kept? (Auto-delete or expire?)</li>
+                <li>☐ User consent: If this touches personal data, has legal reviewed?</li>
+            </ul>
+
+            <h3>📋 Governance</h3>
+            <ul>
+                <li>☐ Audit logging: Who ran it, when, with what inputs, and what happened</li>
+                <li>☐ Access control: Only authorized users/services can call the decoder</li>
+                <li>☐ Rate limits: Prevent abuse (e.g., max 10 requests per minute per user)</li>
+                <li>☐ Alerts: Critical failures trigger notifications</li>
+                <li>☐ Documentation: How to run it, what it does, when to use it, when NOT to use it</li>
+            </ul>
+
+            <h3>✅ Correctness</h3>
+            <ul>
+                <li>☐ Unit tests: Basic functionality (happy path, errors, edge cases)</li>
+                <li>☐ Integration tests: Works with real remote blueprints</li>
+                <li>☐ Error scenarios: What happens on network failure, timeout, malformed input?</li>
+                <li>☐ Type safety: Use type hints/strong types to prevent runtime surprises</li>
+                <li>☐ Code review: A human has read and approved the code</li>
+            </ul>
+
+            <h2>Hardened Decoder Starters (With Guardrails)</h2>
+            <p>Below are improved versions of the decoder that address the four pillars. Compare these to the basic version from Part 4.</p>
+
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
                 <button class="language-tab" data-language="javascript">JavaScript</button>
@@ -69,122 +138,360 @@
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-<pre><code>import re
-import requests
+<pre><code>import requests
+import re
+import logging
+from typing import List
+from urllib.parse import urlparse
+import hashlib
 
-SECRET_PATTERN = re.compile(r"\{\*(.*?)\*\}")
+# Configure secure logging (don't log secrets)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-def retrieve_and_decode_blueprint(blueprint_url, max_secrets=10):
-    # TODO: validate URL/host, add retries/backoff, cap total bytes
-    response = requests.get(blueprint_url, timeout=10)
-    response.raise_for_status()
+# Allowlist of safe blueprint URLs
+ALLOWED_BLUEPRINT_SOURCES = {
+    "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt"
+}
 
-    secrets = SECRET_PATTERN.findall(response.text)[:max_secrets]
-    if not secrets:
-        print("No authentic secrets found. The League's decoys were strong!")
-        return
+def validate_url(url: str) -> bool:
+    """Validate that URL is in the allowlist."""
+    return url in ALLOWED_BLUEPRINT_SOURCES
 
-    for idx, secret in enumerate(secrets, 1):
-        print(f"Secret #{idx}: {secret.strip()[:200]}")
+def extract_secrets(content: str, marker_start: str = "{*", marker_end: str = "*}") -> List[str]:
+    """
+    Extract secrets safely from content.
+    Returns a list of secrets without logging their content.
+    """
+    pattern = re.escape(marker_start) + r"(.*?)" + re.escape(marker_end)
+    secrets = re.findall(pattern, content, re.DOTALL)
+    logger.info(f"Extracted {len(secrets)} secrets")  # Log count, not content
+    return secrets
+
+def retrieve_and_decode_blueprint(blueprint_url: str, timeout: int = 10) -> None:
+    """
+    Securely retrieve and decode a League blueprint.
+    Logs all activity for audit purposes.
+    """
+    # 1. Validate input
+    if not validate_url(blueprint_url):
+        logger.error(f"Unauthorized blueprint source (blocklisted)")
+        raise ValueError("Blueprint source not authorized")
+    
+    # 2. Audit log
+    logger.info(f"User initiated blueprint decode (hash: {hashlib.md5(blueprint_url.encode()).hexdigest()[:8]})")
+    
+    try:
+        # 3. Fetch with timeout
+        response = requests.get(blueprint_url, timeout=timeout)
+        response.raise_for_status()
+        
+        # 4. Extract secrets securely
+        secrets = extract_secrets(response.text)
+        
+        # 5. Audit success
+        logger.info(f"Blueprint decode succeeded")
+        
+        # 6. Output (mask secrets in logs, show to user only)
+        print("=== LEAGUE MISSION REPORT (AUTHORIZED ACCESS) ===")
+        if secrets:
+            for idx, secret in enumerate(secrets, 1):
+                # Show to user, but log only count
+                print(f"Secret #{idx}: {secret.strip()}")
+        else:
+            print("No secrets found.")
+            
+    except requests.exceptions.Timeout:
+        logger.error("Blueprint fetch timeout (possible DoS or network issue)")
+        raise
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Blueprint fetch failed: {type(e).__name__}")
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error during decode: {type(e).__name__}")
+        raise
+
+if __name__ == "__main__":
+    blueprint_url = "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt"
+    retrieve_and_decode_blueprint(blueprint_url)
 </code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-<pre><code>const secretPattern = /\{\*(.*?)\*\}/g;
+<pre><code>// Secure League Blueprint Decoder with Guardrails
+const https = require('https');
+const url = require('url');
+const crypto = require('crypto');
 
-async function retrieveAndDecodeBlueprint(url, maxSecrets = 10) {
-    // TODO: validate URL/host, add timeout + retry with backoff
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+// Configure secure logging
+const logger = {
+    info: (msg) => console.log(`[INFO] ${new Date().toISOString()} ${msg}`),
+    error: (msg) => console.error(`[ERROR] ${new Date().toISOString()} ${msg}`),
+};
 
-    const response = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeout);
-    if (!response.ok) throw new Error(`Fetch error: ${response.status}`);
+// Allowlist of safe sources
+const ALLOWED_SOURCES = new Set([
+    "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt"
+]);
 
-    const text = await response.text();
-    const secrets = [...text.matchAll(secretPattern)]
-        .map(m => m[1].trim())
-        .slice(0, maxSecrets);
-
-    if (!secrets.length) {
-        console.log("No League secrets found. All data may be decoys!");
-        return;
+function validateUrl(urlString) {
+    if (!ALLOWED_SOURCES.has(urlString)) {
+        logger.error("Unauthorized blueprint source");
+        throw new Error("Blueprint source not authorized");
     }
-
-    secrets.forEach((secret, idx) => console.log(`Secret #${idx + 1}: ${secret.slice(0, 200)}`));
+    return true;
 }
+
+function extractSecrets(content, markerStart = "{*", markerEnd = "*}") {
+    const escapedStart = markerStart.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escapedEnd = markerEnd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(escapedStart + "(.*?)" + escapedEnd, "gs");
+    
+    const secrets = [];
+    let match;
+    while ((match = pattern.exec(content)) !== null) {
+        secrets.push(match[1].trim());
+    }
+    
+    logger.info(`Extracted ${secrets.length} secrets`); // Log count, not content
+    return secrets;
+}
+
+async function retrieveAndDecodeBlueprint(blueprintUrl, timeout = 10000) {
+    // 1. Validate
+    validateUrl(blueprintUrl);
+    
+    // 2. Audit log
+    const hash = crypto.createHash('md5').update(blueprintUrl).digest('hex').substring(0, 8);
+    logger.info(`User initiated blueprint decode (hash: ${hash})`);
+    
+    return new Promise((resolve, reject) => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+        
+        try {
+            https.get(blueprintUrl, { signal: controller.signal }, (response) => {
+                if (response.statusCode !== 200) {
+                    logger.error(`Blueprint fetch failed: HTTP ${response.statusCode}`);
+                    reject(new Error(`HTTP ${response.statusCode}`));
+                    return;
+                }
+                
+                let data = '';
+                response.on('data', chunk => { data += chunk; });
+                response.on('end', () => {
+                    try {
+                        const secrets = extractSecrets(data);
+                        logger.info("Blueprint decode succeeded");
+                        
+                        console.log("=== LEAGUE MISSION REPORT (AUTHORIZED ACCESS) ===");
+                        if (secrets.length) {
+                            secrets.forEach((s, i) => console.log(`Secret #${i + 1}: ${s}`));
+                        } else {
+                            console.log("No secrets found.");
+                        }
+                        resolve();
+                    } catch (e) {
+                        logger.error(`Parse error: ${e.message}`);
+                        reject(e);
+                    }
+                });
+            }).on('error', (err) => {
+                logger.error(`Network error: ${err.message}`);
+                reject(err);
+            });
+        } finally {
+            clearTimeout(timeoutId);
+        }
+    });
+}
+
+// Run
+const blueprintUrl = "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt";
+retrieveAndDecodeBlueprint(blueprintUrl)
+    .catch(err => {
+        logger.error(`Mission failed: ${err.message}`);
+        process.exit(1);
+    });
 </code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-<pre><code>using System.Net.Http;
+<pre><code>using System;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
-public class LeagueHQ
+public class SecureLeagueHQ
 {
-    private static readonly Regex SecretPattern = new("\{\*(.*?)\*\}", RegexOptions.Compiled);
-
-    private static async Task RetrieveAndDecodeBlueprint(string url, int maxSecrets = 10)
+    private static readonly HashSet<string> AllowedSources = new()
     {
-        // TODO: validate URL/host, add HttpClient timeout + retry policy
-        using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
-        var blueprintContent = await httpClient.GetStringAsync(url);
+        "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt"
+    };
 
-        var matches = SecretPattern.Matches(blueprintContent);
-        if (matches.Count == 0)
-        {
-            Console.WriteLine("No League secrets found. All data may be decoys!");
-            return;
-        }
+    private static void LogInfo(string message) 
+        => Console.WriteLine($"[INFO] {DateTime.UtcNow:O} {message}");
 
-        int printed = 0;
-        foreach (Match match in matches)
+    private static void LogError(string message) 
+        => Console.Error.WriteLine($"[ERROR] {DateTime.UtcNow:O} {message}");
+
+    private static bool ValidateUrl(string blueprintUrl)
+    {
+        if (!AllowedSources.Contains(blueprintUrl))
         {
-            if (printed >= maxSecrets) break;
-            var value = match.Groups[1].Value.Trim();
-            Console.WriteLine($"Secret #{printed + 1}: {value.Substring(0, Math.Min(200, value.Length))}");
-            printed++;
+            LogError("Unauthorized blueprint source");
+            throw new ArgumentException("Blueprint source not authorized");
         }
+        return true;
+    }
+
+    private static List<string> ExtractSecrets(string content, string markerStart = "{*", string markerEnd = "*}")
+    {
+        var pattern = Regex.Escape(markerStart) + "(.*?)" + Regex.Escape(markerEnd);
+        var regex = new Regex(pattern, RegexOptions.Singleline);
+        var matches = regex.Matches(content);
+        
+        var secrets = matches.Cast<Match>()
+            .Select(m => m.Groups[1].Value.Trim())
+            .ToList();
+        
+        LogInfo($"Extracted {secrets.Count} secrets");
+        return secrets;
+    }
+
+    private static async Task RetrieveAndDecodeBlueprint(string blueprintUrl, int timeoutMs = 10000)
+    {
+        // 1. Validate
+        ValidateUrl(blueprintUrl);
+        
+        // 2. Audit log
+        using var md5 = MD5.Create();
+        var hash = BitConverter.ToString(md5.ComputeHash(Encoding.UTF8.GetBytes(blueprintUrl)))
+            .Replace("-", "").Substring(0, 8);
+        LogInfo($"User initiated blueprint decode (hash: {hash})");
+        
+        try
+        {
+            using var httpClient = new HttpClient(new SocketsHttpHandler())
+            {
+                Timeout = TimeSpan.FromMilliseconds(timeoutMs)
+            };
+            
+            var blueprintContent = await httpClient.GetStringAsync(blueprintUrl);
+            
+            var secrets = ExtractSecrets(blueprintContent);
+            LogInfo("Blueprint decode succeeded");
+            
+            Console.WriteLine("=== LEAGUE MISSION REPORT (AUTHORIZED ACCESS) ===");
+            if (secrets.Count > 0)
+            {
+                for (int i = 0; i < secrets.Count; i++)
+                {
+                    Console.WriteLine($"Secret #{i + 1}: {secrets[i]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No secrets found.");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            LogError($"Network error: {ex.Message}");
+            throw;
+        }
+        catch (TaskCanceledException)
+        {
+            LogError("Blueprint fetch timeout (possible DoS or network issue)");
+            throw;
+        }
+        catch (Exception ex)
+        {
+            LogError($"Unexpected error: {ex.GetType().Name}");
+            throw;
+        }
+    }
+
+    public static async Task Main()
+    {
+        const string blueprintUrl = "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt";
+        await RetrieveAndDecodeBlueprint(blueprintUrl);
     }
 }
 </code></pre>
                 </div>
             </div>
 
-            <h2>Lab 5: Harden the Blueprint Decoders</h2>
-            <h3>1) Threat-model quickly</h3>
+            <h2>Lab 5: Harden ByteStrike's Decoder</h2>
+
+            <h3>Phase 1: Audit the Basic Version</h3>
+            <ol>
+                <li>Look at the basic decoder from Part 4. Ask yourself (or Copilot Chat): <em>"What could go wrong?"</em></li>
+                <li>List 5 potential issues across Security, Privacy, Governance, and Correctness.</li>
+                <li>Rank them by risk (highest to lowest).</li>
+            </ol>
+
+            <h3>Phase 2: Implement Guardrails with Chat Mode</h3>
+            <ol>
+                <li><strong>Input validation:</strong> Ask Copilot Chat: "Add URL validation using an allowlist. Only allow specific League sources."</li>
+                <li><strong>Logging:</strong> Ask: "Add audit logging that records when the decoder runs, but never logs secrets themselves."</li>
+                <li><strong>Error handling:</strong> Ask: "Improve error messages so they don't leak internal details (no stack traces in output)."</li>
+                <li><strong>Type hints/strong typing:</strong> Ask: "Add full type hints (Python) / strong types (C#) to prevent runtime surprises."</li>
+            </ol>
+
+            <h3>Phase 3: Test the Hardened Version</h3>
+            <ol>
+                <li>Write unit tests that verify:
+                    <ul>
+                        <li>Valid URLs succeed</li>
+                        <li>Invalid URLs are blocked</li>
+                        <li>Secrets are extracted correctly</li>
+                        <li>Secrets are not logged</li>
+                        <li>Timeout works</li>
+                    </ul>
+                </li>
+                <li>Run the tests and ensure they pass.</li>
+                <li>Ask Copilot Chat: "What edge cases am I missing in my tests?"</li>
+            </ol>
+
+            <h3>Phase 4: Governance & Documentation</h3>
+            <ol>
+                <li>Create a <code>GUARDRAILS.md</code> file documenting:
+                    <ul>
+                        <li>Security measures (URL allowlist, input validation, timeout)</li>
+                        <li>Privacy protections (what's logged, what's encrypted, retention)</li>
+                        <li>Governance (audit logging, access control, rate limits)</li>
+                        <li>Correctness (test coverage, error handling)</li>
+                    </ul>
+                </li>
+                <li>Ask Copilot: "Generate guardrails documentation for a production decoder."</li>
+                <li>Include a checklist that your team can use before deployment.</li>
+            </ol>
+
+            <h2>Key Principle: Security by Design, Not Afterthought</h2>
+            <p>The best time to think about guardrails is <strong>before</strong> you write the first line of code. ByteStrike's team succeeds by:</p>
             <ul>
-                <li>What can go wrong? Unbounded input, slow network, hostile URL, huge secrets.</li>
+                <li>🔒 <strong>Validating all inputs</strong> (never trust user input)</li>
+                <li>🔐 <strong>Protecting secrets</strong> (encrypt, don't log, minimize exposure)</li>
+                <li>📋 <strong>Enabling audits</strong> (log activity, not secrets)</li>
+                <li>✅ <strong>Testing thoroughly</strong> (happy path AND failure scenarios)</li>
+                <li>👥 <strong>Involving domain experts</strong> (security, legal, compliance) early</li>
             </ul>
 
-            <h3>2) Add guardrails in your language</h3>
-            <ul>
-                <li>Implement URL/host validation, timeouts, and a 2-try exponential backoff.</li>
-                <li>Cap bytes read, limit secrets to 10, truncate to 200 chars.</li>
-                <li>Add structured logging for success/failure and reason codes.</li>
-            </ul>
-
-            <h3>3) Test and verify</h3>
-            <ul>
-                <li>Write one happy-path test and one failure-path test (timeout/404).</li>
-                <li>In Agent Mode, ask it to propose tests; in Chat, ask for a quick refactor.</li>
-            </ul>
-
-            <h3>4) Share learnings</h3>
-            <ul>
-                <li>Capture the guardrails you added and which were easiest/hardest with Copilot.</li>
-            </ul>
+            <p><strong>Next up:</strong> Part 6 shows you how to deploy ByteStrike's decoder safely to production with governance, testing, documentation, and enterprise workflows.</p>
         </div>
 
         <div class="post-navigation">
-            <a href="part4-chat-agent-mode.html" class="previous-post">← Previous: Part 4 - Chat vs Agent Mode</a>
-            <a href="part6-production-workflows.html" class="next-post">Next: Part 6 - Production Workflows →</a>
+            <a href="part6-production-workflows.html" class="next-post">Next: Part 6 - Production & Deployment →</a>
         </div>
     </article>
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+            <p>&copy; 2026 Developer Workshop. All rights reserved.</p>
         </div>
     </footer>
 

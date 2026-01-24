@@ -42,6 +42,13 @@
         </div>
 
         <div class="post-body">
+            <h2>ByteStrike's First Moment</h2>
+            <p>ByteStrike sits at their desk, staring at the mission brief. The encrypted blueprints are waiting on a remote server. The deadline is real. And they've never written this particular piece of code before.</p>
+
+            <p>This is where most developers pause and think: <em>"How do I even start?"</em></p>
+
+            <p>That's where GitHub Copilot comes in. Over the next few parts, you'll see how AI assistance transforms that moment of uncertainty into productive, iterative development.</p>
+
             <h2>The Rise of AI-Assisted Development</h2>
             <p>Artificial intelligence is fundamentally reshaping how we write code. GitHub Copilot represents a watershed moment in software development—a tool that brings AI pair programming directly into your IDE. Whether you're maintaining legacy systems, building new features, or exploring cutting-edge architectures, understanding how to work effectively with AI-assisted code generation is becoming essential.</p>
             
@@ -98,8 +105,8 @@
                 <li><strong>Iterate together:</strong> If Copilot's first suggestion isn't right, refine your prompt and try again.</li>
             </ul>
 
-            <h2>Lab 1: Getting Started with Copilot</h2>
-            <p>In this hands-on lab, you'll set up Copilot and take it for a spin. We'll work in both Python and C# to show that Copilot's capabilities span multiple languages.</p>
+            <h2>Lab 1: ByteStrike's First Lines of Code</h2>
+            <p>ByteStrike needs to fetch the encrypted blueprint. Let's help them start.</p>
 
             <h3>Setup</h3>
             <ul>
@@ -107,7 +114,29 @@
                 <li>Sign in with your GitHub account</li>
             </ul>
 
-            <h3>Exercise 1: Simple Completion</h3>
+            <h3>Task: Build the Blueprint Fetcher</h3>
+            <ol>
+                <li>Set up Copilot extension in VS Code (Python and C#)</li>
+                <li>Create a new file: <code>blueprint_decoder.py</code> (or <code>BlueprintDecoder.cs</code>)</li>
+                <li>Trigger Copilot to suggest a function that fetches a URL and returns the content</li>
+                <li>Observe how Copilot understands the task from just the function name and docstring</li>
+                <li>Challenge: Ask Copilot to extend it to print all lines containing <code>{*</code> markers</li>
+            </ol>
+
+            <p><strong>This is your first taste of how AI assistance works in practice—not magic, but guided iteration.</strong></p>
+
+            <h3>Example Starting Point (Python):</h3>
+            <div class="tab-content-container">
+                <div class="tab-content active">
+                    <p>Create <code>blueprint_decoder.py</code> and start with this comment:</p>
+                    <pre><code># Function to fetch encrypted blueprint from a remote server and extract secrets marked with {* and *}
+def fetch_and_decode_blueprint(url):
+    pass</code></pre>
+                    <p>Press <code>Tab</code> or <code>Ctrl+Enter</code> to see Copilot's suggestion. Then refine it with more detailed comments.</p>
+                </div>
+            </div>
+
+            <h3>Example Starting Point (C#):</h3>
             <p>Choose your preferred language and let Copilot suggest the implementation:</p>
 
             <div class="language-tabs">

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Compare Copilot Chat vs Agent Mode using the ByteStrike mission. Work with Python, JavaScript, and C# tabs and run the blueprint decoder lab.">
-    <title>Part 4: Copilot Chat vs Agent Mode - Developer FAQ</title>
+    <meta name="description" content="Part 4: Compare Copilot Chat vs Agent Mode to improve ByteStrike's blueprint decoder. Learn when to use each mode with Python, JavaScript, and C# examples.">
+    <title>Part 4: Chat vs Agent Mode - ByteStrike's Mission Upgrade</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -34,60 +34,69 @@
 
     <article class="container post-content">
         <div class="post-hero">
-            <img src="../images/agentmode2.jpg" alt="Copilot Chat vs Agent Mode: Workflows and Integrations" loading="eager">
+            <img src="../images/agentmode2.jpg" alt="Chat vs Agent Mode: Choosing the Right Workflow" loading="eager">
         </div>
         <div class="post-header">
             <div class="post-date">Part 4</div>
-            <h1 class="post-title">Copilot Chat vs Agent Mode: Workflows and Integrations</h1>
+            <h1 class="post-title">Chat vs Agent Mode: Upgrade ByteStrike's Decoder</h1>
         </div>
 
         <div class="post-body">
-            <h2>ByteStrike Mission: Chat vs Agent Mode</h2>
-            <p>We now have two stories to anchor the experience: Ask Mode (<a href="../docs/superherostory.md">superherostory.md</a>) and Agent Mode (<a href="../docs/league-AgentMode.md">league-AgentMode.md</a>). Both share the same goal—decode League secrets hidden between <code>{*</code> and <code>*}</code> in a remote blueprint file. We'll use that single scenario to compare Chat and Agent workflows, with runnable starters for Python, JavaScript, and C#.</p>
+            <h2>Where ByteStrike Stands</h2>
+            <p>You've helped ByteStrike build a working blueprint decoder. It fetches encrypted data from The League's remote servers, extracts secrets hidden between <code>{*</code> and <code>*}</code> markers, and logs them cleanly. The code is documented, tested, and ready—sort of.</p>
+            
+            <p>But now the mission evolves. The League has realized they need <strong>faster iteration</strong> on the decoder. New requirements arrive daily: support for multiple secret formats, better error recovery, UI improvements, even CLI flags for advanced operators.</p>
+
+            <p><strong>This is where you learn the difference between two ways of working with Copilot:</strong></p>
+            <ul>
+                <li><strong>Chat Mode (Ask Mode):</strong> You stay in control. Ask targeted questions, get targeted answers. Great for quick improvements and understanding.</li>
+                <li><strong>Agent Mode (Autonomous Mode):</strong> You set a goal; Copilot explores files, makes multiple edits, and runs tests. Faster for big refactors—but requires review.</li>
+            </ul>
 
             <h2>Learning Objectives</h2>
             <ul>
-                <li>Choose when to use inline, Chat (Ask Mode), or Agent Mode</li>
-                <li>Practice moving the same mission between Chat and Agent Mode</li>
-                <li>Review autonomy outputs and keep ownership of changes</li>
+                <li>Know when to use Chat vs Agent Mode for different ByteStrike missions</li>
+                <li>Practice both workflows on the same goal (decoder improvements)</li>
+                <li>Understand the risks and rewards of autonomous mode</li>
+                <li>Learn to review and validate Agent Mode's work before shipping</li>
             </ul>
 
-            <h2>Mode Cheatsheet</h2>
+            <h2>Mode Selection Guide</h2>
             <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
-                <tr style="border-bottom: 2px solid #ccc;">
-                    <th style="text-align: left; padding: 10px;">Task</th>
-                    <th style="text-align: left; padding: 10px;">Inline</th>
-                    <th style="text-align: left; padding: 10px;">Chat</th>
-                    <th style="text-align: left; padding: 10px;">Agent</th>
+                <tr style="border-bottom: 2px solid #ccc; background: #f5f5f5;">
+                    <th style="text-align: left; padding: 10px; font-weight: bold;">Scenario</th>
+                    <th style="text-align: left; padding: 10px; font-weight: bold;">Chat (Ask)</th>
+                    <th style="text-align: left; padding: 10px; font-weight: bold;">Agent (Autonomous)</th>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 10px;">Quick completion</td>
-                    <td style="padding: 10px;">✓ Best</td>
-                    <td style="padding: 10px;">✗</td>
-                    <td style="padding: 10px;">✗</td>
+                    <td style="padding: 10px;"><strong>Add a single feature</strong><br>(e.g., timeout + retry)</td>
+                    <td style="padding: 10px; color: #0f5132; font-weight: bold;">✓ Best</td>
+                    <td style="padding: 10px;">Over-kill</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 10px;">Explain / debug</td>
-                    <td style="padding: 10px;">✗</td>
-                    <td style="padding: 10px;">✓ Best</td>
-                    <td style="padding: 10px;">✗</td>
+                    <td style="padding: 10px;"><strong>Debug or explain code</strong><br>(e.g., why regex fails)</td>
+                    <td style="padding: 10px; color: #0f5132; font-weight: bold;">✓ Best</td>
+                    <td style="padding: 10px;">Not applicable</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 10px;">Refactor a file</td>
-                    <td style="padding: 10px;">✗</td>
-                    <td style="padding: 10px;">Possible</td>
-                    <td style="padding: 10px;">✓ Best</td>
+                    <td style="padding: 10px;"><strong>Refactor an entire file</strong><br>(e.g., clean up all code style)</td>
+                    <td style="padding: 10px;">Possible but slow</td>
+                    <td style="padding: 10px; color: #0f5132; font-weight: bold;">✓ Best</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 10px;">Scaffold + test</td>
-                    <td style="padding: 10px;">✗</td>
-                    <td style="padding: 10px;">Possible</td>
-                    <td style="padding: 10px;">✓ Best</td>
+                    <td style="padding: 10px;"><strong>Build + test + scaffold</strong><br>(e.g., full CLI with tests)</td>
+                    <td style="padding: 10px;">Very tedious</td>
+                    <td style="padding: 10px; color: #0f5132; font-weight: bold;">✓ Best</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 10px;"><strong>Many files, many changes</strong><br>(e.g., add new module to project)</td>
+                    <td style="padding: 10px;">Manual coordination needed</td>
+                    <td style="padding: 10px; color: #0f5132; font-weight: bold;">✓ Best</td>
                 </tr>
             </table>
 
-            <h2>Starter Decoder (Run in Your Language)</h2>
-            <p>All starters pull <code>scrolls.txt</code>, extract secrets between <code>{*</code> and <code>*}</code>, and print them. Use these as the base for the labs below.</p>
+            <h2>Your Starter: The League's Blueprint Decoder</h2>
+            <p>Here's where ByteStrike is now. It works, but it's basic. You'll improve it using Chat and Agent modes.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -104,6 +113,7 @@ def retrieve_and_decode_blueprint(blueprint_url):
     """
     Retrieves a classified League blueprint and deciphers it,
     extracting only authentic secrets hidden by The League's tech.
+    Secrets are wrapped in {* and *} markers.
     """
     try:
         response = requests.get(blueprint_url, timeout=10)
@@ -122,6 +132,7 @@ def retrieve_and_decode_blueprint(blueprint_url):
     except Exception as err:
         print(f"[ALERT] Unexpected error: {err}")
 
+# Run the mission
 blueprint_url = "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt"
 retrieve_and_decode_blueprint(blueprint_url)
 </code></pre>
@@ -139,21 +150,28 @@ retrieve_and_decode_blueprint(blueprint_url)
         const secrets = [...text.matchAll(secretPattern)].map(m => m[1].trim());
 
         console.log("=== LEAGUE MISSION DOSSIER ===");
-        if (secrets.length) secrets.forEach((s, i) => console.log(`Secret #${i + 1}: ${s}`));
-        else console.log("No League secrets found. All data may be decoys!");
+        if (secrets.length) {
+            secrets.forEach((s, i) => console.log(`Secret #${i + 1}: ${s}`));
+        } else {
+            console.log("No League secrets found. All data may be decoys!");
+        }
     } catch (error) {
         console.error("[ALERT] Mission error:", error);
     }
 }
 
+// Run the mission
 const url = "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt";
 retrieveAndDecodeBlueprint(url);
 </code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-<pre><code>using System.Net.Http;
+<pre><code>using System;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
 
 public class LeagueHQ
 {
@@ -188,51 +206,89 @@ public class LeagueHQ
         }
     }
 
-    public static void Run()
+    public static async Task Main()
     {
         const string url = "https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt";
-        RetrieveAndDecodeBlueprint(url).Wait();
+        await RetrieveAndDecodeBlueprint(url);
     }
 }
 </code></pre>
                 </div>
             </div>
 
-            <h2>Lab 4: Solve the Mission with Chat & Agent Mode</h2>
+            <h2>Lab 4: ByteStrike's Decoder Upgrade Sprint</h2>
 
-            <h3>1) Warm-up</h3>
+            <h3>Task 1: Chat Mode — Quick Improvements</h3>
+            <p>The League's intel says improved error handling could save 10 seconds per failed mission. Let's use Chat mode to add resilience quickly.</p>
+            
+            <ol>
+                <li><strong>Copy the starter code</strong> for your language into a new file.</li>
+                <li><strong>Open Copilot Chat</strong> (Cmd+I or Ctrl+I) and ask:
+                    <blockquote style="border-left: 4px solid #007bff; padding-left: 10px; margin: 10px 0;">
+                        "Add retry logic (3 attempts) with exponential backoff and timeout handling to this blueprint decoder. Also add logging so we can see what's happening."
+                    </blockquote>
+                </li>
+                <li><strong>Review the suggestions</strong> and accept the improvements one by one.</li>
+                <li><strong>Test it:</strong> Run the code and verify it still works. Try disconnecting your network briefly to see error handling in action (or mock a timeout in code).</li>
+            </ol>
+
+            <h3>Task 2: Chat Mode — Understanding the Regex</h3>
+            <p>Ask Copilot to explain the regex and suggest edge cases it might miss.</p>
+            
+            <ol>
+                <li><strong>In Chat, ask:</strong>
+                    <blockquote style="border-left: 4px solid #007bff; padding-left: 10px; margin: 10px 0;">
+                        "Explain the regex pattern <code>\{\*(.*?)\*\}</code>. What edge cases might break it? How would you handle secrets that span multiple lines?"
+                    </blockquote>
+                </li>
+                <li><strong>Read the answer</strong> (this is learning, not just automating!).</li>
+                <li><strong>Ask for a fix:</strong> "Update the regex to handle multi-line secrets."</li>
+                <li><strong>Apply the improved pattern</strong> to your code.</li>
+            </ol>
+
+            <h3>Task 3: Agent Mode — Full Refactor & CLI</h3>
+            <p>The League now wants ByteStrike's decoder as a production CLI tool with tests, config, and docs. This is a job for Agent Mode.</p>
+            
+            <ol>
+                <li><strong>Set up a new folder</strong> for your project (e.g., <code>league-mission-decoder</code>).</li>
+                <li><strong>Create one starter file</strong> (the decoder) and a simple README placeholder.</li>
+                <li><strong>Open Agent Mode</strong> (use the Copilot Agent extension or chat command) and prompt:
+                    <blockquote style="border-left: 4px solid #007bff; padding-left: 10px; margin: 10px 0;">
+                        "Refactor the blueprint decoder into a production-ready CLI tool. Add command-line arguments (--source-url, --marker-start, --marker-end, --output), unit tests, error handling, logging, and a README with usage examples. Use best practices for [language]."
+                    </blockquote>
+                </li>
+                <li><strong>Watch Agent Mode work</strong> (it will create/edit multiple files, run tests, etc.).</li>
+                <li><strong>Review every change:</strong> Read the files it created. Do they make sense? Are the tests good? Does the README help?</li>
+                <li><strong>Accept or reject:</strong> If satisfied, accept all changes. If something is off, ask Agent to refine it or manually fix it yourself.</li>
+            </ol>
+
+            <h3>Task 4: Compare & Reflect</h3>
             <ul>
-                <li>Open the stories: Ask Mode (<a href="../docs/superherostory.md">superherostory.md</a>) and Agent Mode (<a href="../docs/league-AgentMode.md">league-AgentMode.md</a>).</li>
-                <li>Run the starter decoder in your language.</li>
+                <li><strong>Which tasks were faster in Chat?</strong> (Probably error handling and explanation.)</li>
+                <li><strong>Which felt natural in Agent Mode?</strong> (Probably the full refactor with tests and CLI.)</li>
+                <li><strong>What would you choose for the next mission?</strong> Think about how you'd apply this decision-making.</li>
             </ul>
 
-            <h3>2) Chat (Ask Mode): targeted improvements</h3>
+            <h2>Key Takeaway: Know Your Tool</h2>
+            <p>Chat and Agent modes are not better or worse—they're <strong>different tools for different jobs.</strong> ByteStrike's team will succeed by:</p>
             <ul>
-                <li>Ask Copilot Chat to explain the regex and add a 10s timeout plus a single retry with logging.</li>
-                <li>Request a “League HQ” console style (emoji headers, counts).</li>
+                <li>Using Chat for quick questions, targeted fixes, and learning</li>
+                <li>Using Agent Mode for big refactors, scaffolding, and multi-file changes</li>
+                <li>Always reviewing the output before shipping</li>
+                <li>Building a culture where Copilot is a collaborator, not a black box</li>
             </ul>
 
-            <h3>3) Agent Mode: end-to-end assist</h3>
-            <ul>
-                <li>Prompt Agent Mode to scaffold a mission-ready version: CLI flags (<code>--source</code>, <code>--marker</code>, <code>--max-secrets</code>), tests, README notes.</li>
-                <li>Let Agent run; review and accept/reject edits.</li>
-            </ul>
-
-            <h3>4) Compare and reflect</h3>
-            <ul>
-                <li>What was faster in Chat? What was stronger in Agent Mode?</li>
-                <li>Capture the workflow you’d repeat for similar missions.</li>
-            </ul>
+            <p><strong>Next up:</strong> Part 5 shows you how The League adds guardrails—security, privacy, and correctness checks—before trusting ByteStrike's decoder in production.</p>
         </div>
 
         <div class="post-navigation">
-            <a href="part5-guardrails.html" class="next-post">Next: Part 5 - Guardrails →</a>
+            <a href="part5-guardrails.html" class="next-post">Next: Part 5 - Guardrails & Security →</a>
         </div>
     </article>
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+            <p>&copy; 2026 Developer Workshop. All rights reserved.</p>
         </div>
     </footer>
 
