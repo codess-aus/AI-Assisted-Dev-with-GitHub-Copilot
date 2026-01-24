@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Establish guardrails for AI-generated code. Learn security best practices, code quality checks, and how to safely integrate Copilot into your workflow.">
+    <meta name="description" content="Establish guardrails for the ByteStrike blueprint mission. Harden Python, JavaScript, and C# decoders with validation, retries, and tests.">
     <title>Part 5: Security & Quality Guardrails - Developer FAQ</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -42,517 +42,143 @@
         </div>
 
         <div class="post-body">
-            <h2>The Responsibility Equation</h2>
-            <p>Copilot is powerful, but with great power comes great responsibility. The code Copilot generates is <em>your</em> code—you're responsible for its correctness, security, and maintainability. This chapter is about establishing guardrails: practices, tools, and mindsets that keep AI-assisted development safe and high-quality.</p>
-
-            <p>The good news? With the right approach, Copilot-assisted code can meet or exceed the quality standards of manually written code.</p>
+            <h2>Guardrails for the ByteStrike Mission</h2>
+            <p>We will harden the blueprint decoders from Part 4 across Python, JavaScript, and C#. Add validation, timeouts, retries, caps, logging, and tests so the League secrets stay safe.</p>
 
             <h2>Learning Objectives</h2>
             <ul>
-                <li><strong>Identify common pitfalls</strong> in Copilot-generated code (security flaws, logic errors, code smells)</li>
-                <li><strong>Establish a code review checklist</strong> for AI-generated suggestions</li>
-                <li><strong>Use static analysis and testing</strong> to catch bugs early</li>
-                <li><strong>Understand responsible AI usage</strong> and ethical considerations</li>
-                <li><strong>Build team practices</strong> around AI-assisted development</li>
+                <li>Spot and patch security/quality gaps in AI-generated code</li>
+                <li>Add guardrails: validation, retries, timeouts, caps, logging, and tests</li>
+                <li>Practice secure-by-default prompting in Chat and Agent Mode</li>
             </ul>
 
-            <h2>Common Pitfalls in Copilot-Generated Code</h2>
-
-            <h3>1. Security Vulnerabilities</h3>
-            <p>Copilot can suggest code that looks correct but contains security flaws. Here are common issues:</p>
-
-            <h4>SQL Injection</h4>
-            <pre><code>// UNSAFE: Copilot might suggest string concatenation
-def get_user(user_id):
-    query = f"SELECT * FROM users WHERE id = {user_id}"  # SQL injection risk!
-    return db.execute(query)</code></pre>
-
-            <p><strong>Guardrail:</strong> Always use parameterized queries</p>
-            <pre><code>def get_user(user_id):
-    query = "SELECT * FROM users WHERE id = ?"
-    return db.execute(query, (user_id,))</code></pre>
-
-            <h4>Hard-Coded Credentials</h4>
-            <pre><code>// UNSAFE: Copilot might auto-suggest API keys or passwords
-api_key = "sk-1234567890abcdef"  # Never commit secrets!
-response = requests.get(url, headers={"Authorization": f"Bearer {api_key}"})</code></pre>
-
-            <p><strong>Guardrail:</strong> Use environment variables and secret management</p>
-            <pre><code>import os
-api_key = os.getenv("API_KEY")
-if not api_key:
-    raise ValueError("API_KEY environment variable not set")
-response = requests.get(url, headers={"Authorization": f"Bearer {api_key}"})</code></pre>
-
-            <h4>Insufficient Input Validation</h4>
-            <pre><code>// UNSAFE: No validation of user input
-def process_file(filename):
-    with open(filename, 'r') as f:  # Path traversal risk!
-        return f.read()</code></pre>
-
-            <p><strong>Guardrail:</strong> Validate and sanitize inputs</p>
-            <pre><code>import os
-import pathlib
-
-def process_file(filename):
-    # Ensure filename is safe (within allowed directory)
-    safe_dir = pathlib.Path("/safe/uploads")
-    file_path = (safe_dir / filename).resolve()
-    
-    if not str(file_path).startswith(str(safe_dir)):
-        raise ValueError("Invalid file path")
-    
-    with open(file_path, 'r') as f:
-        return f.read()</code></pre>
-
-            <h3>2. Logic Errors and Edge Cases</h3>
-            <p>Copilot may miss edge cases or generate logic that works for common scenarios but fails for boundary conditions.</p>
-
-            <h4>Off-by-One Errors</h4>
-            <pre><code>// Copilot might forget inclusive/exclusive boundaries
-def find_elements_in_range(items, min_val, max_val):
-    return [x for x in items if min_val < x < max_val]  # Excludes boundaries!</code></pre>
-
-            <p><strong>Guardrail:</strong> Test boundary cases explicitly</p>
-            <pre><code>def find_elements_in_range(items, min_val, max_val):
-    return [x for x in items if min_val <= x <= max_val]  # Includes boundaries
-
-# Test cases:
-assert find_elements_in_range([1, 2, 3, 4, 5], 2, 4) == [2, 3, 4]  # Boundary values included</code></pre>
-
-            <h4>Null/None Handling</h4>
-            <pre><code>// UNSAFE: Assumes data is always present
-def calculate_average(numbers):
-    return sum(numbers) / len(numbers)  # What if numbers is None or empty?</code></pre>
-
-            <p><strong>Guardrail:</strong> Add defensive checks</p>
-            <pre><code>def calculate_average(numbers):
-    if not numbers:
-        return 0  # or raise ValueError, depending on your design
-    return sum(numbers) / len(numbers)</code></pre>
-
-            <h3>3. Performance Issues</h3>
-            <p>Copilot might suggest code that works but is inefficient.</p>
-
-            <h4>Inefficient Algorithms</h4>
-            <pre><code>// SLOW: O(n²) when O(n) is possible
-def remove_duplicates(items):
-    result = []
-    for item in items:
-        if item not in result:  # This is O(n) for each check!
-            result.append(item)
-    return result</code></pre>
-
-            <p><strong>Guardrail:</strong> Use appropriate data structures</p>
-            <pre><code>def remove_duplicates(items):
-    return list(set(items))  # O(n) using hash-based lookup
-    # Or preserve order: list(dict.fromkeys(items))</code></pre>
-
-            <h3>4. Code Smells</h3>
-            <p>Generated code might be correct but unmaintainable.</p>
-
-            <h4>God Functions (Too Much Responsibility)</h4>
-            <pre><code>// SMELL: One function doing too much
-def process_user_data(raw_data):
-    # Validation, transformation, API calls, database writes, logging... all here!
-    pass</code></pre>
-
-            <p><strong>Guardrail:</strong> Refactor into smaller, focused functions</p>
-            <pre><code>def validate_user_data(data): ...
-def transform_user_data(data): ...
-def save_user(user): ...
-def process_user_data(raw_data):
-    validated = validate_user_data(raw_data)
-    transformed = transform_user_data(validated)
-    return save_user(transformed)</code></pre>
-
-            <h2>The AI-Generated Code Review Checklist</h2>
-            <p>Use this checklist for every piece of Copilot-generated code before accepting it:</p>
-
-            <h3>Security</h3>
+            <h2>Guardrail Checklist</h2>
             <ul>
-                <li>☐ No hard-coded credentials (API keys, passwords, tokens)</li>
-                <li>☐ Input validation on all user-facing inputs</li>
-                <li>☐ SQL queries use parameterized statements (no string concatenation)</li>
-                <li>☐ No direct file path access without validation</li>
-                <li>☐ Authentication and authorization checks where needed</li>
-                <li>☐ No sensitive data logged or exposed in error messages</li>
+                <li>Validate inputs (URL/host), set timeouts, retry with backoff</li>
+                <li>Precompile regex, cap bytes read, limit number/length of secrets</li>
+                <li>Structured logging and clear error messages</li>
+                <li>Tests for happy path, failure path, and empty payload</li>
             </ul>
 
-            <h3>Correctness</h3>
-            <ul>
-                <li>☐ Null/None checks for potentially null values</li>
-                <li>☐ Boundary conditions tested (empty lists, zero values, max values)</li>
-                <li>☐ Off-by-one errors eliminated (especially in loops and ranges)</li>
-                <li>☐ Type mismatches resolved</li>
-                <li>☐ Return values match function signature</li>
-                <li>☐ Error handling for expected failures (network timeouts, file not found, etc.)</li>
-            </ul>
-
-            <h3>Performance</h3>
-            <ul>
-                <li>☐ Time complexity appropriate for the use case</li>
-                <li>☐ No obvious N² loops where O(N) is possible</li>
-                <li>☐ Appropriate data structures (hash tables vs. lists, etc.)</li>
-                <li>☐ No excessive copying or allocations in tight loops</li>
-            </ul>
-
-            <h3>Maintainability</h3>
-            <ul>
-                <li>☐ Variable names are clear and descriptive</li>
-                <li>☐ Comments explain the "why," not the "what"</li>
-                <li>☐ Functions are focused and single-purpose</li>
-                <li>☐ Duplicated code extracted to helper functions</li>
-                <li>☐ Consistent style with the rest of the codebase</li>
-            </ul>
-
-            <h3>Testing</h3>
-            <ul>
-                <li>☐ Unit tests cover happy path and edge cases</li>
-                <li>☐ Tests pass locally and in CI/CD</li>
-                <li>☐ No flaky or timeout-dependent tests</li>
-            </ul>
-
-            <h2>Tooling for Automated Quality Checks</h2>
-
-            <h3>Static Analysis Tools</h3>
-            <p>Use static analyzers to catch common issues automatically:</p>
-
+            <h2>Language Tabs — Harden from Here</h2>
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
-                <button class="language-tab" data-language="csharp">C#</button>
                 <button class="language-tab" data-language="javascript">JavaScript</button>
+                <button class="language-tab" data-language="csharp">C#</button>
             </div>
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <ul>
-                        <li><strong>Pylint / Flake8:</strong> Style and logic errors</li>
-                        <li><strong>Bandit:</strong> Security issues (hard-coded secrets, SQL injection risks)</li>
-                        <li><strong>Mypy:</strong> Type checking</li>
-                    </ul>
+<pre><code>import re
+import requests
 
-                    <p><strong>Setup example:</strong></p>
-                    <pre><code># .flake8 configuration
-[flake8]
-max-line-length = 100
-exclude = .git,__pycache__,docs,build,dist
+SECRET_PATTERN = re.compile(r"\{\*(.*?)\*\}")
 
-# Run:
-flake8 your_code.py
-bandit -r your_module/
-mypy your_module/</code></pre>
-                </div>
+def retrieve_and_decode_blueprint(blueprint_url, max_secrets=10):
+    # TODO: validate URL/host, add retries/backoff, cap total bytes
+    response = requests.get(blueprint_url, timeout=10)
+    response.raise_for_status()
 
-                <div class="tab-content" data-language="csharp">
-                    <ul>
-                        <li><strong>Roslyn Analyzers:</strong> Built-in code analysis</li>
-                        <li><strong>SonarQube:</strong> Code smells and security vulnerabilities</li>
-                        <li><strong>FxCop:</strong> .NET design rule validation</li>
-                    </ul>
+    secrets = SECRET_PATTERN.findall(response.text)[:max_secrets]
+    if not secrets:
+        print("No authentic secrets found. The League's decoys were strong!")
+        return
 
-                    <p><strong>Setup example:</strong></p>
-                    <pre><code>// .editorconfig configuration
-root = true
-
-[*.cs]
-dotnet_analyzer_diagnostic.severity = warning
-
-# Run:
-dotnet build /p:TreatWarningsAsErrors=true
-# Or install and run:
-dotnet tool install --global dotnet-sonarscanner</code></pre>
-                </div>
-
-                                <div class="tab-content" data-language="javascript">
-                                        <ul>
-                                                <li><strong>ESLint:</strong> Style, logic, and unused code detection</li>
-                                                <li><strong>TypeScript:</strong> Type safety for JS projects</li>
-                                                <li><strong>npm audit / snyk:</strong> Dependency vulnerability checks</li>
-                                                <li><strong>semgrep:</strong> Security and correctness patterns</li>
-                                        </ul>
-
-                                        <p><strong>Setup example:</strong></p>
-<pre><code>// .eslintrc.json
-{
-    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-    "env": { "es2021": true, "node": true },
-    "parser": "@typescript-eslint/parser"
-}
-
-# Run:
-npm run lint
-npm audit
-semgrep scan --config=p/owasp-top-ten
+    for idx, secret in enumerate(secrets, 1):
+        print(f"Secret #{idx}: {secret.strip()[:200]}")
 </code></pre>
-                                </div>
-            </div>
+                </div>
 
-            <h3>Automated Testing</h3>
-            <p>Test <em>everything</em> that Copilot generates. Use unit tests, integration tests, and property-based testing when appropriate.</p>
+                <div class="tab-content" data-language="javascript">
+<pre><code>const secretPattern = /\{\*(.*?)\*\}/g;
 
-            <p><strong>Example: Unit testing Copilot-generated code</strong></p>
-            <pre><code>import pytest
+async function retrieveAndDecodeBlueprint(url, maxSecrets = 10) {
+    // TODO: validate URL/host, add timeout + retry with backoff
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
-def test_validate_email_valid_addresses():
-    assert validate_email("user@example.com") == True
-    assert validate_email("name.surname@domain.co.uk") == True
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!response.ok) throw new Error(`Fetch error: ${response.status}`);
 
-def test_validate_email_invalid_addresses():
-    assert validate_email("invalid") == False
-    assert validate_email("@example.com") == False
-    assert validate_email("user@") == False
+    const text = await response.text();
+    const secrets = [...text.matchAll(secretPattern)]
+        .map(m => m[1].trim())
+        .slice(0, maxSecrets);
 
-def test_validate_email_edge_cases():
-    assert validate_email("") == False
-    assert validate_email(None) == False  # or raises ValueError
-    assert validate_email("a" * 255 + "@example.com") == False  # Too long</code></pre>
+    if (!secrets.length) {
+        console.log("No League secrets found. All data may be decoys!");
+        return;
+    }
 
-            <h2>Team Practices for Responsible AI</h2>
-
-            <h3>Code Review Policy</h3>
-            <ul>
-                <li><strong>Flag AI-generated code:</strong> Reviewers should know which code came from Copilot (consider a comment marker)</li>
-                <li><strong>Stricter review for sensitive code:</strong> Security, payment processing, and data handling need extra scrutiny</li>
-                <li><strong>Document intent:</strong> Include the prompt or intent comment so reviewers understand what was requested</li>
-            </ul>
-
-            <h3>Team Training</h3>
-            <ul>
-                <li>Share common Copilot pitfalls and fixes with your team</li>
-                <li>Create team standards for prompting (e.g., "Always include error handling in your prompts")</li>
-                <li>Regular code review retrospectives: "This Copilot suggestion caused a bug—how could we have caught it?"</li>
-            </ul>
-
-            <h3>Gradual Rollout</h3>
-            <ul>
-                <li>Start with non-critical code paths</li>
-                <li>Build team confidence and practices before using Copilot for core features</li>
-                <li>Monitor and learn from issues before increasing autonomy (e.g., Agent Mode)</li>
-            </ul>
-
-            <h2>Lab 5: Reviewing and Securing Code</h2>
-            <p>In this lab, you'll take Copilot-generated code and harden it for production.</p>
-
-            <h3>Exercise 1: Security Review</h3>
-            <p>Here's some code Copilot might generate. Review it using the security checklist:</p>
-
-            <div class="language-tabs">
-                <button class="language-tab active" data-language="python">Python</button>
-                <button class="language-tab" data-language="csharp">C#</button>
-                <button class="language-tab" data-language="javascript">JavaScript</button>
-            </div>
-
-            <div class="tab-content-container">
-                <div class="tab-content active" data-language="python">
-                    <pre><code>def login_user(username, password):
-    # Query the database
-    user = db.execute(f"SELECT * FROM users WHERE username = '{username}'")
-    
-    if user and user.password == password:  # Plain-text comparison!
-        token = "secret_token_12345"  # Hard-coded!
-        return {"success": True, "token": token}
-    return {"success": False}
-
-def upload_file(filename, file_content):
-    # Save the file
-    with open(f"/uploads/{filename}", "w") as f:  # Path traversal risk!
-        f.write(file_content)
-    return {"status": "uploaded"}</code></pre>
-
-                    <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely using:</p>
-                    <ul>
-                        <li>Parameterized queries</li>
-                        <li>Password hashing (bcrypt/argon2)</li>
-                        <li>Secure token generation</li>
-                        <li>Path sanitization</li>
-                    </ul>
+    secrets.forEach((secret, idx) => console.log(`Secret #${idx + 1}: ${secret.slice(0, 200)}`));
+}
+</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <pre><code>public class UserService
+<pre><code>using System.Net.Http;
+using System.Text.RegularExpressions;
+
+public class LeagueHQ
 {
-    public LoginResult LoginUser(string username, string password)
+    private static readonly Regex SecretPattern = new("\{\*(.*?)\*\}", RegexOptions.Compiled);
+
+    private static async Task RetrieveAndDecodeBlueprint(string url, int maxSecrets = 10)
     {
-        // Query the database
-        var query = $"SELECT * FROM Users WHERE Username = '{username}'";  // SQL Injection!
-        var user = db.Execute(query);
-        
-        if (user != null && user.Password == password)  // Plain-text comparison!
+        // TODO: validate URL/host, add HttpClient timeout + retry policy
+        using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+        var blueprintContent = await httpClient.GetStringAsync(url);
+
+        var matches = SecretPattern.Matches(blueprintContent);
+        if (matches.Count == 0)
         {
-            var token = "secret_token_12345";  // Hard-coded!
-            return new LoginResult { Success = true, Token = token };
+            Console.WriteLine("No League secrets found. All data may be decoys!");
+            return;
         }
-        return new LoginResult { Success = false };
+
+        int printed = 0;
+        foreach (Match match in matches)
+        {
+            if (printed >= maxSecrets) break;
+            var value = match.Groups[1].Value.Trim();
+            Console.WriteLine($"Secret #{printed + 1}: {value.Substring(0, Math.Min(200, value.Length))}");
+            printed++;
+        }
     }
-
-    public void UploadFile(string filename, string content)
-    {
-        // Path traversal risk!
-        File.WriteAllText($"/uploads/{filename}", content);
-    }
-}</code></pre>
-
-                    <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely using:</p>
-                    <ul>
-                        <li>Parameterized queries or Entity Framework</li>
-                        <li>Password hashing (BCrypt.Net or Identity)</li>
-                        <li>Secure token generation (JWT)</li>
-                        <li>Path sanitization (Path.GetFileName)</li>
-                    </ul>
-                </div>
-
-                <div class="tab-content" data-language="javascript">
-<pre><code>async function loginUser(username, password) {
-    // Query the database
-    const query = `SELECT * FROM users WHERE username = '${username}'`; // SQL Injection!
-    const user = await db.query(query);
-
-    if (user && user.password === password) { // Plain-text comparison!
-        const token = 'secret_token_12345'; // Hard-coded!
-        return { success: true, token };
-    }
-    return { success: false };
-}
-
-function uploadFile(filename, fileContent) {
-    // Path traversal risk!
-    fs.writeFileSync(`/uploads/${filename}`, fileContent);
-    return { status: 'uploaded' };
 }
 </code></pre>
-
-                    <p><strong>Task:</strong> Identify all security issues. Rewrite the code safely using:</p>
-                    <ul>
-                        <li>Parameterized queries (or query builder/ORM)</li>
-                        <li>Password hashing (bcrypt/argon2)</li>
-                        <li>Secure token generation (JWT/crypto.randomUUID)</li>
-                        <li>Path sanitization (<code>path.basename</code>)</li>
-                    </ul>
                 </div>
             </div>
 
-            <h3>Exercise 2: Logic and Edge Case Testing</h3>
-            <p>Write comprehensive tests for this function:</p>
-
-            <div class="language-tabs">
-                <button class="language-tab active" data-language="python">Python</button>
-                <button class="language-tab" data-language="csharp">C#</button>
-                <button class="language-tab" data-language="javascript">JavaScript</button>
-            </div>
-
-            <div class="tab-content-container">
-                <div class="tab-content active" data-language="python">
-                    <pre><code>def calculate_discount(price: float, customer_type: str) -> float:
-    if customer_type == "premium":
-        return price * 0.9
-    elif customer_type == "regular":
-        return price * 0.95
-    else:
-        return price</code></pre>
-
-                    <p><strong>Task:</strong> Write pytest tests covering:</p>
-                    <ul>
-                        <li>All customer types</li>
-                        <li>Negative prices</li>
-                        <li>Zero price</li>
-                        <li>Invalid customer types</li>
-                        <li>None values</li>
-                    </ul>
-                </div>
-
-                <div class="tab-content" data-language="csharp">
-                    <pre><code>public decimal CalculateDiscount(decimal price, string customerType)
-{
-    return customerType switch
-    {
-        "premium" => price * 0.9m,
-        "regular" => price * 0.95m,
-        _ => price
-    };
-}</code></pre>
-
-                    <p><strong>Task:</strong> Write xUnit tests covering:</p>
-                    <ul>
-                        <li>All customer types</li>
-                        <li>Negative prices</li>
-                        <li>Zero price</li>
-                        <li>Null customer type</li>
-                        <li>Empty string customer type</li>
-                    </ul>
-                </div>
-
-                <div class="tab-content" data-language="javascript">
-<pre><code>function calculateDiscount(price, customerType) {
-    if (customerType === 'premium') {
-        return price * 0.9;
-    }
-    if (customerType === 'regular') {
-        return price * 0.95;
-    }
-    return price;
-}
-</code></pre>
-
-                    <p><strong>Task:</strong> Write Jest tests covering:</p>
-                    <ul>
-                        <li>All customer types</li>
-                        <li>Negative prices</li>
-                        <li>Zero price</li>
-                        <li>Null/undefined customer type</li>
-                        <li>Empty string customer type</li>
-                    </ul>
-                </div>
-            </div>
-    else:
-        return price</code></pre>
-
-            <p><strong>Task:</strong> Create test cases covering:
-            - Valid customer types
-            - Invalid/unknown customer types
-            - Boundary prices (0, negative, very large)
-            - Edge cases (None, empty string)</p>
-
-            <h3>Exercise 3: Performance Analysis</h3>
-            <p>This code works but is inefficient:</p>
-
-            <pre><code>def find_common_elements(list1, list2):
-    result = []
-    for item in list1:
-        for item2 in list2:  # Nested loop: O(n²)!
-            if item == item2 and item not in result:  # Repeated check
-                result.append(item)
-    return result</code></pre>
-
-            <p><strong>Task:</strong> Rewrite this with better time complexity. Benchmark both versions.</p>
-
-            <h3>Exercise 4: Code Review Simulation</h3>
-            <p>Pair with a colleague (or use two IDE windows). One person generates code with Copilot; the other reviews it using the checklist. Document issues found and fixes applied.</p>
-
-            <h3>Reflection Questions</h3>
+            <h2>Lab 5: Harden the Blueprint Decoders</h2>
+            <h3>1) Threat-model quickly</h3>
             <ul>
-                <li>Which types of issues are easiest for humans to catch?</li>
-                <li>Which would be caught by automated tools?</li>
-                <li>How does your review process change when you know code came from AI?</li>
-                <li>What confidence level do you need before merging Copilot-generated code?</li>
+                <li>What can go wrong? Unbounded input, slow network, hostile URL, huge secrets.</li>
             </ul>
 
-            <h2>Responsible AI Principles</h2>
+            <h3>2) Add guardrails in your language</h3>
             <ul>
-                <li><strong>Transparency:</strong> Be clear about where AI assistance was used</li>
-                <li><strong>Accountability:</strong> You are responsible for the generated code, even if an AI wrote it</li>
-                <li><strong>Scrutiny:</strong> AI-generated code deserves the same rigor as human code (or more)</li>
-                <li><strong>Learning:</strong> Use AI-related bugs as learning opportunities for your team</li>
-                <li><strong>Ethical use:</strong> Don't use Copilot to bypass security reviews or skip critical testing</li>
+                <li>Implement URL/host validation, timeouts, and a 2-try exponential backoff.</li>
+                <li>Cap bytes read, limit secrets to 10, truncate to 200 chars.</li>
+                <li>Add structured logging for success/failure and reason codes.</li>
             </ul>
 
-            <h2>Conclusion</h2>
-            <p>Copilot is a powerful tool, but it doesn't eliminate the need for careful engineering practices. In fact, it raises the bar: you must be more vigilant, not less. The teams that will thrive with AI-assisted development are those that combine Copilot's speed with rigorous quality practices.</p>
+            <h3>3) Test and verify</h3>
+            <ul>
+                <li>Write one happy-path test and one failure-path test (timeout/404).</li>
+                <li>In Agent Mode, ask it to propose tests; in Chat, ask for a quick refactor.</li>
+            </ul>
 
-            <p>In the next chapter, we'll see how to integrate Copilot into real production workflows—teams, repositories, code reviews, and all.</p>
-            <div class="post-navigation">
-                <a href="part6-production-workflows.html" class="next-post">Next: Part 6 - Production Workflows →</a>
-            </div>
+            <h3>4) Share learnings</h3>
+            <ul>
+                <li>Capture the guardrails you added and which were easiest/hardest with Copilot.</li>
+            </ul>
+        </div>
+
+        <div class="post-navigation">
+            <a href="part4-chat-agent-mode.html" class="previous-post">← Previous: Part 4 - Chat vs Agent Mode</a>
+            <a href="part6-production-workflows.html" class="next-post">Next: Part 6 - Production Workflows →</a>
         </div>
     </article>
 
@@ -564,32 +190,4 @@ function uploadFile(filename, fileContent) {
 
     <script src="../script.js"></script>
 </body>
-</html>    
-    <script>
-    // Inline tab functionality
-    (function() {
-        const tabs = document.querySelectorAll('.language-tab');
-        tabs.forEach(function(tab) {
-            tab.onclick = function() {
-                const lang = this.getAttribute('data-language');
-                const tabGroup = this.closest('.language-tabs');
-                const container = tabGroup.nextElementSibling;
-                
-                tabGroup.querySelectorAll('.language-tab').forEach(function(t) {
-                    t.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                container.querySelectorAll('.tab-content').forEach(function(c) {
-                    c.classList.remove('active');
-                });
-                const selected = container.querySelector('[data-language="' + lang + '"]');
-                if (selected) {
-                    selected.classList.add('active');
-                }
-                
-                localStorage.setItem('preferred-language', lang);
-            };
-        });
-    })();
-    </script>
+</html>
