@@ -270,17 +270,25 @@
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
                     <p><strong>Create a new file:</strong> <code>blueprint_decoder.py</code></p>
-                    <p><strong>Step 1:</strong> Start with a descriptive comment and let Copilot generate the function:</p>
-                    <pre><code># Function to read a blueprint file and extract all secrets marked between {* and *}
-# Returns a list of extracted secrets
-def decode_blueprint(filename):
-    pass</code></pre>
+                    <p><strong>Step 1:</strong> Import regex at the top of the file:</p>
+                    <pre><code>import re</code></pre>
                     
-                    <p><strong>Step 2:</strong> Press <code>Tab</code> or <code>Ctrl+Enter</code> to see Copilot's suggestion. It should generate code to:</p>
+                    <p><strong>Step 2:</strong> Add a detailed comment describing the exact algorithm:</p>
+                    <pre><code># Function to read a blueprint file and extract all secrets marked between {* and *}
+# Example: League Blueprint contains {* AGENT_CODENAME: SHADOWMIND *}
+# Should extract: "AGENT_CODENAME: SHADOWMIND" (without the markers)
+# Uses regex pattern to find all occurrences
+# Returns a list of extracted secrets
+def decode_blueprint(filename):</code></pre>
+                    
+                    <p><strong>Step 3:</strong> Inside the function, start typing the first line to trigger Copilot:</p>
+                    <pre><code>    with open(filename, 'r') as</code></pre>
+                    
+                    <p><strong>Watch what happens:</strong> As you type, Copilot should start suggesting the rest! Press <code>Tab</code> to accept suggestions. Copilot should generate code to:</p>
                     <ul>
-                        <li>Open and read the file</li>
-                        <li>Use regex or string methods to find patterns between <code>{*</code> and <code>*}</code></li>
-                        <li>Return the extracted secrets</li>
+                        <li>Read the file content</li>
+                        <li>Use <code>re.findall()</code> with pattern <code>r'\{\* (.*?) \*\}'</code></li>
+                        <li>Return the list of matches</li>
                     </ul>
                     
                     <p><strong>Step 3:</strong> Add test code at the bottom:</p>
@@ -297,24 +305,30 @@ if __name__ == "__main__":
 
                 <div class="tab-content" data-language="csharp">
                     <p><strong>Create a new file:</strong> <code>BlueprintDecoder.cs</code></p>
-                    <p><strong>Step 1:</strong> Start with the class structure and a descriptive comment:</p>
+                    <p><strong>Step 1:</strong> Start with the class structure:</p>
                     <pre><code>using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
 public class BlueprintDecoder
-{
-    // Method to read a blueprint file and extract all secrets marked between {* and *}
-    // Returns a list of extracted secrets
-    public static List&lt;string&gt; DecodeBlueprint(string filename)
-    {
-        // Let Copilot complete this
-        return new List&lt;string&gt;();
-    }
-}</code></pre>
+{</code></pre>
                     
-                    <p><strong>Step 2:</strong> Position cursor inside the method and press <code>Ctrl+Enter</code>. Copilot should generate code to read the file, use regex to find secrets, and return them.</p>
+                    <p><strong>Step 2:</strong> Add a detailed XML comment (C# documentation format):</p>
+                    <pre><code>    /// &lt;summary&gt;
+    /// Reads a blueprint file and extracts all secrets marked between {* and *}
+    /// Example: {* VAULT_ACCESS_CODE: DELTA-7-7-ECHO *} extracts the code inside
+    /// Uses regex pattern to find all occurrences
+    /// &lt;/summary&gt;
+    /// &lt;param name="filename"&gt;Path to the blueprint file&lt;/param&gt;
+    /// &lt;returns&gt;List of extracted secret strings&lt;/returns&gt;
+    public static List&lt;string&gt; DecodeBlueprint(string filename)
+    {</code></pre>
+                    
+                    <p><strong>Step 3:</strong> Start typing the first line to trigger Copilot:</p>
+                    <pre><code>        string content = File.ReadAll</code></pre>
+                    
+                    <p><strong>Watch what happens:</strong> Copilot should complete <code>ReadAllText(filename)</code> and suggest the regex code! Press <code>Tab</code> to accept. It should generate code to use <code>Regex.Matches()</code> to find all patterns.</p>
                     
                     <p><strong>Step 3:</strong> Add a Main method to test it:</p>
                     <pre><code>    static void Main()
@@ -333,14 +347,24 @@ public class BlueprintDecoder
 
                 <div class="tab-content" data-language="javascript">
                     <p><strong>Create a new file:</strong> <code>blueprint_decoder.js</code></p>
-                    <p><strong>Step 1:</strong> Start with a descriptive comment:</p>
-                    <pre><code>// Function to read a blueprint file and extract all secrets marked between {* and *}
-// Returns an array of extracted secrets
-function decodeBlueprint(filename) {
-    // Let Copilot complete this
-}</code></pre>
+                    <p><strong>Step 1:</strong> Import the fs module at the top:</p>
+                    <pre><code>const fs = require('fs');</code></pre>
                     
-                    <p><strong>Step 2:</strong> Press <code>Ctrl+Enter</code>. Copilot should generate code using Node.js fs module or similar to read the file and extract secrets with regex.</p>
+                    <p><strong>Step 2:</strong> Add detailed JSDoc comment:</p>
+                    <pre><code>/**
+ * Reads a blueprint file and extracts all secrets marked between {* and *}
+ * Example: League transmission contains {* EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE *}
+ * Extracts: "EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE" (without markers)
+ * Uses regex pattern with match() or matchAll()
+ * @param {string} filename - Path to the blueprint file
+ * @returns {Array&lt;string&gt;} Array of extracted secret strings
+ */
+function decodeBlueprint(filename) {</code></pre>
+                    
+                    <p><strong>Step 3:</strong> Start typing to trigger Copilot suggestions:</p>
+                    <pre><code>    const content = fs.readFileSync(filename</code></pre>
+                    
+                    <p><strong>Watch what happens:</strong> Copilot should complete the line and suggest the regex matching code! Press <code>Tab</code> to accept suggestions. It should generate code using <code>match()</code> or <code>matchAll()</code> with the pattern <code>/\{\* (.*?) \*\}/g</code>.</p>
                     
                     <p><strong>Step 3:</strong> Add test code at the bottom:</p>
                     <pre><code>// Test the decoder
