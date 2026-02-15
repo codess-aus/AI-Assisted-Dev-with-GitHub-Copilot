@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn to build custom GitHub Copilot extensions using the official SDK. Create specialized agents and extend Copilot's capabilities.">
+    <title>Bonus: GitHub Copilot SDK - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/codecollab.png" 
+                 alt="GitHub Copilot SDK">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-02-15">February 15, 2026</time>
+            <h1 class="post-title">Bonus: GitHub Copilot SDK</h1>
+            <p class="post-subtitle">Build Custom Extensions and Specialized Agents</p>
+        </div>
+
+        <div class="post-body">
+            <h2>What is the GitHub Copilot SDK?</h2>
+            <p>
+                The GitHub Copilot SDK (Software Development Kit) is a comprehensive framework that enables developers 
+                to build custom extensions, agents, and integrations for GitHub Copilot. It provides APIs, tools, and 
+                documentation to extend Copilot's capabilities beyond its out-of-the-box features.
+            </p>
+
+            <p>
+                Think of it as opening up Copilot's architecture to customization. You can create specialized agents 
+                for your domain, integrate proprietary tools and databases, add custom language support, or build 
+                entirely new workflows that leverage Copilot's AI capabilities.
+            </p>
+
+            <h2>Why Build Copilot Extensions?</h2>
+            
+            <h3>1. Domain-Specific Intelligence</h3>
+            <p>
+                Create agents specialized for your industry or framework. For example, a financial services company 
+                might build an extension that understands regulatory compliance requirements, or a game development 
+                studio might create agents optimized for game engine APIs.
+            </p>
+
+            <h3>2. Proprietary Tool Integration</h3>
+            <p>
+                Connect Copilot to your internal tools, APIs, and databases. Enable Copilot to query your documentation, 
+                access your design systems, or interact with custom CI/CD platforms.
+            </p>
+
+            <h3>3. Workflow Automation</h3>
+            <p>
+                Build complex automation pipelines that combine Copilot's code generation with your specific business 
+                processes, such as automated compliance checks, custom code reviews, or deployment workflows.
+            </p>
+
+            <h3>4. Enhanced Context</h3>
+            <p>
+                Provide Copilot with additional context from sources it doesn't naturally access, such as project 
+                wikis, Jira tickets, design documents, or architecture decision records (ADRs).
+            </p>
+
+            <h2>When to Use the Copilot SDK</h2>
+            
+            <ul>
+                <li><strong>Unique Requirements:</strong> Your team has specialized needs not met by standard Copilot features</li>
+                <li><strong>Internal Tools:</strong> You need to integrate with proprietary systems or APIs</li>
+                <li><strong>Large Organizations:</strong> Standardizing workflows across multiple teams with custom guardrails</li>
+                <li><strong>Research & Innovation:</strong> Experimenting with novel AI-assisted development patterns</li>
+                <li><strong>Competitive Advantage:</strong> Building custom AI capabilities that differentiate your product</li>
+            </ul>
+
+            <h2>SDK Architecture Overview</h2>
+            
+            <h3>Core Components</h3>
+            <pre><code>GitHub Copilot SDK
+├── Extension API
+│   ├── Agent Interface
+│   ├── Context Providers
+│   └── Action Handlers
+├── Language Protocol
+│   ├── LSP Integration
+│   └── Custom Parsers
+├── UI Components
+│   ├── Chat Interface Extensions
+│   ├── Inline Suggestions
+│   └── Status Indicators
+└── Distribution
+    ├── Marketplace Publishing
+    └── Private Distribution</code></pre>
+
+            <h2>Quick Start: Your First Copilot Extension</h2>
+            
+            <h3>Prerequisites</h3>
+            <pre><code># Required tools
+- Node.js 18+ or Python 3.10+
+- GitHub account with Copilot access
+- VS Code or supported IDE
+- Basic understanding of REST APIs or language servers
+
+# Install Copilot SDK
+npm install @github/copilot-sdk
+# or
+pip install github-copilot-sdk</code></pre>
+
+            <h3>Step 1: Create Extension Scaffold</h3>
+            <pre><code>// Using the CLI scaffolding tool
+npx copilot-create-extension my-custom-agent
+
+// Directory structure created:
+my-custom-agent/
+├── src/
+│   ├── agent.ts          # Main agent logic
+│   ├── handlers/         # Request handlers
+│   ├── providers/        # Context providers
+│   └── utils/            # Helper functions
+├── tests/
+├── manifest.json         # Extension metadata
+├── package.json
+└── README.md</code></pre>
+
+            <h3>Step 2: Define Your Agent</h3>
+            <pre><code>// src/agent.ts
+import { CopilotAgent, AgentContext, AgentResponse } from '@github/copilot-sdk';
+
+export class CustomDocumentationAgent extends CopilotAgent {
+  name = 'docs-expert';
+  description = 'Specialized agent for generating technical documentation';
+  
+  // Define what triggers this agent
+  capabilities = ['documentation', 'code-explanation', 'api-docs'];
+
+  async handle(context: AgentContext): Promise&lt;AgentResponse&gt; {
+    const { prompt, codeContext, fileContext } = context;
+    
+    // Your custom logic here
+    const documentation = await this.generateDocs(codeContext);
+    
+    return {
+      type: 'text',
+      content: documentation,
+      metadata: {
+        confidence: 0.95,
+        sources: ['internal-wiki', 'code-analysis']
+      }
+    };
+  }
+
+  private async generateDocs(code: string): Promise&lt;string&gt; {
+    // Custom documentation generation logic
+    // Can integrate with your internal style guides, APIs, etc.
+    return `Generated documentation based on your standards...`;
+  }
+}</code></pre>
+
+            <h3>Step 3: Add Context Providers</h3>
+            <pre><code>// src/providers/internal-wiki-provider.ts
+import { ContextProvider } from '@github/copilot-sdk';
+
+export class InternalWikiProvider extends ContextProvider {
+  name = 'internal-wiki';
+  
+  async getContext(query: string): Promise&lt;Context[]&gt; {
+    // Fetch relevant content from your internal wiki
+    const wikiResults = await this.searchWiki(query);
+    
+    return wikiResults.map(result => ({
+      content: result.text,
+      source: result.url,
+      relevance: result.score,
+      metadata: {
+        lastUpdated: result.modified,
+        author: result.author
+      }
+    }));
+  }
+
+  private async searchWiki(query: string) {
+    // Integration with your wiki API
+    const response = await fetch(`https://wiki.company.com/api/search?q=${query}`);
+    return response.json();
+  }
+}</code></pre>
+
+            <h3>Step 4: Configure Extension Manifest</h3>
+            <pre><code>// manifest.json
+{
+  "name": "my-custom-agent",
+  "version": "1.0.0",
+  "displayName": "Custom Documentation Agent",
+  "description": "Generates documentation following company standards",
+  "publisher": "your-org",
+  "categories": ["documentation", "productivity"],
+  "activationEvents": [
+    "onCommand:docs.generate",
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
+  "contributes": {
+    "copilotAgents": [{
+      "id": "docs-expert",
+      "name": "Documentation Expert",
+      "description": "Specialized in technical documentation",
+      "commands": [
+        {
+          "command": "docs.generate",
+          "title": "Generate Documentation"
+        }
+      ]
+    }],
+    "configuration": {
+      "title": "Custom Agent Settings",
+      "properties": {
+        "customAgent.wikiUrl": {
+          "type": "string",
+          "description": "Internal wiki URL"
+        }
+      }
+    }
+  },
+  "engines": {
+    "copilot": "^1.0.0"
+  }
+}</code></pre>
+
+            <h3>Step 5: Test Your Extension</h3>
+            <pre><code>// tests/agent.test.ts
+import { CustomDocumentationAgent } from '../src/agent';
+import { mockContext } from '@github/copilot-sdk/testing';
+
+describe('CustomDocumentationAgent', () => {
+  let agent: CustomDocumentationAgent;
+
+  beforeEach(() => {
+    agent = new CustomDocumentationAgent();
+  });
+
+  test('generates documentation for a function', async () => {
+    const context = mockContext({
+      prompt: 'Generate docs for this function',
+      codeContext: 'function calculateTotal(items) { ... }'
+    });
+
+    const response = await agent.handle(context);
+    
+    expect(response.type).toBe('text');
+    expect(response.content).toContain('calculateTotal');
+    expect(response.metadata.confidence).toBeGreaterThan(0.8);
+  });
+});</code></pre>
+
+            <h3>Step 6: Run Locally</h3>
+            <pre><code># Start development server
+npm run dev
+
+# The extension runs in debug mode
+# Press F5 in VS Code to launch Extension Development Host
+# Test your agent in the Copilot Chat panel</code></pre>
+
+            <h2>Real-World Extension Examples</h2>
+            
+            <h3>Example 1: Compliance Check Agent</h3>
+            <pre><code>// Financial services compliance agent
+export class ComplianceAgent extends CopilotAgent {
+  name = 'compliance-checker';
+  
+  async handle(context: AgentContext): Promise&lt;AgentResponse&gt; {
+    const code = context.codeContext;
+    const issues = await this.checkCompliance(code);
+    
+    if (issues.length === 0) {
+      return {
+        type: 'success',
+        content: '✓ Code passes all compliance checks'
+      };
+    }
+    
+    return {
+      type: 'warning',
+      content: `Found ${issues.length} compliance issues:\n` +
+               issues.map(i => `- ${i.rule}: ${i.description}`).join('\n'),
+      actions: issues.map(i => ({
+        label: `Fix ${i.rule}`,
+        command: 'compliance.fix',
+        args: [i]
+      }))
+    };
+  }
+
+  private async checkCompliance(code: string) {
+    // Check against PCI-DSS, SOX, GDPR, etc.
+    return [
+      // Integration with compliance scanning tools
+    ];
+  }
+}</code></pre>
+
+            <h3>Example 2: Design System Agent</h3>
+            <pre><code>// Agent that enforces design system usage
+export class DesignSystemAgent extends CopilotAgent {
+  name = 'design-system';
+  
+  async handle(context: AgentContext): Promise&lt;AgentResponse&gt; {
+    if (context.prompt.includes('component') || context.prompt.includes('UI')) {
+      const components = await this.loadDesignSystem();
+      const suggestions = this.findMatchingComponents(context.prompt, components);
+      
+      return {
+        type: 'suggestions',
+        content: 'Available design system components:',
+        items: suggestions.map(comp => ({
+          label: comp.name,
+          description: comp.description,
+          insertText: comp.template,
+          documentation: comp.docsUrl
+        }))
+      };
+    }
+  }
+
+  private async loadDesignSystem() {
+    // Fetch from Storybook, Figma API, or internal registry
+    const response = await fetch('https://design-system.company.com/api/components');
+    return response.json();
+  }
+}</code></pre>
+
+            <h3>Example 3: Architecture Decision Agent</h3>
+            <pre><code>// Agent that references ADRs (Architecture Decision Records)
+export class ArchitectureAgent extends CopilotAgent {
+  name = 'architecture-advisor';
+  
+  async handle(context: AgentContext): Promise&lt;AgentResponse&gt; {
+    const relevantADRs = await this.findRelevantADRs(context.prompt);
+    
+    return {
+      type: 'guidance',
+      content: 'Based on team architecture decisions:',
+      sections: relevantADRs.map(adr => ({
+        title: adr.title,
+        content: adr.decision,
+        rationale: adr.rationale,
+        link: adr.url
+      })),
+      suggestion: this.generateCodeSuggestion(relevantADRs, context)
+    };
+  }
+
+  private async findRelevantADRs(prompt: string) {
+    // Search through your ADR repository
+    // Match prompt keywords with decision contexts
+    return [];
+  }
+}</code></pre>
+
+            <h2>Advanced SDK Features</h2>
+            
+            <h3>1. Multi-Agent Collaboration</h3>
+            <pre><code>// Agents can call other agents
+export class OrchestratorAgent extends CopilotAgent {
+  async handle(context: AgentContext): Promise&lt;AgentResponse&gt; {
+    // First, get code from the code generation agent
+    const code = await this.invokeAgent('code-generator', context);
+    
+    // Then, check it with the security agent
+    const securityCheck = await this.invokeAgent('security', { code });
+    
+    // Finally, generate tests
+    const tests = await this.invokeAgent('test-generator', { code });
+    
+    return this.combineResults(code, securityCheck, tests);
+  }
+}</code></pre>
+
+            <h3>2. Streaming Responses</h3>
+            <pre><code>// For long-running operations
+export class StreamingAgent extends CopilotAgent {
+  async *handleStream(context: AgentContext): AsyncGenerator&lt;AgentChunk&gt; {
+    yield { type: 'status', content: 'Analyzing codebase...' };
+    
+    const analysis = await this.analyzeCode(context.codeContext);
+    yield { type: 'progress', content: 'Generating suggestions...', progress: 0.5 };
+    
+    for (const suggestion of analysis.suggestions) {
+      yield { 
+        type: 'suggestion', 
+        content: suggestion,
+        progress: suggestion.index / analysis.suggestions.length 
+      };
+    }
+    
+    yield { type: 'complete', content: 'Analysis complete!' };
+  }
+}</code></pre>
+
+            <h3>3. Custom UI Components</h3>
+            <pre><code>// Add custom chat interface elements
+export class CustomUIAgent extends CopilotAgent {
+  async handle(context: AgentContext): Promise&lt;AgentResponse&gt; {
+    return {
+      type: 'custom-ui',
+      component: 'interactive-diagram',
+      props: {
+        data: await this.generateDiagramData(context),
+        onNodeClick: (nodeId) => this.handleNodeClick(nodeId),
+        toolbar: [
+          { icon: 'zoom-in', action: 'zoom.in' },
+          { icon: 'export', action: 'diagram.export' }
+        ]
+      }
+    };
+  }
+}</code></pre>
+
+            <h2>Publishing Your Extension</h2>
+            
+            <h3>Option 1: VS Code Marketplace</h3>
+            <pre><code># Package your extension
+vsce package
+
+# Publish to marketplace
+vsce publish
+
+# Users install via:
+# Extensions > Search > "Your Extension Name"</code></pre>
+
+            <h3>Option 2: Private Distribution</h3>
+            <pre><code># For enterprise internal use
+# Create a .vsix file
+vsce package
+
+# Distribute via internal channels
+# Install via:
+code --install-extension my-agent-1.0.0.vsix
+
+# Or configure in settings.json for team-wide deployment:
+{
+  "extensions.autoUpdate": false,
+  "extensions.ignoreRecommendations": false,
+  "extensions.install": [
+    "path/to/my-agent.vsix"
+  ]
+}</code></pre>
+
+            <h3>Option 3: GitHub Copilot for Business</h3>
+            <pre><code># Register with GitHub
+# Enterprise admins can deploy organization-wide
+
+# In organization settings:
+1. Navigate to Copilot > Extensions
+2. Upload extension package
+3. Configure permissions and availability
+4. Deploy to specific teams or org-wide</code></pre>
+
+            <h2>Security & Best Practices</h2>
+            
+            <ul>
+                <li><strong>Validate Input:</strong> Always sanitize and validate context from users</li>
+                <li><strong>Rate Limiting:</strong> Implement rate limits for API calls to prevent abuse</li>
+                <li><strong>Error Handling:</strong> Gracefully handle failures without exposing sensitive info</li>
+                <li><strong>Authentication:</strong> Use OAuth or API keys for external service integration</li>
+                <li><strong>Data Privacy:</strong> Never log or store sensitive code or credentials</li>
+                <li><strong>Testing:</strong> Comprehensive tests for all code paths and edge cases</li>
+                <li><strong>Documentation:</strong> Clear docs for installation, configuration, and usage</li>
+                <li><strong>Versioning:</strong> Semantic versioning and clear changelogs</li>
+            </ul>
+
+            <h2>Debugging Tips</h2>
+            
+            <pre><code>// Enable SDK debug logging
+export DEBUG=copilot:*
+
+// In your agent
+import { Logger } from '@github/copilot-sdk';
+
+const logger = new Logger('my-agent');
+
+export class MyAgent extends CopilotAgent {
+  async handle(context: AgentContext) {
+    logger.debug('Received context', { 
+      promptLength: context.prompt.length,
+      hasCodeContext: !!context.codeContext 
+    });
+    
+    try {
+      const result = await this.processRequest(context);
+      logger.info('Successfully processed request');
+      return result;
+    } catch (error) {
+      logger.error('Failed to process request', error);
+      throw error;
+    }
+  }
+}</code></pre>
+
+            <h2>Resources & Next Steps</h2>
+            
+            <ul>
+                <li><strong>Official SDK Docs:</strong> <a href="https://docs.github.com/en/copilot/building-copilot-extensions" target="_blank">docs.github.com/copilot/building-extensions</a></li>
+                <li><strong>SDK Reference:</strong> Complete API documentation and type definitions</li>
+                <li><strong>Example Extensions:</strong> GitHub's official example repository</li>
+                <li><strong>Community Forum:</strong> GitHub Discussions for SDK-specific questions</li>
+                <li><strong>Extension Marketplace:</strong> Browse existing extensions for inspiration</li>
+            </ul>
+
+            <h2>Practice Exercise</h2>
+            
+            <p><strong>Build a "Code Review" Agent:</strong></p>
+            <ol>
+                <li>Create an agent that analyzes code for common issues</li>
+                <li>Integrate with your team's code review checklist</li>
+                <li>Provide inline suggestions for improvements</li>
+                <li>Generate a review summary with severity ratings</li>
+                <li>Add actions to auto-fix simple issues</li>
+            </ol>
+
+            <p>
+                Use the patterns above to scaffold your agent, integrate your checklist as context, and test with 
+                sample code from your codebase.
+            </p>
+
+            <div style="background-color: var(--color-bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                <h3>🔗 Continue Learning</h3>
+                <p>Explore more bonus topics:</p>
+                <ul>
+                    <li><a href="bonus1-awesome-copilot.html">Bonus 1: Awesome-Copilot Repository</a> - Community resources</li>
+                    <li><a href="bonus3-spec-kit.html">Bonus 3: The Spec Kit</a> - AI-powered specification writing</li>
+                    <li><a href="bonus4-agentic-workflows.html">Bonus 4: Agentic Workflows</a> - Advanced automation patterns</li>
+                </ul>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

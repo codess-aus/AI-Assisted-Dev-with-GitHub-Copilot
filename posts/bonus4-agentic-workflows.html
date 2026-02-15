@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master agentic workflows - advanced AI automation patterns including reflection, planning, tool use, and multi-agent collaboration.">
+    <title>Bonus: Agentic Workflows - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/agentmode2.jpg" 
+                 alt="Agentic Workflows">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-02-15">February 15, 2026</time>
+            <h1 class="post-title">Bonus: Agentic Workflows</h1>
+            <p class="post-subtitle">Advanced AI Automation Patterns for Complex Development Tasks</p>
+        </div>
+
+        <div class="post-body">
+            <h2>What are Agentic Workflows?</h2>
+            <p>
+                Agentic workflows represent a paradigm shift from simple prompt-response AI interactions to systems where 
+                AI agents autonomously plan, execute, reflect, and iterate on complex tasks. Rather than generating a 
+                single output, agentic systems break down problems, use tools, evaluate their work, and refine their 
+                approach—much like an experienced developer would.
+            </p>
+
+            <p>
+                The term "agentic" emphasizes the agent's ability to act independently toward a goal, making decisions, 
+                handling failures, and adapting strategies without constant human intervention. This enables AI to tackle 
+                tasks that previously required step-by-step human guidance.
+            </p>
+
+            <h2>Why Agentic Workflows Matter</h2>
+            
+            <p>Traditional AI-assisted development (zero-shot prompting) has limitations:</p>
+            
+            <ul>
+                <li><strong>No Self-Correction:</strong> AI generates output once and stops, even if it contains errors</li>
+                <li><strong>Limited Context:</strong> Can't gather additional information or use tools autonomously</li>
+                <li><strong>No Planning:</strong> Doesn't break down complex tasks into manageable steps</li>
+                <li><strong>No Verification:</strong> Can't test or validate its own outputs</li>
+            </ul>
+
+            <p>Agentic workflows unlock 30-50% better results on complex tasks by enabling:</p>
+            
+            <ul>
+                <li><strong>Iterative Refinement:</strong> AI reviews and improves its own work</li>
+                <li><strong>Tool Use:</strong> AI can search documentation, run tests, query databases</li>
+                <li><strong>Strategic Planning:</strong> Breaks complex problems into logical steps</li>
+                <li><strong>Error Recovery:</strong> Detects and fixes mistakes autonomously</li>
+                <li><strong>Multi-Agent Collaboration:</strong> Specialized agents work together on different aspects</li>
+            </ul>
+
+            <h2>The Four Core Agentic Patterns</h2>
+            
+            <h3>1. Reflection</h3>
+            <p>
+                The agent generates output, then critiques and improves it through iterative self-review cycles.
+            </p>
+
+            <pre><code>┌──────────────┐
+│  User Prompt │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐
+│   Generate   │◄─────┐
+│   Output     │      │
+└──────┬───────┘      │
+       │              │
+       ▼              │
+┌──────────────┐      │
+│   Reflect    │      │
+│   on Output  │      │
+└──────┬───────┘      │
+       │              │
+       ▼              │
+    Good enough? ─No──┘
+       │
+      Yes
+       │
+       ▼
+┌──────────────┐
+│ Final Output │
+└──────────────┘</code></pre>
+
+            <h4>Example: Code Review Agent</h4>
+            <pre><code>// Iteration 1: Generate code
+function processPayment(amount, cardNumber) {
+  // Process payment
+  return chargeCard(cardNumber, amount);
+}
+
+// Reflection: "Missing input validation, no error handling, 
+//              security risk with raw card number"
+
+// Iteration 2: Improved code
+async function processPayment(amount, cardToken) {
+  // Validate inputs
+  if (!amount || amount <= 0) {
+    throw new Error('Invalid amount');
+  }
+  if (!cardToken || typeof cardToken !== 'string') {
+    throw new Error('Invalid payment token');
+  }
+  
+  try {
+    // Use tokenized card, not raw number
+    const result = await chargeCard(cardToken, amount);
+    return { success: true, transactionId: result.id };
+  } catch (error) {
+    logger.error('Payment processing failed', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Reflection: "Better, but should add rate limiting and audit logging"
+
+// Iteration 3: Production-ready code
+// ... further improvements ...</code></pre>
+
+            <h3>2. Tool Use</h3>
+            <p>
+                The agent can invoke external tools, APIs, and commands to gather information or perform actions.
+            </p>
+
+            <pre><code>Available Tools:
+├── search_codebase(query)       # Find relevant code
+├── read_file(path)              # Read file contents
+├── run_tests(file)              # Execute test suite
+├── query_docs(question)         # Search documentation
+├── execute_code(snippet)        # Run code snippet
+└── search_web(query)            # Search internet</code></pre>
+
+            <h4>Example: Debugging Agent Workflow</h4>
+            <pre><code>User: "Fix the bug in the payment processor"
+
+Agent workflow:
+1. search_codebase("payment processor") 
+   → Finds: src/payments/processor.js
+
+2. read_file("src/payments/processor.js")
+   → Analyzes code
+
+3. run_tests("src/payments/processor.test.js")
+   → Test output: "Error: Cannot read property 'amount' of undefined"
+
+4. search_codebase("payment amount undefined")
+   → Finds similar bug reports in closed issues
+
+5. query_docs("payment validation best practices")
+   → Gets validation patterns
+
+6. Generate fix with validation
+7. run_tests() again
+   → All tests pass
+
+8. Return: "Fixed null pointer exception, added input validation"</code></pre>
+
+            <h3>3. Planning</h3>
+            <p>
+                The agent creates a step-by-step plan before execution, then follows (and adjusts) the plan.
+            </p>
+
+            <pre><code>Task: "Build a REST API for user management"
+
+Planning Phase:
+┌───────────────────────────────────────────┐
+│ 1. Design API endpoints and contracts    │
+│ 2. Set up database schema                │
+│ 3. Implement authentication middleware   │
+│ 4. Create CRUD operations                │
+│ 5. Add input validation                  │
+│ 6. Write unit tests                      │
+│ 7. Write integration tests               │
+│ 8. Create API documentation              │
+└───────────────────────────────────────────┘
+
+Execution Phase:
+Step 1 ✓ (completed in 2 min)
+Step 2 ✓ (completed in 3 min)
+Step 3 ⚠ (encountered issue: auth library not installed)
+  ↳ Replan: Install library, then continue
+Step 3 ✓ (completed)
+Step 4 → (in progress)
+...</code></pre>
+
+            <h4>Example: Feature Implementation with Planning</h4>
+            <pre><code>// Agent's internal plan
+const plan = {
+  goal: "Implement user authentication with JWT",
+  steps: [
+    {
+      id: 1,
+      task: "Research JWT best practices",
+      actions: [
+        "query_docs('JWT security')",
+        "search_web('JWT implementation patterns 2026')"
+      ],
+      success_criteria: "Found secure JWT implementation pattern"
+    },
+    {
+      id: 2,
+      task: "Install required dependencies",
+      actions: [
+        "execute_code('npm install jsonwebtoken bcrypt')",
+        "verify_installation()"
+      ],
+      success_criteria: "Dependencies installed successfully"
+    },
+    {
+      id: 3,
+      task: "Implement JWT generation",
+      actions: [
+        "create_file('src/auth/jwt.js')",
+        "implement_token_generation()",
+        "run_tests('src/auth/jwt.test.js')"
+      ],
+      success_criteria: "Tests pass, tokens validated"
+    },
+    // ... more steps
+  ],
+  checkpoints: [2, 5, 8], // When to pause and review
+  fallback_strategies: {
+    "tests_fail": "analyze_test_output() then retry",
+    "dependency_error": "search_alternatives() then replan"
+  }
+};</code></pre>
+
+            <h3>4. Multi-Agent Collaboration</h3>
+            <p>
+                Multiple specialized agents work together, each handling their area of expertise.
+            </p>
+
+            <pre><code>Multi-Agent System Architecture:
+
+┌─────────────┐
+│   Manager   │ (Coordinates agents, tracks progress)
+│    Agent    │
+└──────┬──────┘
+       │
+       ├───────────┬───────────┬──────────┬──────────┐
+       ▼           ▼           ▼          ▼          ▼
+┌──────────┐ ┌─────────┐ ┌─────────┐ ┌────────┐ ┌────────┐
+│  Coder   │ │  Tester │ │Security │ │  Docs  │ │ Deploy │
+│  Agent   │ │  Agent  │ │ Agent   │ │ Agent  │ │ Agent  │
+└──────────┘ └─────────┘ └─────────┘ └────────┘ └────────┘
+    │             │            │          │          │
+    └─────────────┴────────────┴──────────┴──────────┘
+                        │
+                        ▼
+              ┌──────────────────┐
+              │  Shared Memory   │
+              │  (Context Store) │
+              └──────────────────┘</code></pre>
+
+            <h4>Example: Multi-Agent Code Review</h4>
+            <pre><code>// Manager Agent assigns tasks
+const reviewTasks = {
+  coder_agent: {
+    task: "Analyze code quality and suggest improvements",
+    focus: ["readability", "maintainability", "best_practices"]
+  },
+  security_agent: {
+    task: "Identify security vulnerabilities",
+    focus: ["OWASP_Top_10", "dependency_vulnerabilities", "secrets"]
+  },
+  performance_agent: {
+    task: "Find performance bottlenecks",
+    focus: ["algorithmic_complexity", "database_queries", "caching"]
+  },
+  test_agent: {
+    task: "Evaluate test coverage and quality",
+    focus: ["coverage_percentage", "edge_cases", "test_quality"]
+  }
+};
+
+// Each agent reports findings
+const findings = {
+  coder_agent: {
+    issues: [
+      { severity: "low", line: 42, message: "Consider extracting to function" }
+    ]
+  },
+  security_agent: {
+    issues: [
+      { severity: "high", line: 18, message: "SQL injection vulnerability" },
+      { severity: "medium", line: 95, message: "Missing rate limiting" }
+    ]
+  },
+  performance_agent: {
+    issues: [
+      { severity: "high", line: 67, message: "N+1 query detected" }
+    ]
+  },
+  test_agent: {
+    issues: [
+      { severity: "medium", message: "Coverage only 65%, target is 80%" }
+    ]
+  }
+};
+
+// Manager prioritizes and combines
+const prioritizedReport = manager.synthesize(findings);
+// Returns comprehensive review with action items sorted by priority</code></pre>
+
+            <h2>When to Use Each Pattern</h2>
+            
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                <thead>
+                    <tr style="background-color: var(--color-bg-secondary);">
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Pattern</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Best For</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Example Use Cases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);"><strong>Reflection</strong></td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Quality-critical outputs needing refinement</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Code review, documentation, API design</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);"><strong>Tool Use</strong></td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Tasks requiring external information or actions</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Debugging, research, data analysis</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);"><strong>Planning</strong></td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Complex multi-step projects</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Feature implementation, refactoring, migrations</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);"><strong>Multi-Agent</strong></td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Tasks benefiting from specialized expertise</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Comprehensive code review, system design</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Quick Start: Implementing Your First Agentic Workflow</h2>
+            
+            <h3>Example 1: Reflection Pattern in GitHub Copilot Chat</h3>
+            <pre><code>// Step 1: Initial generation
+You: Generate a function to validate email addresses
+
+Copilot: [generates basic regex validation]
+
+// Step 2: Trigger reflection
+You: Review this code. What are the weaknesses? How can we improve it?
+
+Copilot: 
+- Regex doesn't handle all valid email formats
+- No handling of internationalized domains
+- Missing error messages
+- No length validation
+
+// Step 3: Iterative improvement
+You: Now generate an improved version addressing these issues
+
+Copilot: [generates comprehensive validation with better regex, 
+          error messages, length checks, and IDN support]
+
+// Step 4: Final review
+You: Run through edge cases. Are there any scenarios this doesn't handle?
+
+Copilot: [analyzes and suggests additional improvements for edge cases]</code></pre>
+
+            <h3>Example 2: Tool Use Pattern with Agent Mode</h3>
+            <pre><code>// GitHub Copilot Agent Mode can use tools automatically
+
+You: @workspace Fix the failing test in payment-processor.test.ts
+
+Agent workflow (automatic):
+1. Searches workspace for payment-processor.test.ts
+2. Reads the test file
+3. Identifies which test is failing
+4. Reads the implementation file
+5. Analyzes the cause
+6. Reads error logs
+7. Proposes fix
+8. Shows diff of changes
+
+You: Apply the fix
+
+Agent:
+9. Applies changes
+10. Runs tests to verify
+11. Confirms all tests pass</code></pre>
+
+            <h3>Example 3: Planning Pattern for Complex Tasks</h3>
+            <pre><code>You: I need to migrate our authentication from sessions to JWT tokens. 
+     This affects 15 files across frontend and backend.
+
+Agent (Planning Mode):
+┌─────────────────────────────────────────────────────────┐
+│ MIGRATION PLAN: Sessions → JWT                          │
+├─────────────────────────────────────────────────────────┤
+│ Phase 1: Analysis (Est: 10 min)                        │
+│   □ Scan codebase for session usage                    │
+│   □ Identify all affected files                        │
+│   □ Document current auth flow                         │
+│                                                         │
+│ Phase 2: Backend Changes (Est: 30 min)                 │
+│   □ Install JWT dependencies                           │
+│   □ Create JWT utilities (generate, verify)            │
+│   □ Replace session middleware with JWT                │
+│   □ Update authentication routes                       │
+│   □ Add token refresh endpoint                         │
+│                                                         │
+│ Phase 3: Frontend Changes (Est: 20 min)                │
+│   □ Update login handler to store JWT                  │
+│   □ Add token to API request headers                   │
+│   □ Implement token refresh logic                      │
+│   □ Update logout to clear tokens                      │
+│                                                         │
+│ Phase 4: Testing (Est: 15 min)                         │
+│   □ Update unit tests                                  │
+│   □ Update integration tests                           │
+│   □ Manual testing of auth flow                        │
+│                                                         │
+│ Phase 5: Deployment (Est: 10 min)                      │
+│   □ Update environment variables                       │
+│   □ Database migrations if needed                      │
+│   □ Deploy with monitoring                             │
+└─────────────────────────────────────────────────────────┘
+
+Proceed with Phase 1? (y/n)</code></pre>
+
+            <h3>Example 4: Multi-Agent Collaboration</h3>
+            <pre><code>// Using custom agents (via Copilot SDK from Bonus 2)
+
+You: Perform a comprehensive review of src/api/users.js
+
+Manager Agent: Coordinating review with specialized agents...
+
+┌─────────────────────────────────────────────┐
+│ Coder Agent:                                │
+│ ✓ Code is well-structured                  │
+│ ⚠ Function 'createUser' is too long (85 LoC)│
+│ ⚠ Missing JSDoc comments                   │
+│ Suggestion: Extract validation to helper   │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Security Agent:                             │
+│ ⚠ HIGH: Password stored without hashing    │
+│ ⚠ MEDIUM: No rate limiting on POST /users  │
+│ ⚠ LOW: Missing CORS configuration          │
+│ Suggestion: Use bcrypt with salt rounds=12 │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Performance Agent:                          │
+│ ⚠ HIGH: N+1 query in GET /users/:id        │
+│ ⚠ MEDIUM: Missing database indexes         │
+│ Suggestion: Use SELECT with JOIN           │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Test Agent:                                 │
+│ ⚠ Coverage: 62% (target: 80%)              │
+│ ⚠ Missing edge case tests                  │
+│ ✓ Existing tests are well-written          │
+│ Suggestion: Add tests for error paths      │
+└─────────────────────────────────────────────┘
+
+Manager Agent: Priority-sorted action items:
+1. [CRITICAL] Fix password storage security issue
+2. [HIGH] Fix N+1 query performance issue
+3. [MEDIUM] Add rate limiting
+4. [MEDIUM] Refactor createUser function
+5. [LOW] Add JSDoc comments
+
+Generate fixes for items 1-3? (y/n)</code></pre>
+
+            <h2>Building Custom Agentic Workflows</h2>
+            
+            <h3>Framework: LangChain + Copilot SDK</h3>
+            <pre><code>// Install dependencies
+npm install langchain @github/copilot-sdk
+
+// Create an agentic workflow
+import { ChatOpenAI } from "langchain/chat_models/openai";
+import { AgentExecutor, createReactAgent } from "langchain/agents";
+import { DynamicTool } from "langchain/tools";
+
+// Define tools the agent can use
+const tools = [
+  new DynamicTool({
+    name: "search_codebase",
+    description: "Search the codebase for specific patterns or files",
+    func: async (query) => {
+      // Integration with your code search
+      return searchResults;
+    }
+  }),
+  
+  new DynamicTool({
+    name: "run_tests",
+    description: "Execute test suite and return results",
+    func: async (testFile) => {
+      // Run tests
+      return testResults;
+    }
+  }),
+  
+  new DynamicTool({
+    name: "analyze_code",
+    description: "Perform static code analysis",
+    func: async (filePath) => {
+      // Run linter/analyzer
+      return analysisResults;
+    }
+  })
+];
+
+// Create agent with reflection capability
+const agent = createReactAgent({
+  llm: new ChatOpenAI({ temperature: 0 }),
+  tools,
+  systemPrompt: `You are a senior software engineer. 
+    
+    For each task:
+    1. Plan your approach
+    2. Use available tools to gather information
+    3. Generate a solution
+    4. Reflect on your solution and identify issues
+    5. Iterate until the solution is high quality
+    
+    Always verify your work before presenting it.`
+});
+
+const executor = new AgentExecutor({
+  agent,
+  tools,
+  maxIterations: 10,
+  verbose: true
+});
+
+// Use the agent
+const result = await executor.invoke({
+  input: "Find and fix all TODO comments in the codebase"
+});
+
+console.log(result.output);</code></pre>
+
+            <h3>Pattern: Reflection Loop</h3>
+            <pre><code>async function reflectiveCodeGeneration(prompt, maxIterations = 3) {
+  let code = await generateCode(prompt);
+  
+  for (let i = 0; i < maxIterations; i++) {
+    const issues = await reviewCode(code);
+    
+    if (issues.length === 0) {
+      break; // Code is good enough
+    }
+    
+    console.log(`Iteration ${i + 1}: Found ${issues.length} issues`);
+    console.log(issues);
+    
+    // Improve based on feedback
+    code = await improveCode(code, issues);
+  }
+  
+  return code;
+}
+
+async function reviewCode(code) {
+  const prompt = `Review this code and list any issues:
+  
+${code}
+
+Check for:
+- Security vulnerabilities
+- Performance issues
+- Best practice violations
+- Missing error handling
+- Unclear variable names
+
+Return JSON array of issues: [{"severity": "high|medium|low", "issue": "description", "line": number}]`;
+
+  const review = await callAI(prompt);
+  return JSON.parse(review);
+}
+
+async function improveCode(code, issues) {
+  const prompt = `Improve this code to fix these issues:
+
+CODE:
+${code}
+
+ISSUES:
+${JSON.stringify(issues, null, 2)}
+
+Return the improved code only.`;
+
+  return await callAI(prompt);
+}</code></pre>
+
+            <h2>Real-World Applications</h2>
+            
+            <h3>1. Autonomous Bug Fixing</h3>
+            <pre><code>// Agent receives bug report
+Bug Report: "Users can't log in - getting 500 error"
+
+Agent Workflow:
+1. search_codebase("login") → finds auth controller
+2. read_logs("error", last="1h") → finds stack trace
+3. read_file("AuthController.js") → analyzes code
+4. run_tests("auth.test.js") → tests are passing (!)
+5. search_issues("login 500") → finds similar past bugs
+6. read_file("database/users.schema.js") → checks schema
+7. Hypothesis: Database connection timeout during high load
+8. search_code("db.connect timeout") → finds config
+9. Generates fix: Increase timeout, add connection pooling
+10. Creates PR with explanation and fix</code></pre>
+
+            <h3>2. Automated Code Review</h3>
+            <pre><code>// Multi-agent review system
+class CodeReviewOrchestrator {
+  async reviewPullRequest(prNumber) {
+    const changes = await this.getChanges(prNumber);
+    
+    // Parallel agent review
+    const [
+      codeQuality,
+      security,
+      performance,
+      tests
+    ] = await Promise.all([
+      this.codeQualityAgent.review(changes),
+      this.securityAgent.review(changes),
+      this.performanceAgent.review(changes),
+      this.testAgent.review(changes)
+    ]);
+    
+    // Synthesize findings
+    const report = this.synthesize({
+      codeQuality,
+      security,
+      performance,
+      tests
+    });
+    
+    // Post as PR comment
+    await this.postComment(prNumber, report);
+    
+    // Update PR status
+    if (report.blockers.length > 0) {
+      await this.requestChanges(prNumber);
+    } else {
+      await this.approve(prNumber);
+    }
+  }
+}</code></pre>
+
+            <h3>3. Documentation Generation</h3>
+            <pre><code>// Planning agent for documentation
+Task: "Generate comprehensive API documentation"
+
+Plan:
+1. Analyze all API endpoints (tool: ast_parser)
+2. Extract route definitions, parameters, responses
+3. Generate OpenAPI spec
+4. For each endpoint:
+   a. Generate description
+   b. Create example requests
+   c. Document error cases
+   d. Add authentication requirements
+5. Reflect: Check completeness
+6. Generate human-readable docs from spec
+7. Create interactive API explorer
+
+Execution with reflection:
+→ Generated OpenAPI spec
+→ Review: Missing error codes for 3 endpoints
+→ Regenerate with error codes
+→ Review: Example requests lack authentication headers
+→ Add auth examples
+→ Review: Looks complete
+→ Generate final documentation</code></pre>
+
+            <h2>Best Practices for Agentic Workflows</h2>
+            
+            <ul>
+                <li><strong>Set Clear Goals:</strong> Define success criteria upfront</li>
+                <li><strong>Limit Iterations:</strong> Prevent infinite loops (max 5-10 iterations)</li>
+                <li><strong>Log Everything:</strong> Debug by reviewing agent's decision-making process</li>
+                <li><strong>Human in the Loop:</strong> Require approval for critical actions</li>
+                <li><strong>Graceful Degradation:</strong> Fall back to simpler patterns if agentic approach fails</li>
+                <li><strong>Cost Awareness:</strong> Monitor API usage, agentic workflows use more tokens</li>
+                <li><strong>Validate Outputs:</strong> Always verify agent results with tests or reviews</li>
+                <li><strong>Security Guards:</strong> Restrict agent access to sensitive operations</li>
+            </ul>
+
+            <h2>Tools and Frameworks</h2>
+            
+            <ul>
+                <li><strong>LangChain:</strong> Popular framework for building agentic systems</li>
+                <li><strong>AutoGPT:</strong> Autonomous agent framework for complex tasks</li>
+                <li><strong>GitHub Copilot Agent Mode:</strong> Built-in agentic capabilities in VS Code</li>
+                <li><strong>Microsoft Semantic Kernel:</strong> Enterprise-grade agent orchestration</li>
+                <li><strong>LlamaIndex:</strong> Tool for building data-aware agents</li>
+                <li><strong>CrewAI:</strong> Multi-agent collaboration framework</li>
+            </ul>
+
+            <h2>Performance Metrics</h2>
+            
+            <p>Research shows agentic workflows improve outcomes significantly:</p>
+            
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                <thead>
+                    <tr style="background-color: var(--color-bg-secondary);">
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Task Type</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Zero-Shot</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Agentic</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Improvement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Code Generation</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">65% correct</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">85% correct</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">+31%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Bug Fixing</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">48% success</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">72% success</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">+50%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Code Review</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">70% issues found</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">92% issues found</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">+31%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Documentation</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">60% complete</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">95% complete</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">+58%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Practice Exercise</h2>
+            
+            <p><strong>Build a Reflection-Based Code Improver:</strong></p>
+            
+            <ol>
+                <li>Choose a function in your codebase that needs improvement</li>
+                <li>Use Copilot Chat with reflection pattern:
+                    <ul>
+                        <li>Generate initial improvement</li>
+                        <li>Ask for critique of the improvement</li>
+                        <li>Iterate 2-3 times based on feedback</li>
+                    </ul>
+                </li>
+                <li>Compare final result with initial improvement</li>
+                <li>Document what improved through iteration</li>
+            </ol>
+
+            <h3>Bonus Challenge: Build a Planning Agent</h3>
+            <p>
+                Use GitHub Copilot Agent Mode to migrate a feature. Ask it to create a detailed plan first, 
+                review the plan with your team, then execute it step by step with checkpoints.
+            </p>
+
+            <h2>Resources</h2>
+            
+            <ul>
+                <li><strong>Research Papers:</strong>
+                    <ul>
+                        <li>"Reflexion: Language Agents with Verbal Reinforcement Learning" (2023)</li>
+                        <li>"ReAct: Synergizing Reasoning and Acting in Language Models" (2023)</li>
+                        <li>"Toolformer: Language Models Can Teach Themselves to Use Tools" (2023)</li>
+                    </ul>
+                </li>
+                <li><strong>Courses:</strong> DeepLearning.AI "Building Agentic RAG Systems"</li>
+                <li><strong>Libraries:</strong> LangChain, AutoGPT, Semantic Kernel documentation</li>
+                <li><strong>Community:</strong> r/LangChain, LangChain Discord, GitHub discussions</li>
+            </ul>
+
+            <div style="background-color: var(--color-bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                <h3>🎓 You've Completed All Bonus Topics!</h3>
+                <p>Review what you've learned:</p>
+                <ul>
+                    <li><a href="bonus1-awesome-copilot.html">Bonus 1: Awesome-Copilot Repository</a> - Community resources</li>
+                    <li><a href="bonus2-copilot-sdk.html">Bonus 2: GitHub Copilot SDK</a> - Build custom extensions</li>
+                    <li><a href="bonus3-spec-kit.html">Bonus 3: The Spec Kit</a> - AI-powered specification writing</li>
+                    <li><strong>Bonus 4: Agentic Workflows</strong> - You are here!</li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <a href="../index.html" style="text-decoration: underline;">← Return to workshop home</a>
+                </p>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

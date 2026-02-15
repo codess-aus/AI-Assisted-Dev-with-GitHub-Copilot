@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the Awesome-Copilot repository - a community-curated collection of GitHub Copilot resources, extensions, and best practices.">
+    <title>Bonus: Awesome-Copilot Repository - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/awesomecopilot.png" 
+                 alt="Awesome-Copilot Repository">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-02-15">February 15, 2026</time>
+            <h1 class="post-title">Bonus: Awesome-Copilot Repository</h1>
+            <p class="post-subtitle">Your Gateway to Community-Driven GitHub Copilot Resources</p>
+        </div>
+
+        <div class="post-body">
+            <h2>What is Awesome-Copilot?</h2>
+            <p>
+                The Awesome-Copilot repository is a community-curated collection of resources, tools, extensions, prompts, 
+                and best practices for GitHub Copilot. Following the popular "Awesome Lists" format, it serves as a 
+                centralized hub where developers worldwide share their discoveries, techniques, and innovations for 
+                maximizing productivity with GitHub Copilot.
+            </p>
+
+            <p>
+                Think of it as a living knowledge base maintained by practitioners who use Copilot daily in real-world 
+                projects. The repository categorizes resources by type, language, use case, and difficulty level, making 
+                it easy to find exactly what you need whether you're a beginner or an advanced user.
+            </p>
+
+            <h2>Why Should You Care?</h2>
+            <p>While GitHub's official documentation is comprehensive, the Awesome-Copilot repository offers:</p>
+            
+            <ul>
+                <li><strong>Real-World Insights:</strong> Learn from developers who've solved actual problems using Copilot</li>
+                <li><strong>Community Extensions:</strong> Discover third-party tools and extensions that enhance Copilot's capabilities</li>
+                <li><strong>Prompt Libraries:</strong> Access curated prompt templates for common development tasks</li>
+                <li><strong>Language-Specific Tips:</strong> Find resources tailored to your programming language of choice</li>
+                <li><strong>Integration Patterns:</strong> See how others integrate Copilot into their workflows and CI/CD pipelines</li>
+                <li><strong>Edge Cases & Solutions:</strong> Learn from community experiences with unusual scenarios</li>
+            </ul>
+
+            <h2>When to Use This Resource</h2>
+            
+            <h3>1. Starting a New Project</h3>
+            <p>
+                Check the repository for language-specific configurations, recommended extensions, and project setup 
+                templates that work well with Copilot. Many contributors share their <code>.github/copilot-instructions.md</code> 
+                files and workspace configurations.
+            </p>
+
+            <h3>2. Hitting Productivity Plateaus</h3>
+            <p>
+                When you feel like you're not getting the most out of Copilot, browse the "Advanced Techniques" section 
+                for prompting strategies, context engineering approaches, and workflow optimizations you might not have considered.
+            </p>
+
+            <h3>3. Learning New Technologies</h3>
+            <p>
+                Before diving into a new framework or language, check if there are Copilot-specific guides or prompt 
+                libraries that can accelerate your learning curve.
+            </p>
+
+            <h3>4. Team Onboarding</h3>
+            <p>
+                Use curated resources from the repository to create training materials for new team members adopting 
+                GitHub Copilot for the first time.
+            </p>
+
+            <h2>How to Navigate the Repository</h2>
+            
+            <h3>Main Categories</h3>
+            <p>Most Awesome-Copilot repositories organize content into these sections:</p>
+            
+            <ul>
+                <li><strong>Getting Started:</strong> Tutorials, setup guides, and introductory resources</li>
+                <li><strong>Extensions & Tools:</strong> Editor extensions, CLI tools, and integrations</li>
+                <li><strong>Prompting Techniques:</strong> Effective prompting patterns and examples</li>
+                <li><strong>Language-Specific Resources:</strong> Python, JavaScript, Go, Rust, etc.</li>
+                <li><strong>Use Case Examples:</strong> Web development, data science, DevOps, mobile, etc.</li>
+                <li><strong>Best Practices:</strong> Security guidelines, code review checklists, team standards</li>
+                <li><strong>Blog Posts & Articles:</strong> Deep dives and case studies from the community</li>
+                <li><strong>Video Tutorials:</strong> Conference talks, demos, and walkthroughs</li>
+            </ul>
+
+            <h2>Quick Start: Contributing Your Own Tips</h2>
+            
+            <h3>1. Find or Create the Repository</h3>
+            <pre><code>// Check if one exists for your ecosystem
+Search GitHub for: "awesome-copilot" OR "awesome-github-copilot"
+
+// If none exist, create your own
+1. Create a new repo named "awesome-copilot"
+2. Add a README.md with categories
+3. Include contribution guidelines
+4. Add the "awesome-list" topic tag</code></pre>
+
+            <h3>2. Structure Your Contribution</h3>
+            <pre><code>## Category Name
+
+### [Resource Title](link)
+**Description:** Brief explanation of what this resource offers
+**Best For:** Beginner/Intermediate/Advanced
+**Language/Framework:** JavaScript, React, etc.
+**Key Takeaway:** The main value proposition
+
+Example:
+### [Copilot Prompt Patterns](https://example.com)
+**Description:** Collection of prompting patterns for complex refactoring
+**Best For:** Intermediate to Advanced
+**Language/Framework:** Language-agnostic
+**Key Takeaway:** Learn how to guide Copilot through multi-step transformations</code></pre>
+
+            <h3>3. Share Your Experience</h3>
+            <p>The community values practical insights. When contributing, include:</p>
+            <ul>
+                <li>Real code examples that worked for you</li>
+                <li>Before/after comparisons</li>
+                <li>Lessons learned from failures</li>
+                <li>Specific metrics or improvements you observed</li>
+            </ul>
+
+            <h2>Sample Prompts from the Community</h2>
+            
+            <h3>For Documentation Generation</h3>
+            <pre><code>// Prompt: Generate comprehensive documentation for this module
+// Include: purpose, parameters, return values, examples, edge cases
+
+/**
+ * Generates a unique identifier based on timestamp and random values
+ * 
+ * @param {string} prefix - Optional prefix for the ID (default: "id")
+ * @param {number} length - Total length of the random portion (default: 8)
+ * @returns {string} A unique identifier in format: prefix_timestamp_random
+ * 
+ * @example
+ * generateUniqueId("user", 12)
+ * // Returns: "user_1707950234_a7f3d8e2b1c4"
+ * 
+ * @edge-cases
+ * - Returns timestamp-only ID if length < 1
+ * - Truncates prefix if combined length > 64 chars
+ */</code></pre>
+
+            <h3>For Test Generation</h3>
+            <pre><code>// Prompt: Create comprehensive unit tests for this function
+// Include: happy path, error cases, edge cases, performance tests
+
+describe('validateEmail', () => {
+  // Happy path tests
+  test('accepts valid email formats', () => {
+    expect(validateEmail('user@example.com')).toBe(true);
+    expect(validateEmail('user.name+tag@example.co.uk')).toBe(true);
+  });
+
+  // Error cases
+  test('rejects invalid formats', () => {
+    expect(validateEmail('invalid')).toBe(false);
+    expect(validateEmail('@example.com')).toBe(false);
+    expect(validateEmail('user@')).toBe(false);
+  });
+
+  // Edge cases
+  test('handles edge cases correctly', () => {
+    expect(validateEmail('')).toBe(false);
+    expect(validateEmail(null)).toBe(false);
+    expect(validateEmail('a@b.c')).toBe(true); // Minimal valid
+  });
+});</code></pre>
+
+            <h3>For Refactoring Legacy Code</h3>
+            <pre><code>// Prompt: Refactor this code to use modern async/await patterns
+// Preserve: all error handling logic
+// Improve: readability, remove callback hell
+// Add: proper type annotations
+
+// Before (callback hell)
+function fetchUserData(userId, callback) {
+  db.query('SELECT * FROM users WHERE id = ?', [userId], (err, user) => {
+    if (err) return callback(err);
+    db.query('SELECT * FROM posts WHERE author = ?', [user.id], (err, posts) => {
+      if (err) return callback(err);
+      callback(null, { user, posts });
+    });
+  });
+}
+
+// After (Copilot-assisted refactor)
+async function fetchUserData(userId: string): Promise<UserData> {
+  try {
+    const user = await db.query('SELECT * FROM users WHERE id = ?', [userId]);
+    const posts = await db.query('SELECT * FROM posts WHERE author = ?', [user.id]);
+    return { user, posts };
+  } catch (error) {
+    throw new Error(`Failed to fetch user data: ${error.message}`);
+  }
+}</code></pre>
+
+            <h2>Integration Example: Adding Awesome-Copilot to Your Workflow</h2>
+            
+            <h3>Create a Team Resource Hub</h3>
+            <pre><code>// In your team repository: docs/copilot-resources.md
+
+# Team Copilot Resources
+
+## Quick Links
+- [Awesome-Copilot Main Repo](link)
+- [Language-Specific Resources](#)
+- [Team Prompting Standards](./prompting-guide.md)
+
+## Recommended Extensions
+1. **Copilot Labs** - Experimental features and test generation
+2. **Copilot Chat** - Conversational coding assistance
+3. **[Community Extension Name]** - [Brief description of value]
+
+## Team-Curated Prompts
+### For API Development
+[Link to internal prompt library]
+
+### For Testing
+[Link to test generation guidelines]
+
+## Monthly Review
+We review new community resources monthly. Next review: [Date]
+Suggest additions by opening an issue with the label "copilot-resource"</code></pre>
+
+            <h3>Automate Discovery</h3>
+            <pre><code># Create a weekly digest of new Awesome-Copilot additions
+# Add to .github/workflows/copilot-digest.yml
+
+name: Awesome-Copilot Digest
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Every Monday at 9 AM
+  workflow_dispatch:
+
+jobs:
+  create-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch latest updates
+        run: |
+          # Script to check for new additions to awesome-copilot repos
+          # Post summary to team Slack/Teams channel
+          curl -s https://api.github.com/repos/awesome-copilot/awesome-copilot/commits \
+            | jq '.[0:5] | .[] | {date: .commit.author.date, message: .commit.message}'</code></pre>
+
+            <h2>Key Resources to Bookmark</h2>
+            
+            <ul>
+                <li><strong>Main Repository:</strong> <a href="https://github.com/topics/awesome-copilot" target="_blank">github.com/topics/awesome-copilot</a></li>
+                <li><strong>Community Forum:</strong> GitHub Discussions for sharing tips and asking questions</li>
+                <li><strong>Video Tutorials:</strong> YouTube playlists curated by community members</li>
+                <li><strong>Prompt Libraries:</strong> Language-specific prompt collections</li>
+                <li><strong>Extension Directory:</strong> Browse and filter third-party Copilot extensions</li>
+            </ul>
+
+            <h2>Contributing Back to the Community</h2>
+            
+            <p>As you develop expertise with GitHub Copilot, consider contributing your learnings:</p>
+            
+            <ol>
+                <li><strong>Document Your Workflow:</strong> Share your daily Copilot workflow and productivity gains</li>
+                <li><strong>Create Prompt Templates:</strong> Publish reusable prompts for common tasks in your domain</li>
+                <li><strong>Write Case Studies:</strong> Describe how Copilot helped solve specific project challenges</li>
+                <li><strong>Build Tools:</strong> Create scripts or extensions that enhance Copilot functionality</li>
+                <li><strong>Share Metrics:</strong> Publish anonymized data about productivity improvements</li>
+                <li><strong>Review PRs:</strong> Help maintain quality by reviewing contributions from others</li>
+            </ol>
+
+            <h2>Best Practices for Using Community Resources</h2>
+            
+            <ul>
+                <li><strong>Verify Currency:</strong> Check when resources were last updated; AI tools evolve quickly</li>
+                <li><strong>Test Before Adopting:</strong> Always test community prompts and patterns in your environment</li>
+                <li><strong>Adapt to Your Context:</strong> Modify examples to fit your team's standards and practices</li>
+                <li><strong>Give Credit:</strong> When using community resources, acknowledge the original authors</li>
+                <li><strong>Stay Engaged:</strong> Star repositories, participate in discussions, and share feedback</li>
+            </ul>
+
+            <h2>Call to Action</h2>
+            
+            <p>
+                <strong>This Week:</strong> Spend 30 minutes browsing an Awesome-Copilot repository. Find one resource 
+                relevant to your current project and try implementing it. Share your experience with your team.
+            </p>
+
+            <p>
+                <strong>This Month:</strong> Contribute at least one prompt, tip, or resource back to the community. 
+                Your unique perspective and use cases can help other developers succeed with Copilot.
+            </p>
+
+            <div style="background-color: var(--color-bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                <h3>🔗 Next Steps</h3>
+                <p>Continue exploring advanced Copilot topics:</p>
+                <ul>
+                    <li><a href="bonus2-copilot-sdk.html">Bonus 2: GitHub Copilot SDK</a> - Build custom extensions</li>
+                    <li><a href="bonus3-spec-kit.html">Bonus 3: The Spec Kit</a> - AI-powered specification writing</li>
+                    <li><a href="bonus4-agentic-workflows.html">Bonus 4: Agentic Workflows</a> - Advanced automation patterns</li>
+                </ul>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

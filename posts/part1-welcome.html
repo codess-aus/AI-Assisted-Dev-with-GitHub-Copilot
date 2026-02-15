@@ -50,7 +50,7 @@
             <p>That's where GitHub Copilot comes in. Over the next few parts, you'll see how AI assistance transforms that moment of uncertainty into productive, iterative development.</p>
 
             <h2>The Rise of AI-Assisted Development</h2>
-            <p>Artificial intelligence is fundamentally reshaping how we write code. GitHub Copilot represents a watershed moment in software development—a tool that brings AI pair programming directly into your IDE. Whether you're maintaining legacy systems, building new features, or exploring cutting-edge architectures, understanding how to work effectively with AI-assisted code generation is becoming essential.</p>
+            <p>Artificial intelligence is fundamentally reshaping how we write code. GitHub Copilot represents a watershed moment in software development, a tool that brings AI pair programming directly into your IDE. Whether you're maintaining legacy systems, building new features, or exploring cutting-edge architectures, understanding how to work effectively with AI-assisted code generation is becoming essential.</p>
             
             <p>This workshop is designed to take you from "What's Copilot?" to "How do I integrate this into my daily workflow?" We'll explore its capabilities, acknowledge its limitations, and equip you with practical techniques to use Copilot responsibly and productively.</p>
 
@@ -59,8 +59,9 @@
                 <li><strong>Set expectations</strong> for the workshop and understand what AI-assisted development means</li>
                 <li><strong>Recognize Copilot's capabilities</strong> as a code suggestion and generation tool</li>
                 <li><strong>Understand Copilot's limitations</strong> and when to rely on human judgment</li>
-                <li><strong>Learn typical workflows</strong> for using Copilot effectively in daily development</li>
-                <li><strong>Differentiate</strong> between Copilot as an autocomplete tool versus as a true pair programmer</li>
+                <li><strong>Learn the four interaction modes</strong>: Inline, Ask (Chat), Agent, and Plan—and when to use each</li>
+                <li><strong>Understand Copilot's three roles</strong>: Coach/Trainer, Pair Programmer, and Colleague to delegate tasks</li>
+                <li><strong>Identify where and how</strong> to use Copilot (inline editor, chat panel, quick chat, etc.)</li>
             </ul>
 
             <h2>What is GitHub Copilot?</h2>
@@ -86,14 +87,125 @@
                 <li><strong>Context window:</strong> Copilot has a limited "view" of your codebase; large files or complex architectures can confuse it</li>
             </ul>
 
-            <h2>Copilot as Autocomplete vs. True Pair Programming</h2>
-            <p>It's important to understand the spectrum of Copilot usage:</p>
+            <h2>Understanding GitHub Copilot's Interaction Modes</h2>
+            <p>GitHub Copilot offers multiple ways to interact with AI assistance, each suited to different tasks and workflows. Understanding when and how to use each mode is key to maximizing productivity.</p>
 
-            <p><strong>Autocomplete Mode:</strong> You type a few characters, and Copilot suggests the next word or line. This is fast and useful for routine coding patterns, but you're still driving the conversation.</p>
+            <h3>The Four Core Modes</h3>
+            
+            <p><strong>1. Inline Completions (Always Active)</strong></p>
+            <p>This is Copilot's foundational mode—real-time code suggestions that appear as you type, directly in your editor. Think of this as your intelligent autocomplete that understands context at a code level.</p>
+            <ul>
+                <li><strong>When to use:</strong> Writing routine code, completing patterns, generating boilerplate</li>
+                <li><strong>How it works:</strong> Type naturally; press Tab to accept, Esc to dismiss</li>
+                <li><strong>Best for:</strong> Function implementations, test cases, repetitive code structures</li>
+                <li><strong>Example:</strong> Type <code>function calculateTax(</code> and Copilot suggests the parameters and implementation</li>
+            </ul>
 
-            <p><strong>Pair Programming Mode:</strong> You write a detailed comment describing what you want to build, and Copilot generates substantial code blocks or entire functions. You then review, refactor, and test. This mode is more powerful but requires more critical thinking on your part.</p>
+            <p><strong>2. Chat Mode - Ask (Conversational Q&amp;A)</strong></p>
+            <p>Open the Copilot Chat panel to have a conversation with Copilot. Ask questions, request explanations, or get guidance without modifying your code directly.</p>
+            <ul>
+                <li><strong>When to use:</strong> Learning unfamiliar APIs, debugging, understanding existing code, getting advice</li>
+                <li><strong>How it works:</strong> Open Chat panel (Ctrl+Shift+I), type your question, get detailed responses</li>
+                <li><strong>Best for:</strong> "How do I...", "Explain this code", "What's wrong with...", "What are best practices for..."</li>
+                <li><strong>Example:</strong> "Explain how OAuth 2.0 works in this context" or "Why is this function failing?"</li>
+            </ul>
 
-            <p><strong>Agent Mode:</strong> Copilot takes more autonomy, making multi-step decisions to solve larger problems. This is the frontier of AI-assisted development and brings both exciting possibilities and new responsibilities.</p>
+            <p><strong>3. Agent Mode (Autonomous Task Execution)</strong></p>
+            <p>Agent mode enables Copilot to autonomously search your codebase, read files, analyze context, and make multi-step changes across your project. It can read documentation, run searches, and understand your workspace structure.</p>
+            <ul>
+                <li><strong>When to use:</strong> Complex refactoring, feature implementation, debugging across multiple files</li>
+                <li><strong>How it works:</strong> Prefix your chat message with <code>@workspace</code> to activate workspace-aware assistance</li>
+                <li><strong>Best for:</strong> "Fix all TODO comments", "Update all API calls to use new endpoints", "Find and fix security issues"</li>
+                <li><strong>Example:</strong> "@workspace Refactor authentication to use JWT tokens across all controllers"</li>
+            </ul>
+
+            <p><strong>4. Plan Mode (Strategic Planning)</strong></p>
+            <p>Plan mode helps you break down complex tasks into actionable steps before diving into implementation. Copilot analyzes your request and creates a structured plan you can review and execute step-by-step.</p>
+            <ul>
+                <li><strong>When to use:</strong> Large features, migrations, architecture changes, unfamiliar territory</li>
+                <li><strong>How it works:</strong> Use planning prompts or activate plan assistance in Chat</li>
+                <li><strong>Best for:</strong> "How should I implement user authentication?", "Plan a migration from REST to GraphQL"</li>
+                <li><strong>Example:</strong> "Create a plan to add real-time notifications to this app"</li>
+            </ul>
+
+            <h3>Copilot's Three Roles in Your Workflow</h3>
+            <p>Beyond modes, think about <em>how</em> you want Copilot to help you:</p>
+
+            <p><strong>🎓 As Your Coach/Trainer</strong> — Use Chat and Ask mode to learn and understand</p>
+            <ul>
+                <li>"Explain this design pattern"</li>
+                <li>"What are the security implications of this approach?"</li>
+                <li>"Show me examples of testing async functions"</li>
+                <li><strong>Best practice:</strong> Ask follow-up questions, request examples, challenge the explanations</li>
+            </ul>
+
+            <p><strong>👥 As Your Pair Programmer</strong> — Use Inline completions and Chat for real-time collaboration</p>
+            <ul>
+                <li>Write comments describing what you want, let Copilot generate implementation</li>
+                <li>Select code and ask: "Refactor this to be more readable"</li>
+                <li>Iterate on suggestions: review, modify, test together</li>
+                <li><strong>Best practice:</strong> Stay engaged, review every line, improve prompts for better results</li>
+            </ul>
+
+            <p><strong>🤝 As Your Colleague (Delegate Tasks)</strong> — Use Agent mode for autonomous work</p>
+            <ul>
+                <li>"@workspace Generate unit tests for all service classes"</li>
+                <li>"@workspace Update all deprecated API calls"</li>
+                <li>"Find performance issues in database queries"</li>
+                <li><strong>Best practice:</strong> Give clear requirements, verify results thoroughly, test changes</li>
+            </ul>
+
+            <h3>Where Copilot Assists You</h3>
+            <ul>
+                <li><strong>In the Editor (Inline):</strong> Real-time suggestions as you type—perfect for flow state coding</li>
+                <li><strong>In the Chat Panel:</strong> Side-by-side conversations while viewing your code—ideal for Q&amp;A and planning</li>
+                <li><strong>In Quick Chat (Ctrl+I):</strong> Inline chat overlay for quick edits—use for focused refactoring of specific sections</li>
+                <li><strong>In Pull Requests:</strong> Copilot can review and summarize changes—great for code review preparation</li>
+                <li><strong>In Terminal:</strong> Copilot can explain commands and suggest shell scripts—helpful for DevOps tasks</li>
+            </ul>
+
+            <h3>Choosing the Right Approach</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                <thead>
+                    <tr style="background-color: var(--color-bg-secondary);">
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Task</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Best Mode</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--color-border);">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Writing a new function</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Inline</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Pair Programmer</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Understanding unfamiliar code</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Ask (Chat)</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Coach</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Refactoring across multiple files</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Agent (@workspace)</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Colleague</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Planning a complex feature</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Plan Mode</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Coach + Pair</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Debugging a specific error</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Ask or Agent</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Coach + Colleague</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Writing tests</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Inline or Agent</td>
+                        <td style="padding: 0.75rem; border: 1px solid var(--color-border);">Pair or Colleague</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <h2>Your Mindset Going Forward</h2>
             <p>The most successful Copilot users adopt a few core principles:</p>
@@ -101,8 +213,18 @@
             <ul>
                 <li><strong>Stay in control:</strong> You're the senior developer. Copilot is your junior developer. Review, question, and improve every suggestion.</li>
                 <li><strong>Be explicit:</strong> The better your prompts (via comments, variable names, and docstrings), the better Copilot's output.</li>
-                <li><strong>Test everything:</strong> Copilot-generated code should pass the same scrutiny as any other code—automated tests, security reviews, code reviews.</li>
-                <li><strong>Iterate together:</strong> If Copilot's first suggestion isn't right, refine your prompt and try again.</li>
+                <li><strong>Choose the right mode:</strong> Start with inline for quick tasks, escalate to Chat for guidance, use Agent for multi-file work.</li>
+                <li><strong>Test everything:</strong> Copilot-generated code should pass the same scrutiny as any other code: automated tests, security reviews, code reviews etc.</li>
+                <li><strong>Iterate together:</strong> If Copilot's first suggestion isn't right, refine your prompt and try again. Use different modes if needed.</li>
+            </ul>
+
+            <h3>💡 Quick Start Tips</h3>
+            <ul>
+                <li><strong>Inline mode:</strong> Press <code>Tab</code> to accept, <code>Esc</code> to dismiss, <code>Alt+]</code> for next suggestion</li>
+                <li><strong>Chat mode:</strong> <code>Ctrl+Shift+I</code> (Windows/Linux) or <code>Cmd+Shift+I</code> (Mac) to open Chat panel</li>
+                <li><strong>Quick Chat:</strong> <code>Ctrl+I</code> (Windows/Linux) or <code>Cmd+I</code> (Mac) for inline chat overlay</li>
+                <li><strong>Agent mode:</strong> Type <code>@workspace</code> in Chat to activate workspace-aware assistance</li>
+                <li><strong>Selection + Chat:</strong> Select code, right-click → "Copilot" → "Explain" or "Fix" for context-specific help</li>
             </ul>
 
             <h2>Lab 1: ByteStrike's First Lines of Code</h2>
@@ -349,7 +471,7 @@ console.log(`\nfizzbuzz(0): ${fizzbuzz(0)}`)</code></pre>
             <ul>
                 <li><strong>Part 2</strong> explores how Copilot "thinks"—the mental models and context mechanisms that drive its suggestions</li>
                 <li><strong>Part 3</strong> covers real-world pair programming: refactoring, documentation, and advanced prompting techniques</li>
-                <li><strong>Part 4</strong> compares Copilot Chat and Agent Mode, showing you when to use each approach</li>
+                <li><strong>Part 4</strong> deep dives into Copilot's modes (Ask, Agent, Plan) and how to choose the right approach for your workflow</li>
                 <li><strong>Part 5</strong> focuses on security and code quality guardrails</li>
                 <li><strong>Part 6</strong> shows how to integrate Copilot into production workflows</li>
                 <li><strong>Part 7</strong> wraps up with resources and your next steps</li>
