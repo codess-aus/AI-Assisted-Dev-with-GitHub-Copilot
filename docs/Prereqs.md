@@ -4,7 +4,7 @@
 
 Welcome! In this workshop, you'll learn AI-assisted development by helping **ByteStrike**, a tech-savvy operative for the secret tech agency known as "The League."
 
-ByteStrike has just been assigned their first mission: Fetch encrypted blueprints from a remote server and extract critical secrets hidden between `{*` and `*}` markers. The only problem? ByteStrike needs to write code to do it—in multiple languages, under pressure, with questions about how to do it right in production.
+ByteStrike has just been assigned their first mission: Fetch encrypted blueprints from a remote server and extract critical secrets hidden between `{*` and `*}` markers. The only problem? ByteStrike needs to write code to do it in multiple languages, under pressure, with questions about how to do it right in production.
 
 Over this workshop, you'll help ByteStrike:
 1. **Learn** how to write code with AI assistance (Parts 1-3)
@@ -12,7 +12,7 @@ Over this workshop, you'll help ByteStrike:
 3. **Add guardrails** for security, privacy, and correctness (Part 5)
 4. **Deploy safely** with governance, testing, and enterprise workflows (Part 6)
 
-By the end, you'll have built a production-ready system that teaches **architecture with governance, privacy, security, and enterprise best practices**—all through the lens of ByteStrike's mission.
+By the end, you'll have built a production-ready system that teaches **architecture with governance, privacy, security, and enterprise best practices**, all through the lens of ByteStrike's mission.
 
 ---
 

@@ -8,14 +8,14 @@ ByteStrike's decoder works, but now the real work begins. The mission has grown:
 - The decoder will be used by others on The League, so docs are critical
 - Time is running out
 
-This is where pair programming shines. You're no longer just asking for code—you're collaborating with Copilot to solve real problems.
+This is where pair programming shines. You're no longer just asking for code; you're collaborating with Copilot to solve real problems.
 
 ## Learning Objectives
 
 - Use Copilot for real-world refactoring, new feature suggestions, and code documentation
 - Practice writing effective prompts for clear, secure, idiomatic code
 - Learn how to guide Copilot through complex instructions
-- Build a decoder that's maintainable, tested, and documented—not just functional
+- Build a decoder that's maintainable, tested, and documented, not just functional
 
 ## Teaching Structure
 
@@ -40,4 +40,4 @@ Your mission is to take ByteStrike's decoder and make it production-ready.
 
 5. **Code Review:** Read the final code together with Copilot. Ask: "Are there security or performance issues?" and iterate on improvements.
 
-**What you'll learn:** Pair programming isn't about Copilot doing all the work—it's about you directing, and Copilot accelerating. By the end, you have a decoder that ByteStrike can actually ship.
+**What you'll learn:** Pair programming isn't about Copilot doing all the work; it's about you directing, and Copilot accelerating. By the end, you have a decoder that ByteStrike can actually ship.

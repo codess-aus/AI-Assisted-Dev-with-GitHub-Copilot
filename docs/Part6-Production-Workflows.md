@@ -1,10 +1,10 @@
-# Part 6: Production Workflows — Enterprise Deployment
+# Part 6: Production Workflows - Enterprise Deployment
 
 ## Mission Critical: Moving to Production
 
 ByteStrike's decoder is done. Security checks: ✓. Tests: ✓. Documentation: ✓. But there's one more frontier: **the actual world.**
 
-In production, code runs 24/7. Users depend on it. Failures ripple through teams. Compliance officers ask questions. Monitoring systems alert at 3 AM. This part isn't about writing new code—it's about **operating code safely at scale.**
+In production, code runs 24/7. Users depend on it. Failures ripple through teams. Compliance officers ask questions. Monitoring systems alert at 3 AM. This part isn't about writing new code; it's about **operating code safely at scale.**
 
 Welcome to enterprise workflows: automated testing, continuous integration, deployment pipelines, monitoring, incident response, and compliance. This is where AI-assisted development meets real engineering discipline.
 

@@ -2,13 +2,13 @@
 
 ## Where ByteStrike Stands
 
-You've helped ByteStrike build a working blueprint decoder. It fetches encrypted data from The League's remote servers, extracts secrets hidden between `{*` and `*}` markers, and logs them cleanly. The code is documented, tested, and ready—sort of.
+You've helped ByteStrike build a working blueprint decoder. It fetches encrypted data from The League's remote servers, extracts secrets hidden between `{*` and `*}` markers, and logs them cleanly. The code is documented, tested, and ready (sort of).
 
 But now the mission evolves. The League has realized they need **faster iteration** on the decoder. New requirements arrive daily: support for multiple secret formats, better error recovery, UI improvements, even CLI flags for advanced operators.
 
 **This is where you learn the difference between two ways of working with Copilot:**
 - **Chat Mode (Ask Mode):** You stay in control. Ask targeted questions, get targeted answers. Great for quick improvements and understanding.
-- **Agent Mode (Autonomous Mode):** You set a goal; Copilot explores files, makes multiple edits, and runs tests. Faster for big refactors—but requires review.
+- **Agent Mode (Autonomous Mode):** You set a goal; Copilot explores files, makes multiple edits, and runs tests. Faster for big refactors, but requires review.
 
 ## Learning Objectives
 
@@ -31,7 +31,7 @@ But now the mission evolves. The League has realized they need **faster iteratio
 
 Here's where ByteStrike is now. It works, but it's basic. You'll improve it using Chat and Agent modes.
 
-Language Tabs — Starter Decoder
+Language Tabs - Starter Decoder
 
 <div class="language-tabs">
   <button class="language-tab active" data-language="python">Python</button>

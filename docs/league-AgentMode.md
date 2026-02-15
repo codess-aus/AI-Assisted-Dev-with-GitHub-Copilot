@@ -10,7 +10,7 @@ In the bustling cityscape of Megalopolis, secret blueprints holding the keys to 
 
 Your mission: develop a system that fetches a digitized blueprint from the secure CyberGrid and decodes it by locating and extracting The League’s authentic secrets. As the League’s newest tech operative (codename: ByteStrike), you’ll use advanced pattern recognition to reveal the true intelligence hidden within, unmasking the secrets vital to the League’s cause.
 
-**In this adventure, you'll master GitHub Copilot Agent Mode** — an autonomous AI assistant that tackles complex tasks, breaking them down step-by-step and assembling complete applications for your heroics!
+**In this adventure, you'll master GitHub Copilot Agent Mode**: an autonomous AI assistant that tackles complex tasks, breaking them down step-by-step and assembling complete applications for your heroics!
 
 ### Prerequisites
 
@@ -179,7 +179,7 @@ Once your hero mission is complete:
 
 1. Try **Advanced League Operations** for deeper missions
 2. Experiment with **Custom League gadgets and extensions** using Agent Mode
-3. Deploy Agent Mode for **real-world League missions**—perfect for end-to-end app building
+3. Deploy Agent Mode for **real-world League missions**: perfect for end-to-end app building
 4. Share your victory and **help build a stronger League by providing feedback**
 
 Remember: With Agent Mode as your autonomous coding partner, clear goals and strategic teamwork mean you’ll always be ready for the next mission, Master Chief Sparkle!
@@ -187,4 +187,4 @@ Remember: With Agent Mode as your autonomous coding partner, clear goals and str
 ---
 
 **Interesting Fact:**  
-Granting Agent Mode autonomy is like sending out a trusted League sidekick—capable of running complex missions, learning, adapting, and always keeping the good guys one step ahead!
+Granting Agent Mode autonomy is like sending out a trusted League sidekick: capable of running complex missions, learning, adapting, and always keeping the good guys one step ahead!

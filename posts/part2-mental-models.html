@@ -43,10 +43,10 @@
 
         <div class="post-body">
             <h2>ByteStrike's Problem: Code Prediction Under Uncertainty</h2>
-            <p>ByteStrike's decoder is working, but the output is messy. Comments and variable names affect what Copilot suggests. Variable names affect everything. This part teaches <strong>why</strong>—so you can guide Copilot intentionally.</p>
+            <p>ByteStrike's decoder is working, but the output is messy. Comments and variable names affect what Copilot suggests. Variable names affect everything. This part teaches <strong>why</strong>, so you can guide Copilot intentionally.</p>
 
             <h2>Understanding the Machine Behind the Suggestions</h2>
-            <p>To use GitHub Copilot effectively, you need to understand how it "thinks"—not in the sense that it has human-like consciousness, but in terms of how it processes information and generates suggestions. This chapter explores the mental models and context mechanisms that drive Copilot's recommendations.</p>
+            <p>To use GitHub Copilot effectively, you need to understand how it "thinks": not in the sense that it has human-like consciousness, but in terms of how it processes information and generates suggestions. This chapter explores the mental models and context mechanisms that drive Copilot's recommendations.</p>
 
             <p>When you understand these mechanisms, you'll write better prompts, anticipate where Copilot might go wrong, and know exactly how to steer it back on track.</p>
 
@@ -60,7 +60,7 @@
             </ul>
 
             <h2>The Token Context Window</h2>
-            <p>At its core, Copilot (and all modern language models) processes code as a sequence of <em>tokens</em>—roughly equivalent to words, but more granular. Each model has a <strong>context window</strong>—a maximum number of tokens it can "see" at once.</p>
+            <p>At its core, Copilot (and all modern language models) processes code as a sequence of <em>tokens</em> (roughly equivalent to words, but more granular). Each model has a <strong>context window</strong>: a maximum number of tokens it can "see" at once.</p>
 
             <p>Think of the context window like a window into your codebase. Copilot can only see what's visible through that window. If your file is large or you're working in a repository with many dependencies, Copilot might not see the full picture.</p>
 
@@ -110,7 +110,7 @@ def generate_report(data):</code></pre>
 
             <p><strong>Example:</strong> If Copilot sees <code>import numpy as np</code> at the top of your file, it will suggest NumPy idioms rather than vanilla Python loops.</p>
 
-            <h2>Why Copilot Succeeds—and Why It Fails</h2>
+            <h2>Why Copilot Succeeds and Why It Fails</h2>
 
             <h3>Copilot Succeeds When:</h3>
             <ul>
@@ -218,7 +218,7 @@ def parse_json_object(json_str: str) -> Dict:
             <p><strong>Fix:</strong> Add a more explicit comment or docstring that clarifies your intent. Show examples of what you expect.</p>
 
             <h2>Lab 2: ByteStrike's Context Experiments</h2>
-            <p>Your task: Improve ByteStrike's decoder using context engineering—without changing the core logic.</p>
+            <p>Your task: Improve ByteStrike's decoder using context engineering, without changing the core logic.</p>
 
             <p><strong>Experiments:</strong></p>
             <ol>
@@ -228,7 +228,7 @@ def parse_json_object(json_str: str) -> Dict:
                 <li><strong>File structure:</strong> Create two versions of the decoder in the same workspace (e.g., <code>decoder_v1.py</code> and <code>decoder_v2.py</code> with better naming). Compare Copilot's output in each.</li>
             </ol>
 
-            <p><strong>What you'll learn:</strong> Copilot isn't "guessing"—it's pattern-matching on context. Better context = better code. This lesson applies to everything ByteStrike writes from now on.</p>
+            <p><strong>What you'll learn:</strong> Copilot isn't "guessing"; it's pattern-matching on context. Better context = better code. This lesson applies to everything ByteStrike writes from now on.</p>
 
             <h3>Detailed Exercise Steps</h3>
 
@@ -475,7 +475,7 @@ function calculate(a, b, c) {
             </ul>
 
             <h2>Conclusion</h2>
-            <p>Copilot is a statistical model that excels at pattern matching. By understanding how it uses context—from token windows to naming conventions—you can engineer prompts that guide it toward excellent suggestions. The key is to think like Copilot: provide clear context, use descriptive names, add type information, and write comments that explain your intent in simple, concrete terms.</p>
+            <p>Copilot is a statistical model that excels at pattern matching. By understanding how it uses context (from token windows to naming conventions), you can engineer prompts that guide it toward excellent suggestions. The key is to think like Copilot: provide clear context, use descriptive names, add type information, and write comments that explain your intent in simple, concrete terms.</p>
 
             <p>In the next chapter, we'll apply these mental models to real-world pair programming scenarios.</p>
             <div class="post-navigation">

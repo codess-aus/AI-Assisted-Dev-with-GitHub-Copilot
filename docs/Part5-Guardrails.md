@@ -1,4 +1,4 @@
-# Part 5: Guardrails — Security, Privacy & Enterprise Governance
+# Part 5: Guardrails - Security, Privacy & Enterprise Governance
 
 ## The Reality Check: Moving to Production
 
@@ -6,7 +6,7 @@ ByteStrike's decoder works. It's fast. It's got retry logic and error handling. 
 
 > "Before we deploy this to production, I need to know: Is the data safe? Is it private? Can we audit who used it? What happens if something goes wrong?"
 
-Welcome to the real world. **Guardrails** are the policies, checks, and safeguards that turn working code into trustworthy, enterprise-ready code. This part teaches you to think like a CISO, security engineer, and compliance officer—not to replace them, but to build with their concerns in mind from day one.
+Welcome to the real world. **Guardrails** are the policies, checks, and safeguards that turn working code into trustworthy, enterprise-ready code. This part teaches you to think like a CISO, security engineer, and compliance officer: not to replace them, but to build with their concerns in mind from day one.
 
 ## Learning Objectives
 
@@ -65,7 +65,7 @@ Guardrail Checklist for the League Mission
 - Observability: structured logging and clear errors
 - Testing: golden-path, failure-path, and empty-data cases
 
-Language Tabs — Start from these decoders
+Language Tabs - Start from these decoders
 
 <div class="language-tabs">
 	<button class="language-tab active" data-language="python">Python</button>

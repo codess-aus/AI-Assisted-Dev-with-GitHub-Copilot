@@ -34,4 +34,4 @@ ByteStrike needs to fetch the encrypted blueprint. Let's help them start:
 4. Observe how Copilot understands the task from just the function name and docstring
 5. Challenge: Ask Copilot to extend it to print all lines containing `{*` markers
 
-This is your first taste of how AI assistance works in practice—not magic, but guided iteration.
+This is your first taste of how AI assistance works in practice: not magic, but guided iteration.

@@ -10,7 +10,7 @@ In the thriving metropolis of Megalopolis, the clandestine agency known as The L
 Eventually, The League digitized these blueprints and stored them in the encrypted League DataVault, only accessible through the League’s secure CyberGrid.
 
 ### Objective
-You, a newly recruited tech hero (codename: ByteStrike), have been chosen to retrieve and decode one crucial blueprint. The blueprint is kept as a file in the League’s DataVault on the CyberGrid. Your mission: use a secure network call to fetch the blueprint's data. However, the brilliant minds’ misleading “red herrings” must be filtered out using the legendary Pattern Recognition Protocols—legendary Regular Expression algorithms—to expose the actual secrets.
+You, a newly recruited tech hero (codename: ByteStrike), have been chosen to retrieve and decode one crucial blueprint. The blueprint is kept as a file in the League's DataVault on the CyberGrid. Your mission: use a secure network call to fetch the blueprint's data. However, the brilliant minds' misleading "red herrings" must be filtered out using the legendary Pattern Recognition Protocols (legendary Regular Expression algorithms) to expose the actual secrets.
 
 ### Specifications
 
@@ -38,7 +38,7 @@ You, a newly recruited tech hero (codename: ByteStrike), have been chosen to ret
 - Use regular expressions to find and extract only the marked secrets.
 - Display the discovered secrets, ignoring all decoys.
 Interesting Fact:
-Regular expressions (regex) are a superhero’s utility belt for text—fast, flexible, and able to detect hidden patterns under any disguise. In superhero tech terms, they cut through layers of villainous static to reveal what matters!
+Regular expressions (regex) are a superhero's utility belt for text: fast, flexible, and able to detect hidden patterns under any disguise. In superhero tech terms, they cut through layers of villainous static to reveal what matters!
 
 ### GitHub Copilot Tips
 
