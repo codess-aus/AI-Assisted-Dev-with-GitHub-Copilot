@@ -247,19 +247,19 @@
 
             <p><strong>This is your first taste of how AI assistance works in practice: not magic, but guided iteration.</strong></p>
 
-            <h3>Example Starting Point (Python):</h3>
-            <div class="tab-content-container">
-                <div class="tab-content active">
-                    <p>Create <code>blueprint_decoder.py</code> and start with this comment:</p>
-                    <pre><code># Function to fetch encrypted blueprint from a remote server and extract secrets marked with {* and *}
-def fetch_and_decode_blueprint(url):
-    pass</code></pre>
-                    <p>Press <code>Tab</code> or <code>Ctrl+Enter</code> to see Copilot's suggestion. Then refine it with more detailed comments.</p>
-                </div>
-            </div>
+            <h3>Step 1: Understanding the Mission</h3>
+            <p>The League stores encrypted blueprints as text files. Critical intelligence is hidden between <code>{*</code> and <code>*}</code> markers, surrounded by decoy information. Your decoder must:</p>
+            <ul>
+                <li>Read a blueprint file (local file or URL)</li>
+                <li>Find all secrets marked with <code>{*</code> and <code>*}</code></li>
+                <li>Extract and display only the secret messages</li>
+            </ul>
 
-            <h3>Example Starting Point (C#):</h3>
-            <p>Choose your preferred language and let Copilot suggest the implementation:</p>
+            <h3>Step 2: Test Data Setup</h3>
+            <p>We've provided a sample blueprint file in your workspace: <code>blueprint-data.txt</code>. It contains fake technical specs with 5 hidden secrets. Let's decode it!</p>
+
+            <h3>Step 3: Build the Decoder</h3>
+            <p>Choose your preferred language and let Copilot help you build the decoder:</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -269,81 +269,97 @@ def fetch_and_decode_blueprint(url):
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p>Create a new file: <code>fizzbuzz.py</code></p>
-                    <p><strong>Step 1:</strong> Write a comment and function signature:</p>
-                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
-def fizzbuzz(n):
+                    <p><strong>Create a new file:</strong> <code>blueprint_decoder.py</code></p>
+                    <p><strong>Step 1:</strong> Start with a descriptive comment and let Copilot generate the function:</p>
+                    <pre><code># Function to read a blueprint file and extract all secrets marked between {* and *}
+# Returns a list of extracted secrets
+def decode_blueprint(filename):
     pass</code></pre>
-                    <p>Now press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Accept the suggestion or iterate by providing more detail in your comment.</p>
                     
-                    <p><strong>Step 2:</strong> Once Copilot completes your function, add this test code at the bottom of your file:</p>
-                    <pre><code># Test your function
+                    <p><strong>Step 2:</strong> Press <code>Tab</code> or <code>Ctrl+Enter</code> to see Copilot's suggestion. It should generate code to:</p>
+                    <ul>
+                        <li>Open and read the file</li>
+                        <li>Use regex or string methods to find patterns between <code>{*</code> and <code>*}</code></li>
+                        <li>Return the extracted secrets</li>
+                    </ul>
+                    
+                    <p><strong>Step 3:</strong> Add test code at the bottom:</p>
+                    <pre><code># Test the decoder
 if __name__ == "__main__":
-    for i in range(1, 16):
-        print(f"{i}: {fizzbuzz(i)}")</code></pre>
+    secrets = decode_blueprint("blueprint-data.txt")
+    print(f"Found {len(secrets)} secret(s):")
+    for i, secret in enumerate(secrets, 1):
+        print(f"{i}. {secret}")</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>python fizzbuzz.py</code></p>
-                    <p><strong>Expected output:</strong> You should see numbers 1-15 with FizzBuzz logic applied (3 → "Fizz", 5 → "Buzz", 15 → "FizzBuzz", etc.)</p>
+                    <p><strong>Run it:</strong> <code>python blueprint_decoder.py</code></p>
+                    <p><strong>Expected output:</strong> 5 secrets extracted from the file, including "AGENT_CODENAME: SHADOWMIND" and "VAULT_ACCESS_CODE: DELTA-7-7-ECHO"</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Create a new file: <code>FizzBuzz.cs</code></p>
-                    <p><strong>Step 1:</strong> Write the class structure with a comment and method signature:</p>
-                    <pre><code>// Implement FizzBuzz logic as a method in a class
-using System;
+                    <p><strong>Create a new file:</strong> <code>BlueprintDecoder.cs</code></p>
+                    <p><strong>Step 1:</strong> Start with the class structure and a descriptive comment:</p>
+                    <pre><code>using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
-public class FizzBuzzSolver
+public class BlueprintDecoder
 {
-    // Write a method that takes a number and returns "Fizz" if divisible by 3,
-    // "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
-    // Otherwise, return the number as a string.
-    public string Solve(int n)
+    // Method to read a blueprint file and extract all secrets marked between {* and *}
+    // Returns a list of extracted secrets
+    public static List&lt;string&gt; DecodeBlueprint(string filename)
     {
-        return n.ToString();
+        // Let Copilot complete this
+        return new List&lt;string&gt;();
     }
 }</code></pre>
-                    <p>Now press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Notice how it adapts to C# syntax and conventions.</p>
                     
-                    <p><strong>Step 2:</strong> Once Copilot completes your method, add this Main method to test it (inside the class, after the Solve method):</p>
+                    <p><strong>Step 2:</strong> Position cursor inside the method and press <code>Ctrl+Enter</code>. Copilot should generate code to read the file, use regex to find secrets, and return them.</p>
+                    
+                    <p><strong>Step 3:</strong> Add a Main method to test it:</p>
                     <pre><code>    static void Main()
     {
-        var solver = new FizzBuzzSolver();
-        for (int i = 1; i <= 15; i++)
+        var secrets = DecodeBlueprint("blueprint-data.txt");
+        Console.WriteLine($"Found {secrets.Count} secret(s):");
+        for (int i = 0; i < secrets.Count; i++)
         {
-            Console.WriteLine($"{i}: {solver.Solve(i)}");
+            Console.WriteLine($"{i + 1}. {secrets[i]}");
         }
     }</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>dotnet run</code> or compile with <code>csc FizzBuzz.cs</code> then run <code>./FizzBuzz</code></p>
-                    <p><strong>Expected output:</strong> Numbers 1-15 with FizzBuzz logic applied</p>
+                    <p><strong>Run it:</strong> <code>dotnet run</code></p>
+                    <p><strong>Expected output:</strong> 5 secrets extracted, properly formatted</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p>Create a new file: <code>fizzbuzz.js</code></p>
-                    <p><strong>Step 1:</strong> Write a comment and function signature:</p>
-<pre><code>// Implement FizzBuzz logic in JavaScript
-// Return "Fizz" for multiples of 3, "Buzz" for 5, "FizzBuzz" for both,
-// otherwise return the number as a string.
-function fizzbuzz(n) {
-    return n.toString();
-}
-</code></pre>
-                    <p>Now press <code>Ctrl+Enter</code> (or <code>Cmd+Enter</code> on Mac) to trigger Copilot's suggestion panel. Notice how it adapts to JavaScript idioms (strict equality, modulo checks).</p>
+                    <p><strong>Create a new file:</strong> <code>blueprint_decoder.js</code></p>
+                    <p><strong>Step 1:</strong> Start with a descriptive comment:</p>
+                    <pre><code>// Function to read a blueprint file and extract all secrets marked between {* and *}
+// Returns an array of extracted secrets
+function decodeBlueprint(filename) {
+    // Let Copilot complete this
+}</code></pre>
                     
-                    <p><strong>Step 2:</strong> Once Copilot completes your function, add this test code at the bottom of your file:</p>
-<pre><code>// Test your function
-for (let i = 1; i <= 15; i++) {
-    console.log(`${i}: ${fizzbuzz(i)}`);
-}
-</code></pre>
+                    <p><strong>Step 2:</strong> Press <code>Ctrl+Enter</code>. Copilot should generate code using Node.js fs module or similar to read the file and extract secrets with regex.</p>
                     
-                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code></p>
-                    <p><strong>Expected output:</strong> Numbers 1-15 with FizzBuzz logic applied</p>
+                    <p><strong>Step 3:</strong> Add test code at the bottom:</p>
+                    <pre><code>// Test the decoder
+const secrets = decodeBlueprint('blueprint-data.txt');
+console.log(`Found ${secrets.length} secret(s):`);
+secrets.forEach((secret, index) => {
+    console.log(`${index + 1}. ${secret}`);
+});</code></pre>
+                    
+                    <p><strong>Run it:</strong> <code>node blueprint_decoder.js</code></p>
+                    <p><strong>Expected output:</strong> List of 5 extracted secrets</p>
                 </div>
             </div>
 
-            <h3>Exercise 2: Iteration and Refinement</h3>
-            <p>Now let's use Copilot to iterate on your function. This demonstrates the real power of pair programming: refining requirements in your comments and letting Copilot enhance the code.</p>
+            <h3>Exercise 2: Enhance the Decoder</h3>
+            <p>Now let's improve ByteStrike's decoder with better features. This demonstrates the power of iterative development with Copilot.</p>
+
+            <h4>Challenge 1: Add Error Handling</h4>
+            <p>What if the file doesn't exist? Update your decoder to handle file errors gracefully.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -353,117 +369,142 @@ for (let i = 1; i <= 15; i++) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1: Delete and rewrite the function with enhanced requirements</strong></p>
-                    <p>Delete your entire fizzbuzz function (keep only the comments). Then type this new comment that specifies error handling:</p>
-                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
-# Otherwise, return the number as a string.
-# Raise a ValueError if the input is negative, with a descriptive error message.
-def fizzbuzz(n):</code></pre>
+                    <p><strong>Add this comment above your function:</strong></p>
+                    <pre><code># Enhanced version with error handling
+# If file doesn't exist, return an empty list and print an error message
+def decode_blueprint_safe(filename):
+    pass</code></pre>
+                    <p>Let Copilot generate a try-except block that catches FileNotFoundError.</p>
                     
-                    <p>Now position your cursor at the end of the `def fizzbuzz(n):` line and press <code>Ctrl+Enter</code> to trigger Copilot. It will generate the complete function including error handling. <strong>Accept the suggestion.</strong></p>
-                    
-                    <p><strong>Step 2: Add a new test section to verify error handling</strong></p>
-                    <p>Keep your existing test loop (1-15), then add this section AFTER it (inside the `if __name__ == "__main__":` block):</p>
-                    <pre><code>    print("\n=== Testing Error Handling ===")
-    try:
-        fizzbuzz(-5)
-        print("ERROR: Should have raised ValueError!")
-    except ValueError as e:
-        print(f"✓ Successfully caught error: {e}")</code></pre>
-                    
-                    <p><strong>Run it:</strong> <code>python fizzbuzz.py</code></p>
-                    <p><strong>Expected output:</strong> Your FizzBuzz sequence (1-15), then "✓ Successfully caught error: Input must be a non-negative integer"</p>
-                    <p>If you see "ERROR: Should have raised ValueError!" instead, your function isn't handling negatives properly. Compare your code to what Copilot generated.</p>
+                    <p><strong>Test it:</strong></p>
+                    <pre><code># Test error handling
+secrets = decode_blueprint_safe("nonexistent.txt")
+print(f"Found {len(secrets)} secrets")  # Should print 0
+
+# Test normal operation
+secrets = decode_blueprint_safe("blueprint-data.txt")
+print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1: Delete and rewrite the method with enhanced requirements</strong></p>
-                    <p>Delete your entire Solve method. Then type this new comment that specifies error handling:</p>
-                    <pre><code>    // Write a method that takes a number and returns "Fizz" if divisible by 3,
-    // "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
-    // Otherwise, return the number as a string.
-    // Throw an ArgumentException if the input is negative, with a descriptive message.
-    public string Solve(int n)</code></pre>
+                    <p><strong>Add this comment and method:</strong></p>
+                    <pre><code>    // Enhanced version with error handling
+    // If file doesn't exist, return empty list and print error message
+    public static List&lt;string&gt; DecodeBlueprintSafe(string filename)
+    {
+        // Let Copilot add try-catch for FileNotFoundException
+        return new List&lt;string&gt;();
+    }</code></pre>
                     
-                    <p>Now position your cursor at the end of the method signature and press <code>Ctrl+Enter</code> to trigger Copilot. It will generate the complete method including error handling. <strong>Accept the suggestion.</strong></p>
-                    
-                    <p><strong>Step 2: Add a new test section to verify error handling</strong></p>
-                    <p>In your Main method, keep your existing loop (1-15), then add this section AFTER it:</p>
-                    <pre><code>        Console.WriteLine("\n=== Testing Error Handling ===");
-        try
-        {
-            solver.Solve(-5);
-            Console.WriteLine("ERROR: Should have thrown ArgumentException!");
-        }
-        catch (ArgumentException e)
-        {
-            Console.WriteLine($"✓ Successfully caught error: {e.Message}");
-        }</code></pre>
-                    
-                    <p><strong>Run it:</strong> <code>dotnet run</code></p>
-                    <p><strong>Expected output:</strong> Your FizzBuzz sequence (1-15), then "✓ Successfully caught error: Input must be a non-negative integer"</p>
+                    <p><strong>Test it in Main:</strong></p>
+                    <pre><code>        // Test error handling
+        var secrets1 = DecodeBlueprintSafe("nonexistent.txt");
+        Console.WriteLine($"Found {secrets1.Count} secrets");
+
+        // Test normal operation
+        var secrets2 = DecodeBlueprintSafe("blueprint-data.txt");
+        Console.WriteLine($"Found {secrets2.Count} secrets");</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1: Delete and rewrite the function with enhanced requirements</strong></p>
-                    <p>Delete your entire fizzbuzz function. Then type this new comment that specifies error handling:</p>
-                    <pre><code>// Write a function that takes a number and returns "Fizz" for multiples of 3, 
-// "Buzz" for 5, "FizzBuzz" for both, otherwise the number as a string.
-// Throw an Error if the input is negative, with a descriptive message.
-function fizzbuzz(n) {</code></pre>
-                    
-                    <p>Now position your cursor at the end of `function fizzbuzz(n) {` and press <code>Ctrl+Enter</code> to trigger Copilot. It will generate the complete function including error handling. <strong>Accept the suggestion.</strong></p>
-                    
-                    <p><strong>Step 2: Add a new test section to verify error handling</strong></p>
-                    <p>Keep your existing test loop (1-15), then add this section AFTER it:</p>
-                    <pre><code>console.log("\n=== Testing Error Handling ===");
-try {
-    fizzbuzz(-5);
-    console.log("ERROR: Should have thrown an Error!");
-} catch (e) {
-    console.log(`✓ Successfully caught error: ${e.message}`);
+                    <p><strong>Add this comment and function:</strong></p>
+                    <pre><code>// Enhanced version with error handling
+// If file doesn't exist, return empty array and print error message
+function decodeBlueprintSafe(filename) {
+    // Let Copilot add try-catch for file errors
 }</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code></p>
-                    <p><strong>Expected output:</strong> Your FizzBuzz sequence (1-15), then "✓ Successfully caught error: Input must be a non-negative integer"</p>
+                    <p><strong>Test it:</strong></p>
+                    <pre><code>// Test error handling
+const secrets1 = decodeBlueprintSafe('nonexistent.txt');
+console.log(`Found ${secrets1.length} secrets`);
+
+// Test normal operation
+const secrets2 = decodeBlueprintSafe('blueprint-data.txt');
+console.log(`Found ${secrets2.length} secrets`);</code></pre>
                 </div>
             </div>
 
-                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code></p>
-                    <p><strong>Expected output:</strong> Your FizzBuzz sequence (1-15), then "✓ Successfully caught error: Input must be a non-negative integer"</p>
-                </div>
+            <h4>Challenge 2: Format the Output</h4>
+            <p>Make the decoder output more readable by adding a function that formats secrets nicely.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
-            <p><strong>Key Insight:</strong> You didn't write the error handling code yourself. Copilot generated it based on your enhanced comment. This is the essence of prompt engineering: better requirements = better code.</p>
-
-// Test negative number (should throw an error)
-console.log("Testing fizzbuzz(-5):");
-try {
-    const result = fizzbuzz(-5);
-    console.log(`Result: ${result}`);
-} catch (e) {
-    console.log(`✓ Caught error: ${e.message}`);
-}
-
-// Test zero (should work)
-console.log(`\nfizzbuzz(0): ${fizzbuzz(0)}`)</code></pre>
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Add this comment and let Copilot generate the function:</strong></p>
+                    <pre><code># Function to format and display secrets in a nice report format
+# Shows total count, numbered list, and a separator line
+def display_secrets_report(secrets):
+    pass</code></pre>
                     
-                    <p><strong>Run it:</strong> <code>node fizzbuzz.js</code></p>
-                    <p><strong>Expected output:</strong> FizzBuzz sequence for 1-15, error handling working with a ✓ checkmark, and fizzbuzz(0) returning "FizzBuzz".</p>
+                    <p><strong>Use it:</strong></p>
+                    <pre><code>secrets = decode_blueprint("blueprint-data.txt")
+display_secrets_report(secrets)</code></pre>
+                    
+                    <p><strong>Expected output:</strong></p>
+                    <pre>========================================
+DECODED SECRETS REPORT
+========================================
+Found 5 secret(s):
+
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+========================================</pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Add this method:</strong></p>
+                    <pre><code>    // Function to format and display secrets in a nice report format
+    // Shows total count, numbered list, and separator line
+    public static void DisplaySecretsReport(List&lt;string&gt; secrets)
+    {
+        // Let Copilot generate the formatting code
+    }</code></pre>
+                    
+                    <p><strong>Use it in Main:</strong></p>
+                    <pre><code>        var secrets = DecodeBlueprint("blueprint-data.txt");
+        DisplaySecretsReport(secrets);</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Add this function:</strong></p>
+                    <pre><code>// Function to format and display secrets in a nice report format
+// Shows total count, numbered list, and separator line
+function displaySecretsReport(secrets) {
+    // Let Copilot generate the formatting code
+}</code></pre>
+                    
+                    <p><strong>Use it:</strong></p>
+                    <pre><code>const secrets = decodeBlueprint('blueprint-data.txt');
+displaySecretsReport(secrets);</code></pre>
                 </div>
             </div>
-            </div>
 
-            <p>See how Copilot's suggestion changes based on your more detailed prompt.</p>
+            <h4>Challenge 3: Count Secret Types</h4>
+            <p>ByteStrike notices secrets have different types (CODENAME, LOCATION, PROTOCOL, etc.). Write a function to categorize them.</p>
+            
+            <p><strong>Hint:</strong> Write a comment like: <code>// Function to categorize secrets by their type (word before the colon)</code></p>
+            <p>Let Copilot help you create a function that returns a dictionary/map of categories and their counts.</p>
 
             <h3>Reflection Questions</h3>
             <ul>
-                <li>How accurate was Copilot's first suggestion?</li>
-                <li>Did you need to edit the generated code? What did you change?</li>
-                <li>How did the Python, C#, and JavaScript suggestions differ?</li>
-                <li>Could you have written this code faster without Copilot, or did Copilot save you time?</li>
-                <li>Did seeing the output help you understand what Copilot generated?</li>
+                <li>How did Copilot interpret your comments about extracting secrets between <code>{*</code> and <code>*}</code>?</li>
+                <li>Did Copilot choose regex or string methods? Which approach do you think is better?</li>
+                <li>How did error handling suggestions differ across Python, C#, and JavaScript?</li>
+                <li>Could you have written the decoder faster without Copilot, or did Copilot save you time?</li>
+                <li>What improvements would you make to the decoder for a real mission?</li>
             </ul>
+
+            <h3>Next Mission Preview</h3>
+            <p>ByteStrike's decoder works, but it's basic. In Part 2, you'll learn how Copilot "thinks" so you can guide it to generate even better code. You'll improve the decoder with better regex patterns, add logging, and handle edge cases ByteStrike might encounter in the field.</p>
 
             <h2>What's Next?</h2>
             <p>You've taken your first steps with Copilot. In the next chapters, we'll dive deeper:</p>
