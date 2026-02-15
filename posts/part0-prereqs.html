@@ -179,13 +179,45 @@ code .</code></pre>
             <p>Before starting Lab 1, verify your setup:</p>
 
             <h3>Test Copilot:</h3>
-            <ol>
-                <li>Open VS Code (in Codespace or locally)</li>
-                <li>Create a new file: <code>test.py</code></li>
-                <li>Type: <code># Write a function that adds two numbers</code></li>
-                <li>Press Enter and wait for Copilot to suggest code (appears in gray text)</li>
-                <li>Press <code>Tab</code> to accept the suggestion</li>
-            </ol>
+            <p>Try Copilot in your preferred language:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <ol>
+                        <li>Open VS Code (in Codespace or locally)</li>
+                        <li>Create a new file: <code>test.py</code></li>
+                        <li>Type: <code># Write a function that adds two numbers</code></li>
+                        <li>Press Enter and wait for Copilot to suggest code (appears in gray text)</li>
+                        <li>Press <code>Tab</code> to accept the suggestion</li>
+                    </ol>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <ol>
+                        <li>Open VS Code (in Codespace or locally)</li>
+                        <li>Create a new file: <code>test.js</code></li>
+                        <li>Type: <code>// Write a function that adds two numbers</code></li>
+                        <li>Press Enter and wait for Copilot to suggest code (appears in gray text)</li>
+                        <li>Press <code>Tab</code> to accept the suggestion</li>
+                    </ol>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <ol>
+                        <li>Open VS Code (in Codespace or locally)</li>
+                        <li>Create a new file: <code>Test.cs</code></li>
+                        <li>Type: <code>// Write a method that adds two numbers</code></li>
+                        <li>Press Enter and wait for Copilot to suggest code (appears in gray text)</li>
+                        <li>Press <code>Tab</code> to accept the suggestion</li>
+                    </ol>
+                </div>
+            </div>
 
             <p>If you see gray suggestions appear, <strong>you're ready to go!</strong></p>
 
@@ -253,5 +285,33 @@ dotnet --version</code></pre>
     </footer>
 
     <script src="../script.js"></script>
+    <script>
+    // Inline tab functionality
+    (function() {
+        const tabs = document.querySelectorAll('.language-tab');
+        tabs.forEach(function(tab) {
+            tab.onclick = function() {
+                const lang = this.getAttribute('data-language');
+                const tabGroup = this.closest('.language-tabs');
+                const container = tabGroup.nextElementSibling;
+                
+                tabGroup.querySelectorAll('.language-tab').forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                container.querySelectorAll('.tab-content').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                const selected = container.querySelector('[data-language="' + lang + '"]');
+                if (selected) {
+                    selected.classList.add('active');
+                }
+                
+                localStorage.setItem('preferred-language', lang);
+            };
+        });
+    })();
+    </script>
 </body>
 </html>
