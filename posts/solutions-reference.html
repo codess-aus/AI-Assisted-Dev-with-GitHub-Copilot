@@ -55,8 +55,8 @@
 
             <h2>Part 1: Getting Started with Copilot</h2>
 
-            <h3>Lab 1, Exercise 1: Simple Completion</h3>
-            <p>Complete your fizzbuzz function using Copilot. Here's what the ideal result looks like for each language:</p>
+            <h3>Lab 1, Exercise 1: Build the Blueprint Decoder</h3>
+            <p>Create a decoder to extract secrets marked between <code>{*</code> and <code>*}</code> from a blueprint file. Here's what the ideal result looks like for each language:</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -66,307 +66,539 @@
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>File: fizzbuzz.py</strong></p>
-                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both. Otherwise, return the number as a string.
-def fizzbuzz(n):
-    if n % 3 == 0 and n % 5 == 0:
-        return "FizzBuzz"
-    elif n % 3 == 0:
-        return "Fizz"
-    elif n % 5 == 0:
-        return "Buzz"
-    else:
-        return str(n)
+                    <p><strong>File: blueprint_decoder.py</strong></p>
+                    <pre><code>import re
 
-if __name__ == "__main__":
-    for i in range(1, 16):
-        print(f"{i}: {fizzbuzz(i)}")</code></pre>
-                    <p><strong>Expected Output:</strong></p>
-                    <pre><code>1: 1
-2: 2
-3: Fizz
-4: 4
-5: Buzz
-6: Fizz
-7: 7
-8: 8
-9: Fizz
-10: Buzz
-11: 11
-12: Fizz
-13: 13
-14: 14
-15: FizzBuzz</code></pre>
-                </div>
-
-                <div class="tab-content" data-language="csharp">
-                    <p><strong>File: FizzBuzz.cs</strong></p>
-                    <pre><code>using System;
-
-public class FizzBuzzSolver
-{
-    public string Solve(int n)
-    {
-        if (n % 3 == 0 && n % 5 == 0)
-        {
-            return "FizzBuzz";
-        }
-        else if (n % 3 == 0)
-        {
-            return "Fizz";
-        }
-        else if (n % 5 == 0)
-        {
-            return "Buzz";
-        }
-        else
-        {
-            return n.ToString();
-        }
-    }
-
-    static void Main()
-    {
-        var solver = new FizzBuzzSolver();
-        for (int i = 1; i <= 15; i++)
-        {
-            Console.WriteLine($"{i}: {solver.Solve(i)}");
-        }
-    }
-}</code></pre>
-                    <p><strong>Expected Output:</strong></p>
-                    <pre><code>1: 1
-2: 2
-3: Fizz
-4: 4
-5: Buzz
-6: Fizz
-7: 7
-8: 8
-9: Fizz
-10: Buzz
-11: 11
-12: Fizz
-13: 13
-14: 14
-15: FizzBuzz</code></pre>
-                </div>
-
-                <div class="tab-content" data-language="javascript">
-                    <p><strong>File: fizzbuzz.js</strong></p>
-                    <pre><code>function fizzbuzz(n) {
-    if (n % 3 === 0 && n % 5 === 0) {
-        return "FizzBuzz";
-    } else if (n % 3 === 0) {
-        return "Fizz";
-    } else if (n % 5 === 0) {
-        return "Buzz";
-    } else {
-        return n.toString();
-    }
-}
-
-for (let i = 1; i <= 15; i++) {
-    console.log(`${i}: ${fizzbuzz(i)}`);
-}</code></pre>
-                    <p><strong>Expected Output:</strong></p>
-                    <pre><code>1: 1
-2: 2
-3: Fizz
-4: 4
-5: Buzz
-6: Fizz
-7: 7
-8: 8
-9: Fizz
-10: Buzz
-11: 11
-12: Fizz
-13: 13
-14: 14
-15: FizzBuzz</code></pre>
-                </div>
-            </div>
-
-            <h3>Lab 1, Exercise 2: Iteration and Refinement</h3>
-            <p>Enhanced function with error handling for negative numbers. Here's the ideal implementation:</p>
-
-            <div class="language-tabs">
-                <button class="language-tab active" data-language="python">Python</button>
-                <button class="language-tab" data-language="csharp">C#</button>
-                <button class="language-tab" data-language="javascript">JavaScript</button>
-            </div>
-
-            <div class="tab-content-container">
-                <div class="tab-content active" data-language="python">
-                    <p><strong>File: fizzbuzz.py (with error handling)</strong></p>
-                    <pre><code># Write a function that takes a number and returns "Fizz" if divisible by 3, "Buzz" if divisible by 5, and "FizzBuzz" if divisible by both.
-# Otherwise, return the number as a string.
-# Raise a ValueError if the input is negative, with a descriptive error message.
-def fizzbuzz(n):
-    if n < 0:
-        raise ValueError("Input must be a non-negative integer")
-    if n % 3 == 0 and n % 5 == 0:
-        return "FizzBuzz"
-    elif n % 3 == 0:
-        return "Fizz"
-    elif n % 5 == 0:
-        return "Buzz"
-    else:
-        return str(n)
-
-if __name__ == "__main__":
-    for i in range(1, 16):
-        print(f"{i}: {fizzbuzz(i)}")
+# Function to read a blueprint file and extract all secrets marked between {* and *}
+# Example: League Blueprint contains {* AGENT_CODENAME: SHADOWMIND *}
+# Should extract: "AGENT_CODENAME: SHADOWMIND" (without the markers)
+# Uses regex pattern to find all occurrences
+# Returns a list of extracted secrets
+def decode_blueprint(filename):
+    with open(filename, 'r') as file:
+        content = file.read()
     
-    print("\n=== Testing Error Handling ===")
-    try:
-        fizzbuzz(-5)
-        print("ERROR: Should have raised ValueError!")
-    except ValueError as e:
-        print(f"✓ Successfully caught error: {e}")</code></pre>
-                    <p><strong>Expected Output:</strong></p>
-                    <pre><code>1: 1
-2: 2
-3: Fizz
-4: 4
-5: Buzz
-6: Fizz
-7: 7
-8: 8
-9: Fizz
-10: Buzz
-11: 11
-12: Fizz
-13: 13
-14: 14
-15: FizzBuzz
+    # Use regex to find all secrets between {* and *}
+    pattern = r'\{\* (.*?) \*\}'
+    secrets = re.findall(pattern, content)
+    return secrets
 
-=== Testing Error Handling ===
-✓ Successfully caught error: Input must be a non-negative integer</code></pre>
+# Test the decoder
+if __name__ == "__main__":
+    secrets = decode_blueprint("blueprint-data.txt")
+    print(f"Found {len(secrets)} secret(s):")
+    for i, secret in enumerate(secrets, 1):
+        print(f"{i}. {secret}")</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>Found 5 secret(s):
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>File: FizzBuzz.cs (with error handling)</strong></p>
+                    <p><strong>File: BlueprintDecoder.cs</strong></p>
                     <pre><code>using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
-public class FizzBuzzSolver
+public class BlueprintDecoder
 {
-    public string Solve(int n)
+    /// &lt;summary&gt;
+    /// Reads a blueprint file and extracts all secrets marked between {* and *}
+    /// Example: {* VAULT_ACCESS_CODE: DELTA-7-7-ECHO *} extracts the code inside
+    /// Uses regex pattern to find all occurrences
+    /// &lt;/summary&gt;
+    /// &lt;param name="filename"&gt;Path to the blueprint file&lt;/param&gt;
+    /// &lt;returns&gt;List of extracted secret strings&lt;/returns&gt;
+    public static List&lt;string&gt; DecodeBlueprint(string filename)
     {
-        if (n < 0)
+        string content = File.ReadAllText(filename);
+        
+        // Use regex to find all secrets between {* and *}
+        string pattern = @"\{\* (.*?) \*\}";
+        MatchCollection matches = Regex.Matches(content, pattern);
+        
+        List&lt;string&gt; secrets = new List&lt;string&gt;();
+        foreach (Match match in matches)
         {
-            throw new ArgumentException("Input must be a non-negative integer");
-        }
-        if (n % 3 == 0 && n % 5 == 0)
-        {
-            return "FizzBuzz";
-        }
-        else if (n % 3 == 0)
-        {
-            return "Fizz";
-        }
-        else if (n % 5 == 0)
-        {
-            return "Buzz";
-        }
-        else
-        {
-            return n.ToString();
-        }
-    }
-
-    static void Main()
-    {
-        var solver = new FizzBuzzSolver();
-        for (int i = 1; i <= 15; i++)
-        {
-            Console.WriteLine($"{i}: {solver.Solve(i)}");
+            secrets.Add(match.Groups[1].Value);
         }
         
-        Console.WriteLine("\n=== Testing Error Handling ===");
-        try
+        return secrets;
+    }
+
+    static void Main()
+    {
+        var secrets = DecodeBlueprint("blueprint-data.txt");
+        Console.WriteLine($"Found {secrets.Count} secret(s):");
+        for (int i = 0; i < secrets.Count; i++)
         {
-            solver.Solve(-5);
-            Console.WriteLine("ERROR: Should have thrown ArgumentException!");
-        }
-        catch (ArgumentException e)
-        {
-            Console.WriteLine($"✓ Successfully caught error: {e.Message}");
+            Console.WriteLine($"{i + 1}. {secrets[i]}");
         }
     }
 }</code></pre>
                     <p><strong>Expected Output:</strong></p>
-                    <pre><code>1: 1
-2: 2
-3: Fizz
-4: 4
-5: Buzz
-6: Fizz
-7: 7
-8: 8
-9: Fizz
-10: Buzz
-11: 11
-12: Fizz
-13: 13
-14: 14
-15: FizzBuzz
-
-=== Testing Error Handling ===
-✓ Successfully caught error: Input must be a non-negative integer</code></pre>
+                    <pre><code>Found 5 secret(s):
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>File: fizzbuzz.js (with error handling)</strong></p>
-                    <pre><code>// Write a function that takes a number and returns "Fizz" for multiples of 3, 
-// "Buzz" for 5, "FizzBuzz" for both, otherwise the number as a string.
-// Throw an Error if the input is negative, with a descriptive message.
-function fizzbuzz(n) {
-    if (n < 0) {
-        throw new Error("Input must be a non-negative integer");
-    }
-    if (n % 3 === 0 && n % 5 === 0) {
-        return "FizzBuzz";
-    } else if (n % 3 === 0) {
-        return "Fizz";
-    } else if (n % 5 === 0) {
-        return "Buzz";
-    } else {
-        return n.toString();
-    }
+                    <p><strong>File: blueprint_decoder.js</strong></p>
+                    <pre><code>const fs = require('fs');
+
+/**
+ * Reads a blueprint file and extracts all secrets marked between {* and *}
+ * Example: League transmission contains {* EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE *}
+ * Extracts: "EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE" (without markers)
+ * Uses regex pattern with match() or matchAll()
+ * @param {string} filename - Path to the blueprint file
+ * @returns {Array&lt;string&gt;} Array of extracted secret strings
+ */
+function decodeBlueprint(filename) {
+    const content = fs.readFileSync(filename, 'utf8');
+    
+    // Use regex to find all secrets between {* and *}
+    const pattern = /\{\* (.*?) \*\}/g;
+    const matches = [...content.matchAll(pattern)];
+    const secrets = matches.map(match =&gt; match[1]);
+    
+    return secrets;
 }
 
-for (let i = 1; i <= 15; i++) {
-    console.log(`${i}: ${fizzbuzz(i)}`);
-}
+// Test the decoder
+const secrets = decodeBlueprint('blueprint-data.txt');
+console.log(`Found ${secrets.length} secret(s):`);
+secrets.forEach((secret, index) =&gt; {
+    console.log(`${index + 1}. ${secret}`);
+});</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>Found 5 secret(s):
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE</code></pre>
+                </div>
+            </div>
 
-console.log("\n=== Testing Error Handling ===");
-try {
-    fizzbuzz(-5);
-    console.log("ERROR: Should have thrown an Error!");
-} catch (e) {
-    console.log(`✓ Successfully caught error: ${e.message}`);
+            <h3>Lab 1, Exercise 2: Enhance the Decoder</h3>
+            <p>Enhanced decoder with error handling, formatting, and categorization features:</p>
+
+            <h4>Challenge 1: Add Error Handling</h4>
+            <p>Gracefully handle missing files:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>File: blueprint_decoder.py (with error handling)</strong></p>
+                    <pre><code">import re
+
+def decode_blueprint(filename):
+    with open(filename, 'r') as file:
+        content = file.read()
+    
+    pattern = r'\{\* (.*?) \*\}'
+    secrets = re.findall(pattern, content)
+    return secrets
+
+# Enhanced version with error handling
+# If file doesn't exist, return an empty list and print an error message
+def decode_blueprint_safe(filename):
+    try:
+        return decode_blueprint(filename)
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+        return []
+
+# Test error handling
+secrets = decode_blueprint_safe("nonexistent.txt")
+print(f"Found {len(secrets)} secrets")  # Should print 0
+
+# Test normal operation
+secrets = decode_blueprint_safe("blueprint-data.txt")
+print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>Error: File 'nonexistent.txt' not found.
+Found 0 secrets
+Found 5 secrets</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>File: BlueprintDecoder.cs (with error handling)</strong></p>
+                    <pre><code>using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+
+public class BlueprintDecoder
+{
+    public static List&lt;string&gt; DecodeBlueprint(string filename)
+    {
+        string content = File.ReadAllText(filename);
+        
+        string pattern = @"\{\* (.*?) \*\}";
+        MatchCollection matches = Regex.Matches(content, pattern);
+        
+        List&lt;string&gt; secrets = new List&lt;string&gt;();
+        foreach (Match match in matches)
+        {
+            secrets.Add(match.Groups[1].Value);
+        }
+        
+        return secrets;
+    }
+
+    // Enhanced version with error handling
+    // If file doesn't exist, return empty list and print error message
+    public static List&lt;string&gt; DecodeBlueprintSafe(string filename)
+    {
+        try
+        {
+            return DecodeBlueprint(filename);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine($"Error: File '{filename}' not found.");
+            return new List&lt;string&gt;();
+        }
+    }
+
+    static void Main()
+    {
+        // Test error handling
+        var secrets1 = DecodeBlueprintSafe("nonexistent.txt");
+        Console.WriteLine($"Found {secrets1.Count} secrets");
+
+        // Test normal operation
+        var secrets2 = DecodeBlueprintSafe("blueprint-data.txt");
+        Console.WriteLine($"Found {secrets2.Count} secrets");
+    }
 }</code></pre>
                     <p><strong>Expected Output:</strong></p>
-                    <pre><code>1: 1
-2: 2
-3: Fizz
-4: 4
-5: Buzz
-6: Fizz
-7: 7
-8: 8
-9: Fizz
-10: Buzz
-11: 11
-12: Fizz
-13: 13
-14: 14
-15: FizzBuzz
+                    <pre><code>Error: File 'nonexistent.txt' not found.
+Found 0 secrets
+Found 5 secrets</code></pre>
+                </div>
 
-=== Testing Error Handling ===
-✓ Successfully caught error: Input must be a non-negative integer</code></pre>
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>File: blueprint_decoder.js (with error handling)</strong></p>
+                    <pre><code>const fs = require('fs');
+
+function decodeBlueprint(filename) {
+    const content = fs.readFileSync(filename, 'utf8');
+    
+    const pattern = /\{\* (.*?) \*\}/g;
+    const matches = [...content.matchAll(pattern)];
+    const secrets = matches.map(match =&gt; match[1]);
+    
+    return secrets;
+}
+
+// Enhanced version with error handling
+// If file doesn't exist, return empty array and print error message
+function decodeBlueprintSafe(filename) {
+    try {
+        return decodeBlueprint(filename);
+    } catch (err) {
+        console.log(`Error: File '${filename}' not found.`);
+        return [];
+    }
+}
+
+// Test error handling
+const secrets1 = decodeBlueprintSafe('nonexistent.txt');
+console.log(`Found ${secrets1.length} secrets`);
+
+// Test normal operation
+const secrets2 = decodeBlueprintSafe('blueprint-data.txt');
+console.log(`Found ${secrets2.length} secrets`);</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>Error: File 'nonexistent.txt' not found.
+Found 0 secrets
+Found 5 secrets</code></pre>
+                </div>
+            </div>
+
+            <h4>Challenge 2: Format the Output</h4>
+            <p>Display secrets in a nicely formatted report:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Continuation of blueprint_decoder.py:</strong></p>
+                    <pre><code># Function to format and display secrets in a nice report format
+# Shows total count, numbered list, and a separator line
+def display_secrets_report(secrets):
+    separator = "=" * 40
+    print(separator)
+    print("DECODED SECRETS REPORT")
+    print(separator)
+    print(f"Found {len(secrets)} secret(s):\n")
+    for i, secret in enumerate(secrets, 1):
+        print(f"{i}. {secret}")
+    print(separator)
+
+# Use it
+secrets = decode_blueprint_safe("blueprint-data.txt")
+display_secrets_report(secrets)</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>========================================
+DECODED SECRETS REPORT
+========================================
+Found 5 secret(s):
+
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+========================================</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Continuation of BlueprintDecoder.cs:</strong></p>
+                    <pre><code>    // Function to format and display secrets in a nice report format
+    // Shows total count, numbered list, and separator line
+    public static void DisplaySecretsReport(List&lt;string&gt; secrets)
+    {
+        string separator = new string('=', 40);
+        Console.WriteLine(separator);
+        Console.WriteLine("DECODED SECRETS REPORT");
+        Console.WriteLine(separator);
+        Console.WriteLine($"Found {secrets.Count} secret(s):\n");
+        for (int i = 0; i < secrets.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {secrets[i]}");
+        }
+        Console.WriteLine(separator);
+    }
+
+    // Modified Main to use the report
+    static void Main()
+    {
+        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
+        DisplaySecretsReport(secrets);
+    }</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>========================================
+DECODED SECRETS REPORT
+========================================
+Found 5 secret(s):
+
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+========================================</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Continuation of blueprint_decoder.js:</strong></p>
+                    <pre><code>// Function to format and display secrets in a nice report format
+// Shows total count, numbered list, and separator line
+function displaySecretsReport(secrets) {
+    const separator = '='.repeat(40);
+    console.log(separator);
+    console.log('DECODED SECRETS REPORT');
+    console.log(separator);
+    console.log(`Found ${secrets.length} secret(s):\n`);
+    secrets.forEach((secret, index) =&gt; {
+        console.log(`${index + 1}. ${secret}`);
+    });
+    console.log(separator);
+}
+
+// Use it
+const secrets = decodeBlueprintSafe('blueprint-data.txt');
+displaySecretsReport(secrets);</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>========================================
+DECODED SECRETS REPORT
+========================================
+Found 5 secret(s):
+
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+========================================</code></pre>
+                </div>
+            </div>
+
+            <h4>Challenge 3: Categorize Secrets by Type</h4>
+            <p>Extract and count secret types (the word before the colon):</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Continuation of blueprint_decoder.py:</strong></p>
+                    <pre><code"># Function to categorize secrets by their type (word before the colon)
+def categorize_secrets(secrets):
+    categories = {}
+    for secret in secrets:
+        if ':' in secret:
+            category = secret.split(':')[0].strip()
+        else:
+            category = "UNCLASSIFIED"
+        
+        if category not in categories:
+            categories[category] = 0
+        categories[category] += 1
+    
+    return categories
+
+# Show categorization
+secrets = decode_blueprint_safe("blueprint-data.txt")
+categories = categorize_secrets(secrets)
+print("\nSecret Categories:")
+for category, count in sorted(categories.items()):
+    print(f"  {category}: {count}")</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>Secret Categories:
+  AGENT_CODENAME: 1
+  EMERGENCY_PROTOCOL: 1
+  MEETING_LOCATION: 1
+  SECURE_COMMS_PROTOCOL: 1
+  VAULT_ACCESS_CODE: 1</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Continuation of BlueprintDecoder.cs:</strong></p>
+                    <pre><code>    // Function to categorize secrets by their type (word before the colon)
+    public static Dictionary&lt;string, int&gt; CategorizeSecrets(List&lt;string&gt; secrets)
+    {
+        var categories = new Dictionary&lt;string, int&gt;();
+        foreach (var secret in secrets)
+        {
+            string category;
+            if (secret.Contains(':'))
+            {
+                category = secret.Split(':')[0].Trim();
+            }
+            else
+            {
+                category = "UNCLASSIFIED";
+            }
+            
+            if (!categories.ContainsKey(category))
+            {
+                categories[category] = 0;
+            }
+            categories[category]++;
+        }
+        
+        return categories;
+    }
+
+    // Modified Main to show categorization
+    static void Main()
+    {
+        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
+        DisplaySecretsReport(secrets);
+        
+        var categories = CategorizeSecrets(secrets);
+        Console.WriteLine("\nSecret Categories:");
+        foreach (var category in categories)
+        {
+            Console.WriteLine($"  {category.Key}: {category.Value}");
+        }
+    }</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>========================================
+DECODED SECRETS REPORT
+========================================
+Found 5 secret(s):
+
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+========================================
+
+Secret Categories:
+  AGENT_CODENAME: 1
+  EMERGENCY_PROTOCOL: 1
+  MEETING_LOCATION: 1
+  SECURE_COMMS_PROTOCOL: 1
+  VAULT_ACCESS_CODE: 1</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Continuation of blueprint_decoder.js:</strong></p>
+                    <pre><code>// Function to categorize secrets by their type (word before the colon)
+function categorizeSecrets(secrets) {
+    const categories = {};
+    secrets.forEach(secret =&gt; {
+        let category;
+        if (secret.includes(':')) {
+            category = secret.split(':')[0].trim();
+        } else {
+            category = 'UNCLASSIFIED';
+        }
+        
+        if (!categories[category]) {
+            categories[category] = 0;
+        }
+        categories[category]++;
+    });
+    
+    return categories;
+}
+
+// Show categorization
+const secrets = decodeBlueprintSafe('blueprint-data.txt');
+displaySecretsReport(secrets);
+
+const categories = categorizeSecrets(secrets);
+console.log('\nSecret Categories:');
+Object.keys(categories).sort().forEach(category =&gt; {
+    console.log(`  ${category}: ${categories[category]}`);
+});</code></pre>
+                    <p><strong>Expected Output:</strong></p>
+                    <pre><code>========================================
+DECODED SECRETS REPORT
+========================================
+Found 5 secret(s):
+
+1. SECURE_COMMS_PROTOCOL
+2. AGENT_CODENAME: SHADOWMIND
+3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+========================================
+
+Secret Categories:
+  AGENT_CODENAME: 1
+  EMERGENCY_PROTOCOL: 1
+  MEETING_LOCATION: 1
+  SECURE_COMMS_PROTOCOL: 1
+  VAULT_ACCESS_CODE: 1</code></pre>
                 </div>
             </div>
 
