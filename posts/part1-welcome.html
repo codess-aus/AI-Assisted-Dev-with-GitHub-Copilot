@@ -65,7 +65,7 @@
             </ul>
 
             <h2>What is GitHub Copilot?</h2>
-            <p>GitHub Copilot is an AI coding assistant powered by OpenAI's large language models (specifically trained on public code repositories). It integrates directly into VS Code, Visual Studio, JetBrains IDEs, and other development environments, providing real-time code suggestions as you type.</p>
+            <p>GitHub Copilot is an AI coding assistant powered by OpenAI's large language models (specifically trained on public code repositories). It integrates directly into VS Code (or Codespaces), Visual Studio, JetBrains IDEs, and other development environments, providing real-time code suggestions as you type.
 
             <p><strong>Key Capabilities:</strong></p>
             <ul>
@@ -237,13 +237,13 @@
 
             <h3>Setup</h3>
             <ul>
-                <li>Ensure Copilot extension is installed in VS Code (GitHub Copilot by GitHub)</li>
+                <li>Ensure Copilot extension is installed in VS Code (or Codespaces) - GitHub Copilot by GitHub</li>
                 <li>Sign in with your GitHub account</li>
             </ul>
 
             <h3>Task: Build the Blueprint Fetcher</h3>
             <ol>
-                <li>Set up Copilot extension in VS Code (Python and C#)</li>
+                <li>Set up Copilot extension in VS Code (or Codespaces) for Python and C#</li>
                 <li>Create a new file: <code>blueprint_decoder.py</code> (or <code>BlueprintDecoder.cs</code>)</li>
                 <li>Trigger Copilot to suggest a function that fetches a URL and returns the content</li>
                 <li>Observe how Copilot understands the task from just the function name and docstring</li>
@@ -265,6 +265,18 @@
 
             <h3>Step 3: Build the Decoder</h3>
             <p>Choose your preferred language and let Copilot help you build the decoder:</p>
+
+            <h4>How to Work with Copilot Suggestions</h4>
+            <p>Before diving into code, understand how Copilot works in your editor:</p>
+            <ul>
+                <li><strong>Trigger suggestions:</strong> Start typing a comment or code, and Copilot will automatically suggest completions. Look for gray text appearing in your editor—that's a suggestion from Copilot.</li>
+                <li><strong>Accept a suggestion:</strong> Press <code>Tab</code> (or <code>Enter</code> on some editors) to accept the suggestion. The gray text becomes permanent code.</li>
+                <li><strong>Reject a suggestion:</strong> Press <code>Esc</code> to dismiss it and keep typing what you want instead.</li>
+                <li><strong>Cycle through suggestions:</strong> If Copilot shows one suggestion but you want to see alternatives, press <code>Alt+[</code> (or <code>Option+[</code> on Mac) to see previous suggestions, or <code>Alt+]</code> to see next suggestions.</li>
+                <li><strong>Multi-line suggestions:</strong> Copilot often suggests entire functions or blocks of code. Accept the whole thing with <code>Tab</code>, then refine if needed.</li>
+                <li><strong>Partial acceptance:</strong> You can also type a few characters and let Copilot finish, or accept part of a suggestion manually.</li>
+                <li><strong>Watch the context:</strong> Copilot reads your comments, variable names, and previous code to understand what you want. Better context = better suggestions. The detailed comments you wrote in Step 2 help Copilot understand the task!</li>
+            </ul>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
