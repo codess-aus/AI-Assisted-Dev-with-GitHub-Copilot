@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to leverage Copilot coding agent to autonomously handle documentation, features, and tests in production workflows.">
+    <title>Bonus: Copilot Coding Agent in Action - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/workflow.png" 
+                 alt="Copilot Coding Agent">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-02-22">February 22, 2026</time>
+            <h1 class="post-title">Bonus: Copilot Coding Agent in Action</h1>
+            <p class="post-subtitle">Automating ByteStrike's Mission with Autonomous Development Tasks</p>
+        </div>
+
+        <div class="post-body">
+        <article>
+            <h1>Bonus: Automating ByteStrike's Mission with Copilot Coding Agent</h1>
+
+            <section>
+                <h2>The Mission Expands</h2>
+                <p>ByteStrike's initial decoder was a success. The encrypted blueprints have been extracted and analyzed. But now The League has expanded the operation.</p>
+                <p>There are three problems:</p>
+                <ol>
+                    <li>The decoder works, but it lacks proper documentation. New operatives need to understand how it works, and right now the code is difficult to follow.</li>
+                    <li>The secret extraction system needs new capabilities. The League wants to support batch processing of multiple blueprint files, with proper error handling and retry logic.</li>
+                    <li>Critical components lack unit tests. For a mission-critical system, this is unacceptable.</li>
+                </ol>
+                <p>ByteStrike has limited time. These tasks are essential but repetitive. This is where Copilot coding agent comes in.</p>
+            </section>
+
+            <section>
+                <h2>What is Copilot Coding Agent?</h2>
+                <p>GitHub Copilot coding agent is an autonomous AI pair programmer that can work on your behalf to complete development tasks. Unlike Chat mode, which requires constant guidance, coding agent takes an issue description and works through it end-to-end, producing a draft pull request.</p>
+                <p>For ByteStrike's mission, this means:</p>
+                <ul>
+                    <li>Assign documentation tasks to Copilot coding agent while you focus on architectural decisions</li>
+                    <li>Request new features asynchronously, letting the agent implement while you work on other priorities</li>
+                    <li>Generate tests automatically without manual repetition</li>
+                    <li>Review the work before merging, maintaining quality control</li>
+                </ul>
+                <p>Think of it as hiring a specialized contractor who works 24/7 to tackle your backlog. You describe the work, Copilot executes it, and you review before deployment.</p>
+            </section>
+
+            <section>
+                <h2>The Power of Well-Scoped Instructions</h2>
+                <p>Here is the critical truth: there is no magic bullet here. Copilot coding agent is effective, but only when given clear, specific instructions. Just like a human developer, it performs best when the scope is well-defined and the requirements are explicit.</p>
+                <p>A vague instruction like "improve the code" will produce vague results. A precise instruction like "Add docstrings to all functions in decoder.py following PEP 257 standards, and ensure each docstring includes parameter types and return value documentation" will produce exactly what you need.</p>
+                <p>This is why clear scoping is essential before assigning work to Copilot coding agent. Invest time upfront in writing good issue descriptions, and you'll see exponentially better results.</p>
+            </section>
+
+            <section>
+                <h2>Preparing Your Environment</h2>
+                <p>Copilot coding agent works like a full-time developer. It needs the right tools and dependencies installed. This is where the <strong>.github/workflows/copilot-setup-steps.yml</strong> file comes in.</p>
+                <p>This special GitHub Actions workflow runs before Copilot begins work, ensuring it has everything needed. For ByteStrike's mission, this might look like:</p>
+                <pre><code>name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install pytest pytest-cov
+          pip install -r requirements.txt</code></pre>
+                <p>Key points:</p>
+                <ul>
+                    <li>The job must be called <strong>copilot-setup-steps</strong></li>
+                    <li>Add a <strong>workflow_dispatch</strong> trigger so you can test it manually before Copilot runs it</li>
+                    <li>Set permissions to the minimum required (contents: read if cloning)</li>
+                    <li>Install all tools and dependencies the agent will need</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Task 1: Document the Decoder</h2>
+                <p>ByteStrike's decoder has been battle-tested, but new team members struggle to understand it. The code needs docstrings that explain what each function does, what parameters it expects, and what it returns.</p>
+                <p>Instead of manually writing documentation, assign this to Copilot coding agent:</p>
+                <ol>
+                    <li>Navigate to your repository on GitHub</li>
+                    <li>Click the <strong>Issues</strong> tab</li>
+                    <li>Click <strong>New issue</strong> and select <strong>Blank issue</strong></li>
+                    <li>Set the title to: <strong>Add comprehensive docstrings to blueprint decoder</strong></li>
+                    <li>Set the description to something like this:
+                        <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation. 
+New operatives cannot easily understand how to use it.
+
+Requirements:
+- Add docstrings to all functions in decoder.py and secret_extractor.py
+- Follow PEP 257 conventions
+- Include parameter types and descriptions
+- Include return value documentation
+- Add type hints where missing
+- Do not modify function logic, only add documentation
+- Ensure all docstrings are clear and helpful to new developers</code></pre>
+                    </li>
+                    <li>Click the <strong>Assignees</strong> button and select <strong>Copilot</strong></li>
+                    <li>Click <strong>Create issue</strong></li>
+                </ol>
+                <p>Watch for the eyes emoji (👀) in the issue, indicating Copilot is working. After a few moments, Copilot will create a draft pull request with a checklist of tasks. You can view the live session to see how Copilot approaches the problem.</p>
+            </section>
+
+            <section>
+                <h2>Task 2: Add Batch Processing Capabilities</h2>
+                <p>The League has new requirements. Instead of processing a single blueprint file, the system needs to handle multiple files asynchronously. This is more complex than the documentation task, but still perfect for Copilot coding agent.</p>
+                <ol>
+                    <li>In your repository, create a new issue</li>
+                    <li>Set the title to: <strong>Implement batch blueprint processing with retry logic</strong></li>
+                    <li>Set the description to:
+                        <pre><code>The decoder currently processes one blueprint file at a time. The League now needs 
+the ability to process multiple files in a single batch, with proper error handling and retry logic.
+
+Requirements:
+- Create a new BatchProcessor class that accepts a list of blueprint file paths
+- Implement exponential backoff retry logic (up to 3 retries with 1s, 2s, 4s delays)
+- Failed files should be logged with error details
+- Return a summary report including:
+  * Total files processed
+  * Successful extractions
+  * Failed files and reasons
+  * Total secrets extracted
+- Write unit tests for all new methods
+- Use Python's asyncio for concurrent processing
+- Ensure backwards compatibility with existing decoder functions</code></pre>
+                    </li>
+                    <li>Assign to <strong>Copilot</strong> and create the issue</li>
+                </ol>
+                <p>Notice how much detail went into the requirements. This specificity is directly proportional to the quality of the work Copilot produces. Without clear scope, results are scattered.</p>
+                <p>While Copilot works on this, ByteStrike can focus on other mission-critical tasks. Instead of being blocked waiting for implementation, work continues in parallel.</p>
+            </section>
+
+            <section>
+                <h2>Task 3: Generate Comprehensive Tests</h2>
+                <p>There's a gap in ByteStrike's codebase. Critical functions lack proper test coverage. This is exactly the type of repetitive work that Copilot excels at.</p>
+                <ol>
+                    <li>Create a new issue with the title: <strong>Add comprehensive unit tests for secret extraction</strong></li>
+                    <li>Set the description to:
+                        <pre><code>The secret extraction module lacks proper test coverage. 
+We need unit tests that validate all edge cases and failure scenarios.
+
+Requirements:
+- Write tests for the extract_secrets() function covering:
+  * Normal extraction (secrets found between {* and *})
+  * Multiple secrets in a single file
+  * No secrets present (empty result)
+  * Malformed markers (incomplete {* or missing *})
+  * Empty or null input
+  * Files with special characters in secrets
+- Write tests for the categorize_secret() function
+- Achieve minimum 95% code coverage
+- Use pytest framework with fixtures for test data
+- Mock file I/O operations where appropriate
+- Include parametrized tests for multiple input variations
+- Run all tests as part of the validation</code></pre>
+                    </li>
+                    <li>Assign to <strong>Copilot</strong> and create</li>
+                </ol>
+                <p>Test generation is one of the highest-value uses for Copilot coding agent. What would take hours to write manually is generated in minutes, then reviewed by your team.</p>
+            </section>
+
+            <section>
+                <h2>Reviewing Copilot's Work</h2>
+                <p>Once Copilot completes a task, it creates a draft pull request. The process is the same as reviewing work from any developer:</p>
+                <ol>
+                    <li>Go to the <strong>Pull Requests</strong> tab in your repository</li>
+                    <li>Open the PR created by Copilot (usually titled [WIP]: followed by your issue title)</li>
+                    <li>Review the changes, file by file, just as you would with a colleague</li>
+                    <li>Check the <strong>Conversation</strong> tab to see Copilot's summary and the checklist it followed</li>
+                    <li>Request changes if needed, or approve and merge if satisfied</li>
+                </ol>
+                <p>The key difference from typical code review: Copilot works for free and doesn't get offended by feedback. If results don't meet expectations, iterate. Update the issue with clarifying instructions and reassign to Copilot. That's the advantage of working with AI.</p>
+            </section>
+
+            <section>
+                <h2>Best Practices for Mission Success</h2>
+                <h3>Be Specific</h3>
+                <p>Vague requirements produce vague code. Describe exactly what you want. Include standards (PEP 257, unit test patterns, error handling expectations). The more detail, the better the output.</p>
+
+                <h3>Start with Small Tasks</h3>
+                <p>Before assigning complex features, start with documentation or test generation. This helps you understand how Copilot works and refine your communication style. Learn on low-stakes tasks.</p>
+
+                <h3>Provide Context</h3>
+                <p>If you're adding features to existing code, reference the existing patterns and style. Let Copilot know if there's a particular library or framework you prefer. Context reduces rework.</p>
+
+                <h3>Test Everything</h3>
+                <p>Copilot coding agent produces code, but it's your responsibility to validate it works. Always run tests, check functionality, and review logic before merging to production.</p>
+
+                <h3>Leverage Async Work</h3>
+                <p>The entire point of Copilot coding agent is asynchronous execution. Assign multiple issues at once. While Copilot works on documentation, you can code new features. While Copilot builds tests, you can review design. This is parallel development.</p>
+
+                <h3>Iterate and Refine</h3>
+                <p>If the first attempt doesn't meet expectations, it's not a failure. Update the issue with more specific requirements and reassign. Iteration is part of the process, whether you're working with human developers or AI agents.</p>
+            </section>
+
+            <section>
+                <h2>A Note on Responsibility</h2>
+                <p>Copilot coding agent is powerful, but it comes with responsibility. As ByteStrike would tell you, autonomy requires oversight. When you assign work to Copilot, you're responsible for:</p>
+                <ul>
+                    <li>Security: Ensure generated code doesn't introduce vulnerabilities</li>
+                    <li>Quality: Review code before it reaches production</li>
+                    <li>Compliance: Make sure the code meets your organization's standards</li>
+                    <li>Testing: Verify that tests pass and coverage is adequate</li>
+                </ul>
+                <p>Think of Copilot as a trusted specialist contractor. You hire them because they're good, but you still review their invoices and test their work before deploying to mission-critical systems.</p>
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <p>Copilot coding agent transforms how teams handle technical debt, feature implementation, and testing. For ByteStrike's operation, it means:</p>
+                <ul>
+                    <li>Faster turnaround on documentation without sacrificing clarity</li>
+                    <li>New features implemented while the team focuses on architecture and planning</li>
+                    <li>Comprehensive tests generated automatically</li>
+                    <li>More time for high-value decision making, less time on routine coding tasks</li>
+                </ul>
+                <p>The key to success is clear communication. Write specific issues, provide context, set expectations, and review carefully. When you work this way, Copilot coding agent becomes not just a productivity multiplier, but a genuine force multiplier for small teams with big missions.</p>
+                <p>For ByteStrike and The League, that means more time to focus on what matters: the mission strategy, security, and making sure the code is production-ready when it matters most.</p>
+            </section>
+
+            <section>
+                <h2>Resources</h2>
+                <ul>
+                    <li><a href="https://docs.github.com/en/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot">About Copilot Coding Agent</a></li>
+                    <li><a href="https://docs.github.com/en/copilot/using-github-copilot/coding-agent/using-copilot-to-work-on-an-issue">Assigning Issues to Copilot</a></li>
+                    <li><a href="https://docs.github.com/en/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks">Coding Agent Best Practices</a></li>
+                    <li><a href="https://docs.github.com/en/copilot/how-tos/agents/copilot-coding-agent/extending-copilot-coding-agent-with-mcp">Extending Coding Agent with MCP</a></li>
+                </ul>
+            </section>
+
+            <div style="background-color: var(--color-bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                <h3>🎓 Bonus Topics Available</h3>
+                <p>Review other bonus content:</p>
+                <ul>
+                    <li><a href="bonus1-awesome-copilot.html">Bonus 1: Awesome-Copilot Repository</a> - Community resources</li>
+                    <li><a href="bonus2-copilot-sdk.html">Bonus 2: GitHub Copilot SDK</a> - Build custom extensions</li>
+                    <li><a href="bonus3-spec-kit.html">Bonus 3: The Spec Kit</a> - AI-powered specification writing</li>
+                    <li><a href="bonus4-agentic-workflows.html">Bonus 4: Agentic Workflows</a> - Advanced AI automation</li>
+                    <li><strong>Bonus 5: Copilot Coding Agent in Action</strong> - You are here!</li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <a href="../index.html" style="text-decoration: underline;">← Return to workshop home</a>
+                </p>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
