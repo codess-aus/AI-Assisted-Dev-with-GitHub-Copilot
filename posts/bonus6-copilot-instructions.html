@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to set up and use .github/copilot-instructions.md to give Copilot custom guidance for your project.">
+    <title>Bonus: Copilot Instructions - Developer FAQ</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="back-link">← Back to Workshop</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container post-content">
+        <div class="post-hero">
+            <img src="../images/workflow.png" 
+                 alt="Copilot Instructions Configuration">
+        </div>
+        
+        <div class="post-header">
+            <time class="post-date" datetime="2026-02-22">February 22, 2026</time>
+            <h1 class="post-title">Bonus: Copilot Instructions</h1>
+            <p class="post-subtitle">Configure Custom Guidance for Copilot in Your Repository</p>
+        </div>
+
+        <div class="post-body">
+            <section>
+                <h2>What is .github/copilot-instructions.md?</h2>
+                <p>The `.github/copilot-instructions.md` file is a special configuration file that allows you to provide custom instructions to GitHub Copilot when it works in your repository. Instead of Copilot relying solely on context from your code, you can explicitly guide it on how to approach tasks, what standards to follow, and what tools to use.</p>
+                <p>Think of it as a project-wide prompt or rulebook that Copilot reads when working on your codebase. Every developer using Copilot in your repository benefits from these instructions.</p>
+            </section>
+
+            <section>
+                <h2>Why Use Copilot Instructions?</h2>
+                <p>Consistency and control. Without explicit instructions, Copilot might:</p>
+                <ul>
+                    <li>Generate code that doesn't match your team's style guide</li>
+                    <li>Suggest design patterns your team doesn't use</li>
+                    <li>Forget about important security or compliance requirements</li>
+                    <li>Miss project-specific best practices</li>
+                    <li>Suggest outdated dependencies or APIs</li>
+                </ul>
+                <p>With `.github/copilot-instructions.md`, you ensure Copilot understands your project's context, values, and constraints from the start.</p>
+            </section>
+
+            <section>
+                <h2>Setting Up Copilot Instructions</h2>
+                <h3>Step 1: Create the File</h3>
+                <p>In your repository root, create a `.github` directory (if it doesn't exist) and add a `copilot-instructions.md` file:</p>
+                <pre><code>.github/
+└── copilot-instructions.md</code></pre>
+
+                <h3>Step 2: Write Your Instructions</h3>
+                <p>The file uses a simple markdown format with instruction blocks. Here's a basic template:</p>
+                <pre><code># Copilot Instructions for ByteStrike Project
+
+## Architecture and Design
+
+- Use async/await patterns for all asynchronous operations
+- Follow MVC architecture for web components
+- Utilize dependency injection for testability
+- Implement single responsibility principle in all classes
+
+## Code Style
+
+- Follow PEP 257 for Python docstrings
+- Use TypeScript for all JavaScript projects (no plain JS)
+- Use meaningful variable names (no single letters except loop counters)
+- Maximum line length: 100 characters
+
+## Security Requirements
+
+- Never hardcode secrets or credentials
+- Validate all user input
+- Use prepared statements for database queries
+- Implement proper error handling without exposing sensitive details
+
+## Dependencies and Frameworks
+
+- Use React 18+ for UI components
+- Use fastapi for Python web services
+- Use Jest for JavaScript testing
+- Keep dependencies up to date</code></pre>
+
+                <h3>Step 3: Commit and Push</h3>
+                <p>Commit the file to your repository. Copilot will automatically pick it up for future interactions:</p>
+                <pre><code>git add .github/copilot-instructions.md
+git commit -m "Add Copilot instructions for project governance"
+git push</code></pre>
+            </section>
+
+            <section>
+                <h2>What to Include in Your Instructions</h2>
+                <h3>1. Architecture and Design Principles</h3>
+                <p>Explain the architectural patterns your project uses:</p>
+                <pre><code>## Architecture
+
+- Services should be stateless and horizontally scalable
+- Use event-driven architecture for asynchronous processing
+- Implement the repository pattern for data access
+- All APIs should follow REST conventions</code></pre>
+
+                <h3>2. Code Style and Conventions</h3>
+                <p>Specify naming conventions, formatting, and style standards:</p>
+                <pre><code>## Code Style
+
+- Use snake_case for Python variables and functions
+- Use camelCase for JavaScript variables and methods
+- Class names: PascalCase
+- Constants: UPPER_SNAKE_CASE
+- Private methods/properties: _leadingUnderscore</code></pre>
+
+                <h3>3. Security and Compliance</h3>
+                <p>Define non-negotiable security requirements:</p>
+                <pre><code>## Security Guardrails
+
+- Always use HTTPS for external API calls
+- Implement rate limiting on all public endpoints
+- Use bcrypt for password hashing (minimum cost factor: 12)
+- Validate input length and type before processing
+- Log security events without exposing sensitive data</code></pre>
+
+                <h3>4. Testing Requirements</h3>
+                <p>Set expectations for test coverage and testing approach:</p>
+                <pre><code>## Testing Standards
+
+- Minimum 80% code coverage required
+- All public methods must have unit tests
+- Use mocking for external service calls
+- Integration tests required for API endpoints
+- Test both happy path and error scenarios</code></pre>
+
+                <h3>5. Technology Stack</h3>
+                <p>List preferred tools, versions, and when to use alternatives:</p>
+                <pre><code>## Technology Choices
+
+- Python 3.11+ for backend services
+- PostgreSQL for relational data
+- Redis for caching and sessions
+- Docker for containerization
+- Kubernetes for orchestration</code></pre>
+
+                <h3>6. Project-Specific Rules</h3>
+                <p>Include rules unique to your project:</p>
+                <pre><code>## ByteStrike-Specific Rules
+
+- All secret extraction must use regex patterns with {* *} markers
+- Mission reports must be ISO 8601 timestamped
+- Agent codenames must be validated against approved list
+- Audit logs must capture all access attempts
+- Classified data must never be logged to standard output</code></pre>
+
+                <h3>7. External Tool Integration</h3>
+                <p>Reference external resources and tools Copilot should know about:</p>
+                <pre><code>## Tools and Integration
+
+- Use Azure Best Practices when implementing cloud features
+- Reference @microsoft/TypeScript-eslint for linting
+- Use GitHub Actions for CI/CD pipelines
+- Integrate with Snyk for dependency scanning</code></pre>
+            </section>
+
+            <section>
+                <h2>Example: ByteStrike's Full Instructions</h2>
+                <p>Here's a complete example for the ByteStrike decoder project:</p>
+                <pre><code"># Copilot Instructions: ByteStrike Blueprint Decoder
+
+## Project Context
+
+ByteStrike is a mission-critical system for decoding encrypted blueprints. 
+Security, accuracy, and auditability are paramount.
+
+## Architecture
+
+- Stateless service design (horizontal scalability)
+- Async/await for all I/O operations
+- Repository pattern for data access
+- Dependency injection for testability
+- Event-driven logging for audit trails
+
+## Code Quality Standards
+
+- All functions must have docstrings (PEP 257 for Python, JSDoc for JavaScript)
+- Maximum cyclomatic complexity: 5
+- No magic numbers (use named constants)
+- Extract functions > 50 lines into separate units
+- Use type hints (Python) or TypeScript
+
+## Security Requirements (NON-NEGOTIABLE)
+
+- Secrets never logged to standard output
+- All inputs validated and sanitized
+- Use regex with proper escaping for pattern matching
+- Implement rate limiting (max 100 requests per minute)
+- Audit log all blueprint access and extraction
+- Use bcrypt for credential storage
+- Validate file size before processing (max 10MB)
+- Implement timeout handling (30 second max)
+
+## Testing Standards
+
+- Minimum 90% code coverage
+- All edge cases tested (malformed input, large files, etc.)
+- Security tests for injection attacks
+- Performance tests for benchmark compliance
+- Integration tests with real blueprint data
+
+## Approved Technologies
+
+- Python 3.11+ for backend
+- PostgreSQL for audit logs
+- Redis for caching
+- Docker for containerization
+- GitHub Actions for CI/CD
+
+## ByteStrike-Specific Rules
+
+- Blueprint markers are always {* and *}
+- Secrets extracted are trimmed of whitespace
+- All times are UTC ISO 8601 format
+- Agent codenames must be alphanumeric + underscore only
+- Declassification authority required for log export</code></pre>
+            </section>
+
+            <section>
+                <h2>Using Instructions with Copilot Chat and Agent Mode</h2>
+                <p>Once you've set up `.github/copilot-instructions.md`, Copilot automatically applies these rules when:</p>
+                <ul>
+                    <li><strong>In Chat:</strong> Ask questions and Copilot answers based on your project's standards</li>
+                    <li><strong>In Inline Completions:</strong> Copilot generates code that follows your style and conventions</li>
+                    <li><strong>In Agent Mode:</strong> Copilot uses instructions to plan and execute multi-file changes</li>
+                    <li><strong>In Code Review:</strong> Copilot evaluates code against your project's standards</li>
+                </ul>
+                <p>You don't need to pass the instructions in every prompt. They're part of the repository context now.</p>
+            </section>
+
+            <section>
+                <h2>Best Practices for Copilot Instructions</h2>
+                <h3>Be Specific</h3>
+                <p>Vague instructions are ignored. Instead of "write good code," say "implement unit tests for all public methods with Jest, using AAA pattern (Arrange, Act, Assert)."</p>
+
+                <h3>Keep It Focused</h3>
+                <p>Include essential rules, not every coding tidbit. Focus on what makes your project unique and critical. Too many instructions dilute their effectiveness.</p>
+
+                <h3>Prioritize Security and Compliance</h3>
+                <p>Lead with non-negotiable requirements (security, compliance, audit trail). Mark them as "NON-NEGOTIABLE" so Copilot treats them as hard constraints.</p>
+
+                <h3>Update Regularly</h3>
+                <p>As your project evolves, update the instructions. When you adopt a new framework or change standards, document it here. Make it a team habit to suggest updates during code review.</p>
+
+                <h3>Make It Discoverable</h3>
+                <p>Reference the file in your README:</p>
+                <pre><code>## Using GitHub Copilot
+
+We've configured Copilot with project-specific instructions in `.github/copilot-instructions.md`. 
+When using Copilot Chat or Agent Mode, these instructions will guide code generation to match our standards.</code></pre>
+
+                <h3>Test Your Instructions</h3>
+                <p>After creating instructions, test them:</p>
+                <ul>
+                    <li>Open Copilot Chat and ask: "What are the security requirements for this project?"</li>
+                    <li>Generate code inline and verify it matches your style</li>
+                    <li>Assign an Agent task and check that it follows the architecture rules</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Common Pitfalls to Avoid</h2>
+                <h3>Too Rigid</h3>
+                <p>Don't make instructions so strict that they prevent Copilot from being helpful. Allow flexibility where it makes sense.</p>
+
+                <h3>Too Long</h3>
+                <p>Keep instructions concise. Copilot processes context more effectively with focused, clear guidance.</p>
+
+                <h3>Not Version Controlled</h3>
+                <p>Always commit changes to instructions to version control. Track what guidelines evolve over time.</p>
+
+                <h3>Forgetting About Team Buy-In</h3>
+                <p>Socialization matters. Share the instructions with your team and get agreement before enforcement.</p>
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <p>`.github/copilot-instructions.md` is a powerful tool for ensuring Copilot works within your project's constraints, standards, and best practices. By investing time in clear, specific instructions, you:</p>
+                <ul>
+                    <li>Ensure code consistency across the team</li>
+                    <li>Embed security and compliance requirements</li>
+                    <li>Reduce code review friction</li>
+                    <li>Help new developers understand project norms</li>
+                    <li>Give Copilot the context it needs to be most helpful</li>
+                </ul>
+                <p>For ByteStrike and The League, that means Copilot becomes not just a productivity tool, but a guardian of mission-critical standards.</p>
+            </section>
+
+            <section>
+                <h2>Resources</h2>
+                <ul>
+                    <li><a href="https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions">GitHub Copilot Custom Instructions Documentation</a></li>
+                    <li><a href="https://github.com/github/copilot-docs">GitHub Copilot Official Documentation</a></li>
+                    <li><a href="https://docs.github.com/en/enterprise-cloud@latest/admin/policies/enforcing-policies-for-your-enterprise/enforcing-a-policy-for-github-copilot-in-your-enterprise">Enterprise Copilot Policies</a></li>
+                </ul>
+            </section>
+
+            <div style="background-color: var(--color-bg-secondary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                <h3>🎓 Bonus Topics Available</h3>
+                <p>Review other bonus content:</p>
+                <ul>
+                    <li><a href="bonus1-awesome-copilot.html">Bonus 1: Awesome-Copilot Repository</a> - Community resources</li>
+                    <li><a href="bonus2-copilot-sdk.html">Bonus 2: GitHub Copilot SDK</a> - Build custom extensions</li>
+                    <li><a href="bonus3-spec-kit.html">Bonus 3: The Spec Kit</a> - AI-powered specification writing</li>
+                    <li><a href="bonus4-agentic-workflows.html">Bonus 4: Agentic Workflows</a> - Advanced AI automation</li>
+                    <li><a href="bonus5-coding-agents.html">Bonus 5: Copilot Coding Agent in Action</a> - Automate development tasks</li>
+                    <li><strong>Bonus 6: Copilot Instructions</strong> - You are here!</li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <a href="../index.html" style="text-decoration: underline;">← Return to workshop home</a>
+                </p>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Developer FAQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
