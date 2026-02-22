@@ -83,8 +83,17 @@
             <section>
                 <h2>Preparing Your Environment</h2>
                 <p>Copilot coding agent works like a full-time developer. It needs the right tools and dependencies installed. This is where the <strong>.github/workflows/copilot-setup-steps.yml</strong> file comes in.</p>
-                <p>This special GitHub Actions workflow runs before Copilot begins work, ensuring it has everything needed. For ByteStrike's mission, this might look like:</p>
-                <pre><code>name: "Copilot Setup Steps"
+                <p>This special GitHub Actions workflow runs before Copilot begins work, ensuring it has everything needed. Choose the setup for your primary language:</p>
+                
+                <div class="language-tabs">
+                    <button class="language-tab active" data-language="python">Python</button>
+                    <button class="language-tab" data-language="javascript">JavaScript</button>
+                    <button class="language-tab" data-language="csharp">C#</button>
+                </div>
+
+                <div class="tab-content-container">
+                    <div class="tab-content active" data-language="python">
+                        <pre><code>name: "Copilot Setup Steps"
 
 on:
   workflow_dispatch
@@ -108,6 +117,64 @@ jobs:
         run: |
           pip install pytest pytest-cov
           pip install -r requirements.txt</code></pre>
+                    </div>
+
+                    <div class="tab-content" data-language="javascript">
+                        <pre><code>name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "./package.json"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install --save-dev jest @types/jest</code></pre>
+                    </div>
+
+                    <div class="tab-content" data-language="csharp">
+                        <pre><code>name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+                      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore dependencies
+        run: |
+          dotnet restore
+          dotnet add ./Tests package xunit
+          dotnet add ./Tests package xunit.runner.visualstudio</code></pre>
+                    </div>
+                </div>
+                
                 <p>Key points:</p>
                 <ul>
                     <li>The job must be called <strong>copilot-setup-steps</strong></li>
@@ -119,15 +186,23 @@ jobs:
 
             <section>
                 <h2>Task 1: Document the Decoder</h2>
-                <p>ByteStrike's decoder has been battle-tested, but new team members struggle to understand it. The code needs docstrings that explain what each function does, what parameters it expects, and what it returns.</p>
+                <p>ByteStrike's decoder has been battle-tested, but new team members struggle to understand it. The code needs comprehensive documentation that explains what each function does, what parameters it expects, and what it returns.</p>
                 <p>Instead of manually writing documentation, assign this to Copilot coding agent:</p>
                 <ol>
                     <li>Navigate to your repository on GitHub</li>
                     <li>Click the <strong>Issues</strong> tab</li>
                     <li>Click <strong>New issue</strong> and select <strong>Blank issue</strong></li>
-                    <li>Set the title to: <strong>Add comprehensive docstrings to blueprint decoder</strong></li>
+                    <li>Set the title to: <strong>Add comprehensive documentation to blueprint decoder</strong></li>
                     <li>Set the description to something like this:
-                        <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation. 
+                        <div class="language-tabs">
+                            <button class="language-tab active" data-language="python">Python</button>
+                            <button class="language-tab" data-language="javascript">JavaScript</button>
+                            <button class="language-tab" data-language="csharp">C#</button>
+                        </div>
+
+                        <div class="tab-content-container">
+                            <div class="tab-content active" data-language="python">
+                                <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation.
 New operatives cannot easily understand how to use it.
 
 Requirements:
@@ -138,6 +213,34 @@ Requirements:
 - Add type hints where missing
 - Do not modify function logic, only add documentation
 - Ensure all docstrings are clear and helpful to new developers</code></pre>
+                            </div>
+                            <div class="tab-content" data-language="javascript">
+                                <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation.
+New operatives cannot easily understand how to use it.
+
+Requirements:
+- Add JSDoc comments to all functions in decoder.js and secretExtractor.js
+- Follow JSDoc conventions
+- Include parameter types and descriptions
+- Include return value documentation
+- Add TypeScript-style type annotations in comments where applicable
+- Do not modify function logic, only add documentation
+- Ensure all comments are clear and helpful to new developers</code></pre>
+                            </div>
+                            <div class="tab-content" data-language="csharp">
+                                <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation.
+New operatives cannot easily understand how to use it.
+
+Requirements:
+- Add XML documentation comments to all public methods in Decoder.cs and SecretExtractor.cs
+- Follow C# XML documentation conventions
+- Include parameter descriptions and types
+- Include return value documentation
+- Add proper access modifiers and inheritance documentation
+- Do not modify method logic, only add documentation
+- Ensure all comments are clear and helpful to new developers</code></pre>
+                            </div>
+                        </div>
                     </li>
                     <li>Click the <strong>Assignees</strong> button and select <strong>Copilot</strong></li>
                     <li>Click <strong>Create issue</strong></li>
@@ -152,7 +255,15 @@ Requirements:
                     <li>In your repository, create a new issue</li>
                     <li>Set the title to: <strong>Implement batch blueprint processing with retry logic</strong></li>
                     <li>Set the description to:
-                        <pre><code>The decoder currently processes one blueprint file at a time. The League now needs 
+                        <div class="language-tabs">
+                            <button class="language-tab active" data-language="python">Python</button>
+                            <button class="language-tab" data-language="javascript">JavaScript</button>
+                            <button class="language-tab" data-language="csharp">C#</button>
+                        </div>
+
+                        <div class="tab-content-container">
+                            <div class="tab-content active" data-language="python">
+                                <pre><code>The decoder currently processes one blueprint file at a time. The League now needs
 the ability to process multiple files in a single batch, with proper error handling and retry logic.
 
 Requirements:
@@ -165,8 +276,44 @@ Requirements:
   * Failed files and reasons
   * Total secrets extracted
 - Write unit tests for all new methods
-- Use Python's asyncio for concurrent processing
+- Use async/await patterns for concurrent processing
 - Ensure backwards compatibility with existing decoder functions</code></pre>
+                            </div>
+                            <div class="tab-content" data-language="javascript">
+                                <pre><code>The decoder currently processes one blueprint file at a time. The League now needs
+the ability to process multiple files in a single batch, with proper error handling and retry logic.
+
+Requirements:
+- Create a new BatchProcessor class that accepts a list of blueprint file paths
+- Implement exponential backoff retry logic (up to 3 retries with 1s, 2s, 4s delays)
+- Failed files should be logged with error details
+- Return a summary report including:
+  * Total files processed
+  * Successful extractions
+  * Failed files and reasons
+  * Total secrets extracted
+- Write unit tests for all new methods using Jest
+- Use Promise and async/await for concurrent processing
+- Ensure backwards compatibility with existing decoder functions</code></pre>
+                            </div>
+                            <div class="tab-content" data-language="csharp">
+                                <pre><code>The decoder currently processes one blueprint file at a time. The League now needs
+the ability to process multiple files in a single batch, with proper error handling and retry logic.
+
+Requirements:
+- Create a new BatchProcessor class that accepts a list of blueprint file paths
+- Implement exponential backoff retry logic (up to 3 retries with 1s, 2s, 4s delays)
+- Failed files should be logged with error details
+- Return a summary report including:
+  * Total files processed
+  * Successful extractions
+  * Failed files and reasons
+  * Total secrets extracted
+- Write unit tests for all new methods using xUnit
+- Use Task and async/await for concurrent processing
+- Ensure backwards compatibility with existing decoder methods</code></pre>
+                            </div>
+                        </div>
                     </li>
                     <li>Assign to <strong>Copilot</strong> and create the issue</li>
                 </ol>
@@ -180,7 +327,15 @@ Requirements:
                 <ol>
                     <li>Create a new issue with the title: <strong>Add comprehensive unit tests for secret extraction</strong></li>
                     <li>Set the description to:
-                        <pre><code>The secret extraction module lacks proper test coverage. 
+                        <div class="language-tabs">
+                            <button class="language-tab active" data-language="python">Python</button>
+                            <button class="language-tab" data-language="javascript">JavaScript</button>
+                            <button class="language-tab" data-language="csharp">C#</button>
+                        </div>
+
+                        <div class="tab-content-container">
+                            <div class="tab-content active" data-language="python">
+                                <pre><code>The secret extraction module lacks proper test coverage.
 We need unit tests that validate all edge cases and failure scenarios.
 
 Requirements:
@@ -197,6 +352,46 @@ Requirements:
 - Mock file I/O operations where appropriate
 - Include parametrized tests for multiple input variations
 - Run all tests as part of the validation</code></pre>
+                            </div>
+                            <div class="tab-content" data-language="javascript">
+                                <pre><code>The secret extraction module lacks proper test coverage.
+We need unit tests that validate all edge cases and failure scenarios.
+
+Requirements:
+- Write tests for the extractSecrets() function covering:
+  * Normal extraction (secrets found between {* and *})
+  * Multiple secrets in a single file
+  * No secrets present (empty result)
+  * Malformed markers (incomplete {* or missing *})
+  * Empty or null input
+  * Files with special characters in secrets
+- Write tests for the categorizeSecret() function
+- Achieve minimum 95% code coverage
+- Use Jest framework with test fixtures for test data
+- Mock file I/O operations where appropriate
+- Include parametrized tests for multiple input variations
+- Run all tests as part of the validation</code></pre>
+                            </div>
+                            <div class="tab-content" data-language="csharp">
+                                <pre><code>The secret extraction module lacks proper test coverage.
+We need unit tests that validate all edge cases and failure scenarios.
+
+Requirements:
+- Write tests for the ExtractSecrets() method covering:
+  * Normal extraction (secrets found between {* and *})
+  * Multiple secrets in a single file
+  * No secrets present (empty result)
+  * Malformed markers (incomplete {* or missing *})
+  * Empty or null input
+  * Files with special characters in secrets
+- Write tests for the CategorizeSecret() method
+- Achieve minimum 95% code coverage
+- Use xUnit framework with shared fixtures for test data
+- Mock file I/O operations where appropriate
+- Use Theory attribute for parametrized tests with multiple input variations
+- Run all tests as part of the validation</code></pre>
+                            </div>
+                        </div>
                     </li>
                     <li>Assign to <strong>Copilot</strong> and create</li>
                 </ol>
@@ -219,7 +414,7 @@ Requirements:
             <section>
                 <h2>Best Practices for Mission Success</h2>
                 <h3>Be Specific</h3>
-                <p>Vague requirements produce vague code. Describe exactly what you want. Include standards (PEP 257, unit test patterns, error handling expectations). The more detail, the better the output.</p>
+                <p>Vague requirements produce vague code. Describe exactly what you want. Include standards (PEP 257 for Python, JSDoc for JavaScript, XML docs for C#) and testing frameworks. The more detail, the better the output.</p>
 
                 <h3>Start with Small Tasks</h3>
                 <p>Before assigning complex features, start with documentation or test generation. This helps you understand how Copilot works and refine your communication style. Learn on low-stakes tasks.</p>
@@ -297,5 +492,33 @@ Requirements:
     </footer>
 
     <script src="../script.js"></script>
+    <script>
+    // Inline tab functionality for language-specific content
+    (function() {
+        const tabs = document.querySelectorAll('.language-tab');
+        tabs.forEach(function(tab) {
+            tab.onclick = function() {
+                const lang = this.getAttribute('data-language');
+                const tabGroup = this.closest('.language-tabs');
+                const container = tabGroup.nextElementSibling;
+                
+                tabGroup.querySelectorAll('.language-tab').forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                container.querySelectorAll('.tab-content').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                const selected = container.querySelector('[data-language="' + lang + '"]');
+                if (selected) {
+                    selected.classList.add('active');
+                }
+                
+                localStorage.setItem('preferred-language', lang);
+            };
+        });
+    })();
+    </script>
 </body>
 </html>
