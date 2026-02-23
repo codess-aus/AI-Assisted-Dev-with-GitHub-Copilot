@@ -482,6 +482,18 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
                 </div>
             </div>
 
+            <div class="callout callout-tip">
+                <p><strong>💡 Keeping Your Output Clean:</strong></p>
+                <p>As you progress through challenges, you'll notice your output gets cluttered with test code from previous exercises. To see only the output from your current challenge:</p>
+                <ul>
+                    <li><strong>Comment out previous test code:</strong> Add <code>#</code> (Python), <code>//</code> (JavaScript/C#) at the start of each line in the test code sections from previous exercises. Look for sections that start with <code># Test the decoder</code>, <code># Test error handling</code>, or similar comment patterns.</li>
+                    <li><strong>Or use separate sections:</strong> Keep all test code, but know that running the file will execute everything not commented out</li>
+                    <li><strong>Easiest approach:</strong> Select the block of code in your editor and press <code>Ctrl+/</code> (or <code>Cmd+/</code> on Mac) to toggle comments on/off for the entire block at once</li>
+                    <li><strong>Best practice:</strong> Wrap your tests in conditional blocks (like <code>if __name__ == "__main__":</code> in Python) so you can control what runs</li>
+                </ul>
+                <p>For Challenge 2, comment out the test code sections from Exercise 1 (<code># Test the decoder</code>) and the test code from Challenge 1 above (<code># Test error handling</code>) to see only your new <code>display_secrets_report()</code> output.</p>
+            </div>
+
             <h4>Challenge 2: Format the Output</h4>
             <p>Make the decoder output more readable by adding a function that formats secrets nicely.</p>
 
@@ -550,17 +562,6 @@ function displaySecretsReport(secrets) {
                     <pre><code>const secrets = decodeBlueprintSafe('blueprint-data.txt');
 displaySecretsReport(secrets);</code></pre>
                 </div>
-            </div>
-
-            <div class="callout callout-tip">
-                <p><strong>💡 Keeping Your Output Clean:</strong></p>
-                <p>As you progress through challenges, you'll notice your output gets cluttered with test code from previous exercises. To see only the output from your current challenge:</p>
-                <ul>
-                    <li><strong>Comment out previous test code:</strong> Add <code>#</code> (Python), <code>//</code> (JavaScript/C#) at the start of each line in the test code sections from previous exercises. Look for sections that start with <code># Test the decoder</code>, <code># Test error handling</code>, or similar comment patterns.</li>
-                    <li><strong>Or use separate sections:</strong> Keep all test code, but know that running the file will execute everything not commented out</li>
-                    <li><strong>Best practice:</strong> Wrap your tests in conditional blocks (like <code>if __name__ == "__main__":</code> in Python) so you can control what runs</li>
-                </ul>
-                <p>For this challenge, comment out the test code sections from Exercise 1 (<code># Test the decoder</code>) and Exercise 2 Challenge 1 (<code># Test error handling</code>) to see only your new <code>display_secrets_report()</code> output.</p>
             </div>
 
             <h4>Challenge 3: Count Secret Types</h4>
