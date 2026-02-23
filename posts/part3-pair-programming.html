@@ -281,8 +281,11 @@ def get_user(user_id):
                 <div class="tab-content active" data-language="python">
                     <h4>Using pytest</h4>
                     <pre><code>def validate_credit_card(card_number: str) -> bool:
-    # Implementation here
-    pass
+    # Validates credit card number format and checksum
+    # Returns True if valid, False otherwise
+    if not card_number or len(card_number) < 13 or len(card_number) > 19:
+        return False
+    # Add checksum validation here
 
 # Prompt for tests:
 # Write comprehensive pytest tests for validate_credit_card, 

@@ -308,15 +308,19 @@ function extractNames(data) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Bad naming:</strong></p>
+                    <p><strong>Bad naming (unclear):</strong></p>
                     <pre><code>def process(d):
-    # Copilot doesn't know what 'd' is
-    pass</code></pre>
+    # What is 'd'? Lacking context makes suggestions poorly targeted
+    return d
 
-                    <p><strong>Good naming:</strong></p>
+def x():
+    # Single letter names hide intent</code></pre>
+
+                    <p><strong>Good naming (clear):</strong></p>
                     <pre><code>def extract_product_names(products: List[Product]) -> List[str]:
-    # Much clearer intent; Copilot suggests appropriate operations
-    pass</code></pre>
+    # Clear intent: extract product names
+    # Copilot knows exactly what type of operation is needed
+    return [product.name for product in products]</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">

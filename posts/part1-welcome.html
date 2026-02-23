@@ -425,12 +425,13 @@ secrets.forEach((secret, index) => {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Add this comment above your function:</strong></p>
+                    <p><strong>Add this comment and function skeleton:</strong></p>
                     <pre><code># Enhanced version with error handling
 # If file doesn't exist, return an empty list and print an error message
 def decode_blueprint_safe(filename):
-    pass</code></pre>
-                    <p>Let Copilot generate a try-except block that catches FileNotFoundError.</p>
+    try:
+        # Use the original decode logic here</code></pre>
+                    <p>Now let Copilot complete the function with try-except that catches FileNotFoundError.</p>
                     
                     <p><strong>Test it:</strong></p>
                     <pre><code># Test error handling
@@ -448,9 +449,9 @@ print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
     // If file doesn't exist, return empty list and print error message
     public static List&lt;string&gt; DecodeBlueprintSafe(string filename)
     {
-        // Let Copilot add try-catch for FileNotFoundException
-        return new List&lt;string&gt;();
-    }</code></pre>
+        try
+        {
+            // Let Copilot read the file and extract secrets like the original function
                     
                     <p><strong>Test it in Main:</strong></p>
                     <pre><code>        // Test error handling
@@ -496,7 +497,10 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
                     <pre><code># Function to format and display secrets in a nice report format
 # Shows total count, numbered list, and a separator line
 def display_secrets_report(secrets):
-    pass</code></pre>
+    print("="*50)
+    print(f"LEAGUE MISSION REPORT: {len(secrets)} SECRET(S) FOUND")
+    print("="*50)
+    # Let Copilot add the rest: numbered list, formatting</code></pre>
                     
                     <p><strong>Use it:</strong></p>
                     <pre><code>secrets = decode_blueprint("blueprint-data.txt")
