@@ -497,14 +497,16 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
                     <pre><code># Function to format and display secrets in a nice report format
 # Shows total count, numbered list, and a separator line
 def display_secrets_report(secrets):
-    print("="*50)
-    print(f"LEAGUE MISSION REPORT: {len(secrets)} SECRET(S) FOUND")
-    print("="*50)
+    separator = "=" * 40
+    print(separator)
+    print("DECODED SECRETS REPORT")
+    print(separator)
+    print(f"Found {len(secrets)} secret(s):\n")
     # Let Copilot add the rest: numbered list, formatting</code></pre>
                     
                     <p><strong>Call the function to test it:</strong></p>
                     <p>Add this code at the bottom of your file (in the <code>if __name__ == "__main__":</code> block) and run it:</p>
-                    <pre><code>secrets = decode_blueprint("blueprint-data.txt")
+                    <pre><code>secrets = decode_blueprint_safe("blueprint-data.txt")
 display_secrets_report(secrets)</code></pre>
                     
                     <p><strong>Expected output:</strong></p>
@@ -531,7 +533,7 @@ Found 5 secret(s):
     }</code></pre>
                     
                     <p><strong>Call it from your Main method and run the program:</strong></p>
-                    <pre><code>        var secrets = DecodeBlueprint("blueprint-data.txt");
+                    <pre><code>        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
         DisplaySecretsReport(secrets);</code></pre>
                 </div>
 
@@ -545,7 +547,7 @@ function displaySecretsReport(secrets) {
                     
                     <p><strong>Call the function to test it:</strong></p>
                     <p>Add this code at the bottom of your file and run it with <code>node blueprint_decoder.js</code>:</p>
-                    <pre><code>const secrets = decodeBlueprint('blueprint-data.txt');
+                    <pre><code>const secrets = decodeBlueprintSafe('blueprint-data.txt');
 displaySecretsReport(secrets);</code></pre>
                 </div>
             </div>
