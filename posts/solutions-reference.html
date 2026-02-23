@@ -204,7 +204,7 @@ secrets.forEach((secret, index) =&gt; {
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
                     <p><strong>File: blueprint_decoder.py (with error handling)</strong></p>
-                    <pre><code">import re
+                    <pre><code>import re
 
 def decode_blueprint(filename):
     with open(filename, 'r') as file:
@@ -223,13 +223,14 @@ def decode_blueprint_safe(filename):
         print(f"Error: File '{filename}' not found.")
         return []
 
-# Test error handling
-secrets = decode_blueprint_safe("nonexistent.txt")
-print(f"Found {len(secrets)} secrets")  # Should print 0
+if __name__ == "__main__":
+    # Test error handling
+    secrets = decode_blueprint_safe("nonexistent.txt")
+    print(f"Found {len(secrets)} secrets")  # Should print 0
 
-# Test normal operation
-secrets = decode_blueprint_safe("blueprint-data.txt")
-print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
+    # Test normal operation
+    secrets = decode_blueprint_safe("blueprint-data.txt")
+    print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
                     <p><strong>Expected Output:</strong></p>
                     <pre><code>Error: File 'nonexistent.txt' not found.
 Found 0 secrets
@@ -457,7 +458,7 @@ Found 5 secret(s):
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
                     <p><strong>Continuation of blueprint_decoder.py:</strong></p>
-                    <pre><code"># Function to categorize secrets by their type (word before the colon)
+                    <pre><code># Function to categorize secrets by their type (word before the colon)
 def categorize_secrets(secrets):
     categories = {}
     for secret in secrets:
