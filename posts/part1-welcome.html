@@ -434,13 +434,14 @@ def decode_blueprint_safe(filename):
                     <p>Now let Copilot complete the function with try-except that catches FileNotFoundError.</p>
                     
                     <p><strong>Test it:</strong></p>
-                    <pre><code># Test error handling
-secrets = decode_blueprint_safe("nonexistent.txt")
-print(f"Found {len(secrets)} secrets")  # Should print 0
+                    <pre><code>if __name__ == "__main__":
+    # Test error handling
+    secrets = decode_blueprint_safe("nonexistent.txt")
+    print(f"Found {len(secrets)} secrets")  # Should print 0
 
-# Test normal operation
-secrets = decode_blueprint_safe("blueprint-data.txt")
-print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
+    # Test normal operation
+    secrets = decode_blueprint_safe("blueprint-data.txt")
+    print(f"Found {len(secrets)} secrets")  # Should print 5</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
@@ -486,12 +487,11 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
                 <p><strong>💡 Keeping Your Output Clean:</strong></p>
                 <p>As you progress through challenges, you'll notice your output gets cluttered with test code from previous exercises. To see only the output from your current challenge:</p>
                 <ul>
-                    <li><strong>Comment out previous test code:</strong> Add <code>#</code> (Python), <code>//</code> (JavaScript/C#) at the start of each line in the test code sections from previous exercises. Look for sections that start with <code># Test the decoder</code>, <code># Test error handling</code>, or similar comment patterns.</li>
-                    <li><strong>Or use separate sections:</strong> Keep all test code, but know that running the file will execute everything not commented out</li>
-                    <li><strong>Easiest approach:</strong> Select the block of code in your editor and press <code>Ctrl+/</code> (or <code>Cmd+/</code> on Mac) to toggle comments on/off for the entire block at once</li>
-                    <li><strong>Best practice:</strong> Wrap your tests in conditional blocks (like <code>if __name__ == "__main__":</code> in Python) so you can control what runs</li>
+                    <li><strong>Comment out previous test code (keep the `if __name__` line!):</strong> Select only the lines inside the <code>if __name__ == "__main__":</code> block from previous exercises and comment them out. Keep the <code>if __name__ == "__main__":</code> line itself uncommented so your new test code has a place to live.</li>
+                    <li><strong>Easiest approach:</strong> Select the block of code you want to hide and press <code>Ctrl+/</code> (or <code>Cmd+/</code> on Mac) to toggle comments on/off</li>
+                    <li><strong>Or use separate sections:</strong> Keep all test code, but know that running the file will execute everything in the <code>if __name__ == "__main__":</code> block</li>
                 </ul>
-                <p>For Challenge 2, comment out the test code sections from Exercise 1 (<code># Test the decoder</code>) and the test code from Challenge 1 above (<code># Test error handling</code>) to see only your new <code>display_secrets_report()</code> output.</p>
+                <p>For Challenge 2, comment out the test code sections from Challenge 1 (keep the `if __name__` line). Your new <code>display_secrets_report()</code> call will replace them inside that same block.</p>
             </div>
 
             <h4>Challenge 2: Format the Output</h4>
