@@ -900,51 +900,977 @@ function calculate(a, b, c) {</code></pre>
             <hr>
 
             <h2>Part 3: Pair Programming</h2>
-            <p>Part 3 exercises focus on refactoring, testing, and documentation. Solutions vary depending on your starting code, but the key principles are:</p>
-            <ul>
-                <li><strong>Refactoring:</strong> Extract functions, reduce duplication, improve readability</li>
-                <li><strong>Testing:</strong> Write unit tests or integration tests that verify your code works</li>
-                <li><strong>Documentation:</strong> Add docstrings and README sections that explain functionality</li>
-            </ul>
-            <p>Use Copilot to help with these tasks, and compare your approach with industry best practices.</p>
+            <p>Part 3 exercises focus on using Copilot as a true pair programmer — guiding it through refactoring, test generation, and documentation. The examples below show what ideal solutions look like for each task.</p>
+
+            <h3>Lab 3, Exercise 1: Refactoring with Copilot</h3>
+            <p>The goal is to prompt Copilot to extract helper functions and reduce duplication. Here's an example of before and after refactoring the blueprint decoder:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Before (monolithic function):</strong></p>
+                    <pre><code>def decode_blueprint(filename):
+    try:
+        with open(filename, 'r') as f:
+            content = f.read()
+        import re
+        secrets = re.findall(r'\{\* (.*?) \*\}', content)
+        print("=" * 40)
+        print("DECODED SECRETS REPORT")
+        print("=" * 40)
+        print(f"Found {len(secrets)} secret(s):\n")
+        for i, s in enumerate(secrets, 1):
+            print(f"{i}. {s}")
+        print("=" * 40)
+        cats = {}
+        for s in secrets:
+            key = s.split(":")[0].strip() if ":" in s else "UNKNOWN"
+            cats[key] = cats.get(key, 0) + 1
+        return cats
+    except FileNotFoundError:
+        print(f"Error: '{filename}' not found.")
+        return {}</code></pre>
+                    <p><strong>Refactoring prompt to give Copilot:</strong></p>
+                    <pre><code># Refactor the function above into three separate helper functions:
+# 1. read_blueprint(filename) -> str — reads and returns file content
+# 2. extract_secrets(content: str) -> List[str] — uses regex to find all {* ... *}
+# 3. categorize_secrets(secrets: List[str]) -> Dict[str, int] — counts by prefix before ":"</code></pre>
+                    <p><strong>After (refactored — what Copilot should generate):</strong></p>
+                    <pre><code>import re
+from typing import List, Dict
+
+def read_blueprint(filename: str) -> str:
+    """Read and return the raw content of a blueprint file."""
+    with open(filename, 'r') as f:
+        return f.read()
+
+def extract_secrets(content: str) -> List[str]:
+    """Extract all secrets marked between {* and *} from content."""
+    return re.findall(r'\{\* (.*?) \*\}', content)
+
+def categorize_secrets(secrets: List[str]) -> Dict[str, int]:
+    """Count secrets by their category prefix (text before the first colon)."""
+    categories: Dict[str, int] = {}
+    for secret in secrets:
+        key = secret.split(":")[0].strip() if ":" in secret else "UNKNOWN"
+        categories[key] = categories.get(key, 0) + 1
+    return categories
+
+def decode_blueprint_safe(filename: str) -> List[str]:
+    """Full pipeline: read file safely and extract secrets."""
+    try:
+        content = read_blueprint(filename)
+        return extract_secrets(content)
+    except FileNotFoundError:
+        print(f"Error: '{filename}' not found.")
+        return []</code></pre>
+                    <p><strong>Why this is better:</strong> Each function has a single responsibility, making it independently testable. The <code>decode_blueprint_safe</code> orchestrator is now easy to read and modify.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Refactoring prompt to give Copilot:</strong></p>
+                    <pre><code>// Refactor the BlueprintDecoder class by extracting:
+// 1. ReadBlueprint(string filename) -> string — file I/O only
+// 2. ExtractSecrets(string content) -> List&lt;string&gt; — regex parsing only
+// 3. CategorizeSecrets(List&lt;string&gt; secrets) -> Dictionary&lt;string, int&gt; — categorization only</code></pre>
+                    <p><strong>After (refactored):</strong></p>
+                    <pre><code>using System.IO;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
+
+public class BlueprintDecoder
+{
+    private static readonly Regex SecretPattern = new Regex(@"\{\* (.*?) \*\}", RegexOptions.Compiled);
+
+    /// &lt;summary&gt;Read and return the raw content of a blueprint file.&lt;/summary&gt;
+    public static string ReadBlueprint(string filename) =&gt; File.ReadAllText(filename);
+
+    /// &lt;summary&gt;Extract all secrets marked between {* and *} from content.&lt;/summary&gt;
+    public static List&lt;string&gt; ExtractSecrets(string content) =&gt;
+        SecretPattern.Matches(content)
+                     .Select(m =&gt; m.Groups[1].Value)
+                     .ToList();
+
+    /// &lt;summary&gt;Count secrets by their category prefix (text before the first colon).&lt;/summary&gt;
+    public static Dictionary&lt;string, int&gt; CategorizeSecrets(List&lt;string&gt; secrets) =&gt;
+        secrets.GroupBy(s =&gt; s.Contains(':') ? s.Split(':')[0].Trim() : "UNKNOWN")
+               .ToDictionary(g =&gt; g.Key, g =&gt; g.Count());
+
+    /// &lt;summary&gt;Full pipeline: read file safely and extract secrets.&lt;/summary&gt;
+    public static List&lt;string&gt; DecodeBlueprintSafe(string filename)
+    {
+        try { return ExtractSecrets(ReadBlueprint(filename)); }
+        catch (FileNotFoundException) { Console.WriteLine($"Error: '{filename}' not found."); return new(); }
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Refactoring prompt to give Copilot:</strong></p>
+                    <pre><code>/**
+ * Refactor the decode function into three helpers:
+ * 1. readBlueprint(filename): string — file I/O only
+ * 2. extractSecrets(content): string[] — regex parsing only
+ * 3. categorizeSecrets(secrets): Record&lt;string, number&gt; — counts by prefix before ":"
+ */</code></pre>
+                    <p><strong>After (refactored):</strong></p>
+                    <pre><code>const fs = require('fs');
+
+/** Read and return the raw content of a blueprint file. */
+function readBlueprint(filename) {
+    return fs.readFileSync(filename, 'utf8');
+}
+
+/** Extract all secrets marked between {* and *} from content. */
+function extractSecrets(content) {
+    return [...content.matchAll(/\{\* (.*?) \*\}/g)].map(m =&gt; m[1]);
+}
+
+/** Count secrets by their category prefix (text before the first colon). */
+function categorizeSecrets(secrets) {
+    return secrets.reduce((acc, s) =&gt; {
+        const key = s.includes(':') ? s.split(':')[0].trim() : 'UNKNOWN';
+        acc[key] = (acc[key] ?? 0) + 1;
+        return acc;
+    }, {});
+}
+
+/** Full pipeline: read file safely and extract secrets. */
+function decodeBlueprintSafe(filename) {
+    try {
+        return extractSecrets(readBlueprint(filename));
+    } catch (err) {
+        console.log(`Error: '${filename}' not found.`);
+        return [];
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Lab 3, Exercise 2: Writing Unit Tests with Copilot</h3>
+            <p>Prompt Copilot to generate tests for each helper function. The ideal test suite should cover happy paths, edge cases, and error conditions.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Prompt to give Copilot:</strong></p>
+                    <pre><code># Write pytest unit tests for extract_secrets() and categorize_secrets().
+# Include: happy path, no matches, multiple secrets, categorization by prefix</code></pre>
+                    <p><strong>What Copilot should generate:</strong></p>
+                    <pre><code>import pytest
+from blueprint_decoder import extract_secrets, categorize_secrets
+
+def test_extract_secrets_finds_all():
+    content = "data {* SECRET_ONE *} more {* KEY: VALUE *} end"
+    assert extract_secrets(content) == ["SECRET_ONE", "KEY: VALUE"]
+
+def test_extract_secrets_no_matches():
+    assert extract_secrets("no secrets here") == []
+
+def test_extract_secrets_empty_string():
+    assert extract_secrets("") == []
+
+def test_categorize_secrets_by_prefix():
+    secrets = ["AGENT_CODENAME: SHADOWMIND", "VAULT_ACCESS_CODE: DELTA-7", "AGENT_CODENAME: GHOSTFIRE"]
+    result = categorize_secrets(secrets)
+    assert result == {"AGENT_CODENAME": 2, "VAULT_ACCESS_CODE": 1}
+
+def test_categorize_secrets_no_colon():
+    assert categorize_secrets(["SECURE_COMMS_PROTOCOL"]) == {"UNKNOWN": 1}
+
+def test_categorize_secrets_empty():
+    assert categorize_secrets([]) == {}</code></pre>
+                    <p><strong>Run with:</strong> <code>pytest blueprint_decoder_test.py -v</code></p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>What Copilot should generate (xUnit):</strong></p>
+                    <pre><code>using Xunit;
+using System.Collections.Generic;
+
+public class BlueprintDecoderTests
+{
+    [Fact]
+    public void ExtractSecrets_FindsAllSecrets()
+    {
+        var content = "data {* SECRET_ONE *} more {* KEY: VALUE *} end";
+        var result = BlueprintDecoder.ExtractSecrets(content);
+        Assert.Equal(new List&lt;string&gt; { "SECRET_ONE", "KEY: VALUE" }, result);
+    }
+
+    [Fact]
+    public void ExtractSecrets_NoMatches_ReturnsEmpty()
+    {
+        Assert.Empty(BlueprintDecoder.ExtractSecrets("no secrets here"));
+    }
+
+    [Fact]
+    public void CategorizeSecrets_GroupsByPrefix()
+    {
+        var secrets = new List&lt;string&gt; { "AGENT_CODENAME: SHADOWMIND", "VAULT_ACCESS_CODE: DELTA-7", "AGENT_CODENAME: GHOSTFIRE" };
+        var result = BlueprintDecoder.CategorizeSecrets(secrets);
+        Assert.Equal(2, result["AGENT_CODENAME"]);
+        Assert.Equal(1, result["VAULT_ACCESS_CODE"]);
+    }
+
+    [Fact]
+    public void CategorizeSecrets_NoColon_MarkedUnknown()
+    {
+        var result = BlueprintDecoder.CategorizeSecrets(new List&lt;string&gt; { "SECURE_COMMS_PROTOCOL" });
+        Assert.Equal(1, result["UNKNOWN"]);
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>What Copilot should generate (Jest):</strong></p>
+                    <pre><code>const { extractSecrets, categorizeSecrets } = require('./blueprint_decoder');
+
+describe('extractSecrets', () =&gt; {
+    test('finds all secrets', () =&gt; {
+        const content = 'data {* SECRET_ONE *} more {* KEY: VALUE *} end';
+        expect(extractSecrets(content)).toEqual(['SECRET_ONE', 'KEY: VALUE']);
+    });
+
+    test('returns empty array when no matches', () =&gt; {
+        expect(extractSecrets('no secrets here')).toEqual([]);
+    });
+
+    test('handles empty string', () =&gt; {
+        expect(extractSecrets('')).toEqual([]);
+    });
+});
+
+describe('categorizeSecrets', () =&gt; {
+    test('groups secrets by prefix', () =&gt; {
+        const secrets = ['AGENT_CODENAME: SHADOWMIND', 'VAULT_ACCESS_CODE: DELTA-7', 'AGENT_CODENAME: GHOSTFIRE'];
+        expect(categorizeSecrets(secrets)).toEqual({ AGENT_CODENAME: 2, VAULT_ACCESS_CODE: 1 });
+    });
+
+    test('marks secrets without colon as UNKNOWN', () =&gt; {
+        expect(categorizeSecrets(['SECURE_COMMS_PROTOCOL'])).toEqual({ UNKNOWN: 1 });
+    });
+
+    test('returns empty object for empty array', () =&gt; {
+        expect(categorizeSecrets([])).toEqual({});
+    });
+});</code></pre>
+                    <p><strong>Run with:</strong> <code>npx jest blueprint_decoder.test.js</code></p>
+                </div>
+            </div>
+
+            <h3>Lab 3, Exercise 3: Documentation Generation</h3>
+            <p>Prompt Copilot to write comprehensive docstrings. The key is giving it a comment that specifies <em>what to document</em>: purpose, parameters, return value, exceptions, and an example.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Prompt:</strong> Place your cursor inside a function and type:</p>
+                    <pre><code># Write a detailed docstring covering: purpose, Args, Returns, Raises, and an Example</code></pre>
+                    <p><strong>What Copilot should generate for <code>extract_secrets</code>:</strong></p>
+                    <pre><code>def extract_secrets(content: str) -> List[str]:
+    """
+    Extract all secrets marked between {* and *} delimiters from a string.
+
+    Searches the given content for all occurrences of the pattern {* ... *}
+    and returns the text found between each pair of markers.
+
+    Args:
+        content: The raw text to search. May contain zero or more secret markers.
+
+    Returns:
+        A list of extracted secret strings, in the order they appear.
+        Returns an empty list if no markers are found.
+
+    Example:
+        &gt;&gt;&gt; extract_secrets("data {* VAULT_CODE: DELTA-7 *} and {* PROTOCOL *}")
+        ['VAULT_CODE: DELTA-7', 'PROTOCOL']
+    """
+    return re.findall(r'\{\* (.*?) \*\}', content)</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>What Copilot should generate for <code>ExtractSecrets</code>:</strong></p>
+                    <pre><code>/// &lt;summary&gt;
+/// Extracts all secrets marked between {* and *} delimiters from a string.
+/// Searches the given content for all occurrences of the pattern &amp;lbrace;* ... *&amp;rbrace;
+/// and returns the captured groups.
+/// &lt;/summary&gt;
+/// &lt;param name="content"&gt;
+/// The raw text to search. May contain zero or more secret markers.
+/// &lt;/param&gt;
+/// &lt;returns&gt;
+/// A list of extracted secret strings in the order they appear.
+/// Returns an empty list if no markers are found.
+/// &lt;/returns&gt;
+/// &lt;example&gt;
+/// &lt;code&gt;
+/// var secrets = ExtractSecrets("data {* VAULT_CODE: DELTA-7 *} end");
+/// // secrets == ["VAULT_CODE: DELTA-7"]
+/// &lt;/code&gt;
+/// &lt;/example&gt;
+public static List&lt;string&gt; ExtractSecrets(string content) =&gt; ...</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>What Copilot should generate for <code>extractSecrets</code>:</strong></p>
+                    <pre><code>/**
+ * Extract all secrets marked between {* and *} delimiters from a string.
+ *
+ * Searches the given content for all occurrences of the pattern {* ... *}
+ * and returns the text found between each pair of markers.
+ *
+ * @param {string} content - The raw text to search. May contain zero or more secret markers.
+ * @returns {string[]} An array of extracted secret strings in the order they appear.
+ *   Returns an empty array if no markers are found.
+ *
+ * @example
+ * extractSecrets("data {* VAULT_CODE: DELTA-7 *} and {* PROTOCOL *}");
+ * // =&gt; ['VAULT_CODE: DELTA-7', 'PROTOCOL']
+ */
+function extractSecrets(content) { ... }</code></pre>
+                </div>
+            </div>
 
             <hr>
 
             <h2>Part 4: Copilot Chat vs Agent Mode</h2>
-            <p>These exercises are exploratory and involve comparing different ways of working with Copilot. Solutions depend on your own experiences and observations.</p>
+            <p>These exercises are about recognising when to use Chat (Ask) Mode for targeted, surgical changes versus Agent (Autonomous) Mode for larger, multi-file tasks. The examples below show what good output looks like for each scenario.</p>
+
+            <h3>Lab 4, Exercise 1: Chat Mode — Targeted Improvement</h3>
+            <p>The task is to add retry logic with exponential backoff to the network call. This is a focused, single-function change — ideal for Chat Mode.</p>
+
+            <p><strong>Chat prompt to use:</strong></p>
+            <pre><code>Add retry logic with exponential backoff to the retrieve_and_decode_blueprint function.
+Retry up to 3 times on network errors (ConnectionError, Timeout). Wait 1s, 2s, 4s between attempts.
+Log each retry attempt. Do not change the function signature.</code></pre>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>What Copilot should produce:</strong></p>
+                    <pre><code>import requests
+import re
+import time
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+
+MAX_RETRIES = 3
+BASE_DELAY = 1  # seconds
+
+def retrieve_and_decode_blueprint(blueprint_url: str) -> None:
+    """Retrieve a blueprint URL and print extracted secrets. Retries up to 3 times."""
+    last_error = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = requests.get(blueprint_url, timeout=10)
+            response.raise_for_status()
+            secrets = re.findall(r"\{\*(.*?)\*\}", response.text)
+            for idx, secret in enumerate(secrets, 1):
+                print(f"Secret #{idx}: {secret.strip()}")
+            return
+        except (requests.ConnectionError, requests.Timeout) as e:
+            last_error = e
+            wait = BASE_DELAY * (2 ** (attempt - 1))
+            logging.warning(f"Attempt {attempt}/{MAX_RETRIES} failed: {e}. Retrying in {wait}s...")
+            time.sleep(wait)
+    logging.error(f"All {MAX_RETRIES} attempts failed. Last error: {last_error}")</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>What Copilot should produce:</strong></p>
+                    <pre><code>using System;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+public class LeagueHQ
+{
+    private static readonly HttpClient _client = new() { Timeout = TimeSpan.FromSeconds(10) };
+    private static readonly Regex _pattern = new(@"\{\*(.*?)\*\}", RegexOptions.Compiled);
+    private const int MaxRetries = 3;
+
+    private static async Task RetrieveAndDecodeBlueprint(string url)
+    {
+        Exception? lastError = null;
+        for (int attempt = 1; attempt &lt;= MaxRetries; attempt++)
+        {
+            try
+            {
+                var content = await _client.GetStringAsync(url);
+                var matches = _pattern.Matches(content);
+                for (int i = 0; i &lt; matches.Count; i++)
+                    Console.WriteLine($"Secret #{i + 1}: {matches[i].Groups[1].Value.Trim()}");
+                return;
+            }
+            catch (HttpRequestException e)
+            {
+                lastError = e;
+                int wait = (int)Math.Pow(2, attempt - 1);
+                Console.Error.WriteLine($"Attempt {attempt}/{MaxRetries} failed: {e.Message}. Retrying in {wait}s...");
+                await Task.Delay(wait * 1000);
+            }
+        }
+        Console.Error.WriteLine($"All {MaxRetries} attempts failed. Last error: {lastError?.Message}");
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>What Copilot should produce:</strong></p>
+                    <pre><code>const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 1000;
+
+async function retrieveAndDecodeBlueprint(url) {
+    let lastError;
+    for (let attempt = 1; attempt &lt;= MAX_RETRIES; attempt++) {
+        try {
+            const controller = new AbortController();
+            const timer = setTimeout(() =&gt; controller.abort(), 10000);
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timer);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const text = await response.text();
+            [...text.matchAll(/\{\*(.*?)\*\}/g)].forEach((m, i) =&gt;
+                console.log(`Secret #${i + 1}: ${m[1].trim()}`)
+            );
+            return;
+        } catch (err) {
+            lastError = err;
+            const wait = BASE_DELAY_MS * Math.pow(2, attempt - 1);
+            console.warn(`Attempt ${attempt}/${MAX_RETRIES} failed: ${err.message}. Retrying in ${wait}ms...`);
+            await new Promise(r =&gt; setTimeout(r, wait));
+        }
+    }
+    console.error(`All ${MAX_RETRIES} attempts failed. Last error: ${lastError?.message}`);
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Lab 4, Exercise 2: Agent Mode — Scaffold a Full CLI Tool</h3>
+            <p>This task spans multiple files and requires coordinating code, tests, and documentation — ideal for Agent Mode. Use this as your Agent Mode prompt:</p>
+
+            <div class="callout callout-info">
+                <p><strong>Agent Mode prompt:</strong> "Scaffold a Node.js CLI tool called <code>league-decoder</code> that: (1) accepts <code>--source &lt;url&gt;</code>, <code>--marker &lt;start:end&gt;</code>, and <code>--max-secrets &lt;n&gt;</code> flags; (2) fetches the URL with a 10s timeout and 3 retries; (3) extracts secrets between the markers; (4) prints a formatted report to stdout; (5) includes a <code>decoder.test.js</code> with at least a happy-path and error-path test; (6) creates a README.md with usage examples."</p>
+            </div>
+
+            <p><strong>What Agent Mode should produce (key files):</strong></p>
+            <pre><code>league-decoder/
+├── cli.js          ← entry point, argument parsing
+├── decoder.js      ← fetch + extract logic with retries
+├── formatter.js    ← report formatting helper
+├── decoder.test.js ← Jest tests: happy path + timeout simulation
+└── README.md       ← usage, flags, examples</code></pre>
+
+            <p><strong>Expected <code>cli.js</code> outline:</strong></p>
+            <pre><code>#!/usr/bin/env node
+const { program } = require('commander');
+const { fetchAndDecode } = require('./decoder');
+
+program
+    .requiredOption('--source &lt;url&gt;', 'Blueprint URL to decode')
+    .option('--marker &lt;start:end&gt;', 'Secret delimiters', '{*:*}')
+    .option('--max-secrets &lt;n&gt;', 'Maximum secrets to display', '10')
+    .parse();
+
+const opts = program.opts();
+const [start, end] = opts.marker.split(':');
+
+fetchAndDecode(opts.source, start, end, parseInt(opts.maxSecrets))
+    .catch(err =&gt; { console.error('Fatal:', err.message); process.exit(1); });</code></pre>
+
+            <div class="callout callout-info">
+                <p><strong>Key takeaway:</strong> Agent Mode is powerful for scaffolding, but always review the generated file structure and test output before trusting it fully. It may miss edge cases or make assumptions about your environment. Chat Mode is better when you only need one precise change.</p>
+            </div>
 
             <hr>
 
-            <h2>Part 5: Security & Guardrails</h2>
-            <p>Part 5 exercises involve code review and security analysis. Solutions focus on:</p>
-            <ul>
-                <li>Identifying security vulnerabilities in Copilot-generated code</li>
-                <li>Understanding common weaknesses and how to mitigate them</li>
-                <li>Building guardrails into your workflow</li>
-            </ul>
-            <p>There's no "one correct solution"; the goal is developing your critical eye for security issues.</p>
+            <h2>Part 5: Security &amp; Guardrails</h2>
+            <p>Part 5 exercises are about hardening the decoder against real-world threats. Below are the ideal solutions for each guardrail category.</p>
+
+            <h3>Lab 5, Exercise 1: URL Validation (Allowlist)</h3>
+            <p>Never trust user-supplied URLs. Add an allowlist check before making any network request.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>from urllib.parse import urlparse
+
+ALLOWED_HOSTS = {
+    "raw.githubusercontent.com",
+    "league-blueprints.internal",
+}
+
+def validate_url(url: str) -> None:
+    """Raise ValueError if the URL's host is not in the allowlist."""
+    parsed = urlparse(url)
+    if parsed.scheme not in ("https",):
+        raise ValueError(f"URL must use HTTPS. Got: {parsed.scheme!r}")
+    if parsed.netloc not in ALLOWED_HOSTS:
+        raise ValueError(f"Host '{parsed.netloc}' is not in the allowed list.")
+
+# Usage:
+try:
+    validate_url("https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt")
+    print("URL is valid")
+except ValueError as e:
+    print(f"Blocked: {e}")</code></pre>
+                    <p><strong>Expected Output (valid URL):</strong> <code>URL is valid</code><br>
+                    <strong>Expected Output (blocked):</strong> <code>Blocked: Host 'evil.example.com' is not in the allowed list.</code></p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <pre><code>using System;
+
+public static class UrlValidator
+{
+    private static readonly HashSet&lt;string&gt; AllowedHosts = new()
+    {
+        "raw.githubusercontent.com",
+        "league-blueprints.internal"
+    };
+
+    /// &lt;summary&gt;Throw ArgumentException if URL is not HTTPS or host is not allowed.&lt;/summary&gt;
+    public static void ValidateUrl(string url)
+    {
+        var uri = new Uri(url);
+        if (uri.Scheme != "https")
+            throw new ArgumentException($"URL must use HTTPS. Got: '{uri.Scheme}'");
+        if (!AllowedHosts.Contains(uri.Host))
+            throw new ArgumentException($"Host '{uri.Host}' is not in the allowed list.");
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <pre><code>const ALLOWED_HOSTS = new Set([
+    'raw.githubusercontent.com',
+    'league-blueprints.internal',
+]);
+
+/**
+ * Throw an Error if the URL is not HTTPS or the host is not in the allowlist.
+ * @param {string} url
+ */
+function validateUrl(url) {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:')
+        throw new Error(`URL must use HTTPS. Got: '${parsed.protocol}'`);
+    if (!ALLOWED_HOSTS.has(parsed.hostname))
+        throw new Error(`Host '${parsed.hostname}' is not in the allowed list.`);
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Lab 5, Exercise 2: Structured Logging (No Secret Leakage)</h3>
+            <p>Audit logs should record <em>that</em> secrets were found — not <em>what</em> they are. Here's the pattern:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>import logging
+import json
+from datetime import datetime, timezone
+
+def log_mission_result(url: str, secrets_count: int, success: bool, reason: str = "") -> None:
+    """Emit a structured audit log entry. Never log secret content."""
+    entry = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "source": url,
+        "secrets_recovered": secrets_count,
+        "success": success,
+        "reason": reason,
+    }
+    logging.info(json.dumps(entry))
+
+# Good — logs metadata only:
+log_mission_result("https://raw.githubusercontent.com/...", secrets_count=5, success=True)
+
+# BAD — never do this:
+# logging.info(f"Secrets: {secrets}")  # exposes classified data</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <pre><code>/**
+ * Emit a structured audit log. Never include actual secret values.
+ * @param {string} url
+ * @param {number} secretsCount
+ * @param {boolean} success
+ * @param {string} [reason]
+ */
+function logMissionResult(url, secretsCount, success, reason = '') {
+    console.log(JSON.stringify({
+        timestamp: new Date().toISOString(),
+        source: url,
+        secrets_recovered: secretsCount,
+        success,
+        reason,
+    }));
+}
+
+// Good — logs metadata only:
+logMissionResult('https://raw.githubusercontent.com/...', 5, true);
+// BAD — never do this:
+// console.log('Secrets:', secrets);  // exposes classified data</code></pre>
+                </div>
+            </div>
+
+            <h3>Lab 5, Exercise 3: Security Test Cases</h3>
+            <p>Every guardrail needs a corresponding test. Here's what the happy-path and failure-path tests should look like:</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <pre><code>import pytest
+from decoder import validate_url
+
+def test_valid_https_url_passes():
+    validate_url("https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt")
+
+def test_http_url_is_blocked():
+    with pytest.raises(ValueError, match="must use HTTPS"):
+        validate_url("http://raw.githubusercontent.com/some/path")
+
+def test_unknown_host_is_blocked():
+    with pytest.raises(ValueError, match="not in the allowed list"):
+        validate_url("https://evil.example.com/payload")</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <pre><code>const { validateUrl } = require('./decoder');
+
+test('valid HTTPS URL passes', () =&gt; {
+    expect(() =&gt; validateUrl('https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt'))
+        .not.toThrow();
+});
+
+test('HTTP URL is blocked', () =&gt; {
+    expect(() =&gt; validateUrl('http://raw.githubusercontent.com/some/path'))
+        .toThrow('must use HTTPS');
+});
+
+test('unknown host is blocked', () =&gt; {
+    expect(() =&gt; validateUrl('https://evil.example.com/payload'))
+        .toThrow('not in the allowed list');
+});</code></pre>
+                </div>
+            </div>
 
             <hr>
 
             <h2>Part 6: Production Workflows</h2>
-            <p>Part 6 involves building a To-Do API. The exercise is open-ended and depends on your implementation choices. Key milestones should include:</p>
-            <ul>
-                <li>CRUD endpoints (Create, Read, Update, Delete todos)</li>
-                <li>Input validation and error handling</li>
-                <li>Tests for your endpoints</li>
-                <li>Documentation (README, API docs)</li>
-            </ul>
-            <p>Use Copilot to help scaffold the API, but ensure you understand and review all generated code before deploying.</p>
+            <p>Part 6 is about assembling everything into a production-ready CLI tool with structured output, observability, and tests. The ideal deliverable is a working tool in one language; the examples below show what the key pieces should look like.</p>
+
+            <h3>Lab 6: The Production-Ready Decoder CLI</h3>
+            <p>By the end of this lab your project should have this structure:</p>
+            <pre><code>league-mission-control/
+├── decoder.py       ← core: validate, fetch (with retries), extract, cap, log
+├── cli.py           ← argument parsing + entry point
+├── test_decoder.py  ← pytest: happy path + failure path + empty payload
+└── README.md        ← quickstart, flags, example output</code></pre>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>decoder.py — hardened core:</strong></p>
+                    <pre><code>import re
+import time
+import json
+import logging
+import requests
+from datetime import datetime, timezone
+from urllib.parse import urlparse
+from typing import List
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+ALLOWED_HOSTS = {"raw.githubusercontent.com"}
+SECRET_PATTERN = re.compile(r"\{\*(.*?)\*\}")
+
+def validate_url(url: str) -> None:
+    parsed = urlparse(url)
+    if parsed.scheme != "https":
+        raise ValueError(f"URL must use HTTPS. Got: {parsed.scheme!r}")
+    if parsed.netloc not in ALLOWED_HOSTS:
+        raise ValueError(f"Host '{parsed.netloc}' is not in the allowed list.")
+
+def fetch_with_retry(url: str, max_retries: int = 3, timeout: int = 10) -> str:
+    for attempt in range(1, max_retries + 1):
+        try:
+            r = requests.get(url, timeout=timeout)
+            r.raise_for_status()
+            return r.text
+        except (requests.ConnectionError, requests.Timeout, requests.HTTPError) as e:
+            if attempt == max_retries:
+                raise
+            wait = 2 ** (attempt - 1)
+            logging.warning(json.dumps({"event": "retry", "attempt": attempt, "wait_s": wait, "reason": str(e)}))
+            time.sleep(wait)
+
+def extract_secrets(content: str, max_secrets: int = 10) -> List[str]:
+    return [m.strip()[:200] for m in SECRET_PATTERN.findall(content)][:max_secrets]
+
+def run_mission(url: str, max_secrets: int = 10) -> None:
+    start = time.monotonic()
+    validate_url(url)
+    content = fetch_with_retry(url)
+    secrets = extract_secrets(content, max_secrets)
+    duration_ms = int((time.monotonic() - start) * 1000)
+    logging.info(json.dumps({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "source": url, "secrets_recovered": len(secrets),
+        "fetch_duration_ms": duration_ms, "success": True
+    }))
+    print(f"=== MISSION REPORT ({len(secrets)} secret(s)) ===")
+    for i, s in enumerate(secrets, 1):
+        print(f"  {i}. {s}")</code></pre>
+
+                    <p><strong>cli.py — entry point:</strong></p>
+                    <pre><code>import argparse
+from decoder import run_mission
+
+def main():
+    parser = argparse.ArgumentParser(description="League Mission Control Decoder")
+    parser.add_argument("--source", required=True, help="Blueprint URL to decode")
+    parser.add_argument("--max-secrets", type=int, default=10, help="Maximum secrets to display")
+    args = parser.parse_args()
+    run_mission(args.source, args.max_secrets)
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+                    <p><strong>test_decoder.py — test suite:</strong></p>
+                    <pre><code>import pytest
+from unittest.mock import patch, MagicMock
+from decoder import validate_url, extract_secrets, run_mission
+
+def test_validate_url_passes_allowed_host():
+    validate_url("https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt")
+
+def test_validate_url_blocks_http():
+    with pytest.raises(ValueError, match="must use HTTPS"):
+        validate_url("http://raw.githubusercontent.com/path")
+
+def test_extract_secrets_caps_at_max():
+    content = " ".join(f"{{* SECRET_{i} *}}" for i in range(20))
+    assert len(extract_secrets(content, max_secrets=5)) == 5
+
+def test_run_mission_happy_path(capsys):
+    with patch("decoder.fetch_with_retry", return_value="{* AGENT_CODENAME: SHADOWMIND *}"):
+        run_mission("https://raw.githubusercontent.com/org/repo/file.txt")
+    captured = capsys.readouterr()
+    assert "AGENT_CODENAME: SHADOWMIND" in captured.out
+
+def test_run_mission_empty_response(capsys):
+    with patch("decoder.fetch_with_retry", return_value="no secrets here"):
+        run_mission("https://raw.githubusercontent.com/org/repo/file.txt")
+    captured = capsys.readouterr()
+    assert "0 secret(s)" in captured.out</code></pre>
+
+                    <p><strong>Run with:</strong></p>
+                    <pre><code>python cli.py --source https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt
+pytest test_decoder.py -v</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Project layout:</strong></p>
+                    <pre><code>LeagueMissionControl/
+├── Decoder.cs        ← validate + fetch with retry + extract
+├── Program.cs        ← CLI entry point (System.CommandLine or args[])
+├── DecoderTests.cs   ← xUnit: happy path + timeout + empty response
+└── README.md</code></pre>
+                    <p><strong>Decoder.cs — key methods:</strong></p>
+                    <pre><code>using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+public static class Decoder
+{
+    private static readonly HttpClient Client = new() { Timeout = TimeSpan.FromSeconds(10) };
+    private static readonly Regex Pattern = new(@"\{\*(.*?)\*\}", RegexOptions.Compiled);
+    private static readonly HashSet&lt;string&gt; AllowedHosts = new() { "raw.githubusercontent.com" };
+
+    public static void ValidateUrl(string url)
+    {
+        var uri = new Uri(url);
+        if (uri.Scheme != "https") throw new ArgumentException($"Must use HTTPS. Got '{uri.Scheme}'");
+        if (!AllowedHosts.Contains(uri.Host)) throw new ArgumentException($"Host '{uri.Host}' not allowed.");
+    }
+
+    public static async Task&lt;string&gt; FetchWithRetry(string url, int maxRetries = 3)
+    {
+        for (int attempt = 1; attempt &lt;= maxRetries; attempt++)
+        {
+            try { return await Client.GetStringAsync(url); }
+            catch (HttpRequestException e) when (attempt &lt; maxRetries)
+            {
+                int wait = (int)Math.Pow(2, attempt - 1);
+                Console.Error.WriteLine($"Attempt {attempt} failed: {e.Message}. Retrying in {wait}s...");
+                await Task.Delay(wait * 1000);
+            }
+        }
+        return await Client.GetStringAsync(url); // final attempt — let it throw
+    }
+
+    public static List&lt;string&gt; ExtractSecrets(string content, int maxSecrets = 10)
+    {
+        var results = new List&lt;string&gt;();
+        foreach (Match m in Pattern.Matches(content))
+        {
+            if (results.Count &gt;= maxSecrets) break;
+            var val = m.Groups[1].Value.Trim();
+            results.Add(val.Length &gt; 200 ? val[..200] : val);
+        }
+        return results;
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Project layout:</strong></p>
+                    <pre><code>league-mission-control/
+├── decoder.js        ← validate + fetch with retry + extract
+├── cli.js            ← entry point with commander
+├── decoder.test.js   ← Jest tests
+└── README.md</code></pre>
+                    <p><strong>decoder.js — core:</strong></p>
+                    <pre><code>const ALLOWED_HOSTS = new Set(['raw.githubusercontent.com']);
+const SECRET_RE = /\{\*(.*?)\*\}/g;
+
+function validateUrl(url) {
+    const p = new URL(url);
+    if (p.protocol !== 'https:') throw new Error(`Must use HTTPS. Got: '${p.protocol}'`);
+    if (!ALLOWED_HOSTS.has(p.hostname)) throw new Error(`Host '${p.hostname}' not allowed.`);
+}
+
+async function fetchWithRetry(url, maxRetries = 3) {
+    let lastErr;
+    for (let i = 1; i &lt;= maxRetries; i++) {
+        try {
+            const ctrl = new AbortController();
+            const t = setTimeout(() =&gt; ctrl.abort(), 10000);
+            const res = await fetch(url, { signal: ctrl.signal });
+            clearTimeout(t);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.text();
+        } catch (e) {
+            lastErr = e;
+            if (i &lt; maxRetries) {
+                const wait = Math.pow(2, i - 1) * 1000;
+                console.warn(`Attempt ${i} failed: ${e.message}. Retrying in ${wait}ms...`);
+                await new Promise(r =&gt; setTimeout(r, wait));
+            }
+        }
+    }
+    throw lastErr;
+}
+
+function extractSecrets(content, maxSecrets = 10) {
+    return [...content.matchAll(SECRET_RE)]
+        .map(m =&gt; m[1].trim().slice(0, 200))
+        .slice(0, maxSecrets);
+}
+
+module.exports = { validateUrl, fetchWithRetry, extractSecrets };</code></pre>
+
+                    <p><strong>Run with:</strong></p>
+                    <pre><code>node cli.js --source https://raw.githubusercontent.com/microsoft/CopilotAdventures/main/Data/scrolls.txt
+npx jest decoder.test.js</code></pre>
+                </div>
+            </div>
 
             <hr>
 
-            <h2>Part 7: Wrap-Up & Next Steps</h2>
-            <p>Part 7 exercises are reflective and personal. They don't have "correct" answers; instead, focus on:</p>
+            <h2>Part 7: Wrap-Up &amp; Next Steps</h2>
+            <p>Part 7 is reflective and personal — there are no single "correct" answers. The exercises below offer prompts and examples to help you consolidate what you've learned and plan your next steps with Copilot.</p>
+
+            <h3>Lab 7, Exercise 1: Discover Features You Haven't Used</h3>
+            <p>Here are some high-value Copilot features that most developers haven't explored yet:</p>
             <ul>
-                <li>Exploring Copilot features you haven't discovered yet</li>
-                <li>Creating your own learning path</li>
-                <li>Building a "Copilot home base" of resources and best practices</li>
+                <li><strong>Copilot Chat context commands:</strong> Type <code>#file</code>, <code>#selection</code>, or <code>#codebase</code> in Chat to give Copilot targeted context without copy-pasting.</li>
+                <li><strong><code>@workspace</code> agent:</strong> Ask questions about your entire project — e.g., "What files handle error logging?" — and Copilot will search across all files.</li>
+                <li><strong>Inline Chat (<code>Ctrl+I</code> / <code>Cmd+I</code>):</strong> Open a chat prompt directly inside the editor to refactor a selected block without switching panels.</li>
+                <li><strong>Fix &amp; Explain in the Problems panel:</strong> Right-click any error in the Problems panel and select "Fix using Copilot" or "Explain using Copilot".</li>
+                <li><strong>Terminal Copilot (<code>Ctrl+I</code> in the terminal):</strong> Ask for shell commands in natural language — e.g., "find all Python files modified in the last 7 days".</li>
+                <li><strong>Copilot Instructions (<code>.github/copilot-instructions.md</code>):</strong> Add a file with project-specific conventions and Copilot will respect them in every suggestion.</li>
             </ul>
+
+            <h3>Lab 7, Exercise 2: Build Your Integration Plan</h3>
+            <p>A well-structured integration plan answers these questions for your own work. Fill in each section:</p>
+            <pre><code># My Copilot Integration Plan
+
+## 1. Where I'll use Copilot first
+# (e.g., "Writing unit tests for the auth module — I always avoid it, Copilot can scaffold them fast")
+
+## 2. Workflow rules I'll establish
+# (e.g., "Never accept a Copilot suggestion without reading every line, especially security-sensitive code")
+
+## 3. Prompting techniques I'll adopt from today
+# (e.g., "Always add type hints + a docstring before writing function bodies")
+
+## 4. One thing I'll try in Agent Mode this week
+# (e.g., "Refactor the legacy CSV parser into smaller, tested functions")
+
+## 5. My 'Copilot home base' bookmarks
+# - GitHub Copilot docs: https://docs.github.com/en/copilot
+# - What's new in Copilot: https://github.blog/changelog/label/copilot/
+# - Responsible AI with Copilot: https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features</code></pre>
+
+            <h3>Lab 7, Exercise 3: Reflection Prompts</h3>
+            <p>Use Copilot Chat to answer these reflection questions — it can help you articulate what you've learned:</p>
+            <ul>
+                <li>"Based on the code in this workspace, where would Copilot's suggestions be most and least reliable?"</li>
+                <li>"What are the security risks of accepting Copilot suggestions without review in a production codebase?"</li>
+                <li>"Explain the difference between using Copilot as an autocomplete tool vs. as a pair programmer."</li>
+                <li>"What makes a good prompt for Copilot? Give me three principles and an example of each."</li>
+            </ul>
+
+            <div class="callout callout-info">
+                <p><strong>Key takeaway:</strong> Copilot is most powerful when you treat it as a <em>junior engineer who needs clear, detailed instructions</em>. The more context and intent you provide, the better its output. You remain responsible for every line of code that ships.</p>
+            </div>
 
             <hr>
 
