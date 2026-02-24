@@ -763,6 +763,12 @@ function extractItemNames(items) {
                     <p><strong>What Copilot should suggest:</strong></p>
                     <pre><code>    return [datetime.strptime(d, '%Y-%m-%d').strftime('%b %d, %Y') for d in dates]</code></pre>
                     <p><strong>Why:</strong> Copilot sees the established list comprehension pattern in <code>format_names</code> and the example transformation in your comment. It keeps the same structure and substitutes the appropriate datetime formatting logic.</p>
+
+                    <div class="callout callout-info">
+                        <p><strong>If Copilot suggested something different — like a <code>try/except</code> loop instead of a list comprehension:</strong> that's intentional behaviour, not a mistake. Copilot has built-in tendencies around safety, error handling, and robust code. Date parsing is a well-known source of runtime errors — a malformed string like <code>"not-a-date"</code> will crash <code>strptime</code> without protection. Copilot recognises this risk and applies defensive coding even when the established pattern didn't include it.</p>
+                        <p>This reflects one of Copilot's core design principles: it balances following your context against its broader responsibility around <strong>security, privacy, and compliance</strong>. It won't blindly repeat an unsafe pattern just because you showed it one. Think of it as a code reviewer who spots a gap you didn't notice — not a deviation from your instructions, but a quiet improvement in your best interest.</p>
+                        <p>You can still guide it back to a pure list comprehension by adding a comment like <code># assume all dates are valid ISO format strings</code>, which signals that safe input is guaranteed and the defensive branch is unnecessary.</p>
+                    </div>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
@@ -782,6 +788,11 @@ function extractItemNames(items) {
                     <p><strong>What Copilot should suggest:</strong></p>
                     <pre><code>    return dates.Select(d => DateTime.Parse(d).ToString("MMM dd, yyyy")).ToList();</code></pre>
                     <p><strong>Why:</strong> Copilot mirrors the LINQ <code>Select(...).ToList()</code> chain it saw in <code>FormatNames</code>, substituting date parsing for the string transform. The explicit example in the comment anchors the exact output format.</p>
+
+                    <div class="callout callout-info">
+                        <p><strong>If Copilot suggested a safer variant — like wrapping the parse in a <code>try/catch</code> or using <code>DateTime.TryParse</code> instead:</strong> that's by design, not a deviation. <code>DateTime.Parse</code> throws a <code>FormatException</code> on invalid input, and Copilot is aware of this. It may decide that the safer overload or a guard clause is more appropriate than following your LINQ pattern verbatim.</p>
+                        <p>This reflects Copilot's built-in focus on <strong>security, reliability, and compliance</strong>. It tries to keep your code safe even when the context you provided didn't account for edge cases. If you want it to stay with the clean LINQ chain, add a comment like <code>// input is pre-validated ISO 8601 strings</code> to signal that defensive parsing is unnecessary here.</p>
+                    </div>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
@@ -798,6 +809,11 @@ const formatDates = (dates) => {</code></pre>
         new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     );</code></pre>
                     <p><strong>Why:</strong> Copilot sees the arrow function / <code>.map()</code> style established in <code>formatNames</code>. The example transformation tells it the target format and it applies <code>toLocaleDateString</code> — the natural JS idiom for that output.</p>
+
+                    <div class="callout callout-info">
+                        <p><strong>If Copilot wrapped the body in a <code>try/catch</code> or added input validation instead of a clean <code>.map()</code>:</strong> that's Copilot applying its built-in judgment about <strong>safety and robustness</strong>. <code>new Date()</code> silently produces an <code>Invalid Date</code> object for bad input, and <code>toLocaleDateString</code> on it returns the string <code>"Invalid Date"</code> — a subtle bug that could slip through unnoticed. Copilot may choose to guard against this even when your established pattern didn't.</p>
+                        <p>This is part of Copilot's design: it holds a baseline responsibility for <strong>security, privacy, and compliance</strong> that can override strict pattern-following when it believes the pattern carries risk. To keep it in pure <code>.map()</code> style, be explicit: add a comment like <code>// dates are guaranteed valid ISO 8601 strings</code>, removing the ambiguity that triggered the defensive suggestion.</p>
+                    </div>
                 </div>
             </div>
 

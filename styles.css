@@ -422,6 +422,33 @@ body {
     font-style: italic;
 }
 
+/* Callout boxes */
+.callout {
+    border-left: 4px solid var(--accent-from);
+    background: var(--bg-secondary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.callout-info {
+    border-left-color: var(--accent-to);
+}
+
+.callout p {
+    margin: 0 0 0.75rem 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.callout p:last-child {
+    margin-bottom: 0;
+}
+
+.callout strong {
+    color: var(--text-primary);
+}
+
 /* Post navigation */
 .post-navigation {
     margin-top: var(--spacing-xl);
