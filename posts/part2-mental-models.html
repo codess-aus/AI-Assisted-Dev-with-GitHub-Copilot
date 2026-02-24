@@ -303,6 +303,7 @@ function extractNames(data) {
             </div>
 
             <h3>Exercise 2: Variable Name Context</h3>
+            <p>Your goal is to see firsthand how variable and function names steer Copilot's suggestions. You'll write the same logic twice — once with vague names and once with descriptive names — and compare what Copilot offers each time.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -312,53 +313,67 @@ function extractNames(data) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Bad naming (unclear):</strong></p>
+                    <p>Create a file called <code>naming_experiment.py</code></p>
+
+                    <p><strong>Step 1:</strong> Write this function with vague names and place your cursor after the comment. Wait for Copilot's suggestion — note what it proposes.</p>
                     <pre><code>def process(d):
-    # What is 'd'? Lacking context makes suggestions poorly targeted
-    return d
+    # return the result
+    </code></pre>
 
-def x():
-    # Single letter names hide intent</code></pre>
+                    <p>Copilot has very little to work with here. What does it suggest? Is it useful or generic?</p>
 
-                    <p><strong>Good naming (clear):</strong></p>
+                    <p><strong>Step 2:</strong> Now write this version directly below it. Again, place your cursor after the comment and observe Copilot's suggestion.</p>
                     <pre><code>def extract_product_names(products: List[Product]) -> List[str]:
-    # Clear intent: extract product names
-    # Copilot knows exactly what type of operation is needed
-    return [product.name for product in products]</code></pre>
+    # iterate over products and return a list of each product's name
+    </code></pre>
+
+                    <p><strong>What to notice:</strong> Did Copilot suggest a list comprehension using <code>product.name</code>? Compare that to what it offered for <code>process(d)</code>. The function name, parameter name, and return type together give Copilot everything it needs to suggest the right logic.</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Bad naming:</strong></p>
+                    <p>Create a file called <code>NamingExperiment.cs</code></p>
+
+                    <p><strong>Step 1:</strong> Write this method stub and place your cursor inside the body. Wait for Copilot's suggestion — note what it proposes.</p>
                     <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; d)
 {
-    // Copilot doesn't know what 'd' is
+    // return the result
+    
 }</code></pre>
 
-                    <p><strong>Good naming:</strong></p>
+                    <p>Copilot has very little to work with here. What does it suggest? Is it useful or generic?</p>
+
+                    <p><strong>Step 2:</strong> Now write this version directly below it. Place your cursor inside the body and observe Copilot's suggestion.</p>
                     <pre><code>public List&lt;string&gt; ExtractProductNames(List&lt;Product&gt; products)
 {
-    // Much clearer intent; Copilot suggests appropriate operations
+    // iterate over products and return a list of each product's name
+    
 }</code></pre>
+
+                    <p><strong>What to notice:</strong> Did Copilot suggest a LINQ <code>Select</code> using <code>p.Name</code>? Compare that to what it offered for <code>Process(d)</code>. The method name and typed parameter together give Copilot everything it needs to suggest the right implementation.</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Bad naming:</strong></p>
+                    <p>Create a file called <code>namingExperiment.js</code></p>
+
+                    <p><strong>Step 1:</strong> Write this function and place your cursor after the comment. Wait for Copilot's suggestion — note what it proposes.</p>
 <pre><code>function process(d) {
-    // Generic name 'd' and vague function name provide minimal context
-    // Copilot's suggestions will be equally vague
+    // return the result
 }
 </code></pre>
 
-                    <p><strong>Good naming:</strong></p>
+                    <p>Copilot has very little to work with here. What does it suggest? Is it useful or generic?</p>
+
+                    <p><strong>Step 2:</strong> Now write this version directly below it. Place your cursor after the comment and observe Copilot's suggestion.</p>
 <pre><code>/**
  * @param {{ name: string }[]} items
  * @returns {string[]}
  */
 function extractItemNames(items) {
-    // Specific names and clear intent guide Copilot toward better code
-    // Copilot knows exactly what type of operation is needed
+    // iterate over items and return a list of each item's name
 }
 </code></pre>
+
+                    <p><strong>What to notice:</strong> Did Copilot suggest <code>items.map(item => item.name)</code>? Compare that to what it offered for <code>process(d)</code>. The descriptive function name, parameter name, and JSDoc types together give Copilot everything it needs to suggest the right logic.</p>
                 </div>
             </div>
 
