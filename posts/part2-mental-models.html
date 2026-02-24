@@ -230,7 +230,7 @@ def parse_json_object(json_str: str) -> Dict:
 
             <p><strong>What you'll learn:</strong> Copilot isn't "guessing"; it's pattern-matching on context. Better context = better code. This lesson applies to everything ByteStrike writes from now on.</p>
 
-            <h3>Detailed Exercise Steps</h3>
+            <h3>Exercise 1: Context Sensitivity</h3>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -286,6 +286,8 @@ def parse_json_object(json_str: str) -> Dict:
 }
 </code></pre>
 
+                    <p>Note Copilot's suggestion. Mock it up to see what Copilot suggests. Is it clear? Probably not very helpful.</p>
+
                     <p><strong>Step 2:</strong> Add JSDoc and a clearer description</p>
 <pre><code>/**
  * @param {{ name: string }[]} data
@@ -295,6 +297,8 @@ function extractNames(data) {
     // Extract the 'name' field from each object and return as a list of strings
 }
 </code></pre>
+
+                    <p>See how much more relevant Copilot's suggestion becomes. The JSDoc types and better naming transform the quality of suggestions.</p>
                 </div>
             </div>
 
@@ -340,16 +344,19 @@ def x():
                 <div class="tab-content" data-language="javascript">
                     <p><strong>Bad naming:</strong></p>
 <pre><code>function process(d) {
-    // Copilot doesn't know what 'd' is
+    // Generic name 'd' and vague function name provide minimal context
+    // Copilot's suggestions will be equally vague
 }
 </code></pre>
 
                     <p><strong>Good naming:</strong></p>
 <pre><code>/**
- * @param {{ products: string[] }} cart
+ * @param {{ name: string }[]} items
+ * @returns {string[]}
  */
-function extractProductNames(cart) {
-    // Much clearer intent; Copilot suggests appropriate operations
+function extractItemNames(items) {
+    // Specific names and clear intent guide Copilot toward better code
+    // Copilot knows exactly what type of operation is needed
 }
 </code></pre>
                 </div>
@@ -392,15 +399,20 @@ public List<string> FormatDates(List<string> dates)
                 </div>
 
                 <div class="tab-content" data-language="javascript">
+                    <p>First, establish a pattern by writing an example:</p>
 <pre><code>// Example: ["alice", "bob"] -> ["ALICE", "BOB"]
 const formatNames = (names) => names.map((name) => name.toUpperCase());
+</code></pre>
 
-// Using the same pattern as formatNames above:
+                    <p>Then, hint that you want to reuse the pattern:</p>
+<pre><code>// Using the same pattern as formatNames above:
 // Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
 const formatDates = (dates) => {
-    // Copilot will mirror the established pattern
+    // Copilot will suggest a date formatting approach in the same style
 };
 </code></pre>
+
+                    <p>Copilot will recognize the established pattern and apply similar logic to the new function.</p>
                 </div>
             </div>
 
@@ -453,6 +465,12 @@ public double Calculate(double a, double b, double c)</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
+                    <p><strong>Without documentation:</strong></p>
+<pre><code>function calculate(a, b, c) {
+    // Copilot has little context; suggestions will be generic
+}
+</code></pre>
+
                     <p><strong>With detailed JSDoc:</strong></p>
 <pre><code>/**
  * Calculate the area of a triangle given three side lengths using Heron's formula.
@@ -462,11 +480,11 @@ public double Calculate(double a, double b, double c)</code></pre>
  * @returns {number} The area of the triangle
  */
 function calculate(a, b, c) {
-    // Copilot will propose the Heron's formula implementation
+    // Copilot now knows the specific algorithm and will propose Heron's formula
 }
 </code></pre>
 
-                    <p>Observe how detailed JSDoc changes Copilot's suggestions.</p>
+                    <p>Observe how detailed JSDoc completely changes Copilot's suggestions, guiding it toward the specific algorithm.</p>
                 </div>
             </div>
 
