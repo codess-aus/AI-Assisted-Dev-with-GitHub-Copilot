@@ -801,6 +801,86 @@ const formatDates = (dates) => {</code></pre>
                 </div>
             </div>
 
+            <h3>Lab 2, Exercise 4: Docstring Impact</h3>
+            <p>The goal is to show how a detailed docstring alone — without changing parameter names — is enough to direct Copilot to a specific, non-obvious algorithm (Heron's formula).</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Step 1 — What you type (no docstring):</strong></p>
+                    <pre><code>def calculate(a, b, c):</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong> Something generic like <code>return a + b + c</code> or a bare <code>pass</code>. Three float parameters named <code>a</code>, <code>b</code>, <code>c</code> give it almost nothing to go on.</p>
+
+                    <p><strong>Step 2 — What you type (with detailed docstring):</strong></p>
+                    <pre><code>def calculate(a: float, b: float, c: float) -> float:
+    """
+    Calculate the area of a triangle given three side lengths using Heron's formula.
+
+    Args:
+        a: Length of side A
+        b: Length of side B
+        c: Length of side C
+
+    Returns:
+        The area of the triangle
+    """</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    s = (a + b + c) / 2
+    return (s * (s - a) * (s - b) * (s - c)) ** 0.5</code></pre>
+                    <p><strong>Why:</strong> The docstring names the exact algorithm ("Heron's formula") and describes the inputs precisely. Copilot matches that to a well-known formula and generates the correct two-line implementation — even though the parameter names <code>a</code>, <code>b</code>, <code>c</code> are minimal.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Step 1 — What you type (no documentation):</strong></p>
+                    <pre><code>public double Calculate(double a, double b, double c)</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong> <code>return a + b + c;</code> or a <code>throw new NotImplementedException();</code> stub — no algorithm-specific logic.</p>
+
+                    <p><strong>Step 2 — What you type (with XML documentation):</strong></p>
+                    <pre><code>/// &lt;summary&gt;
+/// Calculate the area of a triangle given three side lengths using Heron's formula.
+/// &lt;/summary&gt;
+/// &lt;param name="a"&gt;Length of side A&lt;/param&gt;
+/// &lt;param name="b"&gt;Length of side B&lt;/param&gt;
+/// &lt;param name="c"&gt;Length of side C&lt;/param&gt;
+/// &lt;returns&gt;The area of the triangle&lt;/returns&gt;
+public double Calculate(double a, double b, double c)</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>{
+    double s = (a + b + c) / 2;
+    return Math.Sqrt(s * (s - a) * (s - b) * (s - c));
+}</code></pre>
+                    <p><strong>Why:</strong> The XML doc names Heron's formula explicitly. Copilot produces the correct semi-perimeter calculation and <code>Math.Sqrt</code> call, which it would never have inferred from the bare signature alone.</p>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Step 1 — What you type (no documentation):</strong></p>
+<pre><code>function calculate(a, b, c) {
+    // Copilot has little context; suggestions will be generic
+}</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong> <code>return a + b + c;</code> or similar — no specific algorithm.</p>
+
+                    <p><strong>Step 2 — What you type (with JSDoc):</strong></p>
+<pre><code>/**
+ * Calculate the area of a triangle given three side lengths using Heron's formula.
+ * @param {number} a Length of side A
+ * @param {number} b Length of side B
+ * @param {number} c Length of side C
+ * @returns {number} The area of the triangle
+ */
+function calculate(a, b, c) {</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+<pre><code>    const s = (a + b + c) / 2;
+    return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+}</code></pre>
+                    <p><strong>Why:</strong> Naming the algorithm in the JSDoc is the entire signal. Copilot retrieves the well-known Heron's formula pattern and produces the correct <code>Math.sqrt</code> implementation — demonstrating that documentation isn't just for humans.</p>
+                </div>
+            </div>
+
             <hr>
 
             <h2>Part 3: Pair Programming</h2>
