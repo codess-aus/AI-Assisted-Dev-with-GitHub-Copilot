@@ -373,29 +373,41 @@ function extractItemNames(items) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
+                    <p>First, establish a pattern by writing an example:</p>
                     <pre><code>def format_names(names: List[str]) -> List[str]:
     # Example: ["alice", "bob"] -> ["ALICE", "BOB"]
     return [name.upper() for name in names]
+</code></pre>
 
-def format_dates(dates: List[str]) -> List[str]:
+                    <p>Then, hint that you want to reuse the pattern:</p>
+                    <pre><code>def format_dates(dates: List[str]) -> List[str]:
     # Using the same pattern as format_names above:
     # Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
-    # Copilot will follow the established pattern</code></pre>
+    # Copilot will follow the established pattern
+    </code></pre>
+
+                    <p>Copilot will recognize the established pattern and apply similar logic to the new function.</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
+                    <p>First, establish a pattern by writing an example:</p>
                     <pre><code>public List<string> FormatNames(List<string> names)
 {
     // Example: ["alice", "bob"] -> ["ALICE", "BOB"]
     return names.Select(n => n.ToUpper()).ToList();
 }
+</code></pre>
 
-public List<string> FormatDates(List<string> dates)
+                    <p>Then, hint that you want to reuse the pattern:</p>
+                    <pre><code>public List<string> FormatDates(List<string> dates)
 {
     // Using the same pattern as FormatNames above:
     // Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
     // Copilot will follow the established pattern
-}</code></pre>
+}
+</code></pre>
+
+                    <p>Copilot will recognize the established pattern and apply similar logic to the new function.</p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
