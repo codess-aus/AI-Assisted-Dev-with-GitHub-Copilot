@@ -606,16 +606,200 @@ Secret Categories:
             <hr>
 
             <h2>Part 2: Mental Models & Context</h2>
-            <p>Exercises in Part 2 are primarily exploratory and reflective. The solutions involve applying the principles learned to your own code. Focus on understanding the concepts rather than matching exact code.</p>
+            <p>These exercises are designed to show a visible, measurable difference in Copilot's suggestions based on the context you provide. The code below shows both what you type and what Copilot is expected to generate in response.</p>
 
             <h3>Lab 2, Exercise 1: Context Sensitivity</h3>
-            <p>This exercise teaches you to recognize how context affects Copilot's suggestions. There's no single "correct" solution; the goal is to observe how variable names, comments, and surrounding code influence what Copilot suggests.</p>
+            <p>The goal is to see Copilot give a meaningless suggestion with minimal context, then a precise one after you add types and a clear comment.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Step 1 — What you type (vague):</strong></p>
+                    <pre><code>def transform(data):
+    # TODO: implement</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong> A generic stub like <code>return data</code> or a bare <code>pass</code> — it has nothing to go on.</p>
+
+                    <p><strong>Step 2 — What you type (with types + clear comment):</strong></p>
+                    <pre><code>def transform(data: List[Dict[str, Any]]) -> List[str]:
+    # Extract the 'name' field from each dictionary and return as a list of strings</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    return [item['name'] for item in data]</code></pre>
+                    <p><strong>Why:</strong> The return type <code>List[str]</code>, the parameter type <code>List[Dict[str, Any]]</code>, and the comment stating exactly what to extract all combine to give Copilot an unambiguous target. The list comprehension is the natural, idiomatic result.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Step 1 — What you type (vague):</strong></p>
+                    <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; data)
+{
+    // TODO: implement
+}</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong> A stub returning <code>new List&lt;string&gt;()</code> or <code>throw new NotImplementedException()</code> — no useful logic.</p>
+
+                    <p><strong>Step 2 — What you type (with specific types + clear comment):</strong></p>
+                    <pre><code>public List&lt;string&gt; ExtractNames(List&lt;Dictionary&lt;string, object&gt;&gt; data)
+{
+    // Extract the 'name' field from each dictionary and return as a list of strings
+}</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    return data.Select(d => d["name"].ToString()).ToList();</code></pre>
+                    <p><strong>Why:</strong> The concrete generic types tell Copilot the shape of the input, and the comment tells it exactly which field to extract. LINQ's <code>Select</code> is the idiomatic C# answer and Copilot has enough signal to reach it.</p>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Step 1 — What you type (vague):</strong></p>
+<pre><code>function transform(data) {
+    // TODO: implement
+}</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong> <code>return data;</code> or nothing useful.</p>
+
+                    <p><strong>Step 2 — What you type (with JSDoc + clear comment):</strong></p>
+<pre><code>/**
+ * @param {{ name: string }[]} data
+ * @returns {string[]}
+ */
+function extractNames(data) {
+    // Extract the 'name' field from each object and return as a list of strings
+}</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+<pre><code>    return data.map(item => item.name);</code></pre>
+                    <p><strong>Why:</strong> The JSDoc type <code>{{ name: string }[]}</code> tells Copilot the input is an array of objects with a <code>name</code> property. Combined with the return type <code>string[]</code> and the comment, it has everything it needs to generate the correct <code>map</code> expression.</p>
+                </div>
+            </div>
 
             <h3>Lab 2, Exercise 2: Variable Name Context</h3>
-            <p>Similar to Exercise 1, this is about understanding context. The key is noticing that descriptive variable names lead to better suggestions than generic ones.</p>
+            <p>The goal is to see Copilot's suggestion quality shift dramatically when you change a single thing: the names. Same intent, different signal — different output.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Step 1 — What you type (vague names):</strong></p>
+                    <pre><code>def process(d):
+    # return the result</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong></p>
+                    <pre><code>    return transform(d)</code></pre>
+                    <p>A generic pass-through with an invented helper function — Copilot is guessing, because <code>d</code> and <code>process</code> carry no semantic meaning.</p>
+
+                    <p><strong>Step 2 — What you type (descriptive names + types):</strong></p>
+                    <pre><code>def extract_product_names(products: List[Product]) -> List[str]:
+    # iterate over products and return a list of each product's name</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    return [product.name for product in products]</code></pre>
+                    <p><strong>Why:</strong> The function name (<code>extract_product_names</code>), the parameter name (<code>products</code>), the type (<code>List[Product]</code>), and the return type (<code>List[str]</code>) together form a complete picture. Copilot doesn't need to guess — the list comprehension accessing <code>.name</code> is the only logical outcome.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Step 1 — What you type (vague names):</strong></p>
+                    <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; d)
+{
+    // return the result
+}</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong></p>
+                    <pre><code>    return d.Select(x => x.ToString()).ToList();</code></pre>
+                    <p>A generic <code>ToString()</code> fallback — Copilot has no idea what <code>d</code> contains, so it takes the safest possible route.</p>
+
+                    <p><strong>Step 2 — What you type (descriptive names + types):</strong></p>
+                    <pre><code>public List&lt;string&gt; ExtractProductNames(List&lt;Product&gt; products)
+{
+    // iterate over products and return a list of each product's name
+}</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    return products.Select(p => p.Name).ToList();</code></pre>
+                    <p><strong>Why:</strong> The method name makes the intent unambiguous. The typed parameter <code>List&lt;Product&gt;</code> tells Copilot to access a known model property, and it produces idiomatic LINQ accessing <code>.Name</code> instead of a generic <code>ToString()</code>.</p>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Step 1 — What you type (vague names):</strong></p>
+<pre><code>function process(d) {
+    // return the result
+}</code></pre>
+                    <p><strong>What Copilot typically suggests:</strong></p>
+<pre><code>    return d;</code></pre>
+                    <p>A bare passthrough — <code>d</code> tells Copilot nothing, so it produces nothing useful.</p>
+
+                    <p><strong>Step 2 — What you type (descriptive names + JSDoc):</strong></p>
+<pre><code>/**
+ * @param {{ name: string }[]} items
+ * @returns {string[]}
+ */
+function extractItemNames(items) {
+    // iterate over items and return a list of each item's name
+}</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+<pre><code>    return items.map(item => item.name);</code></pre>
+                    <p><strong>Why:</strong> The JSDoc <code>{{ name: string }[]}</code> tells Copilot the exact shape of the array elements. The function name, parameter name, and comment all reinforce the same intent. The result is a precise, idiomatic <code>map</code> accessing the correct property.</p>
+                </div>
+            </div>
 
             <h3>Lab 2, Exercise 3: Example-Driven Prompting</h3>
-            <p>This exercise shows how providing examples in comments guides Copilot's output. Again, there's no single solution; focus on the principle that examples improve code generation.</p>
+            <p>The goal is to demonstrate that Copilot picks up on patterns you establish and carries them forward to new functions.</p>
+
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <p><strong>Step 1 — Establish the pattern:</strong></p>
+                    <pre><code>def format_names(names: List[str]) -> List[str]:
+    # Example: ["alice", "bob"] -> ["ALICE", "BOB"]
+    return [name.upper() for name in names]</code></pre>
+
+                    <p><strong>Step 2 — Hint you want the same pattern applied:</strong></p>
+                    <pre><code>def format_dates(dates: List[str]) -> List[str]:
+    # Using the same pattern as format_names above:
+    # Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    return [datetime.strptime(d, '%Y-%m-%d').strftime('%b %d, %Y') for d in dates]</code></pre>
+                    <p><strong>Why:</strong> Copilot sees the established list comprehension pattern in <code>format_names</code> and the example transformation in your comment. It keeps the same structure and substitutes the appropriate datetime formatting logic.</p>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <p><strong>Step 1 — Establish the pattern:</strong></p>
+                    <pre><code>public List&lt;string&gt; FormatNames(List&lt;string&gt; names)
+{
+    // Example: ["alice", "bob"] -> ["ALICE", "BOB"]
+    return names.Select(n => n.ToUpper()).ToList();
+}</code></pre>
+
+                    <p><strong>Step 2 — Hint you want the same pattern applied:</strong></p>
+                    <pre><code>public List&lt;string&gt; FormatDates(List&lt;string&gt; dates)
+{
+    // Using the same pattern as FormatNames above:
+    // Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
+}</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+                    <pre><code>    return dates.Select(d => DateTime.Parse(d).ToString("MMM dd, yyyy")).ToList();</code></pre>
+                    <p><strong>Why:</strong> Copilot mirrors the LINQ <code>Select(...).ToList()</code> chain it saw in <code>FormatNames</code>, substituting date parsing for the string transform. The explicit example in the comment anchors the exact output format.</p>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <p><strong>Step 1 — Establish the pattern:</strong></p>
+<pre><code>// Example: ["alice", "bob"] -> ["ALICE", "BOB"]
+const formatNames = (names) => names.map((name) => name.toUpperCase());</code></pre>
+
+                    <p><strong>Step 2 — Hint you want the same pattern applied:</strong></p>
+<pre><code>// Using the same pattern as formatNames above:
+// Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
+const formatDates = (dates) => {</code></pre>
+                    <p><strong>What Copilot should suggest:</strong></p>
+<pre><code>    return dates.map((d) =>
+        new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    );</code></pre>
+                    <p><strong>Why:</strong> Copilot sees the arrow function / <code>.map()</code> style established in <code>formatNames</code>. The example transformation tells it the target format and it applies <code>toLocaleDateString</code> — the natural JS idiom for that output.</p>
+                </div>
+            </div>
 
             <hr>
 
