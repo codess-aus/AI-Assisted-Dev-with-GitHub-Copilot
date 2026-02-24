@@ -397,11 +397,20 @@ describe('validateCreditCard', () => {
         print(f"Error: '{filename}' not found.")
         return {}</code></pre>
 
-                    <p><strong>Task:</strong> Add this refactoring comment above the function and let Copilot generate the new helpers:</p>
-                    <pre><code># Refactor the function above into three separate helper functions:
-# 1. read_blueprint(filename) -> str - reads and returns file content
-# 2. extract_secrets(content: str) -> List[str] - uses regex to find all {* ... *}
-# 3. categorize_secrets(secrets: List[str]) -> Dict[str, int] - counts by prefix before ":"</code></pre>
+                    <p><strong>Task:</strong></p>
+                    <ol>
+                        <li>Open <code>blueprint_decoder.py</code> and paste in the monolithic function above.</li>
+                        <li><strong>Select the entire function</strong> (click the first line, then Shift+click the last line).</li>
+                        <li>Open Inline Chat with <kbd>Ctrl+I</kbd> (or <kbd>Cmd+I</kbd> on Mac).</li>
+                        <li>Type this prompt and press Enter:
+                            <pre><code>Refactor this into three separate helper functions:
+1. read_blueprint(filename) -> str - reads and returns file content
+2. extract_secrets(content: str) -> List[str] - uses regex to find all {* ... *}
+3. categorize_secrets(secrets: List[str]) -> Dict[str, int] - counts by prefix before ":"
+Keep a decode_blueprint_safe orchestrator that calls all three.</code></pre>
+                        </li>
+                        <li>Review Copilot's diff, then click <strong>Accept</strong>.</li>
+                    </ol>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
@@ -435,11 +444,20 @@ describe('validateCreditCard', () => {
     }
 }</code></pre>
 
-                    <p><strong>Task:</strong> Add this refactoring comment above the method and let Copilot generate the new helpers:</p>
-                    <pre><code>// Refactor the BlueprintDecoder class by extracting:
-// 1. ReadBlueprint(string filename) -> string - file I/O only
-// 2. ExtractSecrets(string content) -> List&lt;string&gt; - regex parsing only
-// 3. CategorizeSecrets(List&lt;string&gt; secrets) -> Dictionary&lt;string, int&gt; - categorization only</code></pre>
+                    <p><strong>Task:</strong></p>
+                    <ol>
+                        <li>Open <code>LeagueHQ.cs</code> and paste in the monolithic method above.</li>
+                        <li><strong>Select the entire method</strong> from the opening signature to the closing <code>}</code>.</li>
+                        <li>Open Inline Chat with <kbd>Ctrl+I</kbd> (or <kbd>Cmd+I</kbd> on Mac).</li>
+                        <li>Type this prompt and press Enter:
+                            <pre><code>Refactor this into three static helper methods:
+1. ReadBlueprint(string filename) -> string - file I/O only
+2. ExtractSecrets(string content) -> List&lt;string&gt; - regex parsing only
+3. CategorizeSecrets(List&lt;string&gt; secrets) -> Dictionary&lt;string, int&gt; - categorization only
+Keep a DecodeBlueprintSafe orchestrator that calls all three.</code></pre>
+                        </li>
+                        <li>Review Copilot's diff, then click <strong>Accept</strong>.</li>
+                    </ol>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
@@ -467,13 +485,20 @@ describe('validateCreditCard', () => {
 }
 </code></pre>
 
-                    <p><strong>Task:</strong> Add this refactoring comment above the function and let Copilot generate the new helpers:</p>
-<pre><code>/**
- * Refactor the decode function into three helpers:
- * 1. readBlueprint(filename): string - file I/O only
- * 2. extractSecrets(content): string[] - regex parsing only
- * 3. categorizeSecrets(secrets): Record&lt;string, number&gt; - counts by prefix before ":"
- */</code></pre>
+                    <p><strong>Task:</strong></p>
+                    <ol>
+                        <li>Open <code>leagueMission.js</code> and paste in the monolithic function above.</li>
+                        <li><strong>Select the entire function</strong> from <code>function decodeBlueprint</code> to its closing <code>}</code>.</li>
+                        <li>Open Inline Chat with <kbd>Ctrl+I</kbd> (or <kbd>Cmd+I</kbd> on Mac).</li>
+                        <li>Type this prompt and press Enter:
+<pre><code>Refactor this into three helper functions:
+1. readBlueprint(filename): string - file I/O only
+2. extractSecrets(content): string[] - regex parsing only
+3. categorizeSecrets(secrets): Record&lt;string, number&gt; - counts by prefix before ":"
+Keep a decodeBlueprintSafe orchestrator that calls all three and handles errors.</code></pre>
+                        </li>
+                        <li>Review Copilot's diff, then click <strong>Accept</strong>.</li>
+                    </ol>
                 </div>
             </div>
 
