@@ -152,7 +152,7 @@ def aggregate_user_metrics(user_ids: List[int]) -> Dict[int, float]:
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <pre><code>public Dictionary<int, double> AggregateUserMetrics(List<int> userIds)
+                    <pre><code>public Dictionary&lt;int, double&gt; AggregateUserMetrics(List&lt;int&gt; userIds)
 {
     // Type safety guides Copilot's reasoning
 }</code></pre>
@@ -161,7 +161,7 @@ def aggregate_user_metrics(user_ids: List[int]) -> Dict[int, float]:
                 <div class="tab-content" data-language="javascript">
 <pre><code>/**
  * @param {number[]} userIds
- * @returns {Map<number, number>}
+ * @returns {Map&lt;number, number&gt;}
  */
 function aggregateUserMetrics(userIds) {
     // JSDoc types guide Copilot toward Map lookups instead of ad-hoc objects
@@ -261,7 +261,7 @@ def parse_json_object(json_str: str) -> Dict:
                     <p>Create a file called <code>ContextExperiment.cs</code></p>
 
                     <p><strong>Step 1:</strong> Write minimal context</p>
-                    <pre><code>public List<string> Process(List<object> data)
+                    <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; data)
 {
     // TODO: implement
 }</code></pre>
@@ -269,7 +269,7 @@ def parse_json_object(json_str: str) -> Dict:
                     <p>Note Copilot's suggestion. Is it clear? Probably not very helpful.</p>
 
                     <p><strong>Step 2:</strong> Add better type information and descriptive names</p>
-                    <pre><code>public List<string> ExtractNames(List<Dictionary<string, object>> data)
+                    <pre><code>public List&lt;string&gt; ExtractNames(List&lt;Dictionary&lt;string, object&gt;&gt; data)
 {
     // Extract the 'name' field from each dictionary and return as a list of strings
 }</code></pre>
@@ -329,13 +329,13 @@ def x():
 
                 <div class="tab-content" data-language="csharp">
                     <p><strong>Bad naming:</strong></p>
-                    <pre><code>public List<string> Process(List<object> d)
+                    <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; d)
 {
     // Copilot doesn't know what 'd' is
 }</code></pre>
 
                     <p><strong>Good naming:</strong></p>
-                    <pre><code>public List<string> ExtractProductNames(List<Product> products)
+                    <pre><code>public List&lt;string&gt; ExtractProductNames(List&lt;Product&gt; products)
 {
     // Much clearer intent; Copilot suggests appropriate operations
 }</code></pre>
@@ -391,7 +391,7 @@ function extractItemNames(items) {
 
                 <div class="tab-content" data-language="csharp">
                     <p>First, establish a pattern by writing an example:</p>
-                    <pre><code>public List<string> FormatNames(List<string> names)
+                    <pre><code>public List&lt;string&gt; FormatNames(List&lt;string&gt; names)
 {
     // Example: ["alice", "bob"] -> ["ALICE", "BOB"]
     return names.Select(n => n.ToUpper()).ToList();
@@ -399,7 +399,7 @@ function extractItemNames(items) {
 </code></pre>
 
                     <p>Then, hint that you want to reuse the pattern:</p>
-                    <pre><code>public List<string> FormatDates(List<string> dates)
+                    <pre><code>public List&lt;string&gt; FormatDates(List&lt;string&gt; dates)
 {
     // Using the same pattern as FormatNames above:
     // Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
@@ -464,13 +464,13 @@ const formatDates = (dates) => {
                     <pre><code>public double Calculate(double a, double b, double c)</code></pre>
 
                     <p><strong>With detailed XML documentation:</strong></p>
-                    <pre><code>/// <summary>
+                    <pre><code>/// &lt;summary&gt;
 /// Calculate the area of a triangle given three side lengths using Heron's formula.
-/// </summary>
-/// <param name="a">Length of side A</param>
-/// <param name="b">Length of side B</param>
-/// <param name="c">Length of side C</param>
-/// <returns>The area of the triangle</returns>
+/// &lt;/summary&gt;
+/// &lt;param name="a"&gt;Length of side A&lt;/param&gt;
+/// &lt;param name="b"&gt;Length of side B&lt;/param&gt;
+/// &lt;param name="c"&gt;Length of side C&lt;/param&gt;
+/// &lt;returns&gt;The area of the triangle&lt;/returns&gt;
 public double Calculate(double a, double b, double c)</code></pre>
 
                     <p>Observe how the XML documentation completely changes Copilot's suggestions.</p>
