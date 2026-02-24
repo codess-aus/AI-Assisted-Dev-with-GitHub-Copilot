@@ -1054,7 +1054,7 @@ function decodeBlueprintSafe(filename) {
             </div>
 
             <h3>Lab 3, Exercise 2: Writing Unit Tests with Copilot</h3>
-            <p>Prompt Copilot to generate tests for each helper function. The ideal test suite should cover happy paths, edge cases, and error conditions.</p>
+            <p>Prompt Copilot to generate a Playwright test suite for each helper function. The ideal suite covers happy paths, edge cases, and error conditions.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -1065,8 +1065,9 @@ function decodeBlueprintSafe(filename) {
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
                     <p><strong>Prompt to give Copilot:</strong></p>
-                    <pre><code># Write pytest unit tests for extract_secrets() and categorize_secrets().
-# Include: happy path, no matches, multiple secrets, categorization by prefix</code></pre>
+                    <pre><code>Using pytest-playwright, write tests for extract_secrets() and categorize_secrets() in blueprint_decoder.py.
+Cover: happy path, no matches, multiple secrets, categorization by prefix, and no-colon edge case.
+Install with: pip install pytest-playwright</code></pre>
                     <p><strong>What Copilot should generate:</strong></p>
                     <pre><code>import pytest
 from blueprint_decoder import extract_secrets, categorize_secrets
@@ -1091,53 +1092,65 @@ def test_categorize_secrets_no_colon():
 
 def test_categorize_secrets_empty():
     assert categorize_secrets([]) == {}</code></pre>
-                    <p><strong>Run with:</strong> <code>pytest blueprint_decoder_test.py -v</code></p>
+                    <p><strong>Run with:</strong> <code>pytest test_blueprint_decoder.py -v</code></p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>What Copilot should generate (xUnit):</strong></p>
-                    <pre><code>using Xunit;
+                    <p><strong>Prompt to give Copilot:</strong></p>
+                    <pre><code>Using Microsoft.Playwright.NUnit, write tests for BlueprintDecoder.ExtractSecrets and CategorizeSecrets.
+Cover: happy path, no matches, empty input, and categorization edge cases (no colon).
+Install with: dotnet add package Microsoft.Playwright.NUnit</code></pre>
+                    <p><strong>What Copilot should generate:</strong></p>
+                    <pre><code>using Microsoft.Playwright.NUnit;
+using NUnit.Framework;
 using System.Collections.Generic;
 
-public class BlueprintDecoderTests
+[TestFixture]
+public class BlueprintDecoderTests : PlaywrightTest
 {
-    [Fact]
+    [Test]
     public void ExtractSecrets_FindsAllSecrets()
     {
         var content = "data {* SECRET_ONE *} more {* KEY: VALUE *} end";
         var result = BlueprintDecoder.ExtractSecrets(content);
-        Assert.Equal(new List&lt;string&gt; { "SECRET_ONE", "KEY: VALUE" }, result);
+        Assert.That(result, Is.EqualTo(new List&lt;string&gt; { "SECRET_ONE", "KEY: VALUE" }));
     }
 
-    [Fact]
+    [Test]
     public void ExtractSecrets_NoMatches_ReturnsEmpty()
     {
-        Assert.Empty(BlueprintDecoder.ExtractSecrets("no secrets here"));
+        Assert.That(BlueprintDecoder.ExtractSecrets("no secrets here"), Is.Empty);
     }
 
-    [Fact]
+    [Test]
     public void CategorizeSecrets_GroupsByPrefix()
     {
         var secrets = new List&lt;string&gt; { "AGENT_CODENAME: SHADOWMIND", "VAULT_ACCESS_CODE: DELTA-7", "AGENT_CODENAME: GHOSTFIRE" };
         var result = BlueprintDecoder.CategorizeSecrets(secrets);
-        Assert.Equal(2, result["AGENT_CODENAME"]);
-        Assert.Equal(1, result["VAULT_ACCESS_CODE"]);
+        Assert.That(result["AGENT_CODENAME"], Is.EqualTo(2));
+        Assert.That(result["VAULT_ACCESS_CODE"], Is.EqualTo(1));
     }
 
-    [Fact]
+    [Test]
     public void CategorizeSecrets_NoColon_MarkedUnknown()
     {
         var result = BlueprintDecoder.CategorizeSecrets(new List&lt;string&gt; { "SECURE_COMMS_PROTOCOL" });
-        Assert.Equal(1, result["UNKNOWN"]);
+        Assert.That(result["UNKNOWN"], Is.EqualTo(1));
     }
 }</code></pre>
+                    <p><strong>Run with:</strong> <code>dotnet test</code></p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>What Copilot should generate (Jest):</strong></p>
-                    <pre><code>const { extractSecrets, categorizeSecrets } = require('./blueprint_decoder');
+                    <p><strong>Prompt to give Copilot:</strong></p>
+                    <pre><code>Using @playwright/test, write tests for extractSecrets() and categorizeSecrets() in leagueMission.js.
+Cover: happy path, no matches, empty string, secrets with and without a colon prefix.
+Install with: npm install -D @playwright/test</code></pre>
+                    <p><strong>What Copilot should generate:</strong></p>
+                    <pre><code>import { test, expect } from '@playwright/test';
+import { extractSecrets, categorizeSecrets } from './leagueMission';
 
-describe('extractSecrets', () =&gt; {
+test.describe('extractSecrets', () =&gt; {
     test('finds all secrets', () =&gt; {
         const content = 'data {* SECRET_ONE *} more {* KEY: VALUE *} end';
         expect(extractSecrets(content)).toEqual(['SECRET_ONE', 'KEY: VALUE']);
@@ -1152,7 +1165,7 @@ describe('extractSecrets', () =&gt; {
     });
 });
 
-describe('categorizeSecrets', () =&gt; {
+test.describe('categorizeSecrets', () =&gt; {
     test('groups secrets by prefix', () =&gt; {
         const secrets = ['AGENT_CODENAME: SHADOWMIND', 'VAULT_ACCESS_CODE: DELTA-7', 'AGENT_CODENAME: GHOSTFIRE'];
         expect(categorizeSecrets(secrets)).toEqual({ AGENT_CODENAME: 2, VAULT_ACCESS_CODE: 1 });
@@ -1166,7 +1179,7 @@ describe('categorizeSecrets', () =&gt; {
         expect(categorizeSecrets([])).toEqual({});
     });
 });</code></pre>
-                    <p><strong>Run with:</strong> <code>npx jest blueprint_decoder.test.js</code></p>
+                    <p><strong>Run with:</strong> <code>npx playwright test blueprint_decoder.spec.ts</code></p>
                 </div>
             </div>
 

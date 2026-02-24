@@ -512,23 +512,26 @@ Keep a decodeBlueprintSafe orchestrator that calls all three and handles errors.
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p>Using pytest, give Copilot this prompt and let it generate the full test suite:</p>
-                    <pre><code># Write pytest unit tests for extract_secrets() and categorize_secrets().
-# Include: happy path, no matches, multiple secrets, categorization by prefix</code></pre>
+                    <p>Create a new file <code>test_blueprint_decoder.py</code>. Open Copilot Chat (<kbd>Ctrl+Alt+I</kbd>) and send this prompt:</p>
+                    <pre><code>Using pytest-playwright, write tests for extract_secrets() and categorize_secrets() in blueprint_decoder.py.
+Cover: happy path, no matches, multiple secrets, categorization by prefix, and no-colon edge case.
+Install with: pip install pytest-playwright</code></pre>
                     <p>Check that the generated tests cover:</p>
                     <ul>
                         <li>Content with multiple <code>{* *}</code> secrets</li>
                         <li>Content with no markers (empty result)</li>
                         <li>Secrets with a colon prefix (e.g., <code>AGENT_CODENAME: SHADOWMIND</code>)</li>
-                        <li>Secrets without a colon (should be categorised as <code>UNKNOWN</code>)</li>
+                        <li>Secrets without a colon (categorised as <code>UNKNOWN</code>)</li>
                         <li>An empty list passed to <code>categorize_secrets</code></li>
                     </ul>
+                    <p><strong>Run with:</strong> <code>pytest test_blueprint_decoder.py -v</code></p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Using xUnit, give Copilot this prompt and let it generate the test class:</p>
-                    <pre><code>// Write xUnit tests for BlueprintDecoder.ExtractSecrets and CategorizeSecrets.
-// Cover: happy path, no matches, empty input, and categorization edge cases (no colon).</code></pre>
+                    <p>Create a new file <code>BlueprintDecoderTests.cs</code>. Open Copilot Chat (<kbd>Ctrl+Alt+I</kbd>) and send this prompt:</p>
+                    <pre><code>Using Microsoft.Playwright.NUnit, write tests for BlueprintDecoder.ExtractSecrets and CategorizeSecrets.
+Cover: happy path, no matches, empty input, and categorization edge cases (no colon).
+Install with: dotnet add package Microsoft.Playwright.NUnit</code></pre>
                     <p>Check that the generated tests cover:</p>
                     <ul>
                         <li>Content with multiple <code>{* *}</code> secrets</li>
@@ -537,12 +540,14 @@ Keep a decodeBlueprintSafe orchestrator that calls all three and handles errors.
                         <li>Secrets without a colon (should be marked <code>"UNKNOWN"</code>)</li>
                         <li>An empty list passed to <code>CategorizeSecrets</code></li>
                     </ul>
+                    <p><strong>Run with:</strong> <code>dotnet test</code></p>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p>Using Jest, give Copilot this prompt and let it generate the test file:</p>
-                    <pre><code>// Write Jest tests for extractSecrets() and categorizeSecrets().
-// Cover: happy path, no matches, empty string, secrets with and without a colon prefix.</code></pre>
+                    <p>Create a new file <code>blueprint_decoder.spec.ts</code>. Open Copilot Chat (<kbd>Ctrl+Alt+I</kbd>) and send this prompt:</p>
+                    <pre><code>Using @playwright/test, write tests for extractSecrets() and categorizeSecrets() in leagueMission.js.
+Cover: happy path, no matches, empty string, secrets with and without a colon prefix.
+Install with: npm install -D @playwright/test</code></pre>
                     <p>Check that the generated tests cover:</p>
                     <ul>
                         <li>Content with multiple <code>{* *}</code> secrets</li>
@@ -551,6 +556,7 @@ Keep a decodeBlueprintSafe orchestrator that calls all three and handles errors.
                         <li>Secrets without a colon (categorised as <code>UNKNOWN</code>)</li>
                         <li>An empty array passed to <code>categorizeSecrets</code></li>
                     </ul>
+                    <p><strong>Run with:</strong> <code>npx playwright test blueprint_decoder.spec.ts</code></p>
                 </div>
             </div>
 
