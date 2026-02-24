@@ -303,7 +303,7 @@ function extractNames(data) {
             </div>
 
             <h3>Exercise 2: Variable Name Context</h3>
-            <p>Your goal is to see firsthand how variable and function names steer Copilot's suggestions. You'll write the same logic twice — once with vague names and once with descriptive names — and compare what Copilot offers each time.</p>
+            <p>Your goal is to see firsthand how variable and function names steer Copilot's suggestions. You'll write the same logic twice - once with vague names and once with descriptive names - and compare what Copilot offers each time.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -315,7 +315,7 @@ function extractNames(data) {
                 <div class="tab-content active" data-language="python">
                     <p>Create a file called <code>naming_experiment.py</code></p>
 
-                    <p><strong>Step 1:</strong> Write this function with vague names and place your cursor after the comment. Wait for Copilot's suggestion — note what it proposes.</p>
+                    <p><strong>Step 1:</strong> Write this function with vague names and place your cursor after the comment. Wait for Copilot's suggestion - note what it proposes.</p>
                     <pre><code>def process(d):
     # return the result
     </code></pre>
@@ -333,7 +333,7 @@ function extractNames(data) {
                 <div class="tab-content" data-language="csharp">
                     <p>Create a file called <code>NamingExperiment.cs</code></p>
 
-                    <p><strong>Step 1:</strong> Write this method stub and place your cursor inside the body. Wait for Copilot's suggestion — note what it proposes.</p>
+                    <p><strong>Step 1:</strong> Write this method stub and place your cursor inside the body. Wait for Copilot's suggestion - note what it proposes.</p>
                     <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; d)
 {
     // return the result
@@ -355,7 +355,7 @@ function extractNames(data) {
                 <div class="tab-content" data-language="javascript">
                     <p>Create a file called <code>namingExperiment.js</code></p>
 
-                    <p><strong>Step 1:</strong> Write this function and place your cursor after the comment. Wait for Copilot's suggestion — note what it proposes.</p>
+                    <p><strong>Step 1:</strong> Write this function and place your cursor after the comment. Wait for Copilot's suggestion - note what it proposes.</p>
 <pre><code>function process(d) {
     // return the result
 }
@@ -454,12 +454,12 @@ const formatDates = (dates) => {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1 — Without docstring:</strong></p>
+                    <p><strong>Step 1 - Without docstring:</strong></p>
                     <pre><code>def calculate(a, b, c):</code></pre>
 
-                    <p>Note what Copilot suggests. It might return <code>a + b + c</code>, or <code>(a + b) * c</code>, or just <code>pass</code> — something generic, because the parameter names carry no semantic meaning.</p>
+                    <p>Note what Copilot suggests. It might return <code>a + b + c</code>, or <code>(a + b) * c</code>, or just <code>pass</code> - something generic, because the parameter names carry no semantic meaning.</p>
 
-                    <p><strong>Step 2 — With detailed docstring:</strong></p>
+                    <p><strong>Step 2 - With detailed docstring:</strong></p>
                     <pre><code>def calculate(a: float, b: float, c: float) -> float:
     """
     Calculate the area of a triangle given three side lengths using Heron's formula.
@@ -476,18 +476,18 @@ const formatDates = (dates) => {
                     <p>Copilot should now suggest math-based logic along the lines of Heron's formula. Notice the difference in quality.</p>
 
                     <div class="callout callout-info">
-                        <p><strong>Important nuance:</strong> The docstring is a major steer, not an absolute override. Copilot weighs <em>all</em> available signals together — function name, parameter names and types, surrounding code patterns, and the docstring. Here, the docstring names the algorithm explicitly, which is a very strong signal. But if the function were named <code>sum_sides</code> and the docstring mentioned Heron's formula, those conflicting signals would produce a less predictable result.</p>
-                        <p>Think of the docstring as the loudest voice in the room — it will usually win, but the other signals are still in the conversation. The more your name, types, and docstring all point in the same direction, the more confidently Copilot will follow.</p>
+                        <p><strong>Important nuance:</strong> The docstring is a major steer, not an absolute override. Copilot weighs <em>all</em> available signals together - function name, parameter names and types, surrounding code patterns, and the docstring. Here, the docstring names the algorithm explicitly, which is a very strong signal. But if the function were named <code>sum_sides</code> and the docstring mentioned Heron's formula, those conflicting signals would produce a less predictable result.</p>
+                        <p>Think of the docstring as the loudest voice in the room - it will usually win, but the other signals are still in the conversation. The more your name, types, and docstring all point in the same direction, the more confidently Copilot will follow.</p>
                     </div>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1 — Without documentation:</strong></p>
+                    <p><strong>Step 1 - Without documentation:</strong></p>
                     <pre><code>public double Calculate(double a, double b, double c)</code></pre>
 
-                    <p>Note what Copilot suggests — likely a generic <code>return a + b + c;</code> or a <code>throw new NotImplementedException();</code> stub.</p>
+                    <p>Note what Copilot suggests - likely a generic <code>return a + b + c;</code> or a <code>throw new NotImplementedException();</code> stub.</p>
 
-                    <p><strong>Step 2 — With detailed XML documentation:</strong></p>
+                    <p><strong>Step 2 - With detailed XML documentation:</strong></p>
                     <pre><code>/// &lt;summary&gt;
 /// Calculate the area of a triangle given three side lengths using Heron's formula.
 /// &lt;/summary&gt;
@@ -500,21 +500,21 @@ public double Calculate(double a, double b, double c)</code></pre>
                     <p>Copilot should now suggest a <code>Math.Sqrt</code>-based implementation. Compare to what it offered before.</p>
 
                     <div class="callout callout-info">
-                        <p><strong>Important nuance:</strong> The XML doc is a major steer, not an absolute override. Copilot weighs the method name, parameter types, surrounding code, and the documentation together. Naming the algorithm explicitly in <code>&lt;summary&gt;</code> is one of the strongest signals you can give — but it works best when the method name is also consistent. <code>Calculate</code> is neutral, so the docstring dominates. If the method were named <code>SumSides</code>, the conflicting signal would make the result less predictable.</p>
+                        <p><strong>Important nuance:</strong> The XML doc is a major steer, not an absolute override. Copilot weighs the method name, parameter types, surrounding code, and the documentation together. Naming the algorithm explicitly in <code>&lt;summary&gt;</code> is one of the strongest signals you can give - but it works best when the method name is also consistent. <code>Calculate</code> is neutral, so the docstring dominates. If the method were named <code>SumSides</code>, the conflicting signal would make the result less predictable.</p>
                         <p>The practical takeaway: align your method name, parameter names, and documentation to point at the same intent. When they agree, Copilot's confidence goes up and its suggestions become much more accurate.</p>
                     </div>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1 — Without documentation:</strong></p>
+                    <p><strong>Step 1 - Without documentation:</strong></p>
 <pre><code>function calculate(a, b, c) {
     // Copilot has little context; suggestions will be generic
 }
 </code></pre>
 
-                    <p>Note what Copilot suggests — likely <code>return a + b + c;</code> or similar.</p>
+                    <p>Note what Copilot suggests - likely <code>return a + b + c;</code> or similar.</p>
 
-                    <p><strong>Step 2 — With detailed JSDoc:</strong></p>
+                    <p><strong>Step 2 - With detailed JSDoc:</strong></p>
 <pre><code>/**
  * Calculate the area of a triangle given three side lengths using Heron's formula.
  * @param {number} a Length of side A
@@ -529,8 +529,8 @@ function calculate(a, b, c) {
                     <p>Copilot should now suggest a <code>Math.sqrt</code>-based Heron's formula implementation. Compare to the generic version.</p>
 
                     <div class="callout callout-info">
-                        <p><strong>Important nuance:</strong> The JSDoc is a major steer, not an absolute override. Copilot weighs the function name, parameter names, JSDoc types, and surrounding code all together. Here, naming the algorithm in the doc comment is the dominant signal — but it works best when aligned with the other signals. If the function were named <code>sumSides</code>, the contradictory name would dilute the docstring's influence.</p>
-                        <p>The strongest results come when all signals point the same direction: a descriptive function name, typed parameters, and a precise docstring that names the specific algorithm or behaviour you want. Docstrings amplify your intent — they don't replace the need for consistent context across the whole signature.</p>
+                        <p><strong>Important nuance:</strong> The JSDoc is a major steer, not an absolute override. Copilot weighs the function name, parameter names, JSDoc types, and surrounding code all together. Here, naming the algorithm in the doc comment is the dominant signal - but it works best when aligned with the other signals. If the function were named <code>sumSides</code>, the contradictory name would dilute the docstring's influence.</p>
+                        <p>The strongest results come when all signals point the same direction: a descriptive function name, typed parameters, and a precise docstring that names the specific algorithm or behaviour you want. Docstrings amplify your intent - they don't replace the need for consistent context across the whole signature.</p>
                     </div>
                 </div>
             </div>

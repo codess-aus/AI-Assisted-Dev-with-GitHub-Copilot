@@ -363,7 +363,8 @@ describe('validateCreditCard', () => {
 
             <p><strong>What you'll learn:</strong> Pair programming isn't about Copilot doing all the work; it's about you directing, and Copilot accelerating. By the end, you have a decoder that ByteStrike can actually ship.</p>
 
-            <h3>Detailed Exercise Steps</h3>
+            <h3>Exercise 1: Refactor the Blueprint Decoder</h3>
+            <p>The mission briefing is in — ByteStrike's original decoder works, but it's a <em>monolithic blob</em>. One function does everything: reads the file, extracts secrets, categorises them, and prints a report. That makes it impossible to test or extend independently. Your job is to use Copilot to split it into focused, single-responsibility helpers.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -373,81 +374,106 @@ describe('validateCreditCard', () => {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p>Create a file <code>buggy_code.py</code> with this function:</p>
-                    <pre><code>def calculate_stats(numbers):
-    sum = 0
-    max_val = numbers[0]
-    min_val = numbers[0]
-    for n in numbers:
-        sum = sum + n
-        if n > max_val:
-            max_val = n
-        if n < min_val:
-            min_val = n
-    average = sum / len(numbers)
-    return {"sum": sum, "avg": average, "max": max_val, "min": min_val}</code></pre>
+                    <p>Open <code>blueprint_decoder.py</code>. The current implementation looks like this:</p>
+                    <pre><code>def decode_blueprint(filename):
+    try:
+        with open(filename, 'r') as f:
+            content = f.read()
+        import re
+        secrets = re.findall(r'\{\* (.*?) \*\}', content)
+        print("=" * 40)
+        print("DECODED SECRETS REPORT")
+        print("=" * 40)
+        print(f"Found {len(secrets)} secret(s):\n")
+        for i, s in enumerate(secrets, 1):
+            print(f"{i}. {s}")
+        print("=" * 40)
+        cats = {}
+        for s in secrets:
+            key = s.split(":")[0].strip() if ":" in s else "UNKNOWN"
+            cats[key] = cats.get(key, 0) + 1
+        return cats
+    except FileNotFoundError:
+        print(f"Error: '{filename}' not found.")
+        return {}</code></pre>
 
-                    <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:</p>
-                    <ul>
-                        <li>Type hints</li>
-                        <li>Input validation (empty list, non-numeric)</li>
-                        <li>More Pythonic approach (statistics module or comprehensions)</li>
-                        <li>Docstring with examples</li>
-                    </ul>
+                    <p><strong>Task:</strong> Add this refactoring comment above the function and let Copilot generate the new helpers:</p>
+                    <pre><code># Refactor the function above into three separate helper functions:
+# 1. read_blueprint(filename) -> str - reads and returns file content
+# 2. extract_secrets(content: str) -> List[str] - uses regex to find all {* ... *}
+# 3. categorize_secrets(secrets: List[str]) -> Dict[str, int] - counts by prefix before ":"</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Create a file <code>StatCalculator.cs</code> with this method:</p>
-                    <pre><code>public Dictionary<string, double> CalculateStats(int[] numbers)
+                    <p>Open <code>LeagueHQ.cs</code>. The current implementation looks like this:</p>
+                    <pre><code>public static Dictionary&lt;string, int&gt; DecodeBlueprint(string filename)
 {
-    int sum = 0;
-    int max = numbers[0];
-    int min = numbers[0];
-    foreach (int n in numbers)
+    try
     {
-        sum += n;
-        if (n > max) max = n;
-        if (n < min) min = n;
+        var content = System.IO.File.ReadAllText(filename);
+        var pattern = new System.Text.RegularExpressions.Regex(@"\{\* (.*?) \*\}");
+        var secrets = pattern.Matches(content).Select(m =&gt; m.Groups[1].Value).ToList();
+        Console.WriteLine(new string('=', 40));
+        Console.WriteLine("DECODED SECRETS REPORT");
+        Console.WriteLine(new string('=', 40));
+        Console.WriteLine($"Found {secrets.Count} secret(s):\n");
+        for (int i = 0; i &lt; secrets.Count; i++)
+            Console.WriteLine($"{i + 1}. {secrets[i]}");
+        Console.WriteLine(new string('=', 40));
+        var cats = new Dictionary&lt;string, int&gt;();
+        foreach (var s in secrets)
+        {
+            var key = s.Contains(':') ? s.Split(':')[0].Trim() : "UNKNOWN";
+            cats[key] = cats.GetValueOrDefault(key, 0) + 1;
+        }
+        return cats;
     }
-    double average = sum / numbers.Length;
-    return new Dictionary<string, double>
+    catch (FileNotFoundException)
     {
-        {"sum", sum}, {"avg", average}, {"max", max}, {"min", min}
-    };
+        Console.WriteLine($"Error: '{filename}' not found.");
+        return new Dictionary&lt;string, int&gt;();
+    }
 }</code></pre>
 
-                    <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:</p>
-                    <ul>
-                        <li>Input validation (null, empty array)</li>
-                        <li>Use LINQ where appropriate</li>
-                        <li>Add XML documentation</li>
-                        <li>Return a typed result object instead of Dictionary</li>
-                    </ul>
+                    <p><strong>Task:</strong> Add this refactoring comment above the method and let Copilot generate the new helpers:</p>
+                    <pre><code>// Refactor the BlueprintDecoder class by extracting:
+// 1. ReadBlueprint(string filename) -> string - file I/O only
+// 2. ExtractSecrets(string content) -> List&lt;string&gt; - regex parsing only
+// 3. CategorizeSecrets(List&lt;string&gt; secrets) -> Dictionary&lt;string, int&gt; - categorization only</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p>Create a file <code>statsCalculator.js</code> with this function:</p>
-<pre><code>function calculateStats(numbers) {
-    let sum = 0;
-    let max = numbers[0];
-    let min = numbers[0];
-    numbers.forEach((n) => {
-        sum += n;
-        if (n > max) max = n;
-        if (n < min) min = n;
-    });
-    const average = sum / numbers.length;
-    return { sum, avg: average, max, min };
+                    <p>Open <code>leagueMission.js</code>. The current implementation looks like this:</p>
+<pre><code>function decodeBlueprint(filename) {
+    try {
+        const content = require('fs').readFileSync(filename, 'utf8');
+        const secrets = [...content.matchAll(/\{\* (.*?) \*\}/g)].map(m => m[1]);
+        console.log('='.repeat(40));
+        console.log('DECODED SECRETS REPORT');
+        console.log('='.repeat(40));
+        console.log(`Found ${secrets.length} secret(s):\n`);
+        secrets.forEach((s, i) => console.log(`${i + 1}. ${s}`));
+        console.log('='.repeat(40));
+        const cats = {};
+        for (const s of secrets) {
+            const key = s.includes(':') ? s.split(':')[0].trim() : 'UNKNOWN';
+            cats[key] = (cats[key] ?? 0) + 1;
+        }
+        return cats;
+    } catch (err) {
+        console.log(`Error: '${filename}' not found.`);
+        return {};
+    }
 }
 </code></pre>
 
-                    <p><strong>Task:</strong> Use a comment to ask Copilot to refactor this with:</p>
-                    <ul>
-                        <li>Input validation (empty array, non-numeric values)</li>
-                        <li>Use array helpers like <code>reduce</code> and <code>Math.max</code>/<code>Math.min</code></li>
-                        <li>Add JSDoc for types</li>
-                        <li>Return a typed object (or class) instead of a loose literal</li>
-                    </ul>
+                    <p><strong>Task:</strong> Add this refactoring comment above the function and let Copilot generate the new helpers:</p>
+<pre><code>/**
+ * Refactor the decode function into three helpers:
+ * 1. readBlueprint(filename): string - file I/O only
+ * 2. extractSecrets(content): string[] - regex parsing only
+ * 3. categorizeSecrets(secrets): Record&lt;string, number&gt; - counts by prefix before ":"
+ */</code></pre>
                 </div>
             </div>
 
@@ -461,42 +487,50 @@ describe('validateCreditCard', () => {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p>Using pytest, ask Copilot to generate tests for your refactored function covering:</p>
+                    <p>Using pytest, give Copilot this prompt and let it generate the full test suite:</p>
+                    <pre><code># Write pytest unit tests for extract_secrets() and categorize_secrets().
+# Include: happy path, no matches, multiple secrets, categorization by prefix</code></pre>
+                    <p>Check that the generated tests cover:</p>
                     <ul>
-                        <li>Happy path with valid data</li>
-                        <li>Empty list</li>
-                        <li>Single element</li>
-                        <li>Negative numbers</li>
-                        <li>Mixed positive/negative</li>
+                        <li>Content with multiple <code>{* *}</code> secrets</li>
+                        <li>Content with no markers (empty result)</li>
+                        <li>Secrets with a colon prefix (e.g., <code>AGENT_CODENAME: SHADOWMIND</code>)</li>
+                        <li>Secrets without a colon (should be categorised as <code>UNKNOWN</code>)</li>
+                        <li>An empty list passed to <code>categorize_secrets</code></li>
                     </ul>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Using xUnit, ask Copilot to generate tests for your refactored method covering:</p>
+                    <p>Using xUnit, give Copilot this prompt and let it generate the test class:</p>
+                    <pre><code>// Write xUnit tests for BlueprintDecoder.ExtractSecrets and CategorizeSecrets.
+// Cover: happy path, no matches, empty input, and categorization edge cases (no colon).</code></pre>
+                    <p>Check that the generated tests cover:</p>
                     <ul>
-                        <li>Happy path with valid data</li>
-                        <li>Empty array</li>
-                        <li>Single element</li>
-                        <li>Negative numbers</li>
-                        <li>Mixed positive/negative</li>
-                        <li>Null array input</li>
+                        <li>Content with multiple <code>{* *}</code> secrets</li>
+                        <li>Content with no matches (empty list result)</li>
+                        <li>Secrets with a colon prefix grouped correctly</li>
+                        <li>Secrets without a colon (should be marked <code>"UNKNOWN"</code>)</li>
+                        <li>An empty list passed to <code>CategorizeSecrets</code></li>
                     </ul>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p>Using Jest (or Vitest), ask Copilot to generate tests for your refactored function covering:</p>
+                    <p>Using Jest, give Copilot this prompt and let it generate the test file:</p>
+                    <pre><code>// Write Jest tests for extractSecrets() and categorizeSecrets().
+// Cover: happy path, no matches, empty string, secrets with and without a colon prefix.</code></pre>
+                    <p>Check that the generated tests cover:</p>
                     <ul>
-                        <li>Happy path with valid data</li>
-                        <li>Empty array</li>
-                        <li>Single element</li>
-                        <li>Negative numbers</li>
-                        <li>Mixed positive/negative</li>
-                        <li><code>null</code> or <code>undefined</code> input</li>
+                        <li>Content with multiple <code>{* *}</code> secrets</li>
+                        <li>Content with no markers (empty array result)</li>
+                        <li>Secrets with a colon prefix (e.g., <code>AGENT_CODENAME: SHADOWMIND</code>)</li>
+                        <li>Secrets without a colon (categorised as <code>UNKNOWN</code>)</li>
+                        <li>An empty array passed to <code>categorizeSecrets</code></li>
                     </ul>
                 </div>
             </div>
 
-            <h3>Exercise 3: Multi-Step Implementation</h3>
+            <h3>Exercise 3: Documentation Generation</h3>
+            <p>ByteStrike's helpers are now testable — but a new agent needs to use them without reading the implementation. Your mission: ask Copilot to write comprehensive documentation for the helper functions.</p>
             
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -506,78 +540,40 @@ describe('validateCreditCard', () => {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p>Implement a function that:</p>
-                    <ol>
-                        <li>Reads user data from a CSV file</li>
-                        <li>Validates each row</li>
-                        <li>Transforms data to a standardized format</li>
-                        <li>Removes duplicates</li>
-                        <li>Writes to a JSON file</li>
-                    </ol>
-                    <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
-                </div>
-
-                <div class="tab-content" data-language="csharp">
-                    <p>Implement a method that:</p>
-                    <ol>
-                        <li>Reads user data from a CSV file</li>
-                        <li>Validates each row</li>
-                        <li>Transforms data to a standardized format</li>
-                        <li>Removes duplicates</li>
-                        <li>Writes to a JSON file</li>
-                    </ol>
-                    <p>Use a series of comments outlining each step. Let Copilot implement the entire pipeline.</p>
-                </div>
-
-                <div class="tab-content" data-language="javascript">
-                    <p>Implement a function that:</p>
-                    <ol>
-                        <li>Reads user data from a CSV file</li>
-                        <li>Validates each row</li>
-                        <li>Transforms data to a standardized format</li>
-                        <li>Removes duplicates</li>
-                        <li>Writes to a JSON file</li>
-                    </ol>
-                    <p>Use step-by-step comments in JavaScript (Node.js) and let Copilot complete the pipeline.</p>
-                </div>
-            </div>
-
-            <h3>Exercise 4: Documentation Pass</h3>
-            
-            <div class="language-tabs">
-                <button class="language-tab active" data-language="python">Python</button>
-                <button class="language-tab" data-language="csharp">C#</button>
-                <button class="language-tab" data-language="javascript">JavaScript</button>
-            </div>
-
-            <div class="tab-content-container">
-                <div class="tab-content active" data-language="python">
-                    <p>Take one of your previous functions and ask Copilot to:</p>
+                    <p>Place your cursor inside <code>extract_secrets</code> and type this comment to trigger Copilot:</p>
+                    <pre><code># Write a detailed docstring covering: purpose, Args, Returns, Raises, and an Example</code></pre>
+                    <p>Do the same for <code>categorize_secrets</code> and <code>decode_blueprint_safe</code>. Check that each docstring includes:</p>
                     <ul>
-                        <li>Add a comprehensive docstring</li>
-                        <li>Include parameter descriptions and return values</li>
-                        <li>Add usage examples</li>
-                        <li>Document exceptions and edge cases</li>
+                        <li>A clear one-line summary</li>
+                        <li><code>Args:</code> section with type and description for each parameter</li>
+                        <li><code>Returns:</code> section describing what is returned</li>
+                        <li><code>Example:</code> block with runnable sample input and output</li>
                     </ul>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Take one of your previous methods and ask Copilot to:</p>
+                    <p>Place your cursor above <code>ExtractSecrets</code> and type this comment to trigger Copilot:</p>
+                    <pre><code>/// Add comprehensive XML documentation: summary, param, returns, and an example</code></pre>
+                    <p>Do the same for <code>CategorizeSecrets</code> and <code>DecodeBlueprintSafe</code>. Check that each XML doc block includes:</p>
                     <ul>
-                        <li>Add comprehensive XML documentation comments</li>
-                        <li>Include parameter descriptions and return values</li>
-                        <li>Add usage examples in <c>&lt;example&gt;</c> tags</li>
-                        <li>Document exceptions using <c>&lt;exception&gt;</c> tags</li>
+                        <li><code>&lt;summary&gt;</code> with a clear description</li>
+                        <li><code>&lt;param&gt;</code> for each parameter</li>
+                        <li><code>&lt;returns&gt;</code> describing the return value</li>
+                        <li><code>&lt;example&gt;</code> with a code snippet</li>
                     </ul>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p>Take one of your previous functions and ask Copilot to:</p>
+                    <p>Place your cursor above <code>extractSecrets</code> and type this comment to trigger Copilot:</p>
+                    <pre><code>/**
+ * Add comprehensive JSDoc: description, @param, @returns, and @example
+ */</code></pre>
+                    <p>Do the same for <code>categorizeSecrets</code> and <code>decodeBlueprintSafe</code>. Check that each JSDoc block includes:</p>
                     <ul>
-                        <li>Add comprehensive JSDoc comments</li>
-                        <li>Include parameter and return value descriptions</li>
-                        <li>Add usage examples</li>
-                        <li>Document thrown errors and edge cases</li>
+                        <li>A clear description of what the function does</li>
+                        <li><code>@param</code> with type and description for each argument</li>
+                        <li><code>@returns</code> with the return type and description</li>
+                        <li><code>@example</code> showing a real call with its output</li>
                     </ul>
                 </div>
             </div>

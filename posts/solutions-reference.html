@@ -619,12 +619,12 @@ Secret Categories:
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1 — What you type (vague):</strong></p>
+                    <p><strong>Step 1 - What you type (vague):</strong></p>
                     <pre><code>def transform(data):
     # TODO: implement</code></pre>
-                    <p><strong>What Copilot typically suggests:</strong> A generic stub like <code>return data</code> or a bare <code>pass</code> — it has nothing to go on.</p>
+                    <p><strong>What Copilot typically suggests:</strong> A generic stub like <code>return data</code> or a bare <code>pass</code> - it has nothing to go on.</p>
 
-                    <p><strong>Step 2 — What you type (with types + clear comment):</strong></p>
+                    <p><strong>Step 2 - What you type (with types + clear comment):</strong></p>
                     <pre><code>def transform(data: List[Dict[str, Any]]) -> List[str]:
     # Extract the 'name' field from each dictionary and return as a list of strings</code></pre>
                     <p><strong>What Copilot should suggest:</strong></p>
@@ -633,14 +633,14 @@ Secret Categories:
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1 — What you type (vague):</strong></p>
+                    <p><strong>Step 1 - What you type (vague):</strong></p>
                     <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; data)
 {
     // TODO: implement
 }</code></pre>
-                    <p><strong>What Copilot typically suggests:</strong> A stub returning <code>new List&lt;string&gt;()</code> or <code>throw new NotImplementedException()</code> — no useful logic.</p>
+                    <p><strong>What Copilot typically suggests:</strong> A stub returning <code>new List&lt;string&gt;()</code> or <code>throw new NotImplementedException()</code> - no useful logic.</p>
 
-                    <p><strong>Step 2 — What you type (with specific types + clear comment):</strong></p>
+                    <p><strong>Step 2 - What you type (with specific types + clear comment):</strong></p>
                     <pre><code>public List&lt;string&gt; ExtractNames(List&lt;Dictionary&lt;string, object&gt;&gt; data)
 {
     // Extract the 'name' field from each dictionary and return as a list of strings
@@ -651,13 +651,13 @@ Secret Categories:
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1 — What you type (vague):</strong></p>
+                    <p><strong>Step 1 - What you type (vague):</strong></p>
 <pre><code>function transform(data) {
     // TODO: implement
 }</code></pre>
                     <p><strong>What Copilot typically suggests:</strong> <code>return data;</code> or nothing useful.</p>
 
-                    <p><strong>Step 2 — What you type (with JSDoc + clear comment):</strong></p>
+                    <p><strong>Step 2 - What you type (with JSDoc + clear comment):</strong></p>
 <pre><code>/**
  * @param {{ name: string }[]} data
  * @returns {string[]}
@@ -672,7 +672,7 @@ function extractNames(data) {
             </div>
 
             <h3>Lab 2, Exercise 2: Variable Name Context</h3>
-            <p>The goal is to see Copilot's suggestion quality shift dramatically when you change a single thing: the names. Same intent, different signal — different output.</p>
+            <p>The goal is to see Copilot's suggestion quality shift dramatically when you change a single thing: the names. Same intent, different signal - different output.</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -682,32 +682,32 @@ function extractNames(data) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1 — What you type (vague names):</strong></p>
+                    <p><strong>Step 1 - What you type (vague names):</strong></p>
                     <pre><code>def process(d):
     # return the result</code></pre>
                     <p><strong>What Copilot typically suggests:</strong></p>
                     <pre><code>    return transform(d)</code></pre>
-                    <p>A generic pass-through with an invented helper function — Copilot is guessing, because <code>d</code> and <code>process</code> carry no semantic meaning.</p>
+                    <p>A generic pass-through with an invented helper function - Copilot is guessing, because <code>d</code> and <code>process</code> carry no semantic meaning.</p>
 
-                    <p><strong>Step 2 — What you type (descriptive names + types):</strong></p>
+                    <p><strong>Step 2 - What you type (descriptive names + types):</strong></p>
                     <pre><code>def extract_product_names(products: List[Product]) -> List[str]:
     # iterate over products and return a list of each product's name</code></pre>
                     <p><strong>What Copilot should suggest:</strong></p>
                     <pre><code>    return [product.name for product in products]</code></pre>
-                    <p><strong>Why:</strong> The function name (<code>extract_product_names</code>), the parameter name (<code>products</code>), the type (<code>List[Product]</code>), and the return type (<code>List[str]</code>) together form a complete picture. Copilot doesn't need to guess — the list comprehension accessing <code>.name</code> is the only logical outcome.</p>
+                    <p><strong>Why:</strong> The function name (<code>extract_product_names</code>), the parameter name (<code>products</code>), the type (<code>List[Product]</code>), and the return type (<code>List[str]</code>) together form a complete picture. Copilot doesn't need to guess - the list comprehension accessing <code>.name</code> is the only logical outcome.</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1 — What you type (vague names):</strong></p>
+                    <p><strong>Step 1 - What you type (vague names):</strong></p>
                     <pre><code>public List&lt;string&gt; Process(List&lt;object&gt; d)
 {
     // return the result
 }</code></pre>
                     <p><strong>What Copilot typically suggests:</strong></p>
                     <pre><code>    return d.Select(x => x.ToString()).ToList();</code></pre>
-                    <p>A generic <code>ToString()</code> fallback — Copilot has no idea what <code>d</code> contains, so it takes the safest possible route.</p>
+                    <p>A generic <code>ToString()</code> fallback - Copilot has no idea what <code>d</code> contains, so it takes the safest possible route.</p>
 
-                    <p><strong>Step 2 — What you type (descriptive names + types):</strong></p>
+                    <p><strong>Step 2 - What you type (descriptive names + types):</strong></p>
                     <pre><code>public List&lt;string&gt; ExtractProductNames(List&lt;Product&gt; products)
 {
     // iterate over products and return a list of each product's name
@@ -718,15 +718,15 @@ function extractNames(data) {
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1 — What you type (vague names):</strong></p>
+                    <p><strong>Step 1 - What you type (vague names):</strong></p>
 <pre><code>function process(d) {
     // return the result
 }</code></pre>
                     <p><strong>What Copilot typically suggests:</strong></p>
 <pre><code>    return d;</code></pre>
-                    <p>A bare passthrough — <code>d</code> tells Copilot nothing, so it produces nothing useful.</p>
+                    <p>A bare passthrough - <code>d</code> tells Copilot nothing, so it produces nothing useful.</p>
 
-                    <p><strong>Step 2 — What you type (descriptive names + JSDoc):</strong></p>
+                    <p><strong>Step 2 - What you type (descriptive names + JSDoc):</strong></p>
 <pre><code>/**
  * @param {{ name: string }[]} items
  * @returns {string[]}
@@ -751,12 +751,12 @@ function extractItemNames(items) {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1 — Establish the pattern:</strong></p>
+                    <p><strong>Step 1 - Establish the pattern:</strong></p>
                     <pre><code>def format_names(names: List[str]) -> List[str]:
     # Example: ["alice", "bob"] -> ["ALICE", "BOB"]
     return [name.upper() for name in names]</code></pre>
 
-                    <p><strong>Step 2 — Hint you want the same pattern applied:</strong></p>
+                    <p><strong>Step 2 - Hint you want the same pattern applied:</strong></p>
                     <pre><code>def format_dates(dates: List[str]) -> List[str]:
     # Using the same pattern as format_names above:
     # Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]</code></pre>
@@ -765,21 +765,21 @@ function extractItemNames(items) {
                     <p><strong>Why:</strong> Copilot sees the established list comprehension pattern in <code>format_names</code> and the example transformation in your comment. It keeps the same structure and substitutes the appropriate datetime formatting logic.</p>
 
                     <div class="callout callout-info">
-                        <p><strong>If Copilot suggested something different — like a <code>try/except</code> loop instead of a list comprehension:</strong> that's intentional behaviour, not a mistake. Copilot has built-in tendencies around safety, error handling, and robust code. Date parsing is a well-known source of runtime errors — a malformed string like <code>"not-a-date"</code> will crash <code>strptime</code> without protection. Copilot recognises this risk and applies defensive coding even when the established pattern didn't include it.</p>
-                        <p>This reflects one of Copilot's core design principles: it balances following your context against its broader responsibility around <strong>security, privacy, and compliance</strong>. It won't blindly repeat an unsafe pattern just because you showed it one. Think of it as a code reviewer who spots a gap you didn't notice — not a deviation from your instructions, but a quiet improvement in your best interest.</p>
+                        <p><strong>If Copilot suggested something different - like a <code>try/except</code> loop instead of a list comprehension:</strong> that's intentional behaviour, not a mistake. Copilot has built-in tendencies around safety, error handling, and robust code. Date parsing is a well-known source of runtime errors - a malformed string like <code>"not-a-date"</code> will crash <code>strptime</code> without protection. Copilot recognises this risk and applies defensive coding even when the established pattern didn't include it.</p>
+                        <p>This reflects one of Copilot's core design principles: it balances following your context against its broader responsibility around <strong>security, privacy, and compliance</strong>. It won't blindly repeat an unsafe pattern just because you showed it one. Think of it as a code reviewer who spots a gap you didn't notice - not a deviation from your instructions, but a quiet improvement in your best interest.</p>
                         <p>You can still guide it back to a pure list comprehension by adding a comment like <code># assume all dates are valid ISO format strings</code>, which signals that safe input is guaranteed and the defensive branch is unnecessary.</p>
                     </div>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1 — Establish the pattern:</strong></p>
+                    <p><strong>Step 1 - Establish the pattern:</strong></p>
                     <pre><code>public List&lt;string&gt; FormatNames(List&lt;string&gt; names)
 {
     // Example: ["alice", "bob"] -> ["ALICE", "BOB"]
     return names.Select(n => n.ToUpper()).ToList();
 }</code></pre>
 
-                    <p><strong>Step 2 — Hint you want the same pattern applied:</strong></p>
+                    <p><strong>Step 2 - Hint you want the same pattern applied:</strong></p>
                     <pre><code>public List&lt;string&gt; FormatDates(List&lt;string&gt; dates)
 {
     // Using the same pattern as FormatNames above:
@@ -790,17 +790,17 @@ function extractItemNames(items) {
                     <p><strong>Why:</strong> Copilot mirrors the LINQ <code>Select(...).ToList()</code> chain it saw in <code>FormatNames</code>, substituting date parsing for the string transform. The explicit example in the comment anchors the exact output format.</p>
 
                     <div class="callout callout-info">
-                        <p><strong>If Copilot suggested a safer variant — like wrapping the parse in a <code>try/catch</code> or using <code>DateTime.TryParse</code> instead:</strong> that's by design, not a deviation. <code>DateTime.Parse</code> throws a <code>FormatException</code> on invalid input, and Copilot is aware of this. It may decide that the safer overload or a guard clause is more appropriate than following your LINQ pattern verbatim.</p>
+                        <p><strong>If Copilot suggested a safer variant - like wrapping the parse in a <code>try/catch</code> or using <code>DateTime.TryParse</code> instead:</strong> that's by design, not a deviation. <code>DateTime.Parse</code> throws a <code>FormatException</code> on invalid input, and Copilot is aware of this. It may decide that the safer overload or a guard clause is more appropriate than following your LINQ pattern verbatim.</p>
                         <p>This reflects Copilot's built-in focus on <strong>security, reliability, and compliance</strong>. It tries to keep your code safe even when the context you provided didn't account for edge cases. If you want it to stay with the clean LINQ chain, add a comment like <code>// input is pre-validated ISO 8601 strings</code> to signal that defensive parsing is unnecessary here.</p>
                     </div>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1 — Establish the pattern:</strong></p>
+                    <p><strong>Step 1 - Establish the pattern:</strong></p>
 <pre><code>// Example: ["alice", "bob"] -> ["ALICE", "BOB"]
 const formatNames = (names) => names.map((name) => name.toUpperCase());</code></pre>
 
-                    <p><strong>Step 2 — Hint you want the same pattern applied:</strong></p>
+                    <p><strong>Step 2 - Hint you want the same pattern applied:</strong></p>
 <pre><code>// Using the same pattern as formatNames above:
 // Example: ["2026-01-17", "2026-02-20"] -> ["Jan 17, 2026", "Feb 20, 2026"]
 const formatDates = (dates) => {</code></pre>
@@ -808,17 +808,17 @@ const formatDates = (dates) => {</code></pre>
 <pre><code>    return dates.map((d) =>
         new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     );</code></pre>
-                    <p><strong>Why:</strong> Copilot sees the arrow function / <code>.map()</code> style established in <code>formatNames</code>. The example transformation tells it the target format and it applies <code>toLocaleDateString</code> — the natural JS idiom for that output.</p>
+                    <p><strong>Why:</strong> Copilot sees the arrow function / <code>.map()</code> style established in <code>formatNames</code>. The example transformation tells it the target format and it applies <code>toLocaleDateString</code> - the natural JS idiom for that output.</p>
 
                     <div class="callout callout-info">
-                        <p><strong>If Copilot wrapped the body in a <code>try/catch</code> or added input validation instead of a clean <code>.map()</code>:</strong> that's Copilot applying its built-in judgment about <strong>safety and robustness</strong>. <code>new Date()</code> silently produces an <code>Invalid Date</code> object for bad input, and <code>toLocaleDateString</code> on it returns the string <code>"Invalid Date"</code> — a subtle bug that could slip through unnoticed. Copilot may choose to guard against this even when your established pattern didn't.</p>
+                        <p><strong>If Copilot wrapped the body in a <code>try/catch</code> or added input validation instead of a clean <code>.map()</code>:</strong> that's Copilot applying its built-in judgment about <strong>safety and robustness</strong>. <code>new Date()</code> silently produces an <code>Invalid Date</code> object for bad input, and <code>toLocaleDateString</code> on it returns the string <code>"Invalid Date"</code> - a subtle bug that could slip through unnoticed. Copilot may choose to guard against this even when your established pattern didn't.</p>
                         <p>This is part of Copilot's design: it holds a baseline responsibility for <strong>security, privacy, and compliance</strong> that can override strict pattern-following when it believes the pattern carries risk. To keep it in pure <code>.map()</code> style, be explicit: add a comment like <code>// dates are guaranteed valid ISO 8601 strings</code>, removing the ambiguity that triggered the defensive suggestion.</p>
                     </div>
                 </div>
             </div>
 
             <h3>Lab 2, Exercise 4: Docstring Impact</h3>
-            <p>The goal is to show how a detailed docstring alone — without changing parameter names — is enough to direct Copilot to a specific, non-obvious algorithm (Heron's formula).</p>
+            <p>The goal is to show how a detailed docstring alone - without changing parameter names - is enough to direct Copilot to a specific, non-obvious algorithm (Heron's formula).</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -828,11 +828,11 @@ const formatDates = (dates) => {</code></pre>
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Step 1 — What you type (no docstring):</strong></p>
+                    <p><strong>Step 1 - What you type (no docstring):</strong></p>
                     <pre><code>def calculate(a, b, c):</code></pre>
                     <p><strong>What Copilot typically suggests:</strong> Something generic like <code>return a + b + c</code> or a bare <code>pass</code>. Three float parameters named <code>a</code>, <code>b</code>, <code>c</code> give it almost nothing to go on.</p>
 
-                    <p><strong>Step 2 — What you type (with detailed docstring):</strong></p>
+                    <p><strong>Step 2 - What you type (with detailed docstring):</strong></p>
                     <pre><code>def calculate(a: float, b: float, c: float) -> float:
     """
     Calculate the area of a triangle given three side lengths using Heron's formula.
@@ -848,15 +848,15 @@ const formatDates = (dates) => {</code></pre>
                     <p><strong>What Copilot should suggest:</strong></p>
                     <pre><code>    s = (a + b + c) / 2
     return (s * (s - a) * (s - b) * (s - c)) ** 0.5</code></pre>
-                    <p><strong>Why:</strong> The docstring names the exact algorithm ("Heron's formula") and describes the inputs precisely. Copilot matches that to a well-known formula and generates the correct two-line implementation — even though the parameter names <code>a</code>, <code>b</code>, <code>c</code> are minimal.</p>
+                    <p><strong>Why:</strong> The docstring names the exact algorithm ("Heron's formula") and describes the inputs precisely. Copilot matches that to a well-known formula and generates the correct two-line implementation - even though the parameter names <code>a</code>, <code>b</code>, <code>c</code> are minimal.</p>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Step 1 — What you type (no documentation):</strong></p>
+                    <p><strong>Step 1 - What you type (no documentation):</strong></p>
                     <pre><code>public double Calculate(double a, double b, double c)</code></pre>
-                    <p><strong>What Copilot typically suggests:</strong> <code>return a + b + c;</code> or a <code>throw new NotImplementedException();</code> stub — no algorithm-specific logic.</p>
+                    <p><strong>What Copilot typically suggests:</strong> <code>return a + b + c;</code> or a <code>throw new NotImplementedException();</code> stub - no algorithm-specific logic.</p>
 
-                    <p><strong>Step 2 — What you type (with XML documentation):</strong></p>
+                    <p><strong>Step 2 - What you type (with XML documentation):</strong></p>
                     <pre><code>/// &lt;summary&gt;
 /// Calculate the area of a triangle given three side lengths using Heron's formula.
 /// &lt;/summary&gt;
@@ -874,13 +874,13 @@ public double Calculate(double a, double b, double c)</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Step 1 — What you type (no documentation):</strong></p>
+                    <p><strong>Step 1 - What you type (no documentation):</strong></p>
 <pre><code>function calculate(a, b, c) {
     // Copilot has little context; suggestions will be generic
 }</code></pre>
-                    <p><strong>What Copilot typically suggests:</strong> <code>return a + b + c;</code> or similar — no specific algorithm.</p>
+                    <p><strong>What Copilot typically suggests:</strong> <code>return a + b + c;</code> or similar - no specific algorithm.</p>
 
-                    <p><strong>Step 2 — What you type (with JSDoc):</strong></p>
+                    <p><strong>Step 2 - What you type (with JSDoc):</strong></p>
 <pre><code>/**
  * Calculate the area of a triangle given three side lengths using Heron's formula.
  * @param {number} a Length of side A
@@ -893,14 +893,14 @@ function calculate(a, b, c) {</code></pre>
 <pre><code>    const s = (a + b + c) / 2;
     return Math.sqrt(s * (s - a) * (s - b) * (s - c));
 }</code></pre>
-                    <p><strong>Why:</strong> Naming the algorithm in the JSDoc is the entire signal. Copilot retrieves the well-known Heron's formula pattern and produces the correct <code>Math.sqrt</code> implementation — demonstrating that documentation isn't just for humans.</p>
+                    <p><strong>Why:</strong> Naming the algorithm in the JSDoc is the entire signal. Copilot retrieves the well-known Heron's formula pattern and produces the correct <code>Math.sqrt</code> implementation - demonstrating that documentation isn't just for humans.</p>
                 </div>
             </div>
 
             <hr>
 
             <h2>Part 3: Pair Programming</h2>
-            <p>Part 3 exercises focus on using Copilot as a true pair programmer — guiding it through refactoring, test generation, and documentation. The examples below show what ideal solutions look like for each task.</p>
+            <p>Part 3 exercises focus on using Copilot as a true pair programmer - guiding it through refactoring, test generation, and documentation. The examples below show what ideal solutions look like for each task.</p>
 
             <h3>Lab 3, Exercise 1: Refactoring with Copilot</h3>
             <p>The goal is to prompt Copilot to extract helper functions and reduce duplication. Here's an example of before and after refactoring the blueprint decoder:</p>
@@ -937,10 +937,10 @@ function calculate(a, b, c) {</code></pre>
         return {}</code></pre>
                     <p><strong>Refactoring prompt to give Copilot:</strong></p>
                     <pre><code># Refactor the function above into three separate helper functions:
-# 1. read_blueprint(filename) -> str — reads and returns file content
-# 2. extract_secrets(content: str) -> List[str] — uses regex to find all {* ... *}
-# 3. categorize_secrets(secrets: List[str]) -> Dict[str, int] — counts by prefix before ":"</code></pre>
-                    <p><strong>After (refactored — what Copilot should generate):</strong></p>
+# 1. read_blueprint(filename) -> str - reads and returns file content
+# 2. extract_secrets(content: str) -> List[str] - uses regex to find all {* ... *}
+# 3. categorize_secrets(secrets: List[str]) -> Dict[str, int] - counts by prefix before ":"</code></pre>
+                    <p><strong>After (refactored - what Copilot should generate):</strong></p>
                     <pre><code>import re
 from typing import List, Dict
 
@@ -975,9 +975,9 @@ def decode_blueprint_safe(filename: str) -> List[str]:
                 <div class="tab-content" data-language="csharp">
                     <p><strong>Refactoring prompt to give Copilot:</strong></p>
                     <pre><code>// Refactor the BlueprintDecoder class by extracting:
-// 1. ReadBlueprint(string filename) -> string — file I/O only
-// 2. ExtractSecrets(string content) -> List&lt;string&gt; — regex parsing only
-// 3. CategorizeSecrets(List&lt;string&gt; secrets) -> Dictionary&lt;string, int&gt; — categorization only</code></pre>
+// 1. ReadBlueprint(string filename) -> string - file I/O only
+// 2. ExtractSecrets(string content) -> List&lt;string&gt; - regex parsing only
+// 3. CategorizeSecrets(List&lt;string&gt; secrets) -> Dictionary&lt;string, int&gt; - categorization only</code></pre>
                     <p><strong>After (refactored):</strong></p>
                     <pre><code>using System.IO;
 using System.Text.RegularExpressions;
@@ -1015,9 +1015,9 @@ public class BlueprintDecoder
                     <p><strong>Refactoring prompt to give Copilot:</strong></p>
                     <pre><code>/**
  * Refactor the decode function into three helpers:
- * 1. readBlueprint(filename): string — file I/O only
- * 2. extractSecrets(content): string[] — regex parsing only
- * 3. categorizeSecrets(secrets): Record&lt;string, number&gt; — counts by prefix before ":"
+ * 1. readBlueprint(filename): string - file I/O only
+ * 2. extractSecrets(content): string[] - regex parsing only
+ * 3. categorizeSecrets(secrets): Record&lt;string, number&gt; - counts by prefix before ":"
  */</code></pre>
                     <p><strong>After (refactored):</strong></p>
                     <pre><code>const fs = require('fs');
@@ -1253,8 +1253,8 @@ function extractSecrets(content) { ... }</code></pre>
             <h2>Part 4: Copilot Chat vs Agent Mode</h2>
             <p>These exercises are about recognising when to use Chat (Ask) Mode for targeted, surgical changes versus Agent (Autonomous) Mode for larger, multi-file tasks. The examples below show what good output looks like for each scenario.</p>
 
-            <h3>Lab 4, Exercise 1: Chat Mode — Targeted Improvement</h3>
-            <p>The task is to add retry logic with exponential backoff to the network call. This is a focused, single-function change — ideal for Chat Mode.</p>
+            <h3>Lab 4, Exercise 1: Chat Mode - Targeted Improvement</h3>
+            <p>The task is to add retry logic with exponential backoff to the network call. This is a focused, single-function change - ideal for Chat Mode.</p>
 
             <p><strong>Chat prompt to use:</strong></p>
             <pre><code>Add retry logic with exponential backoff to the retrieve_and_decode_blueprint function.
@@ -1369,8 +1369,8 @@ async function retrieveAndDecodeBlueprint(url) {
                 </div>
             </div>
 
-            <h3>Lab 4, Exercise 2: Agent Mode — Scaffold a Full CLI Tool</h3>
-            <p>This task spans multiple files and requires coordinating code, tests, and documentation — ideal for Agent Mode. Use this as your Agent Mode prompt:</p>
+            <h3>Lab 4, Exercise 2: Agent Mode - Scaffold a Full CLI Tool</h3>
+            <p>This task spans multiple files and requires coordinating code, tests, and documentation - ideal for Agent Mode. Use this as your Agent Mode prompt:</p>
 
             <div class="callout callout-info">
                 <p><strong>Agent Mode prompt:</strong> "Scaffold a Node.js CLI tool called <code>league-decoder</code> that: (1) accepts <code>--source &lt;url&gt;</code>, <code>--marker &lt;start:end&gt;</code>, and <code>--max-secrets &lt;n&gt;</code> flags; (2) fetches the URL with a 10s timeout and 3 retries; (3) extracts secrets between the markers; (4) prints a formatted report to stdout; (5) includes a <code>decoder.test.js</code> with at least a happy-path and error-path test; (6) creates a README.md with usage examples."</p>
@@ -1490,7 +1490,7 @@ function validateUrl(url) {
             </div>
 
             <h3>Lab 5, Exercise 2: Structured Logging (No Secret Leakage)</h3>
-            <p>Audit logs should record <em>that</em> secrets were found — not <em>what</em> they are. Here's the pattern:</p>
+            <p>Audit logs should record <em>that</em> secrets were found - not <em>what</em> they are. Here's the pattern:</p>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -1514,10 +1514,10 @@ def log_mission_result(url: str, secrets_count: int, success: bool, reason: str 
     }
     logging.info(json.dumps(entry))
 
-# Good — logs metadata only:
+# Good - logs metadata only:
 log_mission_result("https://raw.githubusercontent.com/...", secrets_count=5, success=True)
 
-# BAD — never do this:
+# BAD - never do this:
 # logging.info(f"Secrets: {secrets}")  # exposes classified data</code></pre>
                 </div>
 
@@ -1539,9 +1539,9 @@ function logMissionResult(url, secretsCount, success, reason = '') {
     }));
 }
 
-// Good — logs metadata only:
+// Good - logs metadata only:
 logMissionResult('https://raw.githubusercontent.com/...', 5, true);
-// BAD — never do this:
+// BAD - never do this:
 // console.log('Secrets:', secrets);  // exposes classified data</code></pre>
                 </div>
             </div>
@@ -1612,7 +1612,7 @@ test('unknown host is blocked', () =&gt; {
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>decoder.py — hardened core:</strong></p>
+                    <p><strong>decoder.py - hardened core:</strong></p>
                     <pre><code>import re
 import time
 import json
@@ -1665,7 +1665,7 @@ def run_mission(url: str, max_secrets: int = 10) -> None:
     for i, s in enumerate(secrets, 1):
         print(f"  {i}. {s}")</code></pre>
 
-                    <p><strong>cli.py — entry point:</strong></p>
+                    <p><strong>cli.py - entry point:</strong></p>
                     <pre><code>import argparse
 from decoder import run_mission
 
@@ -1679,7 +1679,7 @@ def main():
 if __name__ == "__main__":
     main()</code></pre>
 
-                    <p><strong>test_decoder.py — test suite:</strong></p>
+                    <p><strong>test_decoder.py - test suite:</strong></p>
                     <pre><code>import pytest
 from unittest.mock import patch, MagicMock
 from decoder import validate_url, extract_secrets, run_mission
@@ -1719,7 +1719,7 @@ pytest test_decoder.py -v</code></pre>
 ├── Program.cs        ← CLI entry point (System.CommandLine or args[])
 ├── DecoderTests.cs   ← xUnit: happy path + timeout + empty response
 └── README.md</code></pre>
-                    <p><strong>Decoder.cs — key methods:</strong></p>
+                    <p><strong>Decoder.cs - key methods:</strong></p>
                     <pre><code>using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -1752,7 +1752,7 @@ public static class Decoder
                 await Task.Delay(wait * 1000);
             }
         }
-        return await Client.GetStringAsync(url); // final attempt — let it throw
+        return await Client.GetStringAsync(url); // final attempt - let it throw
     }
 
     public static List&lt;string&gt; ExtractSecrets(string content, int maxSecrets = 10)
@@ -1776,7 +1776,7 @@ public static class Decoder
 ├── cli.js            ← entry point with commander
 ├── decoder.test.js   ← Jest tests
 └── README.md</code></pre>
-                    <p><strong>decoder.js — core:</strong></p>
+                    <p><strong>decoder.js - core:</strong></p>
                     <pre><code>const ALLOWED_HOSTS = new Set(['raw.githubusercontent.com']);
 const SECRET_RE = /\{\*(.*?)\*\}/g;
 
@@ -1825,16 +1825,16 @@ npx jest decoder.test.js</code></pre>
             <hr>
 
             <h2>Part 7: Wrap-Up &amp; Next Steps</h2>
-            <p>Part 7 is reflective and personal — there are no single "correct" answers. The exercises below offer prompts and examples to help you consolidate what you've learned and plan your next steps with Copilot.</p>
+            <p>Part 7 is reflective and personal - there are no single "correct" answers. The exercises below offer prompts and examples to help you consolidate what you've learned and plan your next steps with Copilot.</p>
 
             <h3>Lab 7, Exercise 1: Discover Features You Haven't Used</h3>
             <p>Here are some high-value Copilot features that most developers haven't explored yet:</p>
             <ul>
                 <li><strong>Copilot Chat context commands:</strong> Type <code>#file</code>, <code>#selection</code>, or <code>#codebase</code> in Chat to give Copilot targeted context without copy-pasting.</li>
-                <li><strong><code>@workspace</code> agent:</strong> Ask questions about your entire project — e.g., "What files handle error logging?" — and Copilot will search across all files.</li>
+                <li><strong><code>@workspace</code> agent:</strong> Ask questions about your entire project - e.g., "What files handle error logging?" - and Copilot will search across all files.</li>
                 <li><strong>Inline Chat (<code>Ctrl+I</code> / <code>Cmd+I</code>):</strong> Open a chat prompt directly inside the editor to refactor a selected block without switching panels.</li>
                 <li><strong>Fix &amp; Explain in the Problems panel:</strong> Right-click any error in the Problems panel and select "Fix using Copilot" or "Explain using Copilot".</li>
-                <li><strong>Terminal Copilot (<code>Ctrl+I</code> in the terminal):</strong> Ask for shell commands in natural language — e.g., "find all Python files modified in the last 7 days".</li>
+                <li><strong>Terminal Copilot (<code>Ctrl+I</code> in the terminal):</strong> Ask for shell commands in natural language - e.g., "find all Python files modified in the last 7 days".</li>
                 <li><strong>Copilot Instructions (<code>.github/copilot-instructions.md</code>):</strong> Add a file with project-specific conventions and Copilot will respect them in every suggestion.</li>
             </ul>
 
@@ -1843,7 +1843,7 @@ npx jest decoder.test.js</code></pre>
             <pre><code># My Copilot Integration Plan
 
 ## 1. Where I'll use Copilot first
-# (e.g., "Writing unit tests for the auth module — I always avoid it, Copilot can scaffold them fast")
+# (e.g., "Writing unit tests for the auth module - I always avoid it, Copilot can scaffold them fast")
 
 ## 2. Workflow rules I'll establish
 # (e.g., "Never accept a Copilot suggestion without reading every line, especially security-sensitive code")
@@ -1860,7 +1860,7 @@ npx jest decoder.test.js</code></pre>
 # - Responsible AI with Copilot: https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features</code></pre>
 
             <h3>Lab 7, Exercise 3: Reflection Prompts</h3>
-            <p>Use Copilot Chat to answer these reflection questions — it can help you articulate what you've learned:</p>
+            <p>Use Copilot Chat to answer these reflection questions - it can help you articulate what you've learned:</p>
             <ul>
                 <li>"Based on the code in this workspace, where would Copilot's suggestions be most and least reliable?"</li>
                 <li>"What are the security risks of accepting Copilot suggestions without review in a production codebase?"</li>
@@ -1932,5 +1932,33 @@ npx jest decoder.test.js</code></pre>
     </footer>
 
     <script src="../script.js"></script>
+    <script>
+    // Inline tab functionality
+    (function() {
+        const tabs = document.querySelectorAll('.language-tab');
+        tabs.forEach(function(tab) {
+            tab.onclick = function() {
+                const lang = this.getAttribute('data-language');
+                const tabGroup = this.closest('.language-tabs');
+                const container = tabGroup.nextElementSibling;
+
+                tabGroup.querySelectorAll('.language-tab').forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                container.querySelectorAll('.tab-content').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                const selected = container.querySelector('[data-language="' + lang + '"]');
+                if (selected) {
+                    selected.classList.add('active');
+                }
+
+                localStorage.setItem('preferred-language', lang);
+            };
+        });
+    })();
+    </script>
 </body>
 </html>
