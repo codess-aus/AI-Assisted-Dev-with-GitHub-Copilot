@@ -13,7 +13,7 @@
 ## Part 2: Mental Models: How GitHub Copilot Works Under the Hood
 
 ### Lab 2: Exploring Copilot’s Context Awareness and Intent Following
-(Prompting experiments and context engineering exercises)
+(Prompting experiments and context engineering tasks)
 
 ## Part 3: AI Pair Programming: Effective Prompting and Context Engineering
 
@@ -28,7 +28,7 @@
 ## Part 5: Quality and Security: Guardrails for AI-Generated Code
 
 ### Lab 5: Reviewing, Hardening, and Testing Copilot Suggestions
-(Security/quality checklist & exercises to catch common pitfalls)
+(Security/quality checklist & tasks to catch common pitfalls)
 
 ## Part 6: Production Workflows: Integrating Copilot with Real Projects
 

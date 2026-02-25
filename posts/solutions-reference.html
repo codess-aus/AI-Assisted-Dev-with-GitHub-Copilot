@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete solutions reference for all workshop exercises. Use this to check your work or troubleshoot if things go wrong.">
+    <meta name="description" content="Complete solutions reference for all workshop tasks. Use this to check your work or troubleshoot if things go wrong.">
     <title>Solutions Reference - Developer FAQ</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -43,19 +43,19 @@
 
         <div class="post-body">
             <h2>How to Use This Page</h2>
-            <p>This page contains ideal solutions for all exercises in the workshop. Use this reference if:</p>
+            <p>This page contains ideal solutions for all tasks in the workshop. Use this reference if:</p>
             <ul>
                 <li>Your code isn't producing the expected output</li>
                 <li>You want to compare your approach with the ideal solution</li>
                 <li>You're stuck and need to see what the final result should look like</li>
             </ul>
-            <p><strong>Important:</strong> Try to complete each exercise on your own first using Copilot. This reference is for troubleshooting and learning, not for copying solutions.</p>
+            <p><strong>Important:</strong> Try to complete each task on your own first using Copilot. This reference is for troubleshooting and learning, not for copying solutions.</p>
 
             <hr>
 
             <h2>Part 1: Getting Started with Copilot</h2>
 
-            <h3>Lab 1, Exercise 1: Build the Blueprint Decoder</h3>
+            <h3>Lab 1, Task 1: Build the Blueprint Decoder</h3>
             <p>Create a decoder to extract secrets marked between <code>{*</code> and <code>*}</code> from a blueprint file. Here's what the ideal result looks like for each language:</p>
 
             <div class="language-tabs">
@@ -189,7 +189,7 @@ secrets.forEach((secret, index) =&gt; {
                 </div>
             </div>
 
-            <h3>Lab 1, Exercise 2: Enhance the Decoder</h3>
+            <h3>Lab 1, Task 2: Enhance the Decoder</h3>
             <p>Enhanced decoder with error handling, formatting, and categorization features:</p>
 
             <h4>Challenge 1: Add Error Handling</h4>
@@ -606,9 +606,9 @@ Secret Categories:
             <hr>
 
             <h2>Part 2: Mental Models & Context</h2>
-            <p>These exercises are designed to show a visible, measurable difference in Copilot's suggestions based on the context you provide. The code below shows both what you type and what Copilot is expected to generate in response.</p>
+            <p>These tasks are designed to show a visible, measurable difference in Copilot's suggestions based on the context you provide. The code below shows both what you type and what Copilot is expected to generate in response.</p>
 
-            <h3>Lab 2, Exercise 1: Context Sensitivity</h3>
+            <h3>Lab 2, Task 1: Context Sensitivity</h3>
             <p>The goal is to see Copilot give a meaningless suggestion with minimal context, then a precise one after you add types and a clear comment.</p>
 
             <div class="language-tabs">
@@ -671,7 +671,7 @@ function extractNames(data) {
                 </div>
             </div>
 
-            <h3>Lab 2, Exercise 2: Variable Name Context</h3>
+            <h3>Lab 2, Task 2: Variable Name Context</h3>
             <p>The goal is to see Copilot's suggestion quality shift dramatically when you change a single thing: the names. Same intent, different signal - different output.</p>
 
             <div class="language-tabs">
@@ -740,7 +740,7 @@ function extractItemNames(items) {
                 </div>
             </div>
 
-            <h3>Lab 2, Exercise 3: Example-Driven Prompting</h3>
+            <h3>Lab 2, Task 3: Example-Driven Prompting</h3>
             <p>The goal is to demonstrate that Copilot picks up on patterns you establish and carries them forward to new functions.</p>
 
             <div class="language-tabs">
@@ -817,7 +817,7 @@ const formatDates = (dates) => {</code></pre>
                 </div>
             </div>
 
-            <h3>Lab 2, Exercise 4: Docstring Impact</h3>
+            <h3>Lab 2, Task 4: Docstring Impact</h3>
             <p>The goal is to show how a detailed docstring alone - without changing parameter names - is enough to direct Copilot to a specific, non-obvious algorithm (Heron's formula).</p>
 
             <div class="language-tabs">
@@ -900,9 +900,9 @@ function calculate(a, b, c) {</code></pre>
             <hr>
 
             <h2>Part 3: Pair Programming</h2>
-            <p>Part 3 exercises focus on using Copilot as a true pair programmer - guiding it through refactoring, test generation, and documentation. The examples below show what ideal solutions look like for each task.</p>
+            <p>Part 3 tasks focus on using Copilot as a true pair programmer - guiding it through refactoring, test generation, and documentation. The examples below show what ideal solutions look like for each task.</p>
 
-            <h3>Lab 3, Exercise 1: Refactoring with Copilot</h3>
+            <h3>Lab 3, Task 1: Refactoring with Copilot</h3>
             <p>The goal is to prompt Copilot to extract helper functions and reduce duplication. Here's an example of before and after refactoring the blueprint decoder:</p>
 
             <div class="language-tabs">
@@ -1053,7 +1053,7 @@ function decodeBlueprintSafe(filename) {
                 </div>
             </div>
 
-            <h3>Lab 3, Exercise 2: Writing Unit Tests with Copilot</h3>
+            <h3>Lab 3, Task 2: Writing Unit Tests with Copilot</h3>
             <p>Prompt Copilot to generate a Playwright test suite for each helper function. The ideal suite covers happy paths, edge cases, and error conditions.</p>
 
             <div class="language-tabs">
@@ -1183,7 +1183,7 @@ test.describe('categorizeSecrets', () =&gt; {
                 </div>
             </div>
 
-            <h3>Lab 3, Exercise 3: Documentation Generation</h3>
+            <h3>Lab 3, Task 3: Documentation Generation</h3>
             <p>Prompt Copilot to write comprehensive docstrings. The key is giving it a comment that specifies <em>what to document</em>: purpose, parameters, return value, exceptions, and an example.</p>
 
             <div class="language-tabs">
@@ -1264,9 +1264,9 @@ function extractSecrets(content) { ... }</code></pre>
             <hr>
 
             <h2>Part 4: Copilot Chat vs Agent Mode</h2>
-            <p>These exercises are about recognising when to use Chat (Ask) Mode for targeted, surgical changes versus Agent (Autonomous) Mode for larger, multi-file tasks. The examples below show what good output looks like for each scenario.</p>
+            <p>These tasks are about recognising when to use Chat (Ask) Mode for targeted, surgical changes versus Agent (Autonomous) Mode for larger, multi-file tasks. The examples below show what good output looks like for each scenario.</p>
 
-            <h3>Lab 4, Exercise 1: Chat Mode - Targeted Improvement</h3>
+            <h3>Lab 4, Task 1: Chat Mode - Targeted Improvement</h3>
             <p>The task is to add retry logic with exponential backoff to the network call. This is a focused, single-function change - ideal for Chat Mode.</p>
 
             <p><strong>Chat prompt to use:</strong></p>
@@ -1382,7 +1382,7 @@ async function retrieveAndDecodeBlueprint(url) {
                 </div>
             </div>
 
-            <h3>Lab 4, Exercise 2: Agent Mode - Scaffold a Full CLI Tool</h3>
+            <h3>Lab 4, Task 2: Agent Mode - Scaffold a Full CLI Tool</h3>
             <p>This task spans multiple files and requires coordinating code, tests, and documentation - ideal for Agent Mode. Use this as your Agent Mode prompt:</p>
 
             <div class="callout callout-info">
@@ -1421,9 +1421,9 @@ fetchAndDecode(opts.source, start, end, parseInt(opts.maxSecrets))
             <hr>
 
             <h2>Part 5: Security &amp; Guardrails</h2>
-            <p>Part 5 exercises are about hardening the decoder against real-world threats. Below are the ideal solutions for each guardrail category.</p>
+            <p>Part 5 tasks are about hardening the decoder against real-world threats. Below are the ideal solutions for each guardrail category.</p>
 
-            <h3>Lab 5, Exercise 1: URL Validation (Allowlist)</h3>
+            <h3>Lab 5, Task 1: URL Validation (Allowlist)</h3>
             <p>Never trust user-supplied URLs. Add an allowlist check before making any network request.</p>
 
             <div class="language-tabs">
@@ -1502,7 +1502,7 @@ function validateUrl(url) {
                 </div>
             </div>
 
-            <h3>Lab 5, Exercise 2: Structured Logging (No Secret Leakage)</h3>
+            <h3>Lab 5, Task 2: Structured Logging (No Secret Leakage)</h3>
             <p>Audit logs should record <em>that</em> secrets were found - not <em>what</em> they are. Here's the pattern:</p>
 
             <div class="language-tabs">
@@ -1559,7 +1559,7 @@ logMissionResult('https://raw.githubusercontent.com/...', 5, true);
                 </div>
             </div>
 
-            <h3>Lab 5, Exercise 3: Security Test Cases</h3>
+            <h3>Lab 5, Task 3: Security Test Cases</h3>
             <p>Every guardrail needs a corresponding test. Here's what the happy-path and failure-path tests should look like:</p>
 
             <div class="language-tabs">
@@ -1838,9 +1838,9 @@ npx jest decoder.test.js</code></pre>
             <hr>
 
             <h2>Part 7: Wrap-Up &amp; Next Steps</h2>
-            <p>Part 7 is reflective and personal - there are no single "correct" answers. The exercises below offer prompts and examples to help you consolidate what you've learned and plan your next steps with Copilot.</p>
+            <p>Part 7 is reflective and personal - there are no single "correct" answers. The tasks below offer prompts and examples to help you consolidate what you've learned and plan your next steps with Copilot.</p>
 
-            <h3>Lab 7, Exercise 1: Discover Features You Haven't Used</h3>
+            <h3>Lab 7, Task 1: Discover Features You Haven't Used</h3>
             <p>Here are some high-value Copilot features that most developers haven't explored yet:</p>
             <ul>
                 <li><strong>Copilot Chat context commands:</strong> Type <code>#file</code>, <code>#selection</code>, or <code>#codebase</code> in Chat to give Copilot targeted context without copy-pasting.</li>
@@ -1851,7 +1851,7 @@ npx jest decoder.test.js</code></pre>
                 <li><strong>Copilot Instructions (<code>.github/copilot-instructions.md</code>):</strong> Add a file with project-specific conventions and Copilot will respect them in every suggestion.</li>
             </ul>
 
-            <h3>Lab 7, Exercise 2: Build Your Integration Plan</h3>
+            <h3>Lab 7, Task 2: Build Your Integration Plan</h3>
             <p>A well-structured integration plan answers these questions for your own work. Fill in each section:</p>
             <pre><code># My Copilot Integration Plan
 
@@ -1872,7 +1872,7 @@ npx jest decoder.test.js</code></pre>
 # - What's new in Copilot: https://github.blog/changelog/label/copilot/
 # - Responsible AI with Copilot: https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features</code></pre>
 
-            <h3>Lab 7, Exercise 3: Reflection Prompts</h3>
+            <h3>Lab 7, Task 3: Reflection Prompts</h3>
             <p>Use Copilot Chat to answer these reflection questions - it can help you articulate what you've learned:</p>
             <ul>
                 <li>"Based on the code in this workspace, where would Copilot's suggestions be most and least reliable?"</li>

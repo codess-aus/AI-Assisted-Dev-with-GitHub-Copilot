@@ -363,7 +363,7 @@ describe('validateCreditCard', () => {
 
             <p><strong>What you'll learn:</strong> Pair programming isn't about Copilot doing all the work; it's about you directing, and Copilot accelerating. By the end, you have a decoder that ByteStrike can actually ship.</p>
 
-            <h3>Exercise 1: Refactor the Blueprint Decoder</h3>
+            <h3>Task 1: Refactor the Blueprint Decoder</h3>
             <p>The mission briefing is in — ByteStrike's original decoder works, but it's a <em>monolithic blob</em>. One function does everything: reads the file, extracts secrets, categorises them, and prints a report. That makes it impossible to test or extend independently. Your job is to use Copilot to split it into focused, single-responsibility helpers.</p>
 
             <div class="language-tabs">
@@ -502,7 +502,7 @@ Keep a decodeBlueprintSafe orchestrator that calls all three and handles errors.
                 </div>
             </div>
 
-            <h3>Exercise 2: Generate Comprehensive Tests</h3>
+            <h3>Task 2: Generate Comprehensive Tests</h3>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -560,7 +560,7 @@ Install with: npm install -D @playwright/test</code></pre>
                 </div>
             </div>
 
-            <h3>Exercise 3: Documentation Generation</h3>
+            <h3>Task 3: Documentation Generation</h3>
             <p>ByteStrike's helpers are now testable — but a new agent needs to use them without reading the implementation. Your mission: ask Copilot to write comprehensive documentation for the helper functions.</p>
             
             <div class="language-tabs">
@@ -571,7 +571,7 @@ Install with: npm install -D @playwright/test</code></pre>
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p>Open <code>blueprint_decoder.py</code> — this is the file from Exercise 1 containing the three helper functions you refactored (<code>read_blueprint</code>, <code>extract_secrets</code>, and <code>categorize_secrets</code>). Repeat these steps for each function:</p>
+                    <p>Open <code>blueprint_decoder.py</code> — this is the file from Task 1 containing the three helper functions you refactored (<code>read_blueprint</code>, <code>extract_secrets</code>, and <code>categorize_secrets</code>). Repeat these steps for each function:</p>
                     <ol>
                         <li><strong>Select the entire function</strong> signature and body.</li>
                         <li>Open Inline Chat with <kbd>Ctrl+I</kbd> (or <kbd>Cmd+I</kbd> on Mac).</li>
@@ -590,7 +590,7 @@ Install with: npm install -D @playwright/test</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p>Open <code>LeagueHQ.cs</code> — this is the file from Exercise 1 containing the three helper methods you refactored (<code>ReadBlueprint</code>, <code>ExtractSecrets</code>, and <code>CategorizeSecrets</code>). Repeat these steps for each method:</p>
+                    <p>Open <code>LeagueHQ.cs</code> — this is the file from Task 1 containing the three helper methods you refactored (<code>ReadBlueprint</code>, <code>ExtractSecrets</code>, and <code>CategorizeSecrets</code>). Repeat these steps for each method:</p>
                     <ol>
                         <li><strong>Select the entire method</strong> signature and body.</li>
                         <li>Open Inline Chat with <kbd>Ctrl+I</kbd> (or <kbd>Cmd+I</kbd> on Mac).</li>
@@ -609,7 +609,7 @@ Install with: npm install -D @playwright/test</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p>Open <code>leagueMission.js</code> — this is the file from Exercise 1 containing the three helper functions you refactored (<code>readBlueprint</code>, <code>extractSecrets</code>, and <code>categorizeSecrets</code>). Repeat these steps for each function:</p>
+                    <p>Open <code>leagueMission.js</code> — this is the file from Task 1 containing the three helper functions you refactored (<code>readBlueprint</code>, <code>extractSecrets</code>, and <code>categorizeSecrets</code>). Repeat these steps for each function:</p>
                     <ol>
                         <li><strong>Select the entire function</strong> signature and body.</li>
                         <li>Open Inline Chat with <kbd>Ctrl+I</kbd> (or <kbd>Cmd+I</kbd> on Mac).</li>

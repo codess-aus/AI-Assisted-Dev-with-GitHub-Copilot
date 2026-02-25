@@ -1,5 +1,5 @@
 ## The League’s Blueprints: ByteStrike Mission Protocol
-### Ask Mode Exercise
+### Ask Mode Task
 
 ![ByteStrike Mission](../images/bytestrike.png)
 
