@@ -267,8 +267,9 @@ public class LeagueHQ
                 <li><strong>Create one starter file</strong> (the decoder) and a simple README placeholder.</li>
                 <li><strong>Open Agent Mode</strong> (use the Copilot Agent extension or chat command) and prompt:
                     <blockquote style="border-left: 4px solid #007bff; padding-left: 10px; margin: 10px 0;">
-                        "Refactor the blueprint decoder into a production-ready CLI tool. Add command-line arguments (--source-url, --marker-start, --marker-end, --output), unit tests, error handling, logging, and a README with usage examples. Use best practices for [language]."
+                        "Refactor the blueprint decoder into a production-ready CLI tool. Add command-line arguments (--source-url, --marker-start, --marker-end, --output), unit tests, error handling with retries, structured logging, and a README with install and usage examples. Structure the code across separate files for the CLI entry point, decode logic, and tests. Use pytest for Python, xUnit for C#, Jest for JavaScript. Use best practices for [language]."
                     </blockquote>
+                    <p style="margin-top: 8px; font-size: 0.95em; color: #666;"><strong>Note:</strong> Agent Mode output varies. Copilot may choose a single-file layout, use <code>unittest</code> instead of <code>pytest</code>, or add a <code>pyproject.toml</code> package setup. This is normal — check the solutions reference for what a compliant output looks like and what variations are acceptable.</p>
                 </li>
                 <li><strong>Watch Agent Mode work</strong> (it will create/edit multiple files, run tests, etc.).</li>
                 <li><strong>Review every change:</strong> Read the files it created. Do they make sense? Are the tests good? Does the README help?</li>

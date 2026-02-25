@@ -1405,6 +1405,17 @@ async function retrieveAndDecodeBlueprint(url) {
 ├── test_decoder.py  ← pytest tests: happy path + timeout simulation
 └── README.md        ← usage, flags, examples</code></pre>
 
+                    <div class="callout callout-warning">
+                        <p><strong>Agent Mode output varies significantly — this is expected.</strong> Copilot's output is considered compliant if it meets the core requirements, regardless of the exact structure. Common variations you may see:</p>
+                        <ul>
+                            <li><strong>Single-module layout</strong> — all logic in one file (e.g., <code>blueprint_decoder2.py</code>) rather than split across <code>cli.py</code>, <code>decoder.py</code>, <code>formatter.py</code></li>
+                            <li><strong><code>unittest</code> instead of <code>pytest</code></strong> — both are valid; Copilot may default to the stdlib test framework</li>
+                            <li><strong><code>pyproject.toml</code> / <code>setup.py</code></strong> — Copilot may scaffold a full package structure with install metadata</li>
+                            <li><strong>Different flag names</strong> — e.g., <code>--source-url</code>, <code>--marker-start</code>, <code>--marker-end</code> instead of <code>--source</code>, <code>--marker</code></li>
+                        </ul>
+                        <p>Check your output against these core requirements: CLI args ✓, retry/error handling ✓, structured logging ✓, unit tests (happy path + error path) ✓, README with usage ✓. If all five are present, it's a pass.</p>
+                    </div>
+
                     <p><strong>Expected <code>cli.py</code> outline:</strong></p>
                     <pre><code>import argparse
 from decoder import fetch_and_decode
