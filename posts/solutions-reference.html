@@ -1383,22 +1383,99 @@ async function retrieveAndDecodeBlueprint(url) {
             </div>
 
             <h3>Lab 4, Task 2: Agent Mode - Scaffold a Full CLI Tool</h3>
-            <p>This task spans multiple files and requires coordinating code, tests, and documentation - ideal for Agent Mode. Use this as your Agent Mode prompt:</p>
+            <p>This task spans multiple files and requires coordinating code, tests, and documentation - ideal for Agent Mode. Use the prompt for your chosen language below.</p>
 
-            <div class="callout callout-info">
-                <p><strong>Agent Mode prompt:</strong> "Scaffold a Node.js CLI tool called <code>league-decoder</code> that: (1) accepts <code>--source &lt;url&gt;</code>, <code>--marker &lt;start:end&gt;</code>, and <code>--max-secrets &lt;n&gt;</code> flags; (2) fetches the URL with a 10s timeout and 3 retries; (3) extracts secrets between the markers; (4) prints a formatted report to stdout; (5) includes a <code>decoder.test.js</code> with at least a happy-path and error-path test; (6) creates a README.md with usage examples."</p>
+            <div class="language-tabs">
+                <button class="language-tab active" data-language="python">Python</button>
+                <button class="language-tab" data-language="csharp">C#</button>
+                <button class="language-tab" data-language="javascript">JavaScript</button>
             </div>
 
-            <p><strong>What Agent Mode should produce (key files):</strong></p>
-            <pre><code>league-decoder/
+            <div class="tab-content-container">
+                <div class="tab-content active" data-language="python">
+                    <div class="callout callout-info">
+                        <p><strong>Agent Mode prompt:</strong> "Scaffold a Python CLI tool called <code>league-decoder</code> that: (1) accepts <code>--source &lt;url&gt;</code>, <code>--marker &lt;start:end&gt;</code>, and <code>--max-secrets &lt;n&gt;</code> arguments using <code>argparse</code>; (2) fetches the URL with a 10s timeout and 3 retries using <code>requests</code>; (3) extracts secrets between the markers using regex; (4) prints a formatted report to stdout; (5) includes a <code>test_decoder.py</code> with at least a happy-path and error-path test using <code>pytest</code>; (6) creates a README.md with usage examples."</p>
+                    </div>
+
+                    <p><strong>What Agent Mode should produce (key files):</strong></p>
+                    <pre><code>league-decoder/
+├── cli.py           ← entry point, argparse argument parsing
+├── decoder.py       ← fetch + extract logic with retries
+├── formatter.py     ← report formatting helper
+├── test_decoder.py  ← pytest tests: happy path + timeout simulation
+└── README.md        ← usage, flags, examples</code></pre>
+
+                    <p><strong>Expected <code>cli.py</code> outline:</strong></p>
+                    <pre><code>import argparse
+from decoder import fetch_and_decode
+
+def main():
+    parser = argparse.ArgumentParser(description="League Blueprint Decoder")
+    parser.add_argument("--source", required=True, help="Blueprint URL to decode")
+    parser.add_argument("--marker", default="{*:*}", help="Secret delimiters (start:end)")
+    parser.add_argument("--max-secrets", type=int, default=10, help="Maximum secrets to display")
+    args = parser.parse_args()
+
+    start, end = args.marker.split(":")
+    fetch_and_decode(args.source, start, end, args.max_secrets)
+
+if __name__ == "__main__":
+    main()</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="csharp">
+                    <div class="callout callout-info">
+                        <p><strong>Agent Mode prompt:</strong> "Scaffold a .NET console CLI tool called <code>LeagueDecoder</code> that: (1) accepts <code>--source &lt;url&gt;</code>, <code>--marker &lt;start:end&gt;</code>, and <code>--max-secrets &lt;n&gt;</code> arguments; (2) fetches the URL with a 10s timeout and 3 retries using <code>HttpClient</code>; (3) extracts secrets between the markers using regex; (4) prints a formatted report to stdout; (5) includes an <code>xUnit</code> test project with at least a happy-path and error-path test; (6) creates a README.md with usage examples."</p>
+                    </div>
+
+                    <p><strong>What Agent Mode should produce (key files):</strong></p>
+                    <pre><code>LeagueDecoder/
+├── Program.cs           ← entry point, argument parsing
+├── Decoder.cs           ← fetch + extract logic with retries
+├── Formatter.cs         ← report formatting helper
+├── LeagueDecoder.Tests/
+│   └── DecoderTests.cs  ← xUnit tests: happy path + timeout simulation
+└── README.md            ← usage, flags, examples</code></pre>
+
+                    <p><strong>Expected <code>Program.cs</code> outline:</strong></p>
+                    <pre><code>using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        string source = GetArg(args, "--source") ?? throw new ArgumentException("--source is required");
+        string marker = GetArg(args, "--marker") ?? "{*:*}";
+        int maxSecrets = int.TryParse(GetArg(args, "--max-secrets"), out var n) ? n : 10;
+
+        var parts = marker.Split(':');
+        await Decoder.FetchAndDecodeAsync(source, parts[0], parts[1], maxSecrets);
+    }
+
+    static string? GetArg(string[] args, string flag)
+    {
+        int i = Array.IndexOf(args, flag);
+        return i &gt;= 0 &amp;&amp; i + 1 &lt; args.Length ? args[i + 1] : null;
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" data-language="javascript">
+                    <div class="callout callout-info">
+                        <p><strong>Agent Mode prompt:</strong> "Scaffold a Node.js CLI tool called <code>league-decoder</code> that: (1) accepts <code>--source &lt;url&gt;</code>, <code>--marker &lt;start:end&gt;</code>, and <code>--max-secrets &lt;n&gt;</code> flags; (2) fetches the URL with a 10s timeout and 3 retries; (3) extracts secrets between the markers; (4) prints a formatted report to stdout; (5) includes a <code>decoder.test.js</code> with at least a happy-path and error-path test; (6) creates a README.md with usage examples."</p>
+                    </div>
+
+                    <p><strong>What Agent Mode should produce (key files):</strong></p>
+                    <pre><code>league-decoder/
 ├── cli.js          ← entry point, argument parsing
 ├── decoder.js      ← fetch + extract logic with retries
 ├── formatter.js    ← report formatting helper
 ├── decoder.test.js ← Jest tests: happy path + timeout simulation
 └── README.md       ← usage, flags, examples</code></pre>
 
-            <p><strong>Expected <code>cli.js</code> outline:</strong></p>
-            <pre><code>#!/usr/bin/env node
+                    <p><strong>Expected <code>cli.js</code> outline:</strong></p>
+                    <pre><code>#!/usr/bin/env node
 const { program } = require('commander');
 const { fetchAndDecode } = require('./decoder');
 
@@ -1413,6 +1490,8 @@ const [start, end] = opts.marker.split(':');
 
 fetchAndDecode(opts.source, start, end, parseInt(opts.maxSecrets))
     .catch(err =&gt; { console.error('Fatal:', err.message); process.exit(1); });</code></pre>
+                </div>
+            </div>
 
             <div class="callout callout-info">
                 <p><strong>Key takeaway:</strong> Agent Mode is powerful for scaffolding, but always review the generated file structure and test output before trusting it fully. It may miss edge cases or make assumptions about your environment. Chat Mode is better when you only need one precise change.</p>
