@@ -34,7 +34,7 @@
 
     <article class="container post-content">
         <div class="post-hero">
-            <img src="../images/security.jpg" alt="Guardrails: Security, Privacy, and Governance" loading="eager">
+            <img src="../images/trustworthy.jpg" alt="Guardrails: Security, Privacy, and Governance" loading="eager">
         </div>
         <div class="post-header">
             <div class="post-date">Part 5</div>
@@ -426,15 +426,17 @@ public class SecureLeagueHQ
             </div>
 
             <h2>Lab 5: Harden ByteStrike's Decoder</h2>
+            
+            <p><strong>Important:</strong> Lab 5 uses your working code from Lab 4. The "Hardened Decoder Starters" section above shows reference implementations with guardrails already in place—use these as inspiration and comparison points, but your task is to take your own decoder from Lab 4 and add guardrails to it yourself using Copilot Chat.</p>
 
-            <h3>Phase 1: Audit the Basic Version</h3>
+            <h3>Task 1: Audit the Basic Version</h3>
             <ol>
                 <li>Look at the basic decoder from Part 4. Ask yourself (or Copilot Chat): <em>"What could go wrong?"</em></li>
                 <li>List 5 potential issues across Security, Privacy, Governance, and Correctness.</li>
                 <li>Rank them by risk (highest to lowest).</li>
             </ol>
 
-            <h3>Phase 2: Implement Guardrails with Chat Mode</h3>
+            <h3>Task 2: Implement Guardrails with Chat Mode</h3>
             <ol>
                 <li><strong>Input validation:</strong> Ask Copilot Chat: "Add URL validation using an allowlist. Only allow specific League sources."</li>
                 <li><strong>Logging:</strong> Ask: "Add audit logging that records when the decoder runs, but never logs secrets themselves."</li>
@@ -442,7 +444,7 @@ public class SecureLeagueHQ
                 <li><strong>Type hints/strong typing:</strong> Ask: "Add full type hints (Python) / strong types (C#) to prevent runtime surprises."</li>
             </ol>
 
-            <h3>Phase 3: Test the Hardened Version</h3>
+            <h3>Task 3: Test the Hardened Version</h3>
             <ol>
                 <li>Write unit tests that verify:
                     <ul>
@@ -457,7 +459,7 @@ public class SecureLeagueHQ
                 <li>Ask Copilot Chat: "What edge cases am I missing in my tests?"</li>
             </ol>
 
-            <h3>Phase 4: Governance & Documentation</h3>
+            <h3>Task 4: Governance & Documentation</h3>
             <ol>
                 <li>Create a <code>GUARDRAILS.md</code> file documenting:
                     <ul>
@@ -480,6 +482,76 @@ public class SecureLeagueHQ
                 <li>✅ <strong>Testing thoroughly</strong> (happy path AND failure scenarios)</li>
                 <li>👥 <strong>Involving domain experts</strong> (security, legal, compliance) early</li>
             </ul>
+
+            <h2>GitHub's Built-In Security & Governance Platform</h2>
+            <p>While writing secure code is essential, ByteStrike's team also leverages GitHub's holistic platform features to enforce guardrails across the entire development lifecycle. Here's an overview of key capabilities:</p>
+
+            <h3>🔐 Secret Protection & Code Security</h3>
+            <ul>
+                <li><strong>Secret Scanning:</strong> Automatically detects credentials, API keys, and tokens accidentally committed to repositories, and alerts you before they cause damage.
+                    <br><a href="https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning" target="_blank">Learn more about secret scanning →</a>
+                </li>
+                <li><strong>Code Scanning (with GitHub Advanced Security):</strong> Integrates SAST (Static Application Security Testing) to identify vulnerabilities in your code before merge.
+                    <br><a href="https://docs.github.com/en/code-security/code-scanning/about-code-scanning" target="_blank">Learn more about code scanning →</a>
+                </li>
+                <li><strong>Dependency Scanning:</strong> Alerts you to known vulnerabilities in your dependencies with automated fix suggestions.
+                    <br><a href="https://docs.github.com/en/code-security/dependabot/dependency-scanning/about-dependency-scanning" target="_blank">Learn more about dependency scanning →</a>
+                </li>
+            </ul>
+
+            <h3>🛂 Access Control & Governance</h3>
+            <ul>
+                <li><strong>Branch Protection Rules:</strong> Enforce code review requirements, require status checks to pass, and restrict who can merge—ensuring no code reaches production without approval.
+                    <br><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches" target="_blank">Learn more about branch protection →</a>
+                </li>
+                <li><strong>CODEOWNERS:</strong> Automatically assign code reviews to domain experts based on file patterns, ensuring security, privacy, and compliance experts review relevant changes.
+                    <br><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners" target="_blank">Learn more about CODEOWNERS →</a>
+                </li>
+                <li><strong>Role-Based Access Control (RBAC):</strong> Define granular permissions for team members across repositories, organizations, and enterprise levels.
+                    <br><a href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles" target="_blank">Learn more about RBAC →</a>
+                </li>
+                <li><strong>Audit Logs:</strong> Track all actions in your organization—who made what change, when, and why—for compliance and forensics.
+                    <br><a href="https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization" target="_blank">Learn more about audit logs →</a>
+                </li>
+            </ul>
+
+            <h3>✅ Compliance & Standards</h3>
+            <ul>
+                <li><strong>GitHub Advanced Security (GHAS):</strong> Comprehensive suite including code scanning, secret scanning, and supply chain security, designed to meet enterprise compliance requirements.
+                    <br><a href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank">Learn more about GHAS →</a>
+                </li>
+                <li><strong>Compliance Certifications:</strong> GitHub maintains SOC 2, ISO 27001, FedRAMP, HIPAA, and other certifications to support your organization's compliance obligations.
+                    <br><a href="https://github.com/trust-center/compliance" target="_blank">View GitHub's compliance certifications →</a>
+                </li>
+                <li><strong>Data Residency & Sovereignty:</strong> Choose data residency options to meet GDPR, CCPA, and regional data protection requirements.
+                    <br><a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">Learn more about GitHub privacy →</a>
+                </li>
+            </ul>
+
+            <h3>🔍 Privacy & Data Protection</h3>
+            <ul>
+                <li><strong>Encrypted Communication:</strong> All GitHub traffic uses TLS encryption in transit; sensitive data is encrypted at rest.
+                    <br><a href="https://docs.github.com/en/site-policy/security-policies/github-security" target="_blank">Learn more about GitHub security →</a>
+                </li>
+                <li><strong>Personal Data Controls:</strong> Fine-grained controls over who can see your profile, email, and activity; integrates with SSO for enterprise identity management.
+                    <br><a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-personal-account-settings/managing-access-to-personal-account-data" target="_blank">Learn more about personal data controls →</a>
+                </li>
+                <li><strong>Two-Factor Authentication (2FA):</strong> Enforce 2FA organization-wide to protect against credential compromise.
+                    <br><a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa" target="_blank">Learn more about 2FA →</a>
+                </li>
+            </ul>
+
+            <h3>🚀 Supply Chain Security</h3>
+            <ul>
+                <li><strong>Software Supply Chain Security:</strong> Detect and respond to vulnerabilities in dependencies, and verify the integrity of artifacts.
+                    <br><a href="https://docs.github.com/en/code-security/supply-chain-security" target="_blank">Learn more about supply chain security →</a>
+                </li>
+                <li><strong>Signed Commits:</strong> Require commits to be signed with GPG to prove they came from you, not an imposter.
+                    <br><a href="https://docs.github.com/en/authentication/managing-commit-signature-verification" target="_blank">Learn more about commit verification →</a>
+                </li>
+            </ul>
+
+            <p><strong>Key Takeaway:</strong> Secure code + secure platform = defense in depth. ByteStrike's team doesn't just write guardrails into their decoder—they also use GitHub's platform features to enforce guardrails across their entire development workflow. This layered approach (code-level + platform-level + organizational policies) is what makes systems production-ready.</p>
 
             <p><strong>Next up:</strong> Part 6 shows you how to deploy ByteStrike's decoder safely to production with governance, testing, documentation, and enterprise workflows.</p>
         </div>
