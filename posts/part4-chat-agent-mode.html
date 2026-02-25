@@ -236,7 +236,13 @@ public class LeagueHQ
                     </blockquote>
                 </li>
                 <li><strong>Review the suggestions</strong> and accept the improvements one by one.</li>
-                <li><strong>Test it:</strong> Run the code and verify it still works. Try disconnecting your network briefly to see error handling in action (or mock a timeout in code).</li>
+                <li><strong>Test it:</strong> Run the code and verify it still works. To test your error handling without disconnecting the network (required if you're in Codespaces), try one of these:
+                    <ul style="margin-top: 8px;">
+                        <li><strong>Bad URL:</strong> Temporarily change the URL to something that doesn't exist (e.g., append <code>-broken</code> to the filename) to trigger a 404 error.</li>
+                        <li><strong>Force a timeout:</strong> Ask Copilot: <em>"How do I set the timeout to 0.001 seconds to simulate a timeout error in this code?"</em> — apply it, run it, then revert.</li>
+                        <li><strong>Valid network test:</strong> If you're running locally (not Codespaces), you can disconnect your network briefly to trigger the connection error path.</li>
+                    </ul>
+                </li>
             </ol>
 
             <h3>Task 2: Chat Mode - Understanding the Regex</h3>
