@@ -152,7 +152,7 @@
 
             <h2>Lab 6: Deploy ByteStrike's Decoder to Production</h2>
 
-            <h3>Phase 1: Build a Test Suite</h3>
+            <h3>Task 1: Build a Test Suite</h3>
             <p>Use Copilot to scaffold comprehensive tests.</p>
             
             <ol>
@@ -162,7 +162,7 @@
                 <li><strong>Integration tests:</strong> Create a simple mock server that returns sample data. Write tests that fetch and decode.</li>
             </ol>
 
-            <h3>Phase 2: Set Up CI/CD (GitHub Actions, GitLab CI, Jenkins, etc.)</h3>
+            <h3>Task 2: Set Up CI/CD (GitHub Actions, GitLab CI, Jenkins, etc.)</h3>
             <p><strong>Create a pipeline configuration file:</strong></p>
             
             <ul>
@@ -171,7 +171,7 @@
                 <li><strong>Pipeline must enforce:</strong> Tests pass, coverage ≥ 80%, no security warnings, before merging.</li>
             </ul>
 
-            <h3>Phase 3: Create Monitoring & Alerting</h3>
+            <h3>Task 3: Create Monitoring & Alerting</h3>
             <ol>
                 <li><strong>Logging:</strong> Ensure the hardened decoder (Part 5) logs all events. Ask Copilot: "Generate code to stream structured JSON logs from the decoder to a centralized logging service (e.g., CloudWatch, ELK, Datadog)."</li>
                 <li><strong>Metrics:</strong> Ask Copilot: "Add metrics collection to track success rate, latency, and error count. Emit metrics to Prometheus or CloudWatch."</li>
@@ -185,7 +185,7 @@
                 <li><strong>Dashboard:</strong> Ask Copilot: "Generate a Grafana dashboard template showing real-time decoder health: success rate, error types, latency histogram, and security events."</li>
             </ol>
 
-            <h3>Phase 4: Runbooks & Incident Response</h3>
+            <h3>Task 4: Runbooks & Incident Response</h3>
             <ol>
                 <li><strong>Create `RUNBOOK.md`:</strong> Ask Copilot: "Generate a production runbook for the blueprint decoder. Include: how to check status, common failure scenarios (network timeout, invalid URL, quota exceeded), rollback procedure, and escalation contacts."</li>
                 <li><strong>Sections should include:</strong>
@@ -199,7 +199,7 @@
                 </li>
             </ol>
 
-            <h3>Phase 5: Security & Compliance Sign-Off</h3>
+            <h3>Task 5: Security & Compliance Sign-Off</h3>
             <ol>
                 <li><strong>Create `SECURITY.md`:</strong> Ask Copilot: "Document the security measures for the production decoder: input validation, secret handling, audit logging, access control, encryption, and compliance with [your org's policy]."</li>
                 <li><strong>Compliance checklist:</strong> Work with your security team to verify:
@@ -213,7 +213,7 @@
                 </li>
             </ol>
 
-            <h3>Phase 6: Deployment</h3>
+            <h3>Task 6: Deployment</h3>
             <ol>
                 <li><strong>Tag a release:</strong> `git tag v1.0.0` and push. CI/CD builds and stages it.</li>
                 <li><strong>Staging validation:</strong> Run the decoder in staging. Verify logs, metrics, and alerts work.</li>
