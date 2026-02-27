@@ -1924,6 +1924,203 @@ npx jest decoder.test.js</code></pre>
 
             <hr>
 
+                        <h2>Bonus 5: Copilot Coding Agent in Action</h2>
+                        <p>Bonus 5 is about delegating work to Copilot coding agent via GitHub Issues. The "solutions" are well-scoped issue descriptions. Use the templates below for each task and language.</p>
+
+                        <h3>Bonus 5, Task 1: Document the Decoder</h3>
+                        <p>Create an issue with a clear, documentation-only scope.</p>
+
+                        <div class="language-tabs">
+                                <button class="language-tab active" data-language="python">Python</button>
+                                <button class="language-tab" data-language="csharp">C#</button>
+                                <button class="language-tab" data-language="javascript">JavaScript</button>
+                        </div>
+
+                        <div class="tab-content-container">
+                                <div class="tab-content active" data-language="python">
+                                        <p><strong>Issue title:</strong> Add comprehensive documentation to blueprint decoder</p>
+                                        <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation.
+New operatives cannot easily understand how to use it.
+
+Requirements:
+- Add docstrings to all functions in decoder.py and secret_extractor.py
+- Follow PEP 257 conventions
+- Include parameter types and descriptions
+- Include return value documentation
+- Add type hints where missing
+- Do not modify function logic, only add documentation
+- Ensure all docstrings are clear and helpful to new developers</code></pre>
+                                </div>
+                                <div class="tab-content" data-language="csharp">
+                                        <p><strong>Issue title:</strong> Add comprehensive documentation to blueprint decoder</p>
+                                        <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation.
+New operatives cannot easily understand how to use it.
+
+Requirements:
+- Add XML documentation comments to all public methods in Decoder.cs and SecretExtractor.cs
+- Follow C# XML documentation conventions
+- Include parameter descriptions and types
+- Include return value documentation
+- Add proper access modifiers and inheritance documentation
+- Do not modify method logic, only add documentation
+- Ensure all comments are clear and helpful to new developers</code></pre>
+                                </div>
+                                <div class="tab-content" data-language="javascript">
+                                        <p><strong>Issue title:</strong> Add comprehensive documentation to blueprint decoder</p>
+                                        <pre><code>The blueprint decoder has been deployed to production, but lacks proper documentation.
+New operatives cannot easily understand how to use it.
+
+Requirements:
+- Add JSDoc comments to all functions in decoder.js and secretExtractor.js
+- Follow JSDoc conventions
+- Include parameter types and descriptions
+- Include return value documentation
+- Add TypeScript-style type annotations in comments where applicable
+- Do not modify function logic, only add documentation
+- Ensure all comments are clear and helpful to new developers</code></pre>
+                                </div>
+                        </div>
+
+                        <h3>Bonus 5, Task 2: Add Batch Processing Capabilities</h3>
+                        <p>Create an issue that scopes batch processing, retries, and tests.</p>
+
+                        <div class="language-tabs">
+                                <button class="language-tab active" data-language="python">Python</button>
+                                <button class="language-tab" data-language="csharp">C#</button>
+                                <button class="language-tab" data-language="javascript">JavaScript</button>
+                        </div>
+
+                        <div class="tab-content-container">
+                                <div class="tab-content active" data-language="python">
+                                        <p><strong>Issue title:</strong> Implement batch blueprint processing with retry logic</p>
+                                        <pre><code>The decoder currently processes one blueprint file at a time. The League now needs
+the ability to process multiple files in a single batch, with proper error handling and retry logic.
+
+Requirements:
+- Create a new BatchProcessor class that accepts a list of blueprint file paths
+- Implement exponential backoff retry logic (up to 3 retries with 1s, 2s, 4s delays)
+- Failed files should be logged with error details
+- Return a summary report including:
+    * Total files processed
+    * Successful extractions
+    * Failed files and reasons
+    * Total secrets extracted
+- Write unit tests for all new methods
+- Use async/await patterns for concurrent processing
+- Ensure backwards compatibility with existing decoder functions</code></pre>
+                                </div>
+                                <div class="tab-content" data-language="csharp">
+                                        <p><strong>Issue title:</strong> Implement batch blueprint processing with retry logic</p>
+                                        <pre><code>The decoder currently processes one blueprint file at a time. The League now needs
+the ability to process multiple files in a single batch, with proper error handling and retry logic.
+
+Requirements:
+- Create a new BatchProcessor class that accepts a list of blueprint file paths
+- Implement exponential backoff retry logic (up to 3 retries with 1s, 2s, 4s delays)
+- Failed files should be logged with error details
+- Return a summary report including:
+    * Total files processed
+    * Successful extractions
+    * Failed files and reasons
+    * Total secrets extracted
+- Write unit tests for all new methods using xUnit
+- Use Task and async/await for concurrent processing
+- Ensure backwards compatibility with existing decoder methods</code></pre>
+                                </div>
+                                <div class="tab-content" data-language="javascript">
+                                        <p><strong>Issue title:</strong> Implement batch blueprint processing with retry logic</p>
+                                        <pre><code>The decoder currently processes one blueprint file at a time. The League now needs
+the ability to process multiple files in a single batch, with proper error handling and retry logic.
+
+Requirements:
+- Create a new BatchProcessor class that accepts a list of blueprint file paths
+- Implement exponential backoff retry logic (up to 3 retries with 1s, 2s, 4s delays)
+- Failed files should be logged with error details
+- Return a summary report including:
+    * Total files processed
+    * Successful extractions
+    * Failed files and reasons
+    * Total secrets extracted
+- Write unit tests for all new methods using Jest
+- Use Promise and async/await for concurrent processing
+- Ensure backwards compatibility with existing decoder functions</code></pre>
+                                </div>
+                        </div>
+
+                        <h3>Bonus 5, Task 3: Generate Comprehensive Tests</h3>
+                        <p>Create an issue focused on unit test coverage and edge cases.</p>
+
+                        <div class="language-tabs">
+                                <button class="language-tab active" data-language="python">Python</button>
+                                <button class="language-tab" data-language="csharp">C#</button>
+                                <button class="language-tab" data-language="javascript">JavaScript</button>
+                        </div>
+
+                        <div class="tab-content-container">
+                                <div class="tab-content active" data-language="python">
+                                        <p><strong>Issue title:</strong> Add comprehensive unit tests for secret extraction</p>
+                                        <pre><code>The secret extraction module lacks proper test coverage.
+We need unit tests that validate all edge cases and failure scenarios.
+
+Requirements:
+- Write tests for the extract_secrets() function covering:
+    * Normal extraction (secrets found between {* and *})
+    * Multiple secrets in a single file
+    * No secrets present (empty result)
+    * Malformed markers (incomplete {* or missing *})
+    * Empty or null input
+    * Files with special characters in secrets
+- Write tests for the categorize_secret() function
+- Achieve minimum 95% code coverage
+- Use pytest framework with fixtures for test data
+- Mock file I/O operations where appropriate
+- Include parametrized tests for multiple input variations
+- Run all tests as part of the validation</code></pre>
+                                </div>
+                                <div class="tab-content" data-language="csharp">
+                                        <p><strong>Issue title:</strong> Add comprehensive unit tests for secret extraction</p>
+                                        <pre><code>The secret extraction module lacks proper test coverage.
+We need unit tests that validate all edge cases and failure scenarios.
+
+Requirements:
+- Write tests for the ExtractSecrets() method covering:
+    * Normal extraction (secrets found between {* and *})
+    * Multiple secrets in a single file
+    * No secrets present (empty result)
+    * Malformed markers (incomplete {* or missing *})
+    * Empty or null input
+    * Files with special characters in secrets
+- Write tests for the CategorizeSecret() method
+- Achieve minimum 95% code coverage
+- Use xUnit framework with shared fixtures for test data
+- Mock file I/O operations where appropriate
+- Use Theory attribute for parametrized tests with multiple input variations
+- Run all tests as part of the validation</code></pre>
+                                </div>
+                                <div class="tab-content" data-language="javascript">
+                                        <p><strong>Issue title:</strong> Add comprehensive unit tests for secret extraction</p>
+                                        <pre><code>The secret extraction module lacks proper test coverage.
+We need unit tests that validate all edge cases and failure scenarios.
+
+Requirements:
+- Write tests for the extractSecrets() function covering:
+    * Normal extraction (secrets found between {* and *})
+    * Multiple secrets in a single file
+    * No secrets present (empty result)
+    * Malformed markers (incomplete {* or missing *})
+    * Empty or null input
+    * Files with special characters in secrets
+- Write tests for the categorizeSecret() function
+- Achieve minimum 95% code coverage
+- Use Jest framework with test fixtures for test data
+- Mock file I/O operations where appropriate
+- Include parametrized tests for multiple input variations
+- Run all tests as part of the validation</code></pre>
+                                </div>
+                        </div>
+
+                        <hr>
+
             <h2>Part 7: Wrap-Up &amp; Next Steps</h2>
             <p>Part 7 is reflective and personal - there are no single "correct" answers. The tasks below offer prompts and examples to help you consolidate what you've learned and plan your next steps with Copilot.</p>
 
