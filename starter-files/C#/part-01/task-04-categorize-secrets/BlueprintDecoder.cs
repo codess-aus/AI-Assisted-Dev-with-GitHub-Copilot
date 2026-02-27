@@ -42,7 +42,7 @@ public class BlueprintDecoder
     {
         string separator = new string('=', 50);
         Console.WriteLine("\n" + separator);
-        Console.WriteLine("DECODED SECRETS REPORT".PadRight(50));
+        Console.WriteLine("🔐 DECODED SECRETS REPORT".PadRight(50));
         Console.WriteLine(separator);
         Console.WriteLine($"Total secrets found: {secrets.Count}\n");
 
@@ -54,28 +54,9 @@ public class BlueprintDecoder
         Console.WriteLine("\n" + separator + "\n");
     }
 
-    // Function to categorize secrets by their type (word before the colon)
-    public static Dictionary<string, int> CategorizeSecrets(List<string> secrets)
-    {
-        // TODO: Create a dictionary to store categories and counts
-        // TODO: Loop through secrets and extract category (word before ':')
-        // TODO: If no ':', use "UNCLASSIFIED" as category
-        // TODO: Count occurrences of each category
-        // TODO: Return the dictionary
-        return new Dictionary<string, int>();
-    }
-
     static void Main()
     {
         var secrets = DecodeBlueprintSafe("blueprint-data.txt");
         DisplaySecretsReport(secrets);
-
-        // TODO: Call CategorizeSecrets and display results
-        var categories = CategorizeSecrets(secrets);
-        Console.WriteLine("\nSecret Categories:");
-        foreach (var entry in categories)
-        {
-            Console.WriteLine($"  {entry.Key}: {entry.Value}");
-        }
     }
 }
