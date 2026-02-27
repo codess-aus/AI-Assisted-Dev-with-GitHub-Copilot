@@ -36,14 +36,20 @@ public class BlueprintDecoder
         }
     }
 
+    // Function to format and display secrets in a professional report
+    // Includes header, separator lines, numbered list, and footer
+    public static void DisplaySecretsReport(List<string> secrets)
+    {
+        // TODO: Create a separator string of '=' characters (50 chars wide)
+        // TODO: Print header with title
+        // TODO: Print total count of secrets
+        // TODO: Loop through secrets and print each with numbering and alignment
+        // TODO: Print footer separator
+    }
+
     static void Main()
     {
-        // Test error handling
-        var secrets1 = DecodeBlueprintSafe("nonexistent.txt");
-        Console.WriteLine($"Found {secrets1.Count} secrets");
-
-        // Test normal operation
-        var secrets2 = DecodeBlueprintSafe("blueprint-data.txt");
-        Console.WriteLine($"Found {secrets2.Count} secrets");
+        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
+        DisplaySecretsReport(secrets);
     }
 }

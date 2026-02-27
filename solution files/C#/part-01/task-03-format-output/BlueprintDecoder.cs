@@ -52,42 +52,9 @@ public class BlueprintDecoder
         Console.WriteLine(separator);
     }
 
-    // Function to categorize secrets by their type (word before the colon)
-    public static Dictionary<string, int> CategorizeSecrets(List<string> secrets)
-    {
-        var categories = new Dictionary<string, int>();
-        foreach (var secret in secrets)
-        {
-            string category;
-            if (secret.Contains(':'))
-            {
-                category = secret.Split(':')[0].Trim();
-            }
-            else
-            {
-                category = "UNCLASSIFIED";
-            }
-
-            if (!categories.ContainsKey(category))
-            {
-                categories[category] = 0;
-            }
-            categories[category]++;
-        }
-
-        return categories;
-    }
-
     static void Main()
     {
         var secrets = DecodeBlueprintSafe("blueprint-data.txt");
         DisplaySecretsReport(secrets);
-
-        var categories = CategorizeSecrets(secrets);
-        Console.WriteLine("\nSecret Categories:");
-        foreach (var entry in categories)
-        {
-            Console.WriteLine($"  {entry.Key}: {entry.Value}");
-        }
     }
 }

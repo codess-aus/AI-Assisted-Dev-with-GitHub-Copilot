@@ -19,18 +19,14 @@ function decodeBlueprintSafe(filename) {
     }
 }
 
-// Function to format and display secrets in a nice report format
-// Shows total count, numbered list, and separator line
+// Function to format and display secrets in a professional report
+// Includes header, separator lines, numbered list, and footer
 function displaySecretsReport(secrets) {
-    const separator = "=".repeat(40);
-    console.log(separator);
-    console.log("DECODED SECRETS REPORT");
-    console.log(separator);
-    console.log(`Found ${secrets.length} secret(s):\n`);
-    secrets.forEach((secret, index) => {
-        console.log(`${index + 1}. ${secret}`);
-    });
-    console.log(separator);
+    // TODO: Create a separator string of '=' characters (50 chars wide)
+    // TODO: Print header with title
+    // TODO: Print total count of secrets
+    // TODO: Loop through secrets and print each with numbering and alignment
+    // TODO: Print footer separator
 }
 
 // Use it

@@ -27,27 +27,30 @@ function displaySecretsReport(secrets) {
     console.log("DECODED SECRETS REPORT".padEnd(50));
     console.log(separator);
     console.log(`Total secrets found: ${secrets.length}\n`);
+
     secrets.forEach((secret, index) => {
         const num = String(index + 1).padStart(2, " ");
         console.log(`  [${num}] ${secret}`);
     });
+
     console.log("\n" + separator + "\n");
 }
 
 // Function to categorize secrets by their type (word before the colon)
 function categorizeSecrets(secrets) {
-    const categories = {};
-    for (const secret of secrets) {
-        const category = secret.includes(":") ? secret.split(":")[0].trim() : "UNCLASSIFIED";
-        categories[category] = (categories[category] ?? 0) + 1;
-    }
-    return categories;
+    // TODO: Create an object to store categories and their counts
+    // TODO: Loop through secrets and extract category (word before ':')
+    // TODO: If no ':', use "UNCLASSIFIED" as category
+    // TODO: Count occurrences of each category
+    // TODO: Return the categories object
+    return {};
 }
 
 // Use it
 const secrets = decodeBlueprintSafe("blueprint-data.txt");
 displaySecretsReport(secrets);
 
+// TODO: Call categorizeSecrets and display results
 const categories = categorizeSecrets(secrets);
 console.log("\nSecret Categories:");
 Object.keys(categories)

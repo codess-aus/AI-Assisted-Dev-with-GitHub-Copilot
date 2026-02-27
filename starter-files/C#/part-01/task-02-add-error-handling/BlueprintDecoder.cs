@@ -5,10 +5,18 @@ using System.Collections.Generic;
 
 public class BlueprintDecoder
 {
+    /// <summary>
+    /// Reads a blueprint file and extracts all secrets marked between {* and *}
+    /// Example: {* VAULT_ACCESS_CODE: DELTA-7-7-ECHO *} extracts the code inside
+    /// Uses regex pattern to find all occurrences
+    /// </summary>
+    /// <param name="filename">Path to the blueprint file</param>
+    /// <returns>List of extracted secret strings</returns>
     public static List<string> DecodeBlueprint(string filename)
     {
         string content = File.ReadAllText(filename);
 
+        // Use regex to find all secrets between {* and *}
         string pattern = @"\{\* (.*?) \*\}";
         MatchCollection matches = Regex.Matches(content, pattern);
 
@@ -25,15 +33,10 @@ public class BlueprintDecoder
     // If file doesn't exist, return empty list and print error message
     public static List<string> DecodeBlueprintSafe(string filename)
     {
-        try
-        {
-            return DecodeBlueprint(filename);
-        }
-        catch (FileNotFoundException)
-        {
-            Console.WriteLine($"Error: File '{filename}' not found.");
-            return new List<string>();
-        }
+        // TODO: Add try-catch to handle FileNotFoundException
+        // TODO: If file doesn't exist, print error message and return empty list
+        // TODO: Otherwise, call DecodeBlueprint and return secrets
+        return new List<string>();
     }
 
     static void Main()
