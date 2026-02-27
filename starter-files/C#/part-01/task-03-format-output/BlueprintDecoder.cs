@@ -36,31 +36,14 @@ public class BlueprintDecoder
         }
     }
 
-    /// <summary>
-    /// Displays extracted secrets in a professional formatted report
-    /// with separator lines, numbering, and statistics
-    /// </summary>
-    /// <param name="secrets">List of secret strings</param>
-    public static void DisplaySecretsReport(List<string> secrets)
-    {
-        string separator = new string('=', 50);
-        Console.WriteLine("\n" + separator);
-        Console.WriteLine("🔐 DECODED SECRETS REPORT".PadRight(50));
-        Console.WriteLine(separator);
-        Console.WriteLine($"Total secrets found: {secrets.Count}\n");
-        
-        // Let Copilot suggest: numbered list with formatting
-        for (int i = 0; i < secrets.Count; i++)
-        {
-            Console.WriteLine($"  [{i + 1,2}] {secrets[i]}");
-        }
-        
-        Console.WriteLine("\n" + separator + "\n");
-    }
-
     static void Main()
     {
-        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
-        DisplaySecretsReport(secrets);
+        // Test error handling
+        var secrets1 = DecodeBlueprintSafe("nonexistent.txt");
+        Console.WriteLine($"Found {secrets1.Count} secrets");
+
+        // Test normal operation
+        var secrets2 = DecodeBlueprintSafe("blueprint-data.txt");
+        Console.WriteLine($"Found {secrets2.Count} secrets");
     }
 }

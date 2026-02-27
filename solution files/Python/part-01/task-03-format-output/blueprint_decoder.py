@@ -25,7 +25,7 @@ def decode_blueprint_safe(filename):
 def display_secrets_report(secrets):
     separator = "=" * 50
     print("\n" + separator)
-    print("DECODED SECRETS REPORT".center(50))
+    print("🔐 DECODED SECRETS REPORT".center(50))
     print(separator)
     print(f"Total secrets found: {len(secrets)}\n")
 

@@ -18,35 +18,15 @@ function decodeBlueprintSafe(filename) {
         return [];
     }
 }
+// Test error handling
+const secrets1 = decodeBlueprintSafe("nonexistent.txt");
+console.log(`Found ${secrets1.length} secrets`);
 
-/**
- * Displays extracted secrets in a professional formatted report
- * with borders, numbering, and summary statistics
- * @param {Array<string>} secrets - Array of secret strings to display
- */
-function displaySecretsReport(secrets) {
-    const separator = '='.repeat(50);
-    console.log('\n' + separator);
-    console.log('🔐 DECODED SECRETS REPORT'.padEnd(50));
-    console.log(separator);
-    console.log(`Total secrets found: ${secrets.length}\n`);
-    
-    // Let Copilot suggest: format each secret with padding and numbering
-    secrets.forEach((secret, index) => {
-        // Suggestion: use padStart for alignment
-        const num = String(index + 1).padStart(2, ' ');
-        console.log(`  [${num}] ${secret}`);
-    });
-    
-    console.log('\n' + separator + '\n');
-}
-
-// Use it
-const secrets = decodeBlueprintSafe("blueprint-data.txt");
-displaySecretsReport(secrets);
+// Test normal operation
+const secrets2 = decodeBlueprintSafe("blueprint-data.txt");
+console.log(`Found ${secrets2.length} secrets`);
 
 module.exports = {
     decodeBlueprint,
     decodeBlueprintSafe,
-    displaySecretsReport,
 };

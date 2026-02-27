@@ -19,28 +19,11 @@ def decode_blueprint_safe(filename):
         return []
 
 
-# Function to format and display secrets in a professional report
-# Includes header, separator lines, numbered list, and footer
-def display_secrets_report(secrets):
-    """Display extracted secrets in a formatted report.
-    
-    Args:
-        secrets (list): List of secret strings to display
-    """
-    separator = "=" * 50
-    print("\n" + separator)
-    print("🔐 DECODED SECRETS REPORT".center(50))
-    print(separator)
-    print(f"Total secrets found: {len(secrets)}\n")
-    
-    # Let Copilot suggest: format each secret with index
-    # Consider: padding, alignment, special characters
-    for i, secret in enumerate(secrets, 1):
-        print(f"  [{i:2d}] {secret}")
-    
-    print("\n" + separator + "\n")
-
-
 if __name__ == "__main__":
+    # Test error handling
+    secrets = decode_blueprint_safe("nonexistent.txt")
+    print(f"Found {len(secrets)} secrets")
+
+    # Test normal operation
     secrets = decode_blueprint_safe("blueprint-data.txt")
-    display_secrets_report(secrets)
+    print(f"Found {len(secrets)} secrets")
