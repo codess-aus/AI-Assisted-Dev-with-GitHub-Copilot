@@ -304,14 +304,14 @@ def decode_blueprint(filename):</code></pre>
                     <p><strong>Step 3:</strong> Inside the function, start typing the first line to trigger Copilot:</p>
                     <pre><code>    with open(filename, 'r') as</code></pre>
                     
-                    <p><strong>Watch what happens:</strong> As you type, Copilot should start suggesting the rest! Press <code>Tab</code> to accept suggestions. Copilot should generate code to:</p>
+                    <p>As you type, Copilot should start suggesting the rest. Press <code>Tab</code> to accept suggestions. Copilot should generate code to:</p>
                     <ul>
                         <li>Read the file content</li>
                         <li>Use <code>re.findall()</code> with pattern <code>r'\{\* (.*?) \*\}'</code></li>
                         <li>Return the list of matches</li>
                     </ul>
                     
-                    <p><strong>Step 3:</strong> Add test code at the bottom:</p>
+                    <p><strong>Step 4:</strong> Add test code at the bottom:</p>
                     <pre><code># Test the decoder
 if __name__ == "__main__":
     secrets = decode_blueprint("blueprint-data.txt")
@@ -348,9 +348,9 @@ public class BlueprintDecoder
                     <p><strong>Step 3:</strong> Start typing the first line to trigger Copilot:</p>
                     <pre><code>        string content = File.ReadAll</code></pre>
                     
-                    <p><strong>Watch what happens:</strong> Copilot should complete <code>ReadAllText(filename)</code> and suggest the regex code! Press <code>Tab</code> to accept. It should generate code to use <code>Regex.Matches()</code> to find all patterns.</p>
+                    <p>Copilot should complete <code>ReadAllText(filename)</code> and suggest the regex code. Press <code>Tab</code> to accept. It should generate code to use <code>Regex.Matches()</code> to find all patterns.</p>
                     
-                    <p><strong>Step 3:</strong> Add a Main method to test it:</p>
+                    <p><strong>Step 4:</strong> Add a Main method to test it:</p>
                     <pre><code>    static void Main()
     {
         var secrets = DecodeBlueprint("blueprint-data.txt");
@@ -384,9 +384,9 @@ function decodeBlueprint(filename) {</code></pre>
                     <p><strong>Step 3:</strong> Start typing to trigger Copilot suggestions:</p>
                     <pre><code>    const content = fs.readFileSync(filename</code></pre>
                     
-                    <p><strong>Watch what happens:</strong> Copilot should complete the line and suggest the regex matching code! Press <code>Tab</code> to accept suggestions. It should generate code using <code>match()</code> or <code>matchAll()</code> with the pattern <code>/\{\* (.*?) \*\}/g</code>.</p>
+                    <p>Copilot should complete the line and suggest the regex matching code. Press <code>Tab</code> to accept suggestions. It should generate code using <code>match()</code> or <code>matchAll()</code> with the pattern <code>/\{\* (.*?) \*\}/g</code>.</p>
                     
-                    <p><strong>Step 3:</strong> Add test code at the bottom:</p>
+                    <p><strong>Step 4:</strong> Add test code at the bottom:</p>
                     <pre><code>// Test the decoder
 const secrets = decodeBlueprint('blueprint-data.txt');
 console.log(`Found ${secrets.length} secret(s):`);
@@ -495,7 +495,16 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
             </div>
 
             <h3>Part 1, Task 3: Format the Output</h3>
-            <p>Make the decoder output more readable by adding a function that formats secrets nicely.</p>
+            <p>Make the decoder output more readable by adding a formatting function. Your mission report should look professional, not cluttered.</p>
+
+            <h4>What You're Building</h4>
+            <p>A function that transforms raw secret strings into a formatted, readable report with:</p>
+            <ul>
+                <li>Clear visual separators (border lines)</li>
+                <li>Numbered list with proper indentation</li>
+                <li>Summary statistics</li>
+                <li>Professional presentation</li>
+            </ul>
 
             <div class="language-tabs">
                 <button class="language-tab active" data-language="python">Python</button>
@@ -505,62 +514,113 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
 
             <div class="tab-content-container">
                 <div class="tab-content active" data-language="python">
-                    <p><strong>Add this comment and let Copilot generate the function:</strong></p>
-                    <pre><code># Function to format and display secrets in a nice report format
-# Shows total count, numbered list, and a separator line
+                    <p><strong>Add this formatted reporting function to your decoder:</strong></p>
+                    <pre><code># Function to format and display secrets in a professional report
+# Includes header, separator lines, numbered list, and footer
 def display_secrets_report(secrets):
-    separator = "=" * 40
+    """Display extracted secrets in a formatted report.
+    
+    Args:
+        secrets (list): List of secret strings to display
+    """
+    separator = "=" * 50
+    print("\n" + separator)
+    print("🔐 DECODED SECRETS REPORT".center(50))
     print(separator)
-    print("DECODED SECRETS REPORT")
-    print(separator)
-    print(f"Found {len(secrets)} secret(s):\n")
-    # Let Copilot add the rest: numbered list, formatting</code></pre>
+    print(f"Total secrets found: {len(secrets)}\n")
+    
+    # Let Copilot suggest: format each secret with index
+    # Consider: padding, alignment, special characters
+    for i, secret in enumerate(secrets, 1):
+        print(f"  [{i:2d}] {secret}")
+    
+    print("\n" + separator + "\n")</code></pre>
                     
-                    <p><strong>Call the function to test it:</strong></p>
-                    <p>At the bottom of your file, add this code within your <code>if __name__ == "__main__":</code> block (after the code from Task 2):</p>
-                    <pre><code>    secrets = decode_blueprint_safe("blueprint-data.txt")
+                    <p><strong>Complete the function:</strong> Let Copilot finish the formatting logic (the <code>for</code> loop section). Copilot should suggest alternating colors, padding, or fancy formatting.</p>
+                    
+                    <p><strong>Test your formatter:</strong></p>
+                    <p>At the bottom of your file, update your <code>if __name__ == "__main__":</code> block to call the formatter:</p>
+                    <pre><code>if __name__ == "__main__":
+    secrets = decode_blueprint_safe("blueprint-data.txt")
     display_secrets_report(secrets)</code></pre>
                     
                     <p><strong>Expected output:</strong></p>
-                    <pre>========================================
-DECODED SECRETS REPORT
-========================================
-Found 5 secret(s):
+                    <pre><code>==================================================
+🔐 DECODED SECRETS REPORT
+==================================================
+Total secrets found: 5
 
-1. SECURE_COMMS_PROTOCOL
-2. AGENT_CODENAME: SHADOWMIND
-3. VAULT_ACCESS_CODE: DELTA-7-7-ECHO
-4. MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
-5. EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
-========================================</pre>
+  [ 1] SECURE_COMMS_PROTOCOL
+  [ 2] AGENT_CODENAME: SHADOWMIND
+  [ 3] VAULT_ACCESS_CODE: DELTA-7-7-ECHO
+  [ 4] MEETING_LOCATION: SAFEHOUSE_BERLIN_CHECKPOINT_C
+  [ 5] EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE
+
+==================================================</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="csharp">
-                    <p><strong>Add this method:</strong></p>
-                    <pre><code>    // Function to format and display secrets in a nice report format
-    // Shows total count, numbered list, and separator line
+                    <p><strong>Add this formatted reporting method:</strong></p>
+                    <pre><code>    /// &lt;summary&gt;
+    /// Displays extracted secrets in a professional formatted report
+    /// with separator lines, numbering, and statistics
+    /// &lt;/summary&gt;
+    /// &lt;param name="secrets"&gt;List of secret strings&lt;/param&gt;
     public static void DisplaySecretsReport(List&lt;string&gt; secrets)
     {
-        // Let Copilot generate the formatting code
+        string separator = new string('=', 50);
+        Console.WriteLine("\n" + separator);
+        Console.WriteLine("🔐 DECODED SECRETS REPORT".PadRight(50));
+        Console.WriteLine(separator);
+        Console.WriteLine($"Total secrets found: {secrets.Count}\n");
+        
+        // Let Copilot suggest: numbered list with formatting
+        for (int i = 0; i < secrets.Count; i++)
+        {
+            Console.WriteLine($"  [{i + 1,2}] {secrets[i]}");
+        }
+        
+        Console.WriteLine("\n" + separator + "\n");
     }</code></pre>
                     
-                    <p><strong>Call it from your Main method and run the program:</strong></p>
-                    <pre><code>        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
-        DisplaySecretsReport(secrets);</code></pre>
+                    <p><strong>Test your formatter:</strong> Update your <code>Main</code> method:</p>
+                    <pre><code>    static void Main()
+    {
+        var secrets = DecodeBlueprintSafe("blueprint-data.txt");
+        DisplaySecretsReport(secrets);
+    }</code></pre>
                 </div>
 
                 <div class="tab-content" data-language="javascript">
-                    <p><strong>Add this function:</strong></p>
-                    <pre><code>// Function to format and display secrets in a nice report format
-// Shows total count, numbered list, and separator line
+                    <p><strong>Add this formatted reporting function:</strong></p>
+                    <pre><code>/**
+ * Displays extracted secrets in a professional formatted report
+ * with borders, numbering, and summary statistics
+ * @param {Array&lt;string&gt;} secrets - Array of secret strings to display
+ */
 function displaySecretsReport(secrets) {
-    // Let Copilot generate the formatting code
+    const separator = '='.repeat(50);
+    console.log('\n' + separator);
+    console.log('🔐 DECODED SECRETS REPORT'.padEnd(50));
+    console.log(separator);
+    console.log(`Total secrets found: ${secrets.length}\n`);
+    
+    // Let Copilot suggest: format each secret with padding and numbering
+    secrets.forEach((secret, index) => {
+        // Suggestion: use padStart for alignment
+        const num = String(index + 1).padStart(2, ' ');
+        console.log(`  [${num}] ${secret}`);
+    });
+    
+    console.log('\n' + separator + '\n');
 }</code></pre>
                     
-                    <p><strong>Call the function to test it:</strong></p>
-                    <p>Add this code at the bottom of your file and run it with <code>node blueprint_decoder.js</code>:</p>
+                    <p><strong>Test your formatter:</strong> Update the code at the bottom of your file:</p>
+                    <p>Replace your existing test code with this:</p>
                     <pre><code>const secrets = decodeBlueprintSafe('blueprint-data.txt');
 displaySecretsReport(secrets);</code></pre>
+                    
+                    <p>Run it: <code>node blueprint_decoder.js</code></p>
                 </div>
             </div>
 
