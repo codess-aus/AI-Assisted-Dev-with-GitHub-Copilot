@@ -65,7 +65,7 @@
             </ul>
 
             <h2>What is GitHub Copilot?</h2>
-            <p>GitHub Copilot is an AI coding assistant powered by OpenAI's large language models (specifically trained on public code repositories). It integrates directly into VS Code (or Codespaces), Visual Studio, JetBrains IDEs, and other development environments, providing real-time code suggestions as you type.
+            <p>GitHub Copilot is an AI coding assistant powered by OpenAI's large language models (specifically trained on public code repositories). It integrates directly into VS Code (or Codespaces), Visual Studio, JetBrains IDEs, and other development environments, providing real-time code suggestions as you type.</p>
 
             <p><strong>Key Capabilities:</strong></p>
             <ul>
@@ -235,7 +235,7 @@
                 <li><strong>Selection + Chat:</strong> Select code, right-click → "Copilot" → "Explain" or "Fix" for context-specific help</li>
             </ul>
 
-            <h2>Part 1 Lab: Building the Blueprint Decoder</h2>
+            <h2>Lab1: Building the Blueprint Decoder</h2>
             <p>ByteStrike needs to fetch the encrypted blueprint. Let's help them start.</p>
 
             <h3>Setup</h3>
@@ -244,7 +244,7 @@
                 <li>Sign in with your GitHub account</li>
             </ul>
 
-            <h3>Part 1, Task 1: Build the Blueprint Decoder</h3>
+            <h3>Task 1: Build the Blueprint Decoder</h3>
             <ol>
                 <li>Set up Copilot extension in VS Code (or Codespaces) for Python and C#</li>
                 <li>Create a new file: <code>blueprint_decoder.py</code> (or <code>BlueprintDecoder.cs</code>)</li>
@@ -325,7 +325,7 @@ if __name__ == "__main__":
 
                 <div class="tab-content" data-language="csharp">
                     <p><strong>Create a new file:</strong> <code>BlueprintDecoder.cs</code></p>
-                    <p><strong>Step 1:</strong> Start with the class structure:</p>
+                    <p><strong>1:</strong> Start with the class structure:</p>
                     <pre><code>using System;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -334,7 +334,7 @@ using System.Collections.Generic;
 public class BlueprintDecoder
 {</code></pre>
                     
-                    <p><strong>Step 2:</strong> Add a detailed XML comment (C# documentation format):</p>
+                    <p><strong>2:</strong> Add a detailed XML comment (C# documentation format):</p>
                     <pre><code>    /// &lt;summary&gt;
     /// Reads a blueprint file and extracts all secrets marked between {* and *}
     /// Example: {* VAULT_ACCESS_CODE: DELTA-7-7-ECHO *} extracts the code inside
@@ -345,12 +345,12 @@ public class BlueprintDecoder
     public static List&lt;string&gt; DecodeBlueprint(string filename)
     {</code></pre>
                     
-                    <p><strong>Step 3:</strong> Start typing the first line to trigger Copilot:</p>
+                    <p><strong>3:</strong> Start typing the first line to trigger Copilot:</p>
                     <pre><code>        string content = File.ReadAll</code></pre>
                     
                     <p>Copilot should complete <code>ReadAllText(filename)</code> and suggest the regex code. Press <code>Tab</code> to accept. It should generate code to use <code>Regex.Matches()</code> to find all patterns.</p>
                     
-                    <p><strong>Step 4:</strong> Add a Main method to test it:</p>
+                    <p><strong>4:</strong> Add a Main method to test it:</p>
                     <pre><code>    static void Main()
     {
         var secrets = DecodeBlueprint("blueprint-data.txt");
@@ -367,10 +367,10 @@ public class BlueprintDecoder
 
                 <div class="tab-content" data-language="javascript">
                     <p><strong>Create a new file:</strong> <code>blueprint_decoder.js</code></p>
-                    <p><strong>Step 1:</strong> Import the fs module at the top:</p>
+                    <p><strong>1:</strong> Import the fs module at the top:</p>
                     <pre><code>const fs = require('fs');</code></pre>
                     
-                    <p><strong>Step 2:</strong> Add detailed JSDoc comment:</p>
+                    <p><strong>2:</strong> Add detailed JSDoc comment:</p>
                     <pre><code>/**
  * Reads a blueprint file and extracts all secrets marked between {* and *}
  * Example: League transmission contains {* EMERGENCY_PROTOCOL: NIGHTFALL_SEQUENCE_ACTIVE *}
@@ -381,12 +381,12 @@ public class BlueprintDecoder
  */
 function decodeBlueprint(filename) {</code></pre>
                     
-                    <p><strong>Step 3:</strong> Start typing to trigger Copilot suggestions:</p>
+                    <p><strong>3:</strong> Start typing to trigger Copilot suggestions:</p>
                     <pre><code>    const content = fs.readFileSync(filename</code></pre>
                     
                     <p>Copilot should complete the line and suggest the regex matching code. Press <code>Tab</code> to accept suggestions. It should generate code using <code>match()</code> or <code>matchAll()</code> with the pattern <code>/\{\* (.*?) \*\}/g</code>.</p>
                     
-                    <p><strong>Step 4:</strong> Add test code at the bottom:</p>
+                    <p><strong>4:</strong> Add test code at the bottom:</p>
                     <pre><code>// Test the decoder
 const secrets = decodeBlueprint('blueprint-data.txt');
 console.log(`Found ${secrets.length} secret(s):`);
@@ -414,7 +414,7 @@ secrets.forEach((secret, index) => {
                 <p>Copilot is your pair programmer, not your code generator. The best developers using Copilot are active, critical, and always asking questions. That's how you stay in control and learn.</p>
             </div>
 
-            <h3>Part 1, Task 2: Add Error Handling</h3>
+            <h3>Task 2: Add Error Handling</h3>
             <p>What if the file doesn't exist? Update your decoder to handle file errors gracefully.</p>
 
             <div class="language-tabs">
@@ -494,7 +494,7 @@ console.log(`Found ${secrets2.length} secrets`);</code></pre>
                 <p>For Task 3, comment out the test code sections from Task 2 (keep the `if __name__` line). Your new <code>display_secrets_report()</code> call will replace them inside that same block.</p>
             </div>
 
-            <h3>Part 1, Task 3: Format the Output</h3>
+            <h3>Task 3: Format the Output</h3>
             <p>Make the decoder output more readable by adding a formatting function. Your mission report should look professional, not cluttered.</p>
 
             <h4>What You're Building</h4>
@@ -624,7 +624,7 @@ displaySecretsReport(secrets);</code></pre>
                 </div>
             </div>
 
-            <h3>Part 1, Task 4: Categorize Secrets by Type</h3>
+            <h3>Task 4: Categorize Secrets by Type</h3>
             <p>ByteStrike notices secrets have different types (CODENAME, LOCATION, PROTOCOL, etc.). Write a function to categorize them.</p>
             
             <p><strong>Hint:</strong> Write a comment like: <code># Function to categorize secrets by their type (e.g., split on ':' to extract the category name)</code></p>
