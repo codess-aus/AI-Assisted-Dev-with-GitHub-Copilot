@@ -19,14 +19,26 @@ function decodeBlueprintSafe(filename) {
     }
 }
 
-// Function to format and display secrets in a professional report
-// Includes header, separator lines, numbered list, and footer
+/**
+ * Displays extracted secrets in a professional formatted report
+ * with borders, numbering, and summary statistics
+ * @param {Array<string>} secrets - Array of secret strings to display
+ */
 function displaySecretsReport(secrets) {
-    // TODO: Create a separator string of '=' characters (50 chars wide)
-    // TODO: Print header with title
-    // TODO: Print total count of secrets
-    // TODO: Loop through secrets and print each with numbering and alignment
-    // TODO: Print footer separator
+    const separator = '='.repeat(50);
+    console.log('\n' + separator);
+    console.log('🔐 DECODED SECRETS REPORT'.padEnd(50));
+    console.log(separator);
+    console.log(`Total secrets found: ${secrets.length}\n`);
+    
+    // Let Copilot suggest: format each secret with padding and numbering
+    secrets.forEach((secret, index) => {
+        // Suggestion: use padStart for alignment
+        const num = String(index + 1).padStart(2, ' ');
+        console.log(`  [${num}] ${secret}`);
+    });
+    
+    console.log('\n' + separator + '\n');
 }
 
 // Use it

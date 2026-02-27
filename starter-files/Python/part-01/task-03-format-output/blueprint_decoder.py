@@ -22,12 +22,23 @@ def decode_blueprint_safe(filename):
 # Function to format and display secrets in a professional report
 # Includes header, separator lines, numbered list, and footer
 def display_secrets_report(secrets):
-    # TODO: Create a separator string of '=' characters
-    # TODO: Print header with title centered
-    # TODO: Print total count of secrets
-    # TODO: Loop through secrets and print each with numbering
-    # TODO: Print footer separator
-    pass
+    """Display extracted secrets in a formatted report.
+    
+    Args:
+        secrets (list): List of secret strings to display
+    """
+    separator = "=" * 50
+    print("\n" + separator)
+    print("🔐 DECODED SECRETS REPORT".center(50))
+    print(separator)
+    print(f"Total secrets found: {len(secrets)}\n")
+    
+    # Let Copilot suggest: format each secret with index
+    # Consider: padding, alignment, special characters
+    for i, secret in enumerate(secrets, 1):
+        print(f"  [{i:2d}] {secret}")
+    
+    print("\n" + separator + "\n")
 
 
 if __name__ == "__main__":

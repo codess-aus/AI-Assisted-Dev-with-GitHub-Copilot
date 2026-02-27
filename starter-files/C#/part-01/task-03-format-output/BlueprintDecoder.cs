@@ -36,15 +36,26 @@ public class BlueprintDecoder
         }
     }
 
-    // Function to format and display secrets in a professional report
-    // Includes header, separator lines, numbered list, and footer
+    /// <summary>
+    /// Displays extracted secrets in a professional formatted report
+    /// with separator lines, numbering, and statistics
+    /// </summary>
+    /// <param name="secrets">List of secret strings</param>
     public static void DisplaySecretsReport(List<string> secrets)
     {
-        // TODO: Create a separator string of '=' characters (50 chars wide)
-        // TODO: Print header with title
-        // TODO: Print total count of secrets
-        // TODO: Loop through secrets and print each with numbering and alignment
-        // TODO: Print footer separator
+        string separator = new string('=', 50);
+        Console.WriteLine("\n" + separator);
+        Console.WriteLine("🔐 DECODED SECRETS REPORT".PadRight(50));
+        Console.WriteLine(separator);
+        Console.WriteLine($"Total secrets found: {secrets.Count}\n");
+        
+        // Let Copilot suggest: numbered list with formatting
+        for (int i = 0; i < secrets.Count; i++)
+        {
+            Console.WriteLine($"  [{i + 1,2}] {secrets[i]}");
+        }
+        
+        Console.WriteLine("\n" + separator + "\n");
     }
 
     static void Main()
